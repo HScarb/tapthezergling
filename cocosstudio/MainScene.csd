@@ -112,15 +112,15 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="0" G="189" B="255" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Image_1" ActionTag="-1782418608" Tag="45" IconVisible="False" LeftMargin="332.2833" RightMargin="371.7167" TopMargin="128.3843" BottomMargin="155.6157" LeftEage="84" RightEage="84" TopEage="84" BottomEage="84" Scale9OriginX="84" Scale9OriginY="84" Scale9Width="88" Scale9Height="88" ctype="ImageViewObjectData">
-            <Size X="256.0000" Y="256.0000" />
+          <AbstractNodeData Name="Image_7" ActionTag="1921114762" Tag="31" IconVisible="False" LeftMargin="322.0000" RightMargin="322.0000" TopMargin="92.0000" BottomMargin="132.0000" LeftEage="330" RightEage="330" TopEage="330" BottomEage="330" Scale9OriginX="330" Scale9OriginY="330" Scale9Width="340" Scale9Height="340" ctype="ImageViewObjectData">
+            <Size X="316.0000" Y="316.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="460.2833" Y="283.6157" />
-            <Scale ScaleX="1.6030" ScaleY="1.6030" />
+            <Position X="480.0000" Y="290.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4795" Y="0.5252" />
-            <PreSize X="0.2667" Y="0.4741" />
-            <FileData Type="Normal" Path="Res/zergling/SCSP_Zergling_01.png" Plist="" />
+            <PrePosition X="0.5000" Y="0.5370" />
+            <PreSize X="0.3292" Y="0.5852" />
+            <FileData Type="Normal" Path="Res/zergling/zergling_big.png" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

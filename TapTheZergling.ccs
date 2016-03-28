@@ -253,13 +253,14 @@
             <Image Name="SCSP_Zergling_02.png" />
             <Image Name="SCSP_Zergling_03.png" />
             <Image Name="SCSP_Zergling_04.png" />
+            <Image Name="zergling_big.png" />
           </Folder>
         </Folder>
+        <Project Name="CardEnhancer.csd" Type="Layer" />
         <Image Name="HelloWorld.png" />
         <Project Name="MainScene.csd" Type="Scene" />
-        <Project Name="TollgateScene.csd" Type="Scene" />
-        <Project Name="CardEnhancer.csd" Type="Layer" />
         <Project Name="TestScene.csd" Type="Scene" />
+        <Project Name="TollgateScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>
