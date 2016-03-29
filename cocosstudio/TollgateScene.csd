@@ -16,16 +16,6 @@
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="Res/star crafts/starcrafts_Terrain_Dirt.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="LoadingBar_energy" ActionTag="-68107" Tag="15" IconVisible="False" LeftMargin="-116.0000" RightMargin="564.0000" TopMargin="-30.0000" BottomMargin="430.0000" ProgressInfo="95" ctype="LoadingBarObjectData">
-            <Size X="512.0000" Y="140.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="140.0000" Y="500.0000" />
-            <Scale ScaleX="0.5000" ScaleY="0.5000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1458" Y="0.9259" />
-            <PreSize X="0.5333" Y="0.2593" />
-            <ImageFileData Type="Normal" Path="Res/RESOURCE/Energy-progress.png" Plist="" />
-          </AbstractNodeData>
           <AbstractNodeData Name="Image_energy_bar" ActionTag="-929779505" Tag="16" IconVisible="False" LeftMargin="-116.0000" RightMargin="564.0000" TopMargin="-30.0000" BottomMargin="430.0000" LeftEage="168" RightEage="168" TopEage="46" BottomEage="46" Scale9OriginX="168" Scale9OriginY="46" Scale9Width="176" Scale9Height="48" ctype="ImageViewObjectData">
             <Size X="512.0000" Y="140.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -76,6 +66,16 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
+          <AbstractNodeData Name="LoadingBar_energy" ActionTag="-68107" Tag="15" IconVisible="False" LeftMargin="-116.0000" RightMargin="564.0000" TopMargin="-30.0000" BottomMargin="430.0000" ProgressInfo="79" ctype="LoadingBarObjectData">
+            <Size X="512.0000" Y="140.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="140.0000" Y="500.0000" />
+            <Scale ScaleX="0.5000" ScaleY="0.5000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.1458" Y="0.9259" />
+            <PreSize X="0.5333" Y="0.2593" />
+            <ImageFileData Type="Normal" Path="Res/RESOURCE/Energy-progress.png" Plist="" />
+          </AbstractNodeData>
           <AbstractNodeData Name="Text_energy" ActionTag="-759796907" Tag="13" IconVisible="False" LeftMargin="119.5000" RightMargin="759.5000" TopMargin="28.0000" BottomMargin="482.0000" FontSize="22" LabelText="999999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="81.0000" Y="30.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -119,16 +119,6 @@
             <PrePosition X="0.5000" Y="0.8148" />
             <PreSize X="1.0667" Y="0.1889" />
             <ImageFileData Type="Normal" Path="Res/RESOURCE/loading_progress.png" Plist="" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="FileNode_1" Visible="False" ActionTag="-579249552" Tag="34" IconVisible="True" LeftMargin="-0.0001" RightMargin="0.0001" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
-            <Size X="960.0000" Y="540.0000" />
-            <AnchorPoint />
-            <Position X="-0.0001" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0000" />
-            <PreSize X="1.0000" Y="1.0000" />
-            <FileData Type="Normal" Path="CardEnhancer.csd" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="Panel_time" ActionTag="-530265723" Alpha="204" Tag="51" IconVisible="False" LeftMargin="430.0000" RightMargin="430.0000" TopMargin="85.0000" BottomMargin="425.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="204" ComboBoxIndex="1" ColorAngle="90.0000" LeftEage="398" RightEage="398" TopEage="124" BottomEage="124" Scale9OriginX="-398" Scale9OriginY="-124" Scale9Width="796" Scale9Height="248" ctype="PanelObjectData">
             <Size X="100.0000" Y="30.0000" />
