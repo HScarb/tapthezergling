@@ -6,13 +6,13 @@
       <ObjectData Name="Scene" Tag="11" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="540.0000" />
         <Children>
-          <AbstractNodeData Name="Image_background" ActionTag="29963515" Tag="12" IconVisible="False" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_background" ActionTag="29963515" Tag="12" IconVisible="False" LeftMargin="-1.0000" RightMargin="1.0000" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
             <Size X="960.0000" Y="540.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="480.0000" Y="270.0000" />
+            <Position X="479.0000" Y="270.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.5000" />
+            <PrePosition X="0.4990" Y="0.5000" />
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="Res/star crafts/starcrafts_Terrain_Dirt.png" Plist="" />
           </AbstractNodeData>
