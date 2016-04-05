@@ -255,6 +255,10 @@
             <Image Name="SCSP_Zergling_04.png" />
             <Image Name="zergling_big.png" />
           </Folder>
+          <Image Name="zergling_big_1.png" />
+          <Image Name="zergling_big_2.png" />
+          <Image Name="zergling_big_3.png" />
+          <Image Name="zergling_big_4.png" />
         </Folder>
         <Project Name="CardEnhancer.csd" Type="Layer" />
         <Image Name="HelloWorld.png" />

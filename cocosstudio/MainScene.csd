@@ -6,7 +6,7 @@
       <ObjectData Name="Scene" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="540.0000" />
         <Children>
-          <AbstractNodeData Name="Image_background" CanEdit="False" ActionTag="-774305113" Tag="6" IconVisible="False" LeftEage="675" RightEage="675" TopEage="506" BottomEage="506" Scale9OriginX="675" Scale9OriginY="506" Scale9Width="698" Scale9Height="524" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_background" ActionTag="-774305113" Tag="6" IconVisible="False" LeftEage="675" RightEage="675" TopEage="506" BottomEage="506" Scale9OriginX="675" Scale9OriginY="506" Scale9Width="698" Scale9Height="524" ctype="ImageViewObjectData">
             <Size X="960.0000" Y="540.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="270.0000" />
@@ -76,7 +76,7 @@
             <PreSize X="0.5333" Y="0.2593" />
             <ImageFileData Type="Normal" Path="Res/RESOURCE/Energy-progress.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_best_score" CanEdit="False" ActionTag="1334170840" Tag="15" IconVisible="False" LeftMargin="662.5000" RightMargin="216.5000" TopMargin="256.0000" BottomMargin="254.0000" FontSize="22" LabelText="999999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_best_score" ActionTag="1334170840" Tag="15" IconVisible="False" LeftMargin="662.5000" RightMargin="216.5000" TopMargin="256.0000" BottomMargin="254.0000" FontSize="22" LabelText="999999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="81.0000" Y="30.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="703.0000" Y="269.0000" />
@@ -87,18 +87,6 @@
             <FontResource Type="Normal" Path="Res/fonts/Skranji-Regular.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="Text_gem" ActionTag="1728886145" Tag="17" IconVisible="False" LeftMargin="785.5002" RightMargin="93.4998" TopMargin="31.0000" BottomMargin="479.0000" FontSize="22" LabelText="999999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="81.0000" Y="30.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="826.0002" Y="494.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8604" Y="0.9148" />
-            <PreSize X="0.0844" Y="0.0556" />
-            <FontResource Type="Normal" Path="Res/fonts/Skranji-Regular.ttf" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="145" G="92" B="37" />
           </AbstractNodeData>
           <AbstractNodeData Name="Text_energy" ActionTag="-45716226" Tag="18" IconVisible="False" LeftMargin="119.5000" RightMargin="759.5000" TopMargin="28.0000" BottomMargin="482.0000" FontSize="22" LabelText="999999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="81.0000" Y="30.0000" />
@@ -112,15 +100,17 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="0" G="189" B="255" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Image_7" ActionTag="1921114762" Tag="31" IconVisible="False" LeftMargin="322.0000" RightMargin="322.0000" TopMargin="92.0000" BottomMargin="132.0000" LeftEage="330" RightEage="330" TopEage="330" BottomEage="330" Scale9OriginX="330" Scale9OriginY="330" Scale9Width="340" Scale9Height="340" ctype="ImageViewObjectData">
-            <Size X="316.0000" Y="316.0000" />
+          <AbstractNodeData Name="Text_jewel" ActionTag="170071638" Tag="16" IconVisible="False" LeftMargin="785.4977" RightMargin="93.5023" TopMargin="31.0000" BottomMargin="479.0000" FontSize="22" LabelText="999999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="81.0000" Y="30.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="480.0000" Y="290.0000" />
+            <Position X="825.9977" Y="494.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.5370" />
-            <PreSize X="0.3292" Y="0.5852" />
-            <FileData Type="Normal" Path="Res/zergling/zergling_big.png" Plist="" />
+            <PrePosition X="0.8604" Y="0.9148" />
+            <PreSize X="0.0844" Y="0.0556" />
+            <FontResource Type="Normal" Path="Res/fonts/Skranji-Regular.ttf" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="139" G="105" B="20" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

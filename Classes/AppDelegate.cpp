@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
+#include "LoadingScene.h"
 
 USING_NS_CC;
 
@@ -27,11 +28,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("TapTheZergling", Rect(0, 0, 960, 640));
+        glview = GLViewImpl::createWithRect("TapTheZergling", Rect(0, 0, 960, 540));
         director->setOpenGLView(glview);
     }
 
-    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
+    director->getOpenGLView()->setDesignResolutionSize(960, 540, ResolutionPolicy::SHOW_ALL);
 
     // turn on display FPS
     director->setDisplayStats(true);
@@ -40,9 +41,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     FileUtils::getInstance()->addSearchPath("res");
+	FileUtils::getInstance()->addSearchPath("res/images");			// 添加资源搜索路径
+	FileUtils::getInstance()->addSearchPath("res/images/zergling");
+	FileUtils::getInstance()->addSearchPath("res/fonts");
+	FileUtils::getInstance()->addSearchPath("res/RESOURCE");
+	FileUtils::getInstance()->addSearchPath("res/star crafts");
+	FileUtils::getInstance()->addSearchPath("res/zergling");
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+    auto scene = LoadingScene::createScene();
 
     // run
     director->runWithScene(scene);
