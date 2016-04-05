@@ -1,0 +1,2 @@
+// TollgateScene.h
+#pragma once

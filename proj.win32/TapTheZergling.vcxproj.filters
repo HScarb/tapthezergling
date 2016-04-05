@@ -45,6 +45,12 @@
     <ClCompile Include="..\Classes\SceneManager.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\DoubleTapScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TemplateScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -67,6 +73,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SceneManager.h">
       <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TollgateScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DoubleTapScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TemplateScene.h">
+      <Filter>Classes\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

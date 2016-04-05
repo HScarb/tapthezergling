@@ -264,7 +264,6 @@
         <Project Name="MainScene.csd" Type="Scene" />
         <Project Name="TestScene.csd" Type="Scene" />
         <Project Name="TollgateScene.csd" Type="Scene" />
-        <Project Name="SettingsScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>

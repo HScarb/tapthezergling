@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 #include "LoadingScene.h"
+#include "TemplateScene.h"
 
 USING_NS_CC;
 
@@ -49,7 +50,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("res/zergling");
 
     // create a scene. it's an autorelease object
-    auto scene = LoadingScene::createScene();
+    auto scene = TemplateScene::createScene(0,0);
 
     // run
     director->runWithScene(scene);
