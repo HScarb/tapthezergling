@@ -51,6 +51,9 @@
     <ClCompile Include="..\Classes\TemplateScene.cpp">
       <Filter>Classes\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EatCandiesScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -81,6 +84,9 @@
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TemplateScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EatCandiesScene.h">
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
