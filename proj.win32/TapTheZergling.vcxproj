@@ -155,6 +155,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\SceneManager.cpp" />
     <ClCompile Include="..\Classes\SlideScene.cpp" />
     <ClCompile Include="..\Classes\TemplateScene.cpp" />
+    <ClCompile Include="..\Classes\TollgateScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
