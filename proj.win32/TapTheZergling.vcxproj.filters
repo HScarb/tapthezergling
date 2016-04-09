@@ -51,7 +51,14 @@
     <ClCompile Include="..\Classes\TemplateScene.cpp">
       <Filter>Classes\Scenes</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\Classes\EatCandiesScene.cpp">
+=======
+    <ClCompile Include="..\Classes\SlideScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TollgateScene.cpp">
+>>>>>>> c1797fdce22782f154a252ea3da552ca0e534870
       <Filter>Classes\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -86,7 +93,11 @@
     <ClInclude Include="..\Classes\TemplateScene.h">
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\Classes\EatCandiesScene.h">
+=======
+    <ClInclude Include="..\Classes\SlideScene.h">
+>>>>>>> c1797fdce22782f154a252ea3da552ca0e534870
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

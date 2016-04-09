@@ -2,6 +2,7 @@
 #include "HelloWorldScene.h"
 #include "LoadingScene.h"
 #include "TemplateScene.h"
+#include"SlideScene.h"
 
 USING_NS_CC;
 
@@ -48,9 +49,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("res/RESOURCE");
 	FileUtils::getInstance()->addSearchPath("res/star crafts");
 	FileUtils::getInstance()->addSearchPath("res/zergling");
-
+	
+	auto diff = random(5, 10);
+	log("%d", diff);
+	auto loop = random(1, 5);
+	log("%d", loop);
+	
     // create a scene. it's an autorelease object
-    auto scene = TemplateScene::createScene(0,0);
+	auto scene = SlideScene::createScene(diff,loop);
 
     // run
     director->runWithScene(scene);
