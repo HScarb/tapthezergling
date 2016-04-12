@@ -267,6 +267,7 @@
         <Project Name="TollgateScene.csd" Type="Scene" />
         <Folder Name="Tollgates">
           <Project Name="DoubleTapScene.csd" Type="Scene" />
+          <Project Name="EatCandiesScene.csd" Type="Scene" />
         </Folder>
       </RootFolder>
     </Group>
