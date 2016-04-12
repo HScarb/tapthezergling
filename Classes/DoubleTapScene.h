@@ -1,8 +1,7 @@
 // DoubleTapScene.h
 #pragma once
 #include "cocos2d.h"
-#include "filters/cocos2dFilters.h"
-#include "VisibleRect.h"
+#include "ui\CocosGUI.h"
 
 class DoubleTapScene : public cocos2d::Layer
 {
@@ -13,4 +12,9 @@ public:
 
 private:
 	void newLevel(int diff);				// 根据难度创建一个新的轮次
+
+private:
+	cocos2d::ui::Button * m_pauseBtn;
+	cocos2d::ui::Text * m_timeText;
+	cocos2d::ui::LoadingBar * m_timeBar;
 };
