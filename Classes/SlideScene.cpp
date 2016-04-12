@@ -8,15 +8,15 @@ using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 using namespace cocos2d;
 
-Scene* SlideScene::createScene()
+Scene* SlideScene::createScene(int diff, int loop)
 {
 	auto scene = Scene::create();
-	auto layer = SlideScene::create();
+	auto layer = SlideScene::create(diff, loop);
 	scene->addChild(layer);
 	return scene;
 }
 
-bool SlideScene::init()
+bool SlideScene::init(int diff, int loop)
 {
 	if (!Layer::init())
 		return false;

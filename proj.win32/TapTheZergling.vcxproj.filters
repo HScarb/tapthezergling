@@ -22,6 +22,9 @@
     <Filter Include="Classes\Manager">
       <UniqueIdentifier>{6072f44e-f883-4509-9c8c-0bef297479ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scenes\Tollgates">
+      <UniqueIdentifier>{64b7089a-8ff0-487a-bbc0-5b5556d6787d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -45,20 +48,25 @@
     <ClCompile Include="..\Classes\SceneManager.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\DoubleTapScene.cpp">
+    <ClCompile Include="..\Classes\TollgateScene.cpp">
       <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EatCandiesScene.cpp">
+      <Filter>Classes\Scenes\Tollgates</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TemplateScene.cpp">
-      <Filter>Classes\Scenes</Filter>
+      <Filter>Classes\Scenes\Tollgates</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="..\Classes\EatCandiesScene.cpp">
-=======
+    <ClCompile Include="..\Classes\DoubleTapScene.cpp">
+      <Filter>Classes\Scenes\Tollgates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\VisibleRect.cpp">
+      <Filter>Classes\Utils</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\SlideScene.cpp">
-      <Filter>Classes\Scenes</Filter>
+      <Filter>Classes\Scenes\Tollgates</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\TollgateScene.cpp">
->>>>>>> c1797fdce22782f154a252ea3da552ca0e534870
+    <ClCompile Include="..\Classes\FilterSample.cpp">
       <Filter>Classes\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,18 +95,23 @@
     <ClInclude Include="..\Classes\TollgateScene.h">
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\DoubleTapScene.h">
-      <Filter>Classes\Scenes</Filter>
+    <ClInclude Include="..\Classes\EatCandiesScene.h">
+      <Filter>Classes\Scenes\Tollgates</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TemplateScene.h">
+      <Filter>Classes\Scenes\Tollgates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DoubleTapScene.h">
+      <Filter>Classes\Scenes\Tollgates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VisibleRect.h">
+      <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FilterSample.h">
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="..\Classes\EatCandiesScene.h">
-=======
     <ClInclude Include="..\Classes\SlideScene.h">
->>>>>>> c1797fdce22782f154a252ea3da552ca0e534870
-      <Filter>Classes\Scenes</Filter>
+      <Filter>Classes\Scenes\Tollgates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

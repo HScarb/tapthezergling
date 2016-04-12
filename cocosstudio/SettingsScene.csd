@@ -131,7 +131,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_about" ActionTag="-1801763011" Tag="62" IconVisible="False" LeftMargin="410.9542" RightMargin="417.0458" TopMargin="404.3871" BottomMargin="85.6128" FontSize="40" LabelText="ABOUT" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_about" ActionTag="-1801763011" Tag="62" IconVisible="False" LeftMargin="410.9542" RightMargin="417.0458" TopMargin="404.3872" BottomMargin="85.6128" FontSize="40" LabelText="ABOUT" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="132.0000" Y="50.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="476.9542" Y="110.6128" />

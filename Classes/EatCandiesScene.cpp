@@ -46,6 +46,7 @@ void EatCandiesScene::crush()
 		m_isCrushing = false;
 	});
 	this->runAction(Sequence::create(action, call, nullptr));
+
 }
 
 
