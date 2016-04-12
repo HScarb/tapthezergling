@@ -11,7 +11,7 @@
         <iOS_Target Value="TapTheZergling-mobile" />
         <iOS_BundleID Value="" />
         <Platform Value="None" />
-        <RunPlatform Value="None" />
+        <RunPlatform Value="Windows" />
         <FrameworkVersion Value="cocos2d-x-3.10" />
         <IsDebugKeystore Value="True" />
         <KeystorePassword Value="" />
@@ -26,6 +26,18 @@
         <LastPublishType Value="VS" />
         <IsLastPublish Value="True" />
         <LastRunType Value="Windows" />
+      </Value>
+    </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="CardEnhancer.csd" />
+          <FilePathData Path="MainScene.csd" />
+          <FilePathData Path="TestScene.csd" />
+          <FilePathData Path="TollgateScene.csd" />
+          <FilePathData Path="EatCandiesScene.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="EatCandiesScene.csd" />
       </Value>
     </Item>
   </Properties>

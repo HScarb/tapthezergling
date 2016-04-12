@@ -3,52 +3,54 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
-Scene* EatCandiesScene::createScene(int diff, int loop)
+EatCandiesScene* EatCandiesScene::createByType(int type)
 {
-	auto scene = Scene::create();
-	auto layer = EatCandiesScene::create(diff,loop);
-	scene->addChild(layer);
-	return scene;
+	auto candies = new EatCandiesScene();
+
+	if (candies && candies->init(type))
+		{
+			candies->autorelease();
+			return candies;
+		}
+	else
+		{
+			CC_SAFE_DELETE(candies);
+			return nullptr;
+		}
 }
 
-bool EatCandiesScene::init(int diff, int loop)
+bool EatCandiesScene::init(int type)
 {
-	if (!Layer::init())
-	{
-		return false;
-	}
+	Sprite::init();
 
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = [](Touch* touch, Event* event)
-	{
-		Point pos1 = touch->getLocation();
-		Point pos2 = touch->getLocationInView();
-		Point pos3 = Director::getInstance()->convertToGL(pos2);
-		return true;
-	};
+	m_type = type;
+	m_x = random(100,300);
+	m_y = random(100,300);
 
-	listener->onTouchMoved = [](Touch* touch, Event* event){};
-	
-	listener->onTouchEnded = [=](Touch* touch, Event* event){};
+	m_isCrushing = false;
 
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	char name[2] = { 0 };//初始化纹理图片
+	sprintf(name, "SCs_DancingFlowers_00", m_type);
+	this->initWithTexture(TextureCache::getInstance()->getTextureForKey(name));
 
 	return true;
 }
 
-cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
+void EatCandiesScene::crush()
 {
-	auto pRef = new EatCandiesScene();
-	if (pRef && pRef->init(diff, loop))
-	{
-		pRef->autorelease();
-		return pRef;
-	}
-	else
-	{
-		CC_SAFE_DELETE(pRef);
-		return nullptr;
+	//开始消除，消除状态为真，直到消除动作结束，将宝石移除渲染节点，并置消除状态为假
+	m_isCrushing = true;
+	auto action = FadeOut::create(0.2);
+	auto call = CallFunc::create([this](){
+		this->removeFromParent();
+		m_isCrushing = false;
+	});
+	this->runAction(Sequence::create(action, call, nullptr));
 }
+
+
+
+
 
 
 	
