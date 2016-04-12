@@ -48,6 +48,7 @@ cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
 	{
 		CC_SAFE_DELETE(pRef);
 		return nullptr;
+	}
 }
 
 
