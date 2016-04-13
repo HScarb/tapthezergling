@@ -2,6 +2,10 @@
 #include "SceneManager.h"
 #include "LoadingScene.h"
 #include "MainScene.h"
+
+#include "DoubleTapScene.h"
+#include "SlideScene.h"
+#include "EatCandiesScene.h"
 USING_NS_CC;
 
 SceneManager * SceneManager::m_sceneManager = nullptr;
@@ -47,6 +51,32 @@ void SceneManager::changeScene(SceneType sceneType)
 
 	Director * pDirector = Director::getInstance();
 	Scene * curScene = pDirector->getRunningScene();
+	if (curScene == nullptr)
+	{
+		pDirector->runWithScene(pScene);
+	}
+	else
+	{
+		auto replaceScene = TransitionFade::create(0.8f, pScene);
+		pDirector->replaceScene(replaceScene);
+	}
+}
+
+void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
+{
+	Scene * pScene = nullptr;
+	switch (sceneType)
+	{
+	case DoubleTapScene: 
+		pScene = DoubleTapScene::createScene(diff, loop);
+		break;
+	case SlideScene: break;
+	case EatCandiesScene: break;
+	default: break;
+	}
+
+	auto pDirector = Director::getInstance();
+	auto curScene = pDirector->getRunningScene();
 	if (curScene == nullptr)
 	{
 		pDirector->runWithScene(pScene);

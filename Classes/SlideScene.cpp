@@ -33,3 +33,18 @@ bool SlideScene::init(int diff, int loop)
 		this->addChild(sp);
 	}
 }
+
+Layer* SlideScene::create(int diff, int loop)
+{
+	auto pRef = new SlideScene();
+	if(pRef && pRef->init(diff, loop))
+	{
+		pRef->autorelease();
+		return pRef;
+	}
+	else
+	{
+		CC_SAFE_DELETE(pRef);
+		return nullptr;
+	}
+}

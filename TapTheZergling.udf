@@ -28,20 +28,5 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="CardEnhancer.csd" />
-          <FilePathData Path="MainScene.csd" />
-          <FilePathData Path="TestScene.csd" />
-          <FilePathData Path="TollgateScene.csd" />
-          <FilePathData Path="SettingsScene.csd" />
-          <FilePathData Path="Tollgates/DoubleTapScene.csd" />
-          <FilePathData Path="Tollgates/EatCandiesScene.csd" />
-          <FilePathData Path="Tollgates/PauseLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="Tollgates/DoubleTapScene.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

@@ -1,8 +1,6 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
-#include "LoadingScene.h"
-#include "TemplateScene.h"
-#include"SlideScene.h"
+#include "SceneManager.h"
 
 USING_NS_CC;
 
@@ -56,10 +54,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	log("%d", loop);
 	
     // create a scene. it's an autorelease object
-	auto scene = SlideScene::createScene(diff,loop);
+	SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::DoubleTapScene, 1, 1);
 
     // run
-    director->runWithScene(scene);
+    //director->runWithScene(scene);
 
     return true;
 }

@@ -3,9 +3,25 @@
 #include "cocos2d.h"
 #include "ui\CocosGUI.h"
 #include <vector>
+const int GRID_ROW = 3;		// 设定默认的行数和列数
+const int GRID_COL = 6;
+const int GRID_WIDTH = 120;
 
 class Zergling;
 class DoubleTapGrid;
+class IntMatrix;
+
+static const int m_g[9][GRID_ROW][GRID_COL] =
+{
+	// easy
+	{
+		{ 1,2,3,4,5,6 },
+		{ 1,2,3,4,5,6 },
+		{ 1,2,3,4,5,6 }
+	}
+	// medium
+	// hard
+};
 
 class DoubleTapScene : public cocos2d::Layer
 {
@@ -14,10 +30,9 @@ public:
 	virtual bool init(int diff, int loop);	// 根据难度和轮次数初始化一个关卡
 	static cocos2d::Layer * create(int diff, int loop);
 
-	virtual void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
-
 private:
 	void newLevel(int diff);				// 根据难度创建一个新的轮次
+	virtual void update();					// 主要用于刷新时间
 
 private:
 	DoubleTapGrid * m_grid;
@@ -31,7 +46,16 @@ private:
 class DoubleTapGrid : public cocos2d::Node
 {
 public:
+	static DoubleTapGrid * create(int diff, int loop, int row = GRID_ROW, int col = GRID_COL);		// 根据行列创建布局
+	bool init(int diff, int loop, int row = GRID_ROW, int col = GRID_COL);
+
+
+	virtual void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
+
 private:
+	int m_row, m_col;
+	int m_loop;
+	bool m_isRunning;
 	std::vector<std::vector<Zergling*>> m_zerglingGrid;
 
 };

@@ -12,10 +12,17 @@ public:
 		SettingsScene,
 		TollgateScene
 	};
+	enum TollgateSceneType
+	{
+		DoubleTapScene,
+		SlideScene,
+		EatCandiesScene
+	};
 	static SceneManager * getInstance();
 	virtual bool init();
 
 	void changeScene(SceneType sceneType);
+	void changeScene(TollgateSceneType sceneType, int diff, int loop);
 
 private:
 	static SceneManager * m_sceneManager;
