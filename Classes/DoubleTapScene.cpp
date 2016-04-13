@@ -47,6 +47,20 @@ cocos2d::Layer* DoubleTapScene::create(int diff, int loop)
 	}
 }
 
+void DoubleTapScene::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
+{
+	int count = touches.size();
+	if(count == 2)
+	{
+		for(auto &item: touches)
+		{
+			auto touch = item;
+			auto location = touch->getLocation();
+
+		}
+	}
+}
+
 void DoubleTapScene::newLevel(int diff)
 {
 	

@@ -25,6 +25,9 @@
     <Filter Include="Classes\Scenes\Tollgates">
       <UniqueIdentifier>{64b7089a-8ff0-487a-bbc0-5b5556d6787d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Entity">
+      <UniqueIdentifier>{c3dc609f-7d70-43e4-acfd-f3d65bb4f0e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -66,8 +69,14 @@
     <ClCompile Include="..\Classes\SlideScene.cpp">
       <Filter>Classes\Scenes\Tollgates</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\FilterSample.cpp">
-      <Filter>Classes\Scenes</Filter>
+    <ClCompile Include="..\Classes\Zergling.cpp">
+      <Filter>Classes\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FilterSprite.cpp">
+      <Filter>Classes\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TimeManager.cpp">
+      <Filter>Classes\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,11 +116,17 @@
     <ClInclude Include="..\Classes\VisibleRect.h">
       <Filter>Classes\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\FilterSample.h">
-      <Filter>Classes\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\SlideScene.h">
       <Filter>Classes\Scenes\Tollgates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Zergling.h">
+      <Filter>Classes\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FilterSprite.h">
+      <Filter>Classes\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TimeManager.h">
+      <Filter>Classes\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

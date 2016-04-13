@@ -11,7 +11,7 @@
         <iOS_Target Value="TapTheZergling-mobile" />
         <iOS_BundleID Value="" />
         <Platform Value="None" />
-        <RunPlatform Value="Windows" />
+        <RunPlatform Value="None" />
         <FrameworkVersion Value="cocos2d-x-3.10" />
         <IsDebugKeystore Value="True" />
         <KeystorePassword Value="" />
@@ -35,9 +35,12 @@
           <FilePathData Path="MainScene.csd" />
           <FilePathData Path="TestScene.csd" />
           <FilePathData Path="TollgateScene.csd" />
-          <FilePathData Path="EatCandiesScene.csd" />
+          <FilePathData Path="SettingsScene.csd" />
+          <FilePathData Path="Tollgates/DoubleTapScene.csd" />
+          <FilePathData Path="Tollgates/EatCandiesScene.csd" />
+          <FilePathData Path="Tollgates/PauseLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="EatCandiesScene.csd" />
+        <ActiveDocument Path="Tollgates/DoubleTapScene.csd" />
       </Value>
     </Item>
   </Properties>
