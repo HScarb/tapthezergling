@@ -260,16 +260,16 @@
           <Image Name="zergling_big_3.png" />
           <Image Name="zergling_big_4.png" />
         </Folder>
-        <Project Name="CardEnhancer.csd" Type="Layer" />
-        <Project Name="MainScene.csd" Type="Scene" />
-        <Project Name="SettingsScene.csd" Type="Scene" />
-        <Project Name="TestScene.csd" Type="Scene" />
-        <Project Name="TollgateScene.csd" Type="Scene" />
         <Folder Name="Tollgates">
           <Project Name="DoubleTapScene.csd" Type="Scene" />
           <Project Name="EatCandiesScene.csd" Type="Scene" />
           <Project Name="PauseLayer.csd" Type="Layer" />
         </Folder>
+        <Project Name="CardEnhancer.csd" Type="Layer" />
+        <Project Name="MainScene.csd" Type="Scene" />
+        <Project Name="SettingsScene.csd" Type="Scene" />
+        <Project Name="TestScene.csd" Type="Scene" />
+        <Project Name="TollgateScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>

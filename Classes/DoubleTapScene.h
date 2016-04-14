@@ -3,11 +3,11 @@
 #include "cocos2d.h"
 #include "ui\CocosGUI.h"
 #include <vector>
+#include "Zergling.h"
 const int GRID_ROW = 3;		// 设定默认的行数和列数
 const int GRID_COL = 6;
 const int GRID_WIDTH = 120;
 
-class Zergling;
 class DoubleTapGrid;
 class IntMatrix;
 
@@ -49,6 +49,11 @@ public:
 	static DoubleTapGrid * create(int diff, int loop, int row = GRID_ROW, int col = GRID_COL);		// 根据行列创建布局
 	bool init(int diff, int loop, int row = GRID_ROW, int col = GRID_COL);
 
+	// 根据网格坐标设置小狗的具体像素坐标
+	void setZerglingPixPos(Zergling* zergling, int x, int y);
+
+	// 根据颜色和网格坐标创建一个小狗，并且加入到渲染节点
+	Zergling * createAZergling(Zergling::ZerglingColor color, int x, int y);
 
 	virtual void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
 

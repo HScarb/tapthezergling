@@ -3,7 +3,6 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
-#include "Zergling.h"
 
 USING_NS_CC;
 using namespace std;
@@ -81,21 +80,35 @@ bool DoubleTapGrid::init(int diff, int loop, int row, int col)
 	m_isRunning = false;
 
 	// 根据行、列，初始化一个空的二维容器
-	m_zerglingGrid.resize(m_row);
+	m_zerglingGrid.resize(m_col);
 	for (auto &vec : m_zerglingGrid)
-		vec.resize(m_col);
+		vec.resize(m_row);
 
-	for (int x = 0; x < m_col;x++)
+	for (int x = 0; x < m_col; x++)
 	{
-		for (int y = 0; y < m_row;y++)
+		for (int y = 0; y < m_row; y++)
 		{
-			auto s = Sprite::create("Res/zergling/SCs_Zergling_C3_02.png");
-			m_zerglingGrid[x][y] = (Zergling*)Sprite::create("Res/zergling/SCs_Zergling_C3_02.png");
-			this->addChild(m_zerglingGrid[x][y]);
+			m_zerglingGrid[x][y] = createAZergling(Zergling::ZerglingColor::NONE, x, y);
 		}
 	}
 
 	return true;
+}
+
+void DoubleTapGrid::setZerglingPixPos(Zergling* zergling, int x, int y)
+{
+	zergling->setPosition(x * GRID_WIDTH, y * GRID_WIDTH);
+}
+
+Zergling* DoubleTapGrid::createAZergling(Zergling::ZerglingColor color, int x, int y)
+{
+	Zergling * zergling = nullptr;
+	zergling = Zergling::createByColor((Zergling::ZerglingColor)0);
+	
+	setZerglingPixPos(zergling, x, y);
+	addChild(zergling);
+
+	return zergling;
 }
 
 void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
