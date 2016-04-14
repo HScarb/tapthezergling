@@ -27,6 +27,8 @@
             <Image Name="button-cards-2.png" />
             <Image Name="button-home-1.png" />
             <Image Name="button-home-2.png" />
+            <Image Name="button-pause-1.png" />
+            <Image Name="button-pause-2.png" />
             <Image Name="button-setting-1.png" />
             <Image Name="button-setting-2.png" />
             <Image Name="dialog_card_enhancer.png" />

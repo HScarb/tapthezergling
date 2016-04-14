@@ -22,6 +22,8 @@ bool DoubleTapScene::init(int diff, int loop)
 	if (!Layer::init())
 		return false;
 	
+	auto winSize = Director::getInstance()->getWinSize();
+
 	auto UI = CSLoader::createNode("Tollgates/DoubleTapScene.csb");
 	addChild(UI);
 
@@ -30,6 +32,7 @@ bool DoubleTapScene::init(int diff, int loop)
 	m_timeText = (Text*)(UI->getChildByName("Text_time"));
 	
 	m_grid = DoubleTapGrid::create(diff, loop);
+	m_grid->setPosition(120, 80);
 	this->addChild(m_grid);
 
 	return true;
