@@ -5,7 +5,7 @@
 #include "SceneManager.h"
 USING_NS_CC;
 using namespace CocosDenshion;
-const int TOTAL_TEXTURE_NUM = 4;
+const int TOTAL_TEXTURE_NUM = 12;
 
 Scene* LoadingScene::createScene() 
 {
@@ -42,6 +42,10 @@ bool LoadingScene::init()
 	for (int i = 1; i <= 4;i++)
 	{
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("zergling_big_%d.png", i), addTextureCallback);
+	}
+	for (int i = 0; i <= 7;i++)
+	{
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("zergling_small_%d.png", i), addTextureCallback);
 	}
 
 	// 开启加载进度检测

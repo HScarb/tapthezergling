@@ -11,13 +11,17 @@ const int GRID_WIDTH = 120;
 class DoubleTapGrid;
 class IntMatrix;
 
+/*
+	定死的狗狗矩阵
+	0表示空，1-7表示狗的颜色
+*/
 static const int m_g[9][GRID_ROW][GRID_COL] =
 {
 	// easy
 	{
-		{ 1,2,3,4,5,6 },
-		{ 1,2,3,4,5,6 },
-		{ 1,2,3,4,5,6 }
+		{ 5,0,0,0,0,5 },
+		{ 3,5,7,5,7,3 },
+		{ 7,0,0,0,0,7 }
 	}
 	// medium
 	// hard
@@ -61,6 +65,7 @@ private:
 	int m_row, m_col;
 	int m_loop;
 	bool m_isRunning;
+	cocos2d::Label * m_touchesLabel;
 	std::vector<std::vector<Zergling*>> m_zerglingGrid;
 
 };

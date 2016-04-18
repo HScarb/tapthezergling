@@ -261,6 +261,14 @@
           <Image Name="zergling_big_2.png" />
           <Image Name="zergling_big_3.png" />
           <Image Name="zergling_big_4.png" />
+          <Image Name="zergling_small_0.png" />
+          <Image Name="zergling_small_1.png" />
+          <Image Name="zergling_small_2.png" />
+          <Image Name="zergling_small_3.png" />
+          <Image Name="zergling_small_4.png" />
+          <Image Name="zergling_small_5.png" />
+          <Image Name="zergling_small_6.png" />
+          <Image Name="zergling_small_7.png" />
         </Folder>
         <Folder Name="Tollgates">
           <Project Name="DoubleTapScene.csd" Type="Scene" />

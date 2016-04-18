@@ -23,9 +23,11 @@ bool Zergling::init(int color)
 	if (!FilterSprite::init())
 		return false;
 
+	m_colorType = color;
+
 	// 根据资源名加载不同颜色的狗
 	// this->initWithTexture(Texture2D::, Rect::ZERO);
-	this->initWithFile("SCs_Zergling_C3_02.png");
+	this->initWithFile(StringUtils::format("Res/zergling_small_%d.png", m_colorType));
 
 	this->setAnchorPoint(Vec2(0, 0));		// 设置锚点为左下角
 
@@ -35,4 +37,9 @@ bool Zergling::init(int color)
 void Zergling::eatAnimation()
 {
 	// play eat animation
+}
+
+void Zergling::tapped()
+{
+	this->removeFromParent();
 }

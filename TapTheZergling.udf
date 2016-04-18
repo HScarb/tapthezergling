@@ -7,10 +7,10 @@
         <LuaEncryptSign Value="" />
         <Android_PackageName Value="org.cocos.TapTheZergling" />
         <AndroidkeyStore Value="" />
-        <AndroidVersion Value="android-19" />
+        <AndroidVersion Value="android-22" />
         <iOS_Target Value="TapTheZergling-mobile" />
         <iOS_BundleID Value="" />
-        <Platform Value="None" />
+        <Platform Value="Android" />
         <RunPlatform Value="None" />
         <FrameworkVersion Value="cocos2d-x-3.10" />
         <IsDebugKeystore Value="True" />
@@ -24,8 +24,13 @@
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="VS" />
-        <IsLastPublish Value="True" />
+        <IsLastPublish Value="False" />
         <LastRunType Value="Windows" />
+      </Value>
+    </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <ActiveDocument />
       </Value>
     </Item>
   </Properties>

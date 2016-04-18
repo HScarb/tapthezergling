@@ -21,5 +21,6 @@ public:
 	bool init(int color);
 
 	void eatAnimation();
-
+	void tapped();			// 被点击以后消失
+	CC_SYNTHESIZE(int, m_colorType, ColorType);
 };
