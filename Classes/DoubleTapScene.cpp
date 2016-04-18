@@ -9,6 +9,45 @@ using namespace std;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 
+// multi touches test
+static const Color3B* s_TouchColors[5] = {
+	&Color3B::YELLOW,
+	&Color3B::BLUE,
+	&Color3B::GREEN,
+	&Color3B::RED,
+	&Color3B::MAGENTA
+};
+
+class TouchPoint : public Node
+{
+public:
+	TouchPoint(const Vec2 &touchPoint, const Color3B &touchColor)
+	{
+		m_point = touchPoint;
+		DrawNode* drawNode = DrawNode::create();
+		auto s = Director::getInstance()->getWinSize();
+		Color4F color(touchColor.r / 255.0f, touchColor.g / 255.0f, touchColor.b / 255.0f, 1.0f);
+		drawNode->drawLine(Vec2(0, touchPoint.y), Vec2(s.width, touchPoint.y), color);
+		drawNode->drawLine(Vec2(touchPoint.x, 0), Vec2(touchPoint.x, s.height), color);
+		drawNode->drawDot(touchPoint, 3, color);
+		addChild(drawNode);
+	}
+
+	static TouchPoint* touchPointWithParent(Node* pParent, const Vec2 &touchPoint, const Color3B &touchColor)
+	{
+		auto pRet = new (std::nothrow) TouchPoint(touchPoint, touchColor);
+		pRet->setContentSize(pParent->getContentSize());
+		pRet->setAnchorPoint(Vec2(0.0f, 0.0f));
+		pRet->autorelease();
+		return pRet;
+	}
+	CC_SYNTHESIZE(Vec2, m_point, Pt);
+};
+
+static Map<int, TouchPoint*> s_map;
+
+////////////////////
+
 Scene* DoubleTapScene::createScene(int diff, int loop)
 {
 	auto scene = Scene::create();
@@ -32,7 +71,7 @@ bool DoubleTapScene::init(int diff, int loop)
 	m_timeText = (Text*)(UI->getChildByName("Text_time"));
 	
 	m_grid = DoubleTapGrid::create(diff, loop);
-	m_grid->setPosition(120, 80);
+	m_grid->setPosition(0, 0);
 	this->addChild(m_grid);
 
 	return true;
@@ -51,6 +90,16 @@ cocos2d::Layer* DoubleTapScene::create(int diff, int loop)
 		CC_SAFE_DELETE(pRef);
 		return nullptr;
 	}
+}
+
+void DoubleTapScene::newLevel(int diff)
+{
+
+}
+
+void DoubleTapScene::update()
+{
+
 }
 
 /*
@@ -74,7 +123,7 @@ DoubleTapGrid* DoubleTapGrid::create(int diff, int loop, int row, int col)
 
 bool DoubleTapGrid::init(int diff, int loop, int row, int col)
 {
-	if (!Node::init())
+	if (!Layer::init())
 		return false;
 
 	m_row = row;
@@ -82,7 +131,7 @@ bool DoubleTapGrid::init(int diff, int loop, int row, int col)
 	m_loop = loop;
 	m_isRunning = false;
 	m_touchesLabel = Label::create("0000", "Arial", 30);
-	m_touchesLabel->setPosition(100, 400);
+	m_touchesLabel->setPosition(100, 500);
 	this->addChild(m_touchesLabel);
 
 	// 根据行、列，初始化一个空的二维容器
@@ -100,6 +149,8 @@ bool DoubleTapGrid::init(int diff, int loop, int row, int col)
 
 	auto listener = EventListenerTouchAllAtOnce::create();
 	listener->onTouchesBegan = CC_CALLBACK_2(DoubleTapGrid::onTouchesBegan, this);
+	listener->onTouchesMoved = CC_CALLBACK_2(DoubleTapGrid::onTouchesMoved, this);
+	listener->onTouchesEnded = CC_CALLBACK_2(DoubleTapGrid::onTouchesEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return true;
@@ -107,7 +158,7 @@ bool DoubleTapGrid::init(int diff, int loop, int row, int col)
 
 void DoubleTapGrid::setZerglingPixPos(Zergling* zergling, int x, int y)
 {
-	zergling->setPosition(x * GRID_WIDTH, y * GRID_WIDTH);
+	zergling->setPosition(x * GRID_WIDTH + LEFT_MARGIN, y * GRID_WIDTH + BOTTOM_MARGIN);
 }
 
 Zergling* DoubleTapGrid::createAZergling(Zergling::ZerglingColor color, int x, int y)
@@ -123,6 +174,8 @@ Zergling* DoubleTapGrid::createAZergling(Zergling::ZerglingColor color, int x, i
 	return zergling;
 }
 
+
+
 void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
 {
 	// 如果倒计时还没有开始，则开始倒计时
@@ -132,9 +185,94 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 		TimeManager::getInstance()->startCountDown();
 	}
 	
-	int count = touches.size();
-	m_touchesLabel->setString(StringUtils::format("%d", count));
-	if(count == 2)		// 如果触摸点数为2
+	for (auto &item : touches)
+	{
+		auto touch = item;
+		auto location = touch->getLocation();
+		auto touchPoint = TouchPoint::touchPointWithParent(this, location, *s_TouchColors[touch->getID() % 5]);
+
+		addChild(touchPoint);
+		s_map.insert(touch->getID(), touchPoint);
+	}
+	if(s_map.size() == 2)
+	{
+		// log("touches count: %d", count);
+		Vec2 p[2];
+		int c = 0;
+		vector<int> keys;
+		keys = s_map.keys();
+		for(auto key : keys)
+		{
+			p[c] = (s_map.at(key))->getPt();
+			// 将坐标转化成格子坐标
+
+			p[c] = convertToGridPos(p[c]);
+			c++;
+		}
+//		auto p1 = touches[0]->getLocation();
+//		auto p2 = touches[1]->getLocation();
+//		p1.x /= GRID_WIDTH;
+//		p1.y /= GRID_WIDTH;
+//		p2.y /= GRID_WIDTH;
+//		p2.y /= GRID_WIDTH;
+		m_touchesLabel->setString(StringUtils::format("1:(%d,%d), 2:(%d,%d)", (int)p[0].x, (int)p[0].y, (int)p[1].x, (int)p[1].y));
+		int x1 = (int)p[0].x;
+		int y1 = (int)p[0].y;
+		int x2 = (int)p[1].x;
+		int y2 = (int)p[1].y;
+		// 如果这两个被点击的位置都在矩阵内且有狗
+		if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3) 
+			&& (0 <= x2 && x2 < 6) && (0 <= y2 && y2 < 3) 
+			&& m_zerglingGrid[x1][y1] && m_zerglingGrid[x2][y2])
+		{
+			// 如果两只狗的颜色相同
+			if (m_zerglingGrid[x1][y1]->getColorType()
+				== m_zerglingGrid[x2][y2]->getColorType())
+			{
+				log("crush!");
+				// * add animation
+				auto zergling1 = m_zerglingGrid[x1][y1];
+				auto zergling2 = m_zerglingGrid[x2][y2];
+				// 清空矩阵中的狗的指针
+				m_zerglingGrid[x1][y1] = nullptr;
+				m_zerglingGrid[x2][y2] = nullptr;
+				// 将狗从矩阵的绘制节点中移除
+				zergling1->tapped();
+				zergling2->tapped();
+			}
+		}
+	}
+/*	else if (s_map.size() == 1)
+	{
+		Vec2 p;
+		vector<int> keys;
+		keys = s_map.keys();
+		for (auto key : keys)
+		{
+			p = (s_map.at(key))->getPt();
+			p = convertToGridPos(p);
+		}
+		log("touches count: 1");
+		int x = (int)p.x;
+		int y = (int)p.y;
+		log("x = %d, y = %d", x, y);
+		if ((0 <= x && x < 6) && (0 <= y && y < 3) && m_zerglingGrid[x][y])
+		{
+			log("color type: %d", m_zerglingGrid[x][y]->getColorType());
+			m_touchesLabel->setString(StringUtils::format("Color Type: %d", m_zerglingGrid[x][y]->getColorType()));
+			auto zerg = m_zerglingGrid[x][y];
+			m_zerglingGrid[x][y] = nullptr;
+			zerg->tapped();
+		}
+		else
+			log("none zergling.");
+	}*/
+}
+
+void DoubleTapGrid::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
+{
+/*	int count = 0;
+	if (count == 2)		// 如果触摸点数为2
 	{
 		// log("touches count: %d", count);
 		auto p1 = touches[0]->getLocation();
@@ -170,9 +308,9 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 			}
 		}
 	}
-	else if(count == 1)
+	else if (count == 1)
 	{
-		log("touches count: 1");
+/*		log("touches count: 1");
 		auto p = touches[0]->getLocation();
 		p.x /= GRID_WIDTH;
 		p.y /= GRID_WIDTH;
@@ -188,16 +326,25 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 			zerg->tapped();
 		}
 		else
-			log("none zergling.");
+			log("none zergling.");#1#
+	}*/
+}
+
+void DoubleTapGrid::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
+{
+	for (auto &item : touches)
+	{
+		auto touch = item;
+		auto pTP = s_map.at(touch->getID());
+		removeChild(pTP, true);
+		s_map.erase(touch->getID());
 	}
 }
 
-void DoubleTapScene::newLevel(int diff)
+cocos2d::Vec2 DoubleTapGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 {
-	
-}
-
-void DoubleTapScene::update()
-{
-	
+	float x, y;
+	x = (pixPos.x - LEFT_MARGIN) / GRID_WIDTH;
+	y = (pixPos.y - BOTTOM_MARGIN) / GRID_WIDTH;
+	return Vec2(x, y);
 }
