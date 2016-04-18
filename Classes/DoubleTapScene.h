@@ -4,9 +4,11 @@
 #include "ui\CocosGUI.h"
 #include <vector>
 #include "Zergling.h"
-const int GRID_ROW = 3;		// 设定默认的行数和列数
+const int GRID_ROW = 3;				// 设定默认的行数和列数
 const int GRID_COL = 6;
-const int GRID_WIDTH = 120;
+const int GRID_WIDTH = 120;			// 小狗方块的宽度(和高度)
+const int LEFT_MARGIN = 120;		// 小狗矩阵距离左边的距离
+const int BOTTOM_MARGIN = 80;		// 小狗矩阵距离底部的距离
 
 class DoubleTapGrid;
 class IntMatrix;
@@ -47,7 +49,7 @@ private:
 	cocos2d::ui::LoadingBar * m_timeBar;
 };
 
-class DoubleTapGrid : public cocos2d::Node
+class DoubleTapGrid : public cocos2d::Layer
 {
 public:
 	static DoubleTapGrid * create(int diff, int loop, int row = GRID_ROW, int col = GRID_COL);		// 根据行列创建布局
@@ -60,6 +62,8 @@ public:
 	Zergling * createAZergling(Zergling::ZerglingColor color, int x, int y);
 
 	virtual void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
+	virtual void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
+	virtual void onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
 
 private:
 	int m_row, m_col;
@@ -67,5 +71,8 @@ private:
 	bool m_isRunning;
 	cocos2d::Label * m_touchesLabel;
 	std::vector<std::vector<Zergling*>> m_zerglingGrid;
+
+private:
+	cocos2d::Vec2 convertToGridPos(cocos2d::Vec2 pixPos);		// 将像素坐标转化成格子矩阵中的坐标
 
 };
