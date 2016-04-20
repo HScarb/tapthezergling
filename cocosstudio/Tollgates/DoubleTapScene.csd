@@ -46,13 +46,13 @@
             <PreSize X="1.0667" Y="0.1889" />
             <FileData Type="Normal" Path="Res/RESOURCE/loading_bar.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="LoadingBar_time" ActionTag="1423303837" Tag="69" IconVisible="False" LeftMargin="-32.0001" RightMargin="-31.9999" TopMargin="6.0000" BottomMargin="432.0000" ProgressInfo="75" ctype="LoadingBarObjectData">
+          <AbstractNodeData Name="LoadingBar_time" ActionTag="1423303837" Tag="69" IconVisible="False" LeftMargin="-33.1641" RightMargin="-30.8359" TopMargin="6.0000" BottomMargin="432.0000" ProgressInfo="75" ctype="LoadingBarObjectData">
             <Size X="1024.0000" Y="102.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="479.9999" Y="483.0000" />
+            <Position X="478.8359" Y="483.0000" />
             <Scale ScaleX="0.4000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.8944" />
+            <PrePosition X="0.4988" Y="0.8944" />
             <PreSize X="1.0667" Y="0.1889" />
             <ImageFileData Type="Normal" Path="Res/RESOURCE/loading_progress.png" Plist="" />
           </AbstractNodeData>

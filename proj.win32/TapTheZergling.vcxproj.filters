@@ -28,6 +28,9 @@
     <Filter Include="Classes\Entity">
       <UniqueIdentifier>{c3dc609f-7d70-43e4-acfd-f3d65bb4f0e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Layer">
+      <UniqueIdentifier>{ef96f611-aa76-476b-99c6-e17dd2de12b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -78,6 +81,9 @@
     <ClCompile Include="..\Classes\TimeManager.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\PauseLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -127,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\TimeManager.h">
       <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PauseLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TollgateControlLayer.h">
+      <Filter>Classes\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

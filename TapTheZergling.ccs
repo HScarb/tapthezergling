@@ -277,9 +277,11 @@
         </Folder>
         <Project Name="CardEnhancer.csd" Type="Layer" />
         <Project Name="MainScene.csd" Type="Scene" />
+        <Project Name="PauseLayer.csd" Type="Layer" />
         <Project Name="SettingsScene.csd" Type="Scene" />
         <Project Name="TestScene.csd" Type="Scene" />
         <Project Name="TollgateScene.csd" Type="Scene" />
+        <Project Name="TollgateControlLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>
