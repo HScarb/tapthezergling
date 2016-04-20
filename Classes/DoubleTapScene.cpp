@@ -3,6 +3,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
+#include "TollgateControlLayer.h"
 
 USING_NS_CC;
 using namespace std;
@@ -66,9 +67,8 @@ bool DoubleTapScene::init(int diff, int loop)
 	auto UI = CSLoader::createNode("Tollgates/DoubleTapScene.csb");
 	addChild(UI);
 
-	m_pauseBtn = (Button*)(UI->getChildByName("Button_pause"));
-	m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
-	m_timeText = (Text*)(UI->getChildByName("Text_time"));
+	auto tollgateControlLayer = TollgateControlLayer::create();
+	addChild(tollgateControlLayer);
 	
 	m_grid = DoubleTapGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);

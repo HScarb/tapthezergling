@@ -84,6 +84,9 @@
     <ClCompile Include="..\Classes\PauseLayer.cpp">
       <Filter>Classes\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\TollgateControlLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">

@@ -42,10 +42,6 @@ private:
 private:
 	DoubleTapGrid * m_grid;
 
-private:
-	cocos2d::ui::Button * m_pauseBtn;
-	cocos2d::ui::Text * m_timeText;
-	cocos2d::ui::LoadingBar * m_timeBar;
 };
 
 class DoubleTapGrid : public cocos2d::Layer
