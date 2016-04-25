@@ -28,6 +28,9 @@
     <Filter Include="Classes\Entity">
       <UniqueIdentifier>{c3dc609f-7d70-43e4-acfd-f3d65bb4f0e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Layer">
+      <UniqueIdentifier>{ef96f611-aa76-476b-99c6-e17dd2de12b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -75,11 +78,16 @@
     <ClCompile Include="..\Classes\TimeManager.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\Classes\SlideCutScene.cpp">
       <Filter>Classes\Scenes\Tollgates</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Farmer.cpp">
       <Filter>Classes\Entity</Filter>
+=======
+    <ClCompile Include="..\Classes\PauseLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+>>>>>>> 73375d86b5c982f54fa051bfb710d9ff4fa500bc
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,11 +136,19 @@
     <ClInclude Include="..\Classes\TimeManager.h">
       <Filter>Classes\Manager</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\Classes\SlideCutScene.h">
       <Filter>Classes\Scenes\Tollgates</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Farmer.h">
       <Filter>Classes\Entity</Filter>
+=======
+    <ClInclude Include="..\Classes\PauseLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TollgateControlLayer.h">
+      <Filter>Classes\Layer</Filter>
+>>>>>>> 73375d86b5c982f54fa051bfb710d9ff4fa500bc
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

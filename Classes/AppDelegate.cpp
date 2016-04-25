@@ -54,7 +54,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	log("%d", loop);
 	
     // create a scene. it's an autorelease object
+<<<<<<< HEAD
 	SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::SlideCutScene, 1, 1);
+=======
+	SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::DoubleTapScene, 0, 3);
+>>>>>>> 73375d86b5c982f54fa051bfb710d9ff4fa500bc
 
     // run
     //director->runWithScene(scene);
