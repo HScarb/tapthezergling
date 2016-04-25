@@ -15,7 +15,7 @@ public:
 	enum TollgateSceneType
 	{
 		DoubleTapScene,
-		SlideScene,
+		SlideCutScene,
 		EatCandiesScene
 	};
 	static SceneManager * getInstance();

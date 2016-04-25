@@ -30,7 +30,13 @@
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
-        <ActiveDocument />
+        <OpenedDocuments>
+          <FilePathData Path="Tollgates/DoubleTapScene.csd" />
+          <FilePathData Path="CardEnhancer.csd" />
+          <FilePathData Path="Tollgates/PauseLayer.csd" />
+          <FilePathData Path="Tollgates/SlideCutScene.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="Tollgates/SlideCutScene.csd" />
       </Value>
     </Item>
   </Properties>
