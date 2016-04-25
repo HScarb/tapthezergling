@@ -24,14 +24,13 @@
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="VS" />
-        <IsLastPublish Value="False" />
+        <IsLastPublish Value="True" />
         <LastRunType Value="Windows" />
       </Value>
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="Tollgates/DoubleTapScene.csd" />
           <FilePathData Path="CardEnhancer.csd" />
           <FilePathData Path="Tollgates/PauseLayer.csd" />
           <FilePathData Path="Tollgates/SlideCutScene.csd" />

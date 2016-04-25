@@ -4,7 +4,7 @@
 #include "FilterSprite.h"
 using namespace cocos2d;
 
-class Farmer :public FilterSprite
+class Farmer :public Layer
 {
 public:
 	enum Farmerappear

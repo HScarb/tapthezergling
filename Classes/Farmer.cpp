@@ -19,14 +19,14 @@ Farmer* Farmer::FarmerAppear(Farmerappear appear)
 
 bool Farmer::init(int appear)
 {
-	if (!FilterSprite::init())
+	if (!Layer::init())
 	{
 		return false;
 	}
 	m_appear = appear;
-	//Sprite *farmer = Sprite::create("SCs_Zergling_C3_02.png");
-	this->initWithFile(StringUtils::format("Res/zergling_small_%d.png", m_appear));
-	this->setAnchorPoint(Vec2(0, 0));
+	Sprite *farmer = Sprite::create("SCs_Zergling_C3_02.png");
+	
+	this->setAnchorPoint(Vec2(0, 0));// 设置锚点为左下角
 	return true;
 }
 void Farmer::tapped()

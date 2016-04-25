@@ -1,4 +1,4 @@
-//SlideScene
+//SlideCutScene
 #include"SlideCutScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
@@ -9,32 +9,7 @@ using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 using namespace cocos2d;
 
-/*class TouchPoint : public Node
-{
-public:
-	TouchPoint(const Vec2 &touchPoint, const Color3B &touchColor)
-	{
-		m_point = touchPoint;
-		DrawNode* drawNode = DrawNode::create();
-		auto s = Director::getInstance()->getWinSize();
-		Color4F color(touchColor.r / 255.0f, touchColor.g / 255.0f, touchColor.b / 255.0f, 1.0f);
-		drawNode->drawLine(Vec2(0, touchPoint.y), Vec2(s.width, touchPoint.y), color);
-		drawNode->drawLine(Vec2(touchPoint.x, 0), Vec2(touchPoint.x, s.height), color);
-		drawNode->drawDot(touchPoint, 3, color);
-		addChild(drawNode);
-	}
 
-	static TouchPoint* touchPointWithParent(Node* pParent, const Vec2 &touchPoint, const Color3B &touchColor)
-	{
-		auto pRet = new (std::nothrow) TouchPoint(touchPoint, touchColor);
-		pRet->setContentSize(pParent->getContentSize());
-		pRet->setAnchorPoint(Vec2(0.0f, 0.0f));
-		pRet->autorelease();
-		return pRet;
-	}
-	CC_SYNTHESIZE(Vec2, m_point, Pt);
-};
-static Map<int, TouchPoint*> s_map;*/
 
 Scene* SlideCutScene::createScene(int diff, int loop)
 {
@@ -110,21 +85,30 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 	this->addChild(m_touchesLabel);
 
 	// 根据行、列，初始化一个空的二维容器
-	m_famrerGrid.resize(m_col);
-	for (auto &vec : m_famrerGrid)
+	m_farmerGrid.resize(m_col);
+	for (auto &vec : m_farmerGrid)
 		vec.resize(m_row);
 
 	for (int x = 0; x < m_col; x++)
 	{
 		for (int y = 0; y < m_row; y++)
 		{
-			m_famrerGrid[x][y] = createAFarmer((Farmer::Farmerappear)m_a[0][y][x], x, y);
+			m_farmerGrid[x][y] = createAFarmer((Farmer::Farmerappear)m_a[0][y][x], x, y);
 		}
 	}
 
-	auto listener = EventListenerTouchOneByOne::create();
+	//创建一个事件监听器类型为 单点触摸
+	auto touchListener = EventListenerTouchOneByOne::create();
+
+	//绑定事件
+	touchListener->onTouchBegan = CC_CALLBACK_2(SlideCutGrid::onTouchBegan, this);
+	touchListener->onTouchMoved = CC_CALLBACK_2(SlideCutGrid::onTouchMoved, this);
+	touchListener->onTouchEnded = CC_CALLBACK_2(SlideCutGrid::onTouchEnded, this);
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
+	/*auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = [](Touch* touch, Event *event){};
-	listener->onTouchMoved = [](Touch* touch, Event *event)
+	listener->onTouchMoved = [*](Touch* touch, Event *event)
 	{
 		if (!m_isRunning)
 		{
@@ -136,25 +120,55 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 		pos.y /= Grid_WIDTH;
 		int x1 = (int)pos.x - 1;
 		int y1 = (int)pos.y - 1;
-		if ((0 <= x1 && x1 <8 ) && (0 <= y1 && y1 < 6)&&m_famrerGrid[x1][y1])
+		if ((0 <= x1 && x1 <8 ) && (0 <= y1 && y1 < 6)&&m_farmerGrid[x1][y1])
 		{
 			log("crush!");
 			// * add animation
-			auto zergling1 = m_farmerGrid[x1][y1];
+			auto farmer = m_farmerGrid[x1][y1];
 			// 清空矩阵中的狗的指针
 			m_farmerGrid[x1][y1] = nullptr;
 			// 将狗从矩阵的绘制节点中移除
-			zergling1->tapped();
+			farmer->tapped();
 		}
 
 	};
 	listener->onTouchEnded = [=](Touch* touch, Event *event){
 
 	};
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);*/
 
 	return true;
 }
+
+//单点触摸事件响应函数
+bool SlideCutGrid::onTouchBegan(Touch *touch, Event *unused_event)     { CCLOG("began"); return true; }
+void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event)
+{ 
+	CCLOG("moved"); 
+	if (!m_isRunning)
+	{
+		m_isRunning = true;
+		TimeManager::getInstance()->startCountDown();
+	}
+	auto pos = touch->getLocation();
+	pos.x /= Grid_WIDTH;
+	pos.y /= Grid_WIDTH;
+	int x1 = (int)pos.x - 1;
+	int y1 = (int)pos.y - 1;
+	if ((0 <= x1 && x1 <8) && (0 <= y1 && y1 < 6) && m_farmerGrid[x1][y1])
+	{
+		log("crush!");
+		// * add animation
+		auto farmer = m_farmerGrid[x1][y1];
+		// 清空矩阵中的狗的指针
+		m_farmerGrid[x1][y1] = nullptr;
+		// 将狗从矩阵的绘制节点中移除
+		farmer->tapped();
+	}
+}
+void SlideCutGrid::onTouchEnded(Touch *touch, Event *unused_event)     { CCLOG("ended"); }
+
+
 void SlideCutGrid::setFarmerPixPos(Farmer* farmer, int x, int y)
 {
 	farmer->setPosition(x * Grid_WIDTH + Left_MARGIN, y * Grid_WIDTH + Bottom_MARGIN);
@@ -163,7 +177,7 @@ void SlideCutGrid::setFarmerPixPos(Farmer* farmer, int x, int y)
 Farmer* SlideCutGrid::createAFarmer(Farmer::Farmerappear appear , int x, int y)
 {
 	Farmer * farmer = nullptr;
-	if (appear <= 0)
+	if (appear == 0)
 		return nullptr;
 	farmer = Farmer::FarmerAppear(appear);
 	setFarmerPixPos(farmer, x, y);
