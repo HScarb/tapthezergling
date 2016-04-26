@@ -67,8 +67,8 @@ bool DoubleTapScene::init(int diff, int loop)
 	auto UI = CSLoader::createNode("Tollgates/DoubleTapScene.csb");
 	addChild(UI);
 
-	auto tollgateControlLayer = TollgateControlLayer::create();
-	addChild(tollgateControlLayer);
+//	auto tollgateControlLayer = TollgateControlLayer::create();
+//	addChild(tollgateControlLayer);
 	
 	m_grid = DoubleTapGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);
@@ -233,6 +233,10 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 				}
 			}
 		}
+	}
+	else if(s_map.size() == 1)
+	{
+		
 	}
 	/*	
 	else if (s_map.size() == 1)

@@ -31,6 +31,12 @@
     <Filter Include="Classes\Layer">
       <UniqueIdentifier>{ef96f611-aa76-476b-99c6-e17dd2de12b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\SlideCut">
+      <UniqueIdentifier>{a5f1f2ec-e57b-468d-99d3-92efe05d486d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\DoubleTap">
+      <UniqueIdentifier>{9dfd1f53-61de-4648-8580-ebae28dccc2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,17 +69,8 @@
     <ClCompile Include="..\Classes\TemplateScene.cpp">
       <Filter>Classes\Scenes\Tollgates</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\DoubleTapScene.cpp">
-      <Filter>Classes\Scenes\Tollgates</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\VisibleRect.cpp">
       <Filter>Classes\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SlideScene.cpp">
-      <Filter>Classes\Scenes\Tollgates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Zergling.cpp">
-      <Filter>Classes\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\FilterSprite.cpp">
       <Filter>Classes\Entity</Filter>
@@ -89,6 +86,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\SettingsScene.cpp">
       <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Farmer.cpp">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SlideCutScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DoubleTapScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Zergling.cpp">
+      <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,17 +131,8 @@
     <ClInclude Include="..\Classes\TemplateScene.h">
       <Filter>Classes\Scenes\Tollgates</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\DoubleTapScene.h">
-      <Filter>Classes\Scenes\Tollgates</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\VisibleRect.h">
       <Filter>Classes\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SlideScene.h">
-      <Filter>Classes\Scenes\Tollgates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Zergling.h">
-      <Filter>Classes\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FilterSprite.h">
       <Filter>Classes\Entity</Filter>
@@ -148,6 +148,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SettingsScene.h">
       <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Farmer.h">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SlideCutScene.h">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DoubleTapScene.h">
+      <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Zergling.h">
+      <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

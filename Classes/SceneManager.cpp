@@ -7,7 +7,7 @@
 #include "SettingsScene.h"
 
 #include "DoubleTapScene.h"
-#include "SlideScene.h"
+#include "SlideCutScene.h"
 #include "EatCandiesScene.h"
 USING_NS_CC;
 
@@ -79,7 +79,9 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 	case DoubleTapScene: 
 		pScene = DoubleTapScene::createScene(diff, loop);
 		break;
-	case SlideScene: break;
+	case SlideScene: 
+		pScene = SlideCutScene::createScene(diff, loop);
+		break;
 	case EatCandiesScene: break;
 	default: break;
 	}

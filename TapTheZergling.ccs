@@ -272,6 +272,7 @@
         <Folder Name="Tollgates">
           <Project Name="DoubleTapScene.csd" Type="Scene" />
           <Project Name="EatCandiesScene.csd" Type="Scene" />
+          <Project Name="SlideCutScene.csd" Type="Scene" />
         </Folder>
         <Project Name="CardEnhancer.csd" Type="Layer" />
         <Project Name="MainScene.csd" Type="Scene" />
