@@ -156,6 +156,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\PauseLayer.cpp" />
     <ClCompile Include="..\Classes\SceneManager.cpp" />
+    <ClCompile Include="..\Classes\SettingsScene.cpp" />
     <ClCompile Include="..\Classes\SlideScene.cpp" />
     <ClCompile Include="..\Classes\TemplateScene.cpp" />
     <ClCompile Include="..\Classes\TimeManager.cpp" />
@@ -176,6 +177,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\PauseLayer.h" />
     <ClInclude Include="..\Classes\SceneManager.h" />
+    <ClInclude Include="..\Classes\SettingsScene.h" />
     <ClInclude Include="..\Classes\SlideScene.h" />
     <ClInclude Include="..\Classes\TemplateScene.h" />
     <ClInclude Include="..\Classes\TimeManager.h" />
