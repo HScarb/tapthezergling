@@ -185,6 +185,10 @@ Farmer* SlideCutGrid::createAFarmer(Farmer::Farmerappear appear , int x, int y)
 	return farmer;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b0ed1404c5530113eb36c76c5d22173722b64ace
 Vec2 SlideCutGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 {
 	float x, y;

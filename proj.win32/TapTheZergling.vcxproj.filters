@@ -78,8 +78,11 @@
     <ClCompile Include="..\Classes\TimeManager.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\PauseLayer.cpp">
-      <Filter>Classes\Layer</Filter>
+    <ClCompile Include="..\Classes\SlideCutScene.cpp">
+      <Filter>Classes\Scenes\Tollgates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Farmer.cpp">
+      <Filter>Classes\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TollgateControlLayer.cpp">
       <Filter>Classes\Layer</Filter>
@@ -140,11 +143,11 @@
     <ClInclude Include="..\Classes\TimeManager.h">
       <Filter>Classes\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\PauseLayer.h">
-      <Filter>Classes\Layer</Filter>
+    <ClInclude Include="..\Classes\SlideCutScene.h">
+      <Filter>Classes\Scenes\Tollgates</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\TollgateControlLayer.h">
-      <Filter>Classes\Layer</Filter>
+    <ClInclude Include="..\Classes\Farmer.h">
+      <Filter>Classes\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SettingsScene.h">
       <Filter>Classes\Scenes</Filter>
