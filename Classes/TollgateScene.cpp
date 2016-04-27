@@ -95,7 +95,7 @@ void TollgateScene::onItem2Clicked(Ref* pSender, TouchEventType type)
 	if(type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
 		log("tollgate 2");
-		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::SlideScene, 0, 1);
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::SlideCutScene, 0, 1);
 	}
 }
 
