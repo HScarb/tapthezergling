@@ -30,6 +30,8 @@ bool SlideCutScene::init(int diff, int loop)
 	m_grid = SlideCutGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);
 	this->addChild(m_grid);
+
+	return true;
 }
 
 Layer* SlideCutScene::create(int diff, int loop)
@@ -141,10 +143,17 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 }
 
 //单点触摸事件响应函数
-bool SlideCutGrid::onTouchBegan(Touch *touch, Event *unused_event)     { CCLOG("began"); return true; }
+bool SlideCutGrid::onTouchBegan(Touch *touch, Event *unused_event)
+{
+	auto pos = touch->getLocation();
+	pos = convertToGridPos(pos);
+	int x1 = (int)pos.x;
+	int y1 = (int)pos.y;
+	log("x = %d, y = %d", x1, y1);
+	return true;
+}
 void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event)
 { 
-	CCLOG("moved"); 
 	if (!m_isRunning)
 	{
 		m_isRunning = true;
@@ -156,9 +165,9 @@ void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event)
 	int y1 = (int)pos.y;
 	if ((0 <= x1 && x1 < 10) && (0 <= y1 && y1 < 6) && m_farmerGrid[x1][y1])
 	{
-		log("crush!");
 		// * add animation
 		auto farmer = m_farmerGrid[x1][y1];
+		log("farmer pos x = %f, y = %f", farmer->getPosition().x, farmer->getPosition().y);
 		// 清空矩阵中的狗的指针
 		m_farmerGrid[x1][y1] = nullptr;
 		// 将狗从矩阵的绘制节点中移除

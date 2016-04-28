@@ -37,6 +37,9 @@
     <Filter Include="Classes\Scenes\Tollgates\DoubleTap">
       <UniqueIdentifier>{9dfd1f53-61de-4648-8580-ebae28dccc2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\EatCandies">
+      <UniqueIdentifier>{b8d09fb3-dd41-40b6-881c-aea985c02efb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,9 +66,6 @@
     <ClCompile Include="..\Classes\TollgateScene.cpp">
       <Filter>Classes\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EatCandiesScene.cpp">
-      <Filter>Classes\Scenes\Tollgates</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\TemplateScene.cpp">
       <Filter>Classes\Scenes\Tollgates</Filter>
     </ClCompile>
@@ -77,12 +77,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\TimeManager.cpp">
       <Filter>Classes\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SlideCutScene.cpp">
-      <Filter>Classes\Scenes\Tollgates</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Farmer.cpp">
-      <Filter>Classes\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TollgateControlLayer.cpp">
       <Filter>Classes\Layer</Filter>
@@ -101,6 +95,16 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Zergling.cpp">
       <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PauseLayer.cpp" />
+    <ClCompile Include="..\Classes\SlideCutScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Farmer.cpp">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EatCandiesScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,9 +132,6 @@
     <ClInclude Include="..\Classes\TollgateScene.h">
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\EatCandiesScene.h">
-      <Filter>Classes\Scenes\Tollgates</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\TemplateScene.h">
       <Filter>Classes\Scenes\Tollgates</Filter>
     </ClInclude>
@@ -142,12 +143,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\TimeManager.h">
       <Filter>Classes\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SlideCutScene.h">
-      <Filter>Classes\Scenes\Tollgates</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Farmer.h">
-      <Filter>Classes\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SettingsScene.h">
       <Filter>Classes\Scenes</Filter>
@@ -163,6 +158,17 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Zergling.h">
       <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PauseLayer.h" />
+    <ClInclude Include="..\Classes\TollgateControlLayer.h" />
+    <ClInclude Include="..\Classes\SlideCutScene.h">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Farmer.h">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EatCandiesScene.h">
+      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
