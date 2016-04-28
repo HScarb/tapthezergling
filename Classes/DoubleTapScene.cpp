@@ -234,11 +234,6 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 			}
 		}
 	}
-	else if(s_map.size() == 1)
-	{
-		
-	}
-	/*	
 	else if (s_map.size() == 1)
 	{
 		Vec2 p;
@@ -264,7 +259,6 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 		else
 			log("none zergling.");
 	}
-	*/
 }
 
 void DoubleTapGrid::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
@@ -344,6 +338,10 @@ cocos2d::Vec2 DoubleTapGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 	float x, y;
 	x = (pixPos.x - LEFT_MARGIN) / GRID_WIDTH;
 	y = (pixPos.y - BOTTOM_MARGIN) / GRID_WIDTH;
+	if (x < 0.0)
+		x = -1.0;
+	if (y < 0.0)
+		y = -1.0;
 	return Vec2(x, y);
 }
 
