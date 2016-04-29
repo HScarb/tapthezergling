@@ -70,7 +70,9 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 	case DoubleTapScene: 
 		pScene = DoubleTapScene::createScene(diff, loop);
 		break;
-	case SlideCutScene: break;
+	case SlideCutScene: 
+		pScene = SlideCutScene::createScene(diff, loop);
+		break;
 	case EatCandiesScene: break;
 	default: break;
 	}

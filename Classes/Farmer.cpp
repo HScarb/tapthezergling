@@ -23,10 +23,10 @@ bool Farmer::init(int appear)
 	{
 		return false;
 	}
-	m_appear = appear;
 	Sprite *farmer = Sprite::create("SCs_Zergling_C3_02.png");
-	
+	//farmer->setScale(0.2);
 	this->setAnchorPoint(Vec2(0, 0));// 设置锚点为左下角
+	this->addChild(farmer);
 	return true;
 }
 void Farmer::tapped()

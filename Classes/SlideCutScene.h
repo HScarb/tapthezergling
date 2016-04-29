@@ -7,10 +7,10 @@
 #include <vector>
 #include "Farmer.h"
 const int Grid_ROW = 6;				// 设定默认的行数和列数
-const int Grid_COL = 8;
+const int Grid_COL = 10;
 const int Grid_WIDTH = 70;			// 小狗方块的宽度(和高度)
-const int Left_MARGIN = 80;		// 小狗矩阵距离左边的距离
-const int Bottom_MARGIN = 40;		// 小狗矩阵距离底部的距离
+const int Left_MARGIN = 130;		// 小狗矩阵距离左边的距离
+const int Bottom_MARGIN = 70;		// 小狗矩阵距离底部的距离
 
 using namespace cocos2d;
 
@@ -24,12 +24,9 @@ static const int m_a[1][Grid_ROW][Grid_COL] =
 {
 	// easy
 	{
-		{ 1, 0, 0, 0, 0, 1 ,1, 0},
-		{ 1, 0, 0, 0, 1, 1 ,0, 1},
-		{ 1, 0, 1, 1, 0, 1 ,0, 1},
-		{ 1, 0, 1, 0, 0, 1 ,0, 1},
-		{ 1, 1, 1, 1, 1, 1 ,0, 1},
-		{ 1, 0, 0, 0, 0, 1 ,1, 0}
+		{ 5, 0, 0, 0, 0, 5 },
+		{ 3, 5, 7, 5, 7, 3 },
+		{ 7, 0, 0, 0, 0, 7 }
 	}
 	// medium
 	// hard

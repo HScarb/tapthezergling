@@ -11,6 +11,7 @@ using namespace cocos2d;
 
 
 
+
 Scene* SlideCutScene::createScene(int diff, int loop)
 {
 	auto scene = Scene::create();
@@ -106,58 +107,36 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 	touchListener->onTouchEnded = CC_CALLBACK_2(SlideCutGrid::onTouchEnded, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
-	/*auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = [](Touch* touch, Event *event){};
-	listener->onTouchMoved = [*](Touch* touch, Event *event)
-	{
-		if (!m_isRunning)
-		{
-			m_isRunning = true;
-			TimeManager::getInstance()->startCountDown();
-		}
-		auto pos = touch->getLocation();
-		pos.x /= Grid_WIDTH;
-		pos.y /= Grid_WIDTH;
-		int x1 = (int)pos.x - 1;
-		int y1 = (int)pos.y - 1;
-		if ((0 <= x1 && x1 <8 ) && (0 <= y1 && y1 < 6)&&m_farmerGrid[x1][y1])
-		{
-			log("crush!");
-			// * add animation
-			auto farmer = m_farmerGrid[x1][y1];
-			// 清空矩阵中的狗的指针
-			m_farmerGrid[x1][y1] = nullptr;
-			// 将狗从矩阵的绘制节点中移除
-			farmer->tapped();
-		}
-
-	};
-	listener->onTouchEnded = [=](Touch* touch, Event *event){
-
-	};
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);*/
+	
 
 	return true;
 }
 
 //单点触摸事件响应函数
-bool SlideCutGrid::onTouchBegan(Touch *touch, Event *unused_event)     { CCLOG("began"); return true; }
+bool SlideCutGrid::onTouchBegan(Touch *touch, Event *unused_event){ return true; }
 void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event)
 { 
-	CCLOG("moved"); 
+	
 	if (!m_isRunning)
 	{
 		m_isRunning = true;
 		TimeManager::getInstance()->startCountDown();
 	}
 	auto pos = touch->getLocation();
+//	this->convertToNodeSpace(pos);
+	log("pos x=%f,y=%f", pos.x, pos.y);
+	pos.x -= Left_MARGIN;
+	pos.y -= Bottom_MARGIN;
 	pos.x /= Grid_WIDTH;
 	pos.y /= Grid_WIDTH;
-	int x1 = (int)pos.x - 1;
-	int y1 = (int)pos.y - 1;
-	if ((0 <= x1 && x1 <8) && (0 <= y1 && y1 < 6) && m_farmerGrid[x1][y1])
+	//log("pos x1=%d,y1=%d", x1, y1);
+	int x1 = (int)pos.x;
+	int y1 = (int)pos.y;
+	log("pos x=%f,y=%f", pos.x, pos.y); log("pos x1=%d,y1=%d", x1, y1);
+	if ((0 <= x1 && x1 <10) && (0 <= y1 && y1 < 6) && m_farmerGrid[x1][y1])
 	{
 		log("crush!");
+		
 		// * add animation
 		auto farmer = m_farmerGrid[x1][y1];
 		// 清空矩阵中的狗的指针
@@ -166,7 +145,7 @@ void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event)
 		farmer->tapped();
 	}
 }
-void SlideCutGrid::onTouchEnded(Touch *touch, Event *unused_event)     { CCLOG("ended"); }
+void SlideCutGrid::onTouchEnded(Touch *touch, Event *unused_event)     {  }
 
 
 void SlideCutGrid::setFarmerPixPos(Farmer* farmer, int x, int y)
