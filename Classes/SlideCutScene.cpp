@@ -85,6 +85,7 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 	m_row = row;
 	m_col = col;
 	m_loop = loop;
+	m_diff = diff;
 	m_isRunning = false;
 	m_touchesLabel = Label::create("0000", "Arial", 30);
 	m_touchesLabel->setPosition(100, 500);
@@ -95,13 +96,9 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 	for (auto &vec : m_farmerGrid)
 		vec.resize(m_row);
 
-	for (int x = 0; x < m_col; x++)
-	{
-		for (int y = 0; y < m_row; y++)
-		{
-			m_farmerGrid[x][y] = createAFarmer((Farmer::Farmerappear)m_a[0][y][x], x, y);
-		}
-	}
+	generateNewFarmersGrid(m_diff);
+
+	
 
 	//创建一个事件监听器类型为 单点触摸
 	auto touchListener = EventListenerTouchOneByOne::create();
@@ -113,7 +110,7 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 	
-
+	
 	return true;
 }
 
@@ -147,6 +144,11 @@ void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event)
 		m_farmerGrid[x1][y1] = nullptr;
 		// 将狗从矩阵的绘制节点中移除
 		farmer->tapped();
+		// 如果狗被消光，但是loop>0
+		if (getLivingFarmersNum() == 0 && m_loop > 0)
+		{
+			generateNewFarmersGrid(m_diff);
+		}
 	}
 }
 void SlideCutGrid::onTouchEnded(Touch *touch, Event *unused_event)     {  }
@@ -157,12 +159,12 @@ void SlideCutGrid::setFarmerPixPos(Farmer* farmer, int x, int y)
 	farmer->setPosition(x * Grid_WIDTH + Left_MARGIN, y * Grid_WIDTH + Bottom_MARGIN);
 }
 
-Farmer* SlideCutGrid::createAFarmer(Farmer::Farmerappear appear , int x, int y)
+Farmer* SlideCutGrid::createAFarmer(int type , int x, int y)
 {
 	Farmer * farmer = nullptr;
-	if (appear == 0)
+	if (type == 0)
 		return nullptr;
-	farmer = Farmer::FarmerAppear(appear);
+	farmer = Farmer::FarmerAppear(type);
 	setFarmerPixPos(farmer, x, y);
 	addChild(farmer);
 
@@ -184,4 +186,32 @@ Vec2 SlideCutGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 		y = -1.0;
 	}
 	return Vec2(x, y);
+}
+void SlideCutGrid::generateNewFarmersGrid(const int diff)
+{
+	m_loop--;
+	int r = random(1, 3);
+	for (int x = 0; x < m_col; x++)
+	{
+		for (int y = 0; y < m_row; y++)
+		{
+			if (m_a[0][y][x] != 0)
+				m_farmerGrid[x][y] = createAFarmer(r, x, y);
+		}
+	}
+	log("loop=%d", m_loop);
+}
+int SlideCutGrid::getLivingFarmersNum()
+{
+	int count = 0;
+	for (int x = 0; x < m_col; x++)
+	{
+		for (int y = 0; y < m_row; y++)
+		{
+			if (m_farmerGrid[x][y] != nullptr)
+				count++;
+		}
+	}
+	log("count%d", count);
+	return count;
 }

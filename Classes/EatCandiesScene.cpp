@@ -457,69 +457,13 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 		TimeManager::getInstance()->startCountDown();
 	}
 	
-	for (auto &item : touch)
-	{
-		auto touch = item;
-		auto location = touch->getLocation();
-		auto touchPoint = TouchPoint::touchPointWithParent(this, location, *s_TouchColors[touch->getID() % 5]);
-
-		addChild(touchPoint);
-		s_map.insert(touch->getID(), touchPoint);
-	}
-	if (s_map.size() == 2)
-	{
-		// log("touches count: %d", count);
-		Vec2 p[1];
-		int c = 0;
-		vector<int> keys;
-		keys = s_map.keys();
-		for (auto key : keys)
-		{
-			p[c] = (s_map.at(key))->getPt();
-			// 将坐标转化成格子坐标
-
-			p[c] = convertToGridPos(p[c]);
-			c++;
-		}
-		
-		//////////////////////////////////////////////////////////////////////
-
-
-		m_touchesLabel->setString(StringUtils::format("1:(%d,%d)", (int)p[0].x, (int)p[0].y));
-		int x1 = (int)p[0].x;
-		int y1 = (int)p[0].y;
-		
-		// 如果被点击的位置在矩阵内且有花
-		if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3)
-			&& m_flowersesGrid[x1][y1] )
-		{
-			if (m_flowersesGrid[x1][y1]->getColorType())
-			{
-				log("crush!");
-				// * add animation
-				auto flower1 = m_flowersesGrid[x1][y1];
-
-				// 清空矩阵中的狗的指针
-				m_flowersesGrid[x1][y1] = nullptr;
-
-				// 将花从矩阵的绘制节点中移除
-				flower1->tapped();
-			}
-		}
-	}///////////////////////////////////////////////////////////////////////
 	return true;
 }
 
 
 void EatCandiesGrid::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event *unused_event)
 {
-	for (auto &item : touch)
-	{
-		auto touch = item;
-		auto pTP = s_map.at(touch->getID());
-		removeChild(pTP, true);
-		s_map.erase(touch->getID());
-	}
+
 }		
 
 //坐标获取，范围坐标与触屏坐标

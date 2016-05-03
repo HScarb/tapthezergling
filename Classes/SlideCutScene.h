@@ -57,20 +57,21 @@ public:
 	void setFarmerPixPos(Farmer* farmer, int x, int y);
 
 	// 根据网格坐标创建一个小狗，并且加入到渲染节点
-	Farmer * createAFarmer(Farmer::Farmerappear appear, int x, int y);
+	Farmer * createAFarmer(int, int x, int y);
 
 	virtual bool SlideCutGrid::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	virtual void SlideCutGrid::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	virtual void SlideCutGrid::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 private:
 	int m_row, m_col;
-	int m_loop;
+	int m_loop, m_diff;
 	bool m_isRunning;
 	cocos2d::Label * m_touchesLabel;
 	std::vector<std::vector<Farmer*>> m_farmerGrid;
 
 private:
 	cocos2d::Vec2 convertToGridPos(cocos2d::Vec2 pixPos);		// 将像素坐标转化成格子矩阵中的坐标
-
+	void generateNewFarmersGrid(const int diff);
+	int getLivingFarmersNum();			// 得到活的农民的数量
 };
 #endif
