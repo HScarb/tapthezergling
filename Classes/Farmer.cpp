@@ -25,8 +25,8 @@ bool Farmer::init(int appear)
 		return false;
 	}
 
-	this->initWithFile("SCs_Zergling_C3_02.png");
-	
+	this->initWithFile("SCs_SCV_C_01.PNG");
+	this->setScale(0.5f);
 	this->setAnchorPoint(Vec2(0, 0));// 设置锚点为左下角
 	
 	return true;

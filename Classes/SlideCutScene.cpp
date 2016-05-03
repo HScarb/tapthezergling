@@ -197,7 +197,16 @@ Farmer* SlideCutGrid::createAFarmer(Farmer::Farmerappear appear , int x, int y)
 Vec2 SlideCutGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 {
 	float x, y;
+	
 	x = (pixPos.x - Left_MARGIN) / Grid_WIDTH;
 	y = (pixPos.y - Bottom_MARGIN) / Grid_WIDTH;
+	if (x < 0.0)
+	{
+		x = -1.0;
+	}
+	if (y < 0.0)
+	{
+		y = -1.0;
+	}
 	return Vec2(x, y);
 }

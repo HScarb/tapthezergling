@@ -9,8 +9,8 @@
 const int Grid_ROW = 6;				// 设定默认的行数和列数
 const int Grid_COL = 10;
 const int Grid_WIDTH = 70;			// 小狗方块的宽度(和高度)
-const int Left_MARGIN = 0;		// 小狗矩阵距离左边的距离
-const int Bottom_MARGIN = 0;		// 小狗矩阵距离底部的距离
+const int Left_MARGIN = 130;		// 小狗矩阵距离左边的距离
+const int Bottom_MARGIN = 40;		// 小狗矩阵距离底部的距离
 
 class SlideCutGrid;
 class IntMatrix;
