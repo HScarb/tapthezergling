@@ -3,6 +3,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
+#include "TollgateControlLayer.h"
 
 USING_NS_CC;
 using namespace std;
@@ -59,13 +60,13 @@ bool DoubleTapScene::init(int diff, int loop)
 		return false;
 	
 	auto winSize = Director::getInstance()->getWinSize();
-
+	m_controlLayer = CSLoader::createNode("Tollgates/TollgateControlLayer.csb");
 	auto UI = CSLoader::createNode("Tollgates/DoubleTapScene.csb");
 	addChild(UI);
+	addChild(m_controlLayer);
 
-	m_pauseBtn = (Button*)(UI->getChildByName("Button_pause"));
-	m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
-	m_timeText = (Text*)(UI->getChildByName("Text_time"));
+//	auto tollgateControlLayer = TollgateControlLayer::create();
+//	addChild(tollgateControlLayer);
 	
 	m_grid = DoubleTapGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);
@@ -126,6 +127,7 @@ bool DoubleTapGrid::init(int diff, int loop, int row, int col)
 	m_row = row;
 	m_col = col;
 	m_loop = loop;
+	m_diff = diff;
 	m_isRunning = false;
 	m_touchesLabel = Label::create("0000", "Arial", 30);
 	m_touchesLabel->setPosition(100, 500);
@@ -136,13 +138,7 @@ bool DoubleTapGrid::init(int diff, int loop, int row, int col)
 	for (auto &vec : m_zerglingGrid)
 		vec.resize(m_row);
 
-	for (int x = 0; x < m_col; x++)
-	{
-		for (int y = 0; y < m_row; y++)
-		{
-			m_zerglingGrid[x][y] = createAZergling((Zergling::ZerglingColor)m_g[0][y][x], x, y);
-		}
-	}
+	generateNewZerglingGrid(m_diff);
 
 	auto listener = EventListenerTouchAllAtOnce::create();
 	listener->onTouchesBegan = CC_CALLBACK_2(DoubleTapGrid::onTouchesBegan, this);
@@ -170,8 +166,6 @@ Zergling* DoubleTapGrid::createAZergling(Zergling::ZerglingColor color, int x, i
 
 	return zergling;
 }
-
-
 
 void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
 {
@@ -202,16 +196,9 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 		{
 			p[c] = (s_map.at(key))->getPt();
 			// 将坐标转化成格子坐标
-
 			p[c] = convertToGridPos(p[c]);
 			c++;
 		}
-//		auto p1 = touches[0]->getLocation();
-//		auto p2 = touches[1]->getLocation();
-//		p1.x /= GRID_WIDTH;
-//		p1.y /= GRID_WIDTH;
-//		p2.y /= GRID_WIDTH;
-//		p2.y /= GRID_WIDTH;
 		m_touchesLabel->setString(StringUtils::format("1:(%d,%d), 2:(%d,%d)", (int)p[0].x, (int)p[0].y, (int)p[1].x, (int)p[1].y));
 		int x1 = (int)p[0].x;
 		int y1 = (int)p[0].y;
@@ -236,10 +223,16 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 				// 将狗从矩阵的绘制节点中移除
 				zergling1->tapped();
 				zergling2->tapped();
+
+				// 如果狗被消光，但是loop>0
+				if(getLivingZerglingsNum() == 0 && m_loop > 0)
+				{
+					generateNewZerglingGrid(m_diff);
+				}
 			}
 		}
 	}
-/*	else if (s_map.size() == 1)
+	else if (s_map.size() == 1)
 	{
 		Vec2 p;
 		vector<int> keys;
@@ -263,7 +256,7 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 		}
 		else
 			log("none zergling.");
-	}*/
+	}
 }
 
 void DoubleTapGrid::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
@@ -343,5 +336,35 @@ cocos2d::Vec2 DoubleTapGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 	float x, y;
 	x = (pixPos.x - LEFT_MARGIN) / GRID_WIDTH;
 	y = (pixPos.y - BOTTOM_MARGIN) / GRID_WIDTH;
+	if (x < 0.0)
+		x = -1.0;
+	if (y < 0.0)
+		y = -1.0;
 	return Vec2(x, y);
+}
+
+void DoubleTapGrid::generateNewZerglingGrid(const int diff)
+{
+	m_loop--;
+	for (int x = 0; x < m_col; x++)
+	{
+		for (int y = 0; y < m_row; y++)
+		{
+			m_zerglingGrid[x][y] = createAZergling((Zergling::ZerglingColor)m_g[diff][y][x], x, y);
+		}
+	}
+}
+
+int DoubleTapGrid::getLivingZerglingsNum()
+{
+	int count = 0;
+	for (int x = 0; x < m_col;x++)
+	{
+		for (int y = 0; y < m_row;y++)
+		{
+			if (m_zerglingGrid[x][y] != nullptr)
+				count++;
+		}
+	}
+	return count;
 }

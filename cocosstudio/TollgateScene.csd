@@ -88,7 +88,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="0" G="189" B="255" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_gem" ActionTag="-147867041" Tag="14" IconVisible="False" LeftMargin="785.5002" RightMargin="93.4998" TopMargin="31.0000" BottomMargin="479.0000" FontSize="22" LabelText="999999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_jewel" ActionTag="-147867041" Tag="14" IconVisible="False" LeftMargin="785.5002" RightMargin="93.4998" TopMargin="31.0000" BottomMargin="479.0000" FontSize="22" LabelText="999999" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="81.0000" Y="30.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="826.0002" Y="494.0000" />
@@ -144,6 +144,58 @@
             <FontResource Type="Normal" Path="Res/fonts/Skranji-Bold.ttf" Plist="" />
             <OutlineColor A="255" R="0" G="128" B="0" />
             <ShadowColor A="255" R="0" G="128" B="0" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="ScrollView" ActionTag="2122249046" Tag="60" IconVisible="False" LeftMargin="280.0039" RightMargin="279.9961" TopMargin="130.0000" BottomMargin="10.0000" ClipAble="False" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+            <Size X="400.0000" Y="400.0000" />
+            <Children>
+              <AbstractNodeData Name="Text_1" ActionTag="1813621424" Tag="61" IconVisible="False" LeftMargin="43.0000" RightMargin="43.0000" TopMargin="29.0000" BottomMargin="729.0000" TouchEnable="True" FontSize="34" LabelText="1 DoubleTapZergling" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="314.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="750.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.9375" />
+                <PreSize X="0.7850" Y="0.0525" />
+                <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_2" ActionTag="-1058239227" Tag="62" IconVisible="False" LeftMargin="120.0000" RightMargin="120.0000" TopMargin="79.0000" BottomMargin="679.0000" TouchEnable="True" FontSize="34" LabelText="2 SlideCut" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="160.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="700.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.8750" />
+                <PreSize X="0.4000" Y="0.0525" />
+                <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_3" ActionTag="787125517" Tag="63" IconVisible="False" LeftMargin="99.0000" RightMargin="99.0000" TopMargin="129.0000" BottomMargin="629.0000" TouchEnable="True" FontSize="34" LabelText="3 EatFlowers" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="202.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="650.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.8125" />
+                <PreSize X="0.5050" Y="0.0525" />
+                <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="480.0039" Y="210.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="0.3889" />
+            <PreSize X="0.4167" Y="0.7407" />
+            <SingleColor A="255" R="255" G="150" B="100" />
+            <FirstColor A="255" R="255" G="150" B="100" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+            <InnerNodeSize Width="400" Height="800" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

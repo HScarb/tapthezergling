@@ -11,6 +11,18 @@ public:
 	CREATE_FUNC(MainScene);
 
 private:
+	virtual bool onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event);
+	virtual void onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * unused_event);
+
+private:
+	// UI触发事件
+	void onSettingsBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);		// 设置按钮被点击
+	void onCardBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);			// 卡片管理器按钮被点击
+	void onAddJewelBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);		// 买宝石按钮被点击
+private:
+	// 狗
+	cocos2d::Sprite * m_zergling;
+
 	// 标签和按钮和进度条
 	cocos2d::ui::Text * m_jewelText;
 	cocos2d::ui::Text * m_energyText;

@@ -2,9 +2,12 @@
 #include "SceneManager.h"
 #include "LoadingScene.h"
 #include "MainScene.h"
+#include "TollgateControlLayer.h"
+#include "TollgateScene.h"
+#include "SettingsScene.h"
 
 #include "DoubleTapScene.h"
-#include "SlideScene.h"
+#include "SlideCutScene.h"
 #include "EatCandiesScene.h"
 USING_NS_CC;
 
@@ -45,6 +48,12 @@ void SceneManager::changeScene(SceneType sceneType)
 	case SceneManager::LoadingScene:
 		pScene = LoadingScene::createScene();
 		break;
+	case SceneManager::TollgateScene:
+		pScene = TollgateScene::createScene();
+		break;
+	case SceneManager::SettingsScene:
+		pScene = SettingsScene::createScene();
+		break;
 	default:
 		break;
 	}
@@ -70,9 +79,11 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 	case DoubleTapScene: 
 		pScene = DoubleTapScene::createScene(diff, loop);
 		break;
-	case SlideScene: break;
-	case EatCandiesScene: 
-		pScene = EatCandiesScene::createScene(diff, loop);
+	case SlideCutScene: 
+		pScene = SlideCutScene::createScene(diff, loop);
+		break;
+	case EatCandiesScene:
+		pScene = EatCandiesScene::createScene(diff,loop);
 		break;
 	default: break;
 	}

@@ -128,6 +128,96 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 	m_isRunning = false;
 	
 
+=======
+{
+public:
+	TouchPoint(const Vec2 &touchPoint, const Color3B &touchColor)
+	{
+		m_point = touchPoint;
+		DrawNode* drawNode = DrawNode::create();
+		auto s = Director::getInstance()->getWinSize();
+		Color4F color(touchColor.r / 255.0f, touchColor.g / 255.0f, touchColor.b / 255.0f, 1.0f);
+		drawNode->drawLine(Vec2(0, touchPoint.y), Vec2(s.width, touchPoint.y), color);
+		drawNode->drawLine(Vec2(touchPoint.x, 0), Vec2(touchPoint.x, s.height), color);
+		drawNode->drawDot(touchPoint, 3, color);
+		addChild(drawNode);
+	}
+
+	static TouchPoint* touchPointWithParent(Node* pParent, const Vec2 &touchPoint, const Color3B &touchColor)
+	{
+		auto pRet = new (std::nothrow) TouchPoint(touchPoint, touchColor);
+		pRet->setContentSize(pParent->getContentSize());
+		pRet->setAnchorPoint(Vec2(0.0f, 0.0f));
+		pRet->autorelease();
+		return pRet;
+	}
+	CC_SYNTHESIZE(Vec2, m_point, Pt);
+};
+
+static Map<int, TouchPoint*> s_map;
+
+
+Scene* EatCandiesScene::createScene(int diff, int loop)
+{
+	auto scene = Scene::create();
+	auto layer = EatCandiesScene::create(diff, loop);
+	scene->addChild(layer);
+	return scene;
+}
+
+cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
+{
+	auto pRef = new EatCandiesScene();
+	if (pRef && pRef->init(diff, loop))
+	{
+		pRef->autorelease();
+		return pRef;
+	}
+	else
+	{
+		CC_SAFE_DELETE(pRef);
+		return nullptr;
+	}
+}
+
+void EatCandiesGrid::setFlower(Flower* flower, int x, int y)
+{
+	flower->setPosition(x * grid_width +  left_margin, y * grid_width + bottom_margin);
+}
+
+
+EatCandiesGrid* EatCandiesGrid::create(int diff, int loop, int row, int col)
+{
+	auto pRef = new EatCandiesGrid();
+	if (pRef && pRef->init(diff, loop, row, col))
+	{
+		pRef->autorelease();
+		return pRef;
+	}
+	else
+	{
+		CC_SAFE_DELETE(pRef);
+		return nullptr;
+	}
+}
+
+bool EatCandiesGrid::init(int diff, int loop, int row, int col)
+{
+	if (!Layer::init())
+		return false;
+
+	Sprite* sprite = Sprite::create("zergling_big_1.jpg");
+	auto size = Director::getInstance()->getVisibleSize();
+	sprite->setPosition(size.height / 2, size.width / 2);
+	this->addChild(sprite);
+
+	m_row = row;
+	m_col = col;
+	m_loop = loop;
+	m_isRunning = false;
+	
+
+>>>>>>> a8bf9fd8ec3ad10b573d29659c621a7fbdb16601
 	m_flowerGrid.resize(m_col);
 	for (auto &vec : m_flowerGrid)
 		vec.resize(m_row);
@@ -274,6 +364,7 @@ cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
 	}
 }
 
+
 //接下去两个虚函数
 void EatCandiesScene::newLevel(int diff)
 {
@@ -334,6 +425,7 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return true;
+
 }
 
 void EatCandiesGrid::setZerglingPixPos(Flower* zergling, int x, int y)
