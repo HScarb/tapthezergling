@@ -40,6 +40,7 @@ private:
 	virtual void update();					// 主要用于刷新时间
 
 private:
+	cocos2d::Node * m_controlLayer;
 	DoubleTapGrid * m_grid;
 
 };

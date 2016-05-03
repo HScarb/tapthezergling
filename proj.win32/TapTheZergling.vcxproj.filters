@@ -78,9 +78,6 @@
     <ClCompile Include="..\Classes\TimeManager.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\TollgateControlLayer.cpp">
-      <Filter>Classes\Layer</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\SettingsScene.cpp">
       <Filter>Classes\Scenes</Filter>
     </ClCompile>
@@ -96,7 +93,6 @@
     <ClCompile Include="..\Classes\Zergling.cpp">
       <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\PauseLayer.cpp" />
     <ClCompile Include="..\Classes\SlideCutScene.cpp">
       <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
     </ClCompile>
@@ -105,6 +101,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\EatCandiesScene.cpp">
       <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Flower.cpp">
+      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PauseLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TollgateControlLayer.cpp">
+      <Filter>Classes\Layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,8 +164,6 @@
     <ClInclude Include="..\Classes\Zergling.h">
       <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\PauseLayer.h" />
-    <ClInclude Include="..\Classes\TollgateControlLayer.h" />
     <ClInclude Include="..\Classes\SlideCutScene.h">
       <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
     </ClInclude>
@@ -169,6 +172,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\EatCandiesScene.h">
       <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Flower.h">
+      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PauseLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TollgateControlLayer.h">
+      <Filter>Classes\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

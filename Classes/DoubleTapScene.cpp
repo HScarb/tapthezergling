@@ -11,12 +11,10 @@ using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 
 // multi touches test
-static const Color3B* s_TouchColors[5] = {
+static const Color3B* s_TouchColors[3] = {
 	&Color3B::YELLOW,
 	&Color3B::BLUE,
 	&Color3B::GREEN,
-	&Color3B::RED,
-	&Color3B::MAGENTA
 };
 
 class TouchPoint : public Node
@@ -47,7 +45,6 @@ public:
 
 static Map<int, TouchPoint*> s_map;
 
-////////////////////
 
 Scene* DoubleTapScene::createScene(int diff, int loop)
 {
@@ -63,9 +60,10 @@ bool DoubleTapScene::init(int diff, int loop)
 		return false;
 	
 	auto winSize = Director::getInstance()->getWinSize();
-
+	m_controlLayer = CSLoader::createNode("Tollgates/TollgateControlLayer.csb");
 	auto UI = CSLoader::createNode("Tollgates/DoubleTapScene.csb");
 	addChild(UI);
+	addChild(m_controlLayer);
 
 //	auto tollgateControlLayer = TollgateControlLayer::create();
 //	addChild(tollgateControlLayer);
@@ -234,11 +232,6 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 			}
 		}
 	}
-	else if(s_map.size() == 1)
-	{
-		
-	}
-	/*	
 	else if (s_map.size() == 1)
 	{
 		Vec2 p;
@@ -264,7 +257,6 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 		else
 			log("none zergling.");
 	}
-	*/
 }
 
 void DoubleTapGrid::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
@@ -344,6 +336,10 @@ cocos2d::Vec2 DoubleTapGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 	float x, y;
 	x = (pixPos.x - LEFT_MARGIN) / GRID_WIDTH;
 	y = (pixPos.y - BOTTOM_MARGIN) / GRID_WIDTH;
+	if (x < 0.0)
+		x = -1.0;
+	if (y < 0.0)
+		y = -1.0;
 	return Vec2(x, y);
 }
 

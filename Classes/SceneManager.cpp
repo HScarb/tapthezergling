@@ -82,7 +82,9 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 	case SlideCutScene: 
 		pScene = SlideCutScene::createScene(diff, loop);
 		break;
-	case EatCandiesScene: break;
+	case EatCandiesScene:
+		pScene = EatCandiesScene::createScene(diff,loop);
+		break;
 	default: break;
 	}
 

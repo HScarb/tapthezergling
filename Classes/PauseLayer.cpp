@@ -11,6 +11,8 @@ bool PauseLayer::init()
 	listener->onTouchBegan = CC_CALLBACK_2(PauseLayer::onTouchBegan, this);
 	listener->onTouchMoved = CC_CALLBACK_2(PauseLayer::onTouchMoved, this);
 	listener->onTouchEnded = CC_CALLBACK_2(PauseLayer::onTouchEnded, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	listener->setSwallowTouches(true);
 	return true;
 }
 

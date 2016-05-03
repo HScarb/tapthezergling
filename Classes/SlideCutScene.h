@@ -44,6 +44,7 @@ private:
 	virtual void update();
 private:
 	SlideCutGrid * m_grid;
+	cocos2d::Node * m_controlLayer;
 };
 
 class SlideCutGrid :public cocos2d::Layer

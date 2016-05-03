@@ -17,6 +17,7 @@ public:
 		BLUE,
 		PURPLE
 	};
+
 	static Zergling * createByColor(ZerglingColor color = NONE);
 	bool init(int color);
 
