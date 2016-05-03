@@ -1,5 +1,5 @@
 <Solution>
-  <PropertyGroup Name="tapthezergling" Version="3.10.0.0" Type="CocosStudio" />
+  <PropertyGroup Name="TapTheZergling" Version="3.10.0.0" Type="CocosStudio" />
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
@@ -19,6 +19,8 @@
             <Image Name="button_base.png" />
             <Image Name="button_cards_1.png" />
             <Image Name="button_cards_2.png" />
+            <Image Name="button_play_1.png" />
+            <Image Name="button_play_2.png" />
             <Image Name="button_settings_1.png" />
             <Image Name="button_settings_2.png" />
             <Image Name="button_x_1.png" />
@@ -273,13 +275,13 @@
           <Project Name="DoubleTapScene.csd" Type="Scene" />
           <Project Name="EatCandiesScene.csd" Type="Scene" />
           <Project Name="SlideCutScene.csd" Type="Scene" />
+          <Project Name="TollgateControlLayer.csd" Type="Layer" />
         </Folder>
         <Project Name="CardEnhancer.csd" Type="Layer" />
         <Project Name="MainScene.csd" Type="Scene" />
         <Project Name="PauseLayer.csd" Type="Layer" />
         <Project Name="SettingsScene.csd" Type="Scene" />
         <Project Name="TestScene.csd" Type="Scene" />
-        <Project Name="TollgateControlLayer.csd" Type="Layer" />
         <Project Name="TollgateScene.csd" Type="Scene" />
       </RootFolder>
     </Group>

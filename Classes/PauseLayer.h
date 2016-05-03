@@ -1,4 +1,7 @@
 // PauseLayer.h
+/*
+	ÔİÍ£²ã£¬ÍÌ²¢´¥ÃşÊÂ¼ş
+*/
 #pragma once
 #include "cocos2d.h"
 

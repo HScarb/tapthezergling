@@ -63,9 +63,10 @@ bool DoubleTapScene::init(int diff, int loop)
 		return false;
 	
 	auto winSize = Director::getInstance()->getWinSize();
-
+	m_controlLayer = CSLoader::createNode("Tollgates/TollgateControlLayer.csb");
 	auto UI = CSLoader::createNode("Tollgates/DoubleTapScene.csb");
 	addChild(UI);
+	addChild(m_controlLayer);
 
 //	auto tollgateControlLayer = TollgateControlLayer::create();
 //	addChild(tollgateControlLayer);

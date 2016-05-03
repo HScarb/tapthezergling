@@ -27,6 +27,9 @@ bool SlideCutScene::init(int diff, int loop)
 
 	auto UI = CSLoader::createNode("Tollgates/SlideCutScene.csb");
 	addChild(UI);
+	m_controlLayer = CSLoader::createNode("Tollgates/TollgateControlLayer.csb");
+	addChild(m_controlLayer);
+
 	m_grid = SlideCutGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);
 	this->addChild(m_grid);

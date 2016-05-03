@@ -2,6 +2,7 @@
 #include "TollgateControlLayer.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
+#include "PauseLayer.h"
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;

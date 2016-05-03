@@ -23,20 +23,9 @@
     </Item>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
-        <LastPublishType Value="Resource" />
-        <IsLastPublish Value="False" />
+        <LastPublishType Value="VS" />
+        <IsLastPublish Value="True" />
         <LastRunType Value="Windows" />
-      </Value>
-    </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <ActiveDocument />
-        <OpenedDocuments>
-          <FilePathData Path="CardEnhancer.csd" />
-          <FilePathData Path="Tollgates/PauseLayer.csd" />
-          <FilePathData Path="Tollgates/SlideCutScene.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="Tollgates/SlideCutScene.csd" />
       </Value>
     </Item>
   </Properties>
