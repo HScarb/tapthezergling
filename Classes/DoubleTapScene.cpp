@@ -10,12 +10,10 @@ using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 
 // multi touches test
-static const Color3B* s_TouchColors[5] = {
+static const Color3B* s_TouchColors[3] = {
 	&Color3B::YELLOW,
 	&Color3B::BLUE,
 	&Color3B::GREEN,
-	&Color3B::RED,
-	&Color3B::MAGENTA
 };
 
 class TouchPoint : public Node
@@ -46,7 +44,6 @@ public:
 
 static Map<int, TouchPoint*> s_map;
 
-////////////////////
 
 Scene* DoubleTapScene::createScene(int diff, int loop)
 {

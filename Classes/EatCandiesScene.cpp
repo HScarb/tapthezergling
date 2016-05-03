@@ -1,53 +1,446 @@
 //EacCandiesScnen.cpp
 #include "EatCandiesScene.h"
-#include "cocos2d.h"
+#include "cocostudio/CocoStudio.h"
+#include "ui/CocosGUI.h"
+#include "TimeManager.h"
+#include "Flower.h"
+
 USING_NS_CC;
 
-EatCandiesScene* EatCandiesScene::createByType(int type)
+/*
+using namespace std;
+using namespace cocos2d::ui;
+using namespace cocostudio::timeline;
+
+static const Color3B* s_TouchColors[3] = {
+	&Color3B::YELLOW,
+	&Color3B::BLUE,
+	&Color3B::GREEN,
+};
+
+bool EatCandiesScene::init(int diff, int loop)
 {
-	auto candies = new EatCandiesScene();
+	if (!Layer::init())
+		return false;
 
-	if (candies && candies->init(type))
-		{
-			candies->autorelease();
-			return candies;
-		}
-	else
-		{
-			CC_SAFE_DELETE(candies);
-			return nullptr;
-		}
-}
+	auto winSize = Director::getInstance()->getWinSize();
 
-bool EatCandiesScene::init(int type)
-{
-	Sprite::init();
+	auto UI = CSLoader::createNode("Tollgates/EatCandiesScene.csb");
+	addChild(UI);
 
-	m_type = type;
-	m_x = random(100,300);
-	m_y = random(100,300);
+	m_pauseBtn = (Button*)(UI->getChildByName("Button_pause"));
+	m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
+	m_timeText = (Text*)(UI->getChildByName("Text_time"));
 
-	m_isCrushing = false;
-
-	char name[2] = { 0 };//初始化纹理图片
-	sprintf(name, "SCs_DancingFlowers_00", m_type);
-	this->initWithTexture(TextureCache::getInstance()->getTextureForKey(name));
+	n_grid = EatCandiesGrid::create(diff, loop);
+	n_grid->setPosition(0, 0);
+	this->addChild(n_grid);
 
 	return true;
 }
 
-void EatCandiesScene::crush()
+class TouchPoint : public Node
 {
-	//开始消除，消除状态为真，直到消除动作结束，将宝石移除渲染节点，并置消除状态为假
-	m_isCrushing = true;
-	auto action = FadeOut::create(0.2);
-	auto call = CallFunc::create([this](){
-		this->removeFromParent();
-		m_isCrushing = false;
-	});
-	this->runAction(Sequence::create(action, call, nullptr));
+public:
+	TouchPoint(const Vec2 &touchPoint, const Color3B &touchColor)
+	{
+		m_point = touchPoint;
+		DrawNode* drawNode = DrawNode::create();
+		auto s = Director::getInstance()->getWinSize();
+		Color4F color(touchColor.r / 255.0f, touchColor.g / 255.0f, touchColor.b / 255.0f, 1.0f);
+		drawNode->drawLine(Vec2(0, touchPoint.y), Vec2(s.width, touchPoint.y), color);
+		drawNode->drawLine(Vec2(touchPoint.x, 0), Vec2(touchPoint.x, s.height), color);
+		drawNode->drawDot(touchPoint, 3, color);
+		addChild(drawNode);
+	}
+
+	static TouchPoint* touchPointWithParent(Node* pParent, const Vec2 &touchPoint, const Color3B &touchColor)
+	{
+		auto pRet = new (std::nothrow) TouchPoint(touchPoint, touchColor);
+		pRet->setContentSize(pParent->getContentSize());
+		pRet->setAnchorPoint(Vec2(0.0f, 0.0f));
+		pRet->autorelease();
+		return pRet;
+	}
+	CC_SYNTHESIZE(Vec2, m_point, Pt);
+};
+
+static Map<int, TouchPoint*> s_map;
+
+
+Scene* EatCandiesScene::createScene(int diff, int loop)
+{
+	auto scene = Scene::create();
+	auto layer = EatCandiesScene::create(diff, loop);
+	scene->addChild(layer);
+	return scene;
+}
+
+cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
+{
+	auto pRef = new EatCandiesScene();
+	if (pRef && pRef->init(diff, loop))
+	{
+		pRef->autorelease();
+		return pRef;
+	}
+	else
+	{
+		CC_SAFE_DELETE(pRef);
+		return nullptr;
+	}
+}
+
+void EatCandiesGrid::setFlower(Flower* flower, int x, int y)
+{
+	flower->setPosition(x * grid_width +  left_margin, y * grid_width + bottom_margin);
+}
+
+
+EatCandiesGrid* EatCandiesGrid::create(int diff, int loop, int row, int col)
+{
+	auto pRef = new EatCandiesGrid();
+	if (pRef && pRef->init(diff, loop, row, col))
+	{
+		pRef->autorelease();
+		return pRef;
+	}
+	else
+	{
+		CC_SAFE_DELETE(pRef);
+		return nullptr;
+	}
+}
+
+bool EatCandiesGrid::init(int diff, int loop, int row, int col)
+{
+	if (!Layer::init())
+		return false;
+
+	Sprite* sprite = Sprite::create("zergling_big_1.jpg");
+	auto size = Director::getInstance()->getVisibleSize();
+	sprite->setPosition(size.height / 2, size.width / 2);
+	this->addChild(sprite);
+
+	m_row = row;
+	m_col = col;
+	m_loop = loop;
+	m_isRunning = false;
+	
+
+	m_flowerGrid.resize(m_col);
+	for (auto &vec : m_flowerGrid)
+		vec.resize(m_row);
+
+	for (int x = 0; x < m_col; x++)
+	{
+		for (int y = 0; y < m_row; y++)
+		{
+			m_flowerGrid[x][y] = createFlower((Flower::FlowerColor)m_f[0][y][x], x, y);
+		}
+	}
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(EatCandiesGrid::onTouchBegan, this);
+		
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	return true;
+}
+
+bool EatCandiesGrid::onTouchBegan(Touch * touch, Event * unused_event)
+{
+	//Vec2 pos = touch->getLocation();
+	//log("x = %f, y = %f", pos.x, pos.y);
+	
+}
+
+Flower* EatCandiesGrid::createFlower(Flower::FlowerColor color, int x, int y)
+{
+	Flower * flower = nullptr;
+	if (color <= 0)
+		return nullptr;
+	flower = Flower::createByColor(color);
+
+	setFlower(flower, x, y);
+	addChild(flower);
+
+	return flower;
 
 }
+
+cocos2d::Vec2 EatCandiesGrid::convertToGridPos(cocos2d::Vec2 pixPos)
+{
+	float x, y;
+	x = (pixPos.x - left_margin) / grid_width;
+	y = (pixPos.y - bottom_margin) / grid_width;
+	return Vec2(x, y);
+}
+*/
+using namespace std;
+using namespace cocos2d::ui;
+using namespace cocostudio::timeline;
+
+
+// multi touches test
+static const Color3B* s_TouchColors[5] = {
+	&Color3B::YELLOW,
+	&Color3B::BLUE,
+	&Color3B::GREEN,
+	&Color3B::RED,
+	&Color3B::MAGENTA
+};
+
+class TouchPoint : public Node
+{
+public:
+	TouchPoint(const Vec2 &touchPoint, const Color3B &touchColor)
+	{
+		m_point = touchPoint;
+		DrawNode* drawNode = DrawNode::create();
+		auto s = Director::getInstance()->getWinSize();
+		Color4F color(touchColor.r / 255.0f, touchColor.g / 255.0f, touchColor.b / 255.0f, 1.0f);
+		drawNode->drawLine(Vec2(0, touchPoint.y), Vec2(s.width, touchPoint.y), color);
+		drawNode->drawLine(Vec2(touchPoint.x, 0), Vec2(touchPoint.x, s.height), color);
+		drawNode->drawDot(touchPoint, 3, color);
+		addChild(drawNode);
+	}
+
+	static TouchPoint* touchPointWithParent(Node* pParent, const Vec2 &touchPoint, const Color3B &touchColor)
+	{
+		auto pRet = new (std::nothrow) TouchPoint(touchPoint, touchColor);
+		pRet->setContentSize(pParent->getContentSize());
+		pRet->setAnchorPoint(Vec2(0.0f, 0.0f));
+		pRet->autorelease();
+		return pRet;
+	}
+	CC_SYNTHESIZE(Vec2, m_point, Pt);
+};
+
+static Map<int, TouchPoint*> s_map;
+
+
+
+Scene* EatCandiesScene::createScene(int diff, int loop)
+{
+	auto scene = Scene::create();
+	auto layer = EatCandiesScene::create(diff, loop);
+	scene->addChild(layer);
+	return scene;
+}
+
+bool EatCandiesScene::init(int diff, int loop)
+{
+	if (!Layer::init())
+		return false;
+
+	/*Sprite* sprite = Sprite::create("Res\zergling_big_1.png");
+	auto size = Director::getInstance()->getVisibleSize();
+	sprite->setPosition(size.height / 2, size.width / 2);
+	this->addChild(sprite);*/
+
+	//用矩阵中固定一个狗代替
+
+	auto winSize = Director::getInstance()->getWinSize();
+
+	auto UI = CSLoader::createNode("Tollgates/DoubleTapScene.csb");
+	addChild(UI);
+
+	m_pauseBtn = (Button*)(UI->getChildByName("Button_pause"));
+	m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
+	m_timeText = (Text*)(UI->getChildByName("Text_time"));
+
+	m_grid = EatCandiesGrid::create(diff, loop);
+	m_grid->setPosition(0, 0);
+	this->addChild(m_grid);
+
+	return true;
+}
+
+//下面的Layer* create代码差不多，固定
+cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
+{
+	auto pRef = new EatCandiesScene();
+	if (pRef && pRef->init(diff, loop))
+	{
+		pRef->autorelease();
+		return pRef;
+	}
+	else
+	{
+		CC_SAFE_DELETE(pRef);
+		return nullptr;
+	}
+}
+
+//接下去两个虚函数
+void EatCandiesScene::newLevel(int diff)
+{
+
+}
+
+void EatCandiesScene::update()
+{
+
+}
+
+//根据困难和轮数创建矩阵数量
+EatCandiesGrid* EatCandiesGrid::create(int diff, int loop, int row, int col)
+{
+	auto pRef = new EatCandiesGrid();
+	if (pRef && pRef->init(diff, loop, row, col))
+	{
+		pRef->autorelease();
+		return pRef;
+	}
+	else
+	{
+		CC_SAFE_DELETE(pRef);
+		return nullptr;
+	}
+}
+
+bool EatCandiesGrid::init(int diff, int loop, int row, int col)
+{
+	if (!Layer::init())
+		return false;
+
+	m_row = row;
+	m_col = col;
+	m_loop = loop;
+	m_isRunning = false;
+	m_touchesLabel = Label::create("0000", "Arial", 30);
+	m_touchesLabel->setPosition(100, 500);
+	this->addChild(m_touchesLabel);
+
+	// 根据行、列，初始化一个空的二维容器
+	m_flowersesGrid.resize(m_col);
+	for (auto &vec : m_flowersesGrid)
+		vec.resize(m_row);
+
+	for (int x = 0; x < m_col; x++)
+	{
+		for (int y = 0; y < m_row; y++)
+		{
+			m_flowersesGrid[x][y] = createflower((Flower::FlowerColor)n_g[0][y][x], x, y);//鲜花只有三种:flower_1~3.png
+		}
+	}
+
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(EatCandiesGrid::onTouchBegan, this);
+	listener->onTouchEnded = CC_CALLBACK_2(EatCandiesGrid::onTouchEnded, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	return true;
+}
+
+void EatCandiesGrid::setZerglingPixPos(Flower* zergling, int x, int y)
+{
+	zergling->setPosition(x * grid_WIDTH + left_MARGIN, y * grid_WIDTH + bottom_MARGIN);
+}
+
+Flower* EatCandiesGrid::createflower(Flower::FlowerColor color, int x, int y)
+{
+	Flower * flower = nullptr;
+	if (color <= 0)
+		return nullptr;
+	flower = Flower::createByColor(color);
+
+	setZerglingPixPos(flower, x, y);
+	addChild(flower);
+
+	return flower;
+}
+
+
+
+bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
+{
+	// 如果倒计时还没有开始，则开始倒计时
+	if (!m_isRunning)
+	{
+		m_isRunning = true;
+		TimeManager::getInstance()->startCountDown();
+	}
+	
+	for (auto &item : touch)
+	{
+		auto touch = item;
+		auto location = touch->getLocation();
+		auto touchPoint = TouchPoint::touchPointWithParent(this, location, *s_TouchColors[touch->getID() % 5]);
+
+		addChild(touchPoint);
+		s_map.insert(touch->getID(), touchPoint);
+	}
+	if (s_map.size() == 2)
+	{
+		// log("touches count: %d", count);
+		Vec2 p[1];
+		int c = 0;
+		vector<int> keys;
+		keys = s_map.keys();
+		for (auto key : keys)
+		{
+			p[c] = (s_map.at(key))->getPt();
+			// 将坐标转化成格子坐标
+
+			p[c] = convertToGridPos(p[c]);
+			c++;
+		}
+		
+		//////////////////////////////////////////////////////////////////////
+
+
+		m_touchesLabel->setString(StringUtils::format("1:(%d,%d)", (int)p[0].x, (int)p[0].y));
+		int x1 = (int)p[0].x;
+		int y1 = (int)p[0].y;
+		
+		// 如果被点击的位置在矩阵内且有花
+		if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3)
+			&& m_flowersesGrid[x1][y1] )
+		{
+			if (m_flowersesGrid[x1][y1]->getColorType())
+			{
+				log("crush!");
+				// * add animation
+				auto flower1 = m_flowersesGrid[x1][y1];
+
+				// 清空矩阵中的狗的指针
+				m_flowersesGrid[x1][y1] = nullptr;
+
+				// 将花从矩阵的绘制节点中移除
+				flower1->tapped();
+			}
+		}
+	}///////////////////////////////////////////////////////////////////////
+	return true;
+}
+
+
+void EatCandiesGrid::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event *unused_event)
+{
+	for (auto &item : touch)
+	{
+		auto touch = item;
+		auto pTP = s_map.at(touch->getID());
+		removeChild(pTP, true);
+		s_map.erase(touch->getID());
+	}
+}		
+
+//坐标获取，范围坐标与触屏坐标
+cocos2d::Vec2 EatCandiesGrid::convertToGridPos(cocos2d::Vec2 pixPos)
+{
+	float x, y;
+	x = (pixPos.x - left_MARGIN) / grid_WIDTH;
+	y = (pixPos.y - bottom_MARGIN) / grid_WIDTH;
+	return Vec2(x, y);
+}
+
+
+
 
 
 

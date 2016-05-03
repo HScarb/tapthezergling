@@ -28,6 +28,9 @@
     <Filter Include="Classes\Entity">
       <UniqueIdentifier>{c3dc609f-7d70-43e4-acfd-f3d65bb4f0e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\EatCandies">
+      <UniqueIdentifier>{e6fe3309-0043-4dc8-b19e-ad9a89ec0e51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,9 +57,6 @@
     <ClCompile Include="..\Classes\TollgateScene.cpp">
       <Filter>Classes\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EatCandiesScene.cpp">
-      <Filter>Classes\Scenes\Tollgates</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\TemplateScene.cpp">
       <Filter>Classes\Scenes\Tollgates</Filter>
     </ClCompile>
@@ -77,6 +77,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\TimeManager.cpp">
       <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EatCandiesScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Flower.cpp">
+      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,9 +110,6 @@
     <ClInclude Include="..\Classes\TollgateScene.h">
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\EatCandiesScene.h">
-      <Filter>Classes\Scenes\Tollgates</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\TemplateScene.h">
       <Filter>Classes\Scenes\Tollgates</Filter>
     </ClInclude>
@@ -127,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\TimeManager.h">
       <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EatCandiesScene.h">
+      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Flower.h">
+      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
