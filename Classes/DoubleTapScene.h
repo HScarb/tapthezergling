@@ -11,7 +11,6 @@ const int LEFT_MARGIN = 120;		// 小狗矩阵距离左边的距离
 const int BOTTOM_MARGIN = 80;		// 小狗矩阵距离底部的距离
 
 class DoubleTapGrid;
-class IntMatrix;
 
 /*
 	定死的狗狗矩阵
@@ -43,10 +42,6 @@ private:
 private:
 	DoubleTapGrid * m_grid;
 
-private:
-	cocos2d::ui::Button * m_pauseBtn;
-	cocos2d::ui::Text * m_timeText;
-	cocos2d::ui::LoadingBar * m_timeBar;
 };
 
 class DoubleTapGrid : public cocos2d::Layer
@@ -64,15 +59,16 @@ public:
 	virtual void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
 	virtual void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
 	virtual void onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
-
+	
 private:
 	int m_row, m_col;
-	int m_loop;
+	int m_loop, m_diff;
 	bool m_isRunning;
 	cocos2d::Label * m_touchesLabel;
 	std::vector<std::vector<Zergling*>> m_zerglingGrid;
 
 private:
 	cocos2d::Vec2 convertToGridPos(cocos2d::Vec2 pixPos);		// 将像素坐标转化成格子矩阵中的坐标
-
+	void generateNewZerglingGrid(const int diff);
+	int getLivingZerglingsNum();			// 得到活的狗的数量
 };

@@ -2,9 +2,8 @@
 #pragma once
 #include "cocos2d.h"
 #include "FilterSprite.h"
-using namespace cocos2d;
 
-class Farmer :public Layer
+class Farmer :public cocos2d::Sprite
 {
 public:
 	enum Farmerappear

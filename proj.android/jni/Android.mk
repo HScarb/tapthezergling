@@ -20,12 +20,16 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/LoadingScene.cpp \
 				   ../../Classes/MainScene.cpp \
 				   ../../Classes/SceneManager.cpp \
-				   ../../Classes/SlideScene.cpp \
+				   ../../Classes/SlideCutScene.cpp \
 				   ../../Classes/TemplateScene.cpp \
 				   ../../Classes/TimeManager.cpp \
 				   ../../Classes/TollgateScene.cpp \
 				   ../../Classes/VisibleRect.cpp \
-				   ../../Classes/Zergling.cpp 
+				   ../../Classes/Zergling.cpp \
+				   ../../Classes/Farmer.cpp \
+				   ../../Classes/SettingsScene.cpp \
+				   ../../Classes/TollgateControlLayer.cpp \
+				   ../../Classes/PauseLayer.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 

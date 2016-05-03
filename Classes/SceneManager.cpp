@@ -2,6 +2,9 @@
 #include "SceneManager.h"
 #include "LoadingScene.h"
 #include "MainScene.h"
+#include "TollgateControlLayer.h"
+#include "TollgateScene.h"
+#include "SettingsScene.h"
 
 #include "DoubleTapScene.h"
 #include "SlideCutScene.h"
@@ -44,6 +47,12 @@ void SceneManager::changeScene(SceneType sceneType)
 		break;
 	case SceneManager::LoadingScene:
 		pScene = LoadingScene::createScene();
+		break;
+	case SceneManager::TollgateScene:
+		pScene = TollgateScene::createScene();
+		break;
+	case SceneManager::SettingsScene:
+		pScene = SettingsScene::createScene();
 		break;
 	default:
 		break;

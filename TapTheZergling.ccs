@@ -48,7 +48,6 @@
           </Folder>
           <Folder Name="star crafts">
             <Image Name="belshir_cliff0_diff.png" />
-            <File Name="button_base.psd" />
             <Image Name="SCs_Bush_00.png" />
             <Image Name="SCs_Bush_01.png" />
             <Image Name="SCs_Bush_02.png" />
@@ -273,13 +272,14 @@
         <Folder Name="Tollgates">
           <Project Name="DoubleTapScene.csd" Type="Scene" />
           <Project Name="EatCandiesScene.csd" Type="Scene" />
-          <Project Name="PauseLayer.csd" Type="Layer" />
           <Project Name="SlideCutScene.csd" Type="Scene" />
         </Folder>
         <Project Name="CardEnhancer.csd" Type="Layer" />
         <Project Name="MainScene.csd" Type="Scene" />
+        <Project Name="PauseLayer.csd" Type="Layer" />
         <Project Name="SettingsScene.csd" Type="Scene" />
         <Project Name="TestScene.csd" Type="Scene" />
+        <Project Name="TollgateControlLayer.csd" Type="Layer" />
         <Project Name="TollgateScene.csd" Type="Scene" />
       </RootFolder>
     </Group>

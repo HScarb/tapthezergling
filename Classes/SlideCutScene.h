@@ -10,9 +10,7 @@ const int Grid_ROW = 6;				// 设定默认的行数和列数
 const int Grid_COL = 10;
 const int Grid_WIDTH = 70;			// 小狗方块的宽度(和高度)
 const int Left_MARGIN = 130;		// 小狗矩阵距离左边的距离
-const int Bottom_MARGIN = 70;		// 小狗矩阵距离底部的距离
-
-using namespace cocos2d;
+const int Bottom_MARGIN = 40;		// 小狗矩阵距离底部的距离
 
 class SlideCutGrid;
 class IntMatrix;
@@ -24,9 +22,12 @@ static const int m_a[1][Grid_ROW][Grid_COL] =
 {
 	// easy
 	{
-		{ 5, 0, 0, 0, 0, 5 },
-		{ 3, 5, 7, 5, 7, 3 },
-		{ 7, 0, 0, 0, 0, 7 }
+		{ 1, 0, 0, 0, 0, 1 ,1, 0, 1, 1},
+		{ 1, 0, 0, 0, 1, 1 ,0, 1, 1, 1},
+		{ 1, 0, 1, 1, 0, 1 ,0, 1, 1, 1},
+		{ 1, 0, 1, 0, 0, 1 ,0, 1, 1, 1},
+		{ 1, 1, 1, 1, 1, 1 ,0, 1, 1, 1},
+		{ 1, 0, 0, 0, 0, 1 ,1, 0, 1, 1}
 	}
 	// medium
 	// hard
@@ -45,7 +46,7 @@ private:
 	SlideCutGrid * m_grid;
 };
 
-class SlideCutGrid :public Layer
+class SlideCutGrid :public cocos2d::Layer
 {
 public:
 	static SlideCutGrid * create(int diff, int loop, int row = Grid_ROW, int col = Grid_COL);		// 根据行列创建布局
@@ -57,9 +58,9 @@ public:
 	// 根据网格坐标创建一个小狗，并且加入到渲染节点
 	Farmer * createAFarmer(Farmer::Farmerappear appear, int x, int y);
 
-	virtual bool SlideCutGrid::onTouchBegan(Touch *touch, Event *unused_event);
-	virtual void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event);
-	virtual void SlideCutGrid::onTouchEnded(Touch *touch, Event *unused_event);
+	virtual bool SlideCutGrid::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	virtual void SlideCutGrid::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	virtual void SlideCutGrid::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 private:
 	int m_row, m_col;
 	int m_loop;

@@ -30,6 +30,7 @@
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
+        <ActiveDocument />
         <OpenedDocuments>
           <FilePathData Path="CardEnhancer.csd" />
           <FilePathData Path="Tollgates/PauseLayer.csd" />
