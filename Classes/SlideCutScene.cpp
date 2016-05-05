@@ -27,8 +27,10 @@ bool SlideCutScene::init(int diff, int loop)
 
 	auto UI = CSLoader::createNode("Tollgates/SlideCutScene.csb");
 	addChild(UI);
+
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
+	m_controlLayer->scheduleUpdate();
 	addChild(m_controlLayer);
 
 	m_grid = SlideCutGrid::create(diff, loop);
@@ -136,6 +138,12 @@ void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event)
 	int y1 = (int)pos.y;
 	if ((0 <= x1 && x1 < 10) && (0 <= y1 && y1 < 6) && m_farmerGrid[x1][y1])
 	{
+		// 如果倒计时还没有开始，则开始倒计时
+		if (!m_isRunning)
+		{
+			m_isRunning = true;
+			TimeManager::getInstance()->startCountDown();
+		}
 		// * add animation
 		auto farmer = m_farmerGrid[x1][y1];
 		log("farmer pos x = %f, y = %f", farmer->getPosition().x, farmer->getPosition().y);

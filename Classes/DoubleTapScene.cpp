@@ -168,13 +168,6 @@ Zergling* DoubleTapGrid::createAZergling(Zergling::ZerglingColor color, int x, i
 
 void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
 {
-	// 如果倒计时还没有开始，则开始倒计时
-	if (!m_isRunning)
-	{
-		m_isRunning = true;
-		TimeManager::getInstance()->startCountDown();
-	}
-	
 	for (auto &item : touches)
 	{
 		auto touch = item;
@@ -213,6 +206,12 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 				== m_zerglingGrid[x2][y2]->getColorType())
 			{
 				log("crush!");
+				// 如果倒计时还没有开始，则开始倒计时
+				if (!m_isRunning)
+				{
+					m_isRunning = true;
+					TimeManager::getInstance()->startCountDown();
+				}
 				// * add animation
 				auto zergling1 = m_zerglingGrid[x1][y1];
 				auto zergling2 = m_zerglingGrid[x2][y2];
