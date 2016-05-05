@@ -89,9 +89,6 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 	m_loop = loop;
 	m_diff = diff;
 	m_isRunning = false;
-	m_touchesLabel = Label::create("0000", "Arial", 30);
-	m_touchesLabel->setPosition(100, 500);
-	this->addChild(m_touchesLabel);
 
 	// 根据行、列，初始化一个空的二维容器
 	m_farmerGrid.resize(m_col);
@@ -156,6 +153,11 @@ void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event)
 		{
 			generateNewFarmersGrid(m_diff);
 		}
+		else if(getLivingFarmersNum() <= 0 && m_loop <= 0)
+		{
+			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"SlideCut");
+			CCLOG("SlideCut clear");
+		}
 	}
 }
 void SlideCutGrid::onTouchEnded(Touch *touch, Event *unused_event)     {  }
@@ -219,6 +221,5 @@ int SlideCutGrid::getLivingFarmersNum()
 				count++;
 		}
 	}
-	log("count%d", count);
 	return count;
 }

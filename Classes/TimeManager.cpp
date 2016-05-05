@@ -71,6 +71,7 @@ void TimeManager::update(float dt)
 		{
 			m_isCountingDown = false;
 			m_time = 0;
+			_eventDispatcher->dispatchCustomEvent("tollgate_fail"/* , (void*)score */);
 		}
 	}
 }

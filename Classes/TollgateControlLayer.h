@@ -13,6 +13,9 @@ public:
 	virtual void update(float dt) override;
 
 	void initTimeBar();		// 在关卡载入时，设置时间条为当前剩余时间
+
+	void tollgateClear(cocos2d::EventCustom *);	// tollgate clear callback
+	void tollgateFail(cocos2d::EventCustom *);	// tollgate fail callback, at this time, game over
 private:
 	void onPauseBtnClick(Ref *, cocos2d::ui::TouchEventType type);
 

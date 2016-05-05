@@ -38,7 +38,6 @@
             <Image Name="Energy-progress.png" />
             <Image Name="Gem-board.png" />
             <Image Name="loading_bar.png" />
-            <File Name="loading_bar.psd" />
             <Image Name="loading_progress.png" />
             <Image Name="long_button_green_1.png" />
             <Image Name="long_button_green_2.png" />

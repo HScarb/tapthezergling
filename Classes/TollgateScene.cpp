@@ -65,7 +65,16 @@ bool TollgateScene::init()
 	
 	// 设置时间
 	if (GameManager::getInstance()->getIsGameOn() == false)		// 如果游戏还没有开始
+	{
 		TimeManager::getInstance()->setTime(INITIAL_TIME);
+		GameManager::getInstance()->setIsGameOn(true);			// set game is on
+	}
+	else
+	{
+		TimeManager::getInstance()->addTime(2.0f);				// add 2 seconds
+		CCLOG("added 2 seconds.");
+	}
+
 	m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 
 	// 关联触摸函数
@@ -103,7 +112,7 @@ void TollgateScene::onItem2Clicked(Ref* pSender, TouchEventType type)
 	if(type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
 		log("tollgate 2");
-		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::SlideCutScene, 0, 1);
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::SlideCutScene, 0, 2);
 	}
 }
 

@@ -29,7 +29,10 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/Farmer.cpp \
 				   ../../Classes/SettingsScene.cpp \
 				   ../../Classes/TollgateControlLayer.cpp \
-				   ../../Classes/PauseLayer.cpp
+				   ../../Classes/PauseLayer.cpp \
+				   ../../Classes/Flower.cpp \
+				   ../../Classes/GameManager.cpp \
+				   ../../Classes/DataManager.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 

@@ -71,6 +71,10 @@ bool DoubleTapScene::init(int diff, int loop)
 	m_grid->setPosition(0, 0);
 	this->addChild(m_grid);
 
+	// add custom event listener
+	auto clearListener = EventListenerCustom::create("tollgate_clear", CC_CALLBACK_1(DoubleTapScene::tollgateClear, this));
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(clearListener,this);
+
 	return true;
 }
 
@@ -87,6 +91,17 @@ cocos2d::Layer* DoubleTapScene::create(int diff, int loop)
 		CC_SAFE_DELETE(pRef);
 		return nullptr;
 	}
+}
+
+void DoubleTapScene::tollgateClear(EventCustom * event)
+{
+	m_controlLayer->unscheduleUpdate();		// stop time countdown
+	CCLOG("Double tap scene tollgate clear");
+}
+
+void DoubleTapScene::tollgateFail(EventCustom * event)
+{
+	
 }
 
 void DoubleTapScene::newLevel(int diff)
@@ -227,10 +242,16 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 				{
 					generateNewZerglingGrid(m_diff);
 				}
+				// 如果狗被消光，而且loop<=0,关卡清除
+				else if(getLivingZerglingsNum() == 0 && m_loop <= 0)
+				{
+					_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"DoubleTap");
+					CCLOG("DoubleTap clear");
+				}
 			}
 		}
 	}
-	else if (s_map.size() == 1)
+	/*else if (s_map.size() == 1)
 	{
 		Vec2 p;
 		vector<int> keys;
@@ -254,7 +275,7 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 		}
 		else
 			log("none zergling.");
-	}
+	}*/
 }
 
 void DoubleTapGrid::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)

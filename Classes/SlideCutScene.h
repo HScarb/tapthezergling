@@ -23,12 +23,12 @@ static const int m_a[1][Grid_ROW][Grid_COL] =
 {
 	// easy
 	{
-		{ 1, 0, 0, 0, 0, 1 ,1, 0, 1, 1},
-		{ 1, 0, 0, 0, 1, 1 ,0, 1, 1, 1},
-		{ 1, 0, 1, 1, 0, 1 ,0, 1, 1, 1},
-		{ 1, 0, 1, 0, 0, 1 ,0, 1, 1, 1},
-		{ 1, 1, 1, 1, 1, 1 ,0, 1, 1, 1},
-		{ 1, 0, 0, 0, 0, 1 ,1, 0, 1, 1}
+		{ 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0},
+		{ 0, 0, 0, 0, 1, 1 ,0, 0, 0, 0},
+		{ 0, 0, 0, 1, 1, 1 ,1, 0, 0, 0},
+		{ 0, 0, 1, 0, 0, 0 ,0, 1, 0, 0},
+		{ 0, 1, 0, 0, 0, 0 ,0, 0, 1, 0},
+		{ 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0}
 	}
 	// medium
 	// hard
@@ -60,14 +60,13 @@ public:
 	// 根据网格坐标创建一个小狗，并且加入到渲染节点
 	Farmer * createAFarmer(int, int x, int y);
 
-	virtual bool SlideCutGrid::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
-	virtual void SlideCutGrid::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
-	virtual void SlideCutGrid::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 private:
 	int m_row, m_col;
 	int m_loop, m_diff;
 	bool m_isRunning;
-	cocos2d::Label * m_touchesLabel;
 	std::vector<std::vector<Farmer*>> m_farmerGrid;
 
 private:
