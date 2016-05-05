@@ -6,6 +6,7 @@
 #include "ui\CocosGUI.h"
 #include <vector>
 #include "Farmer.h"
+#include "TollgateControlLayer.h"
 const int Grid_ROW = 6;				// 设定默认的行数和列数
 const int Grid_COL = 10;
 const int Grid_WIDTH = 70;			// 小狗方块的宽度(和高度)
@@ -44,7 +45,7 @@ private:
 	virtual void update();
 private:
 	SlideCutGrid * m_grid;
-	cocos2d::Node * m_controlLayer;
+	TollgateControlLayer * m_controlLayer;
 };
 
 class SlideCutGrid :public cocos2d::Layer

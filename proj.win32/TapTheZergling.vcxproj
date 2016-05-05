@@ -148,11 +148,13 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
   <ItemGroup>
     <ClCompile Include="..\Classes\AnimationUtil.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\DataManager.cpp" />
     <ClCompile Include="..\Classes\DoubleTapScene.cpp" />
     <ClCompile Include="..\Classes\EatCandiesScene.cpp" />
     <ClCompile Include="..\Classes\Farmer.cpp" />
     <ClCompile Include="..\Classes\FilterSprite.cpp" />
     <ClCompile Include="..\Classes\Flower.cpp" />
+    <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\LoadingScene.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
@@ -171,6 +173,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
   <ItemGroup>
     <ClInclude Include="..\Classes\AnimationUtil.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\DataManager.h" />
     <ClInclude Include="..\Classes\DoubleTapScene.h" />
     <ClInclude Include="..\Classes\EatCandiesScene.h" />
     <ClInclude Include="..\Classes\Farmer.h" />
@@ -187,6 +190,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\TimeManager.h" />
     <ClInclude Include="..\Classes\TollgateControlLayer.h" />
     <ClInclude Include="..\Classes\TollgateScene.h" />
+    <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
     <ClInclude Include="..\Classes\Zergling.h" />
     <ClInclude Include="main.h" />

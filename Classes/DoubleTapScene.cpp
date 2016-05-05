@@ -45,7 +45,6 @@ public:
 
 static Map<int, TouchPoint*> s_map;
 
-
 Scene* DoubleTapScene::createScene(int diff, int loop)
 {
 	auto scene = Scene::create();
@@ -60,13 +59,13 @@ bool DoubleTapScene::init(int diff, int loop)
 		return false;
 	
 	auto winSize = Director::getInstance()->getWinSize();
-	m_controlLayer = CSLoader::createNode("Tollgates/TollgateControlLayer.csb");
 	auto UI = CSLoader::createNode("Tollgates/DoubleTapScene.csb");
 	addChild(UI);
-	addChild(m_controlLayer);
 
-//	auto tollgateControlLayer = TollgateControlLayer::create();
-//	addChild(tollgateControlLayer);
+	m_controlLayer = TollgateControlLayer::create();		// 创建关卡控制层
+	m_controlLayer->initTimeBar();			// 初始化时间条
+	m_controlLayer->scheduleUpdate();		// 开始刷新
+	addChild(m_controlLayer);
 	
 	m_grid = DoubleTapGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);

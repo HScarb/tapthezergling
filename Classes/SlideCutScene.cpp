@@ -3,13 +3,12 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
+#include "TollgateControlLayer.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 using namespace cocos2d;
-
-
 
 
 Scene* SlideCutScene::createScene(int diff, int loop)
@@ -28,7 +27,8 @@ bool SlideCutScene::init(int diff, int loop)
 
 	auto UI = CSLoader::createNode("Tollgates/SlideCutScene.csb");
 	addChild(UI);
-	m_controlLayer = CSLoader::createNode("Tollgates/TollgateControlLayer.csb");
+	m_controlLayer = TollgateControlLayer::create();
+	m_controlLayer->initTimeBar();
 	addChild(m_controlLayer);
 
 	m_grid = SlideCutGrid::create(diff, loop);
@@ -109,7 +109,6 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 	touchListener->onTouchEnded = CC_CALLBACK_2(SlideCutGrid::onTouchEnded, this);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
-	
 	
 	return true;
 }

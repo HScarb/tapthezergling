@@ -36,17 +36,20 @@ bool TimeManager::init()
 
 void TimeManager::addTime(float t)
 {
+	m_preTime = m_time;
 	m_time += t;
 }
 
 void TimeManager::reduceTime(float t)
 {
+	m_preTime = m_time;
 	m_time -= t;
 }
 
 void TimeManager::startCountDown()
 {
 	m_isCountingDown = true;
+	m_preTime = m_time;
 }
 
 void TimeManager::pauseCountDown()
@@ -54,8 +57,20 @@ void TimeManager::pauseCountDown()
 	m_isCountingDown = false;
 }
 
+bool TimeManager::isCountingDown()
+{
+	return m_isCountingDown;
+}
+
 void TimeManager::update(float dt)
 {
 	if (m_isCountingDown)		// 如果正在倒数，那么减少总时间
+	{
 		m_time -= dt;
+		if(m_time <= 0.0)
+		{
+			m_isCountingDown = false;
+			m_time = 0;
+		}
+	}
 }
