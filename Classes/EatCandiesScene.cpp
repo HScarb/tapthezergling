@@ -456,18 +456,6 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 		m_isRunning = true;
 		TimeManager::getInstance()->startCountDown();
 	}
-	
-	for (auto &item : touch)
-	{
-		auto touch = item;
-		auto location = touch->getLocation();
-		auto touchPoint = TouchPoint::touchPointWithParent(this, location, *s_TouchColors[touch->getID() % 5]);
-
-		addChild(touchPoint);
-		s_map.insert(touch->getID(), touchPoint);
-	}
-	if (s_map.size() == 2)
-	{
 		// log("touches count: %d", count);
 		Vec2 p[1];
 		int c = 0;
@@ -506,21 +494,9 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 				flower1->tapped();
 			}
 		}
-	}///////////////////////////////////////////////////////////////////////
 	return true;
 }
 
-
-void EatCandiesGrid::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event *unused_event)
-{
-	for (auto &item : touch)
-	{
-		auto touch = item;
-		auto pTP = s_map.at(touch->getID());
-		removeChild(pTP, true);
-		s_map.erase(touch->getID());
-	}
-}		
 
 //坐标获取，范围坐标与触屏坐标
 cocos2d::Vec2 EatCandiesGrid::convertToGridPos(cocos2d::Vec2 pixPos)

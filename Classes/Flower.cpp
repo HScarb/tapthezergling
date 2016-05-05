@@ -42,3 +42,5 @@ void Flower::tapped()
 {
 	this->removeFromParent();
 }
+
+
