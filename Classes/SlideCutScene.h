@@ -68,10 +68,11 @@ private:
 	int m_loop, m_diff;
 	bool m_isRunning;
 	std::vector<std::vector<Farmer*>> m_farmerGrid;
-
+	cocos2d::MotionStreak* streak; // 拖尾
 private:
 	cocos2d::Vec2 convertToGridPos(cocos2d::Vec2 pixPos);		// 将像素坐标转化成格子矩阵中的坐标
 	void generateNewFarmersGrid(const int diff);
 	int getLivingFarmersNum();			// 得到活的农民的数量
+
 };
 #endif
