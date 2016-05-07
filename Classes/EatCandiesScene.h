@@ -6,6 +6,7 @@
 #include "ui\CocosGUI.h"
 #include <vector>
 #include "Flower.h"
+#include "TollgateControlLayer.h"
 
 const int grid_ROW = 3;				// 设定默认的行数和列数
 const int grid_COL = 6;
@@ -17,7 +18,7 @@ class EatCandiesGrid;
 class IntMatrix;
 
 
-static const int n_g[4][grid_ROW][grid_COL] =
+static const int n_g[3][grid_ROW][grid_COL] =
 {
 	// easy
 	{
@@ -41,6 +42,7 @@ private:
 
 private:
 	EatCandiesGrid * m_grid;
+	TollgateControlLayer * m_controlLayer;
 
 private:
 	cocos2d::ui::Button * m_pauseBtn;

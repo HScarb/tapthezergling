@@ -4,270 +4,10 @@
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
 #include "Flower.h"
+#include "TollgateControlLayer.h"
 
 USING_NS_CC;
 
-/*
-using namespace std;
-using namespace cocos2d::ui;
-using namespace cocostudio::timeline;
-
-static const Color3B* s_TouchColors[3] = {
-	&Color3B::YELLOW,
-	&Color3B::BLUE,
-	&Color3B::GREEN,
-};
-
-bool EatCandiesScene::init(int diff, int loop)
-{
-	if (!Layer::init())
-		return false;
-
-	auto winSize = Director::getInstance()->getWinSize();
-
-	auto UI = CSLoader::createNode("Tollgates/EatCandiesScene.csb");
-	addChild(UI);
-
-	m_pauseBtn = (Button*)(UI->getChildByName("Button_pause"));
-	m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
-	m_timeText = (Text*)(UI->getChildByName("Text_time"));
-
-	n_grid = EatCandiesGrid::create(diff, loop);
-	n_grid->setPosition(0, 0);
-	this->addChild(n_grid);
-
-	return true;
-}
-
-class TouchPoint : public Node
-{
-public:
-	TouchPoint(const Vec2 &touchPoint, const Color3B &touchColor)
-	{
-		m_point = touchPoint;
-		DrawNode* drawNode = DrawNode::create();
-		auto s = Director::getInstance()->getWinSize();
-		Color4F color(touchColor.r / 255.0f, touchColor.g / 255.0f, touchColor.b / 255.0f, 1.0f);
-		drawNode->drawLine(Vec2(0, touchPoint.y), Vec2(s.width, touchPoint.y), color);
-		drawNode->drawLine(Vec2(touchPoint.x, 0), Vec2(touchPoint.x, s.height), color);
-		drawNode->drawDot(touchPoint, 3, color);
-		addChild(drawNode);
-	}
-
-	static TouchPoint* touchPointWithParent(Node* pParent, const Vec2 &touchPoint, const Color3B &touchColor)
-	{
-		auto pRet = new (std::nothrow) TouchPoint(touchPoint, touchColor);
-		pRet->setContentSize(pParent->getContentSize());
-		pRet->setAnchorPoint(Vec2(0.0f, 0.0f));
-		pRet->autorelease();
-		return pRet;
-	}
-	CC_SYNTHESIZE(Vec2, m_point, Pt);
-};
-
-static Map<int, TouchPoint*> s_map;
-
-
-Scene* EatCandiesScene::createScene(int diff, int loop)
-{
-	auto scene = Scene::create();
-	auto layer = EatCandiesScene::create(diff, loop);
-	scene->addChild(layer);
-	return scene;
-}
-
-cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
-{
-	auto pRef = new EatCandiesScene();
-	if (pRef && pRef->init(diff, loop))
-	{
-		pRef->autorelease();
-		return pRef;
-	}
-	else
-	{
-		CC_SAFE_DELETE(pRef);
-		return nullptr;
-	}
-}
-
-void EatCandiesGrid::setFlower(Flower* flower, int x, int y)
-{
-	flower->setPosition(x * grid_width +  left_margin, y * grid_width + bottom_margin);
-}
-
-
-EatCandiesGrid* EatCandiesGrid::create(int diff, int loop, int row, int col)
-{
-	auto pRef = new EatCandiesGrid();
-	if (pRef && pRef->init(diff, loop, row, col))
-	{
-		pRef->autorelease();
-		return pRef;
-	}
-	else
-	{
-		CC_SAFE_DELETE(pRef);
-		return nullptr;
-	}
-}
-
-bool EatCandiesGrid::init(int diff, int loop, int row, int col)
-{
-	if (!Layer::init())
-		return false;
-
-	Sprite* sprite = Sprite::create("zergling_big_1.jpg");
-	auto size = Director::getInstance()->getVisibleSize();
-	sprite->setPosition(size.height / 2, size.width / 2);
-	this->addChild(sprite);
-
-	m_row = row;
-	m_col = col;
-	m_loop = loop;
-	m_isRunning = false;
-	
-
-=======
-{
-public:
-	TouchPoint(const Vec2 &touchPoint, const Color3B &touchColor)
-	{
-		m_point = touchPoint;
-		DrawNode* drawNode = DrawNode::create();
-		auto s = Director::getInstance()->getWinSize();
-		Color4F color(touchColor.r / 255.0f, touchColor.g / 255.0f, touchColor.b / 255.0f, 1.0f);
-		drawNode->drawLine(Vec2(0, touchPoint.y), Vec2(s.width, touchPoint.y), color);
-		drawNode->drawLine(Vec2(touchPoint.x, 0), Vec2(touchPoint.x, s.height), color);
-		drawNode->drawDot(touchPoint, 3, color);
-		addChild(drawNode);
-	}
-
-	static TouchPoint* touchPointWithParent(Node* pParent, const Vec2 &touchPoint, const Color3B &touchColor)
-	{
-		auto pRet = new (std::nothrow) TouchPoint(touchPoint, touchColor);
-		pRet->setContentSize(pParent->getContentSize());
-		pRet->setAnchorPoint(Vec2(0.0f, 0.0f));
-		pRet->autorelease();
-		return pRet;
-	}
-	CC_SYNTHESIZE(Vec2, m_point, Pt);
-};
-
-static Map<int, TouchPoint*> s_map;
-
-
-Scene* EatCandiesScene::createScene(int diff, int loop)
-{
-	auto scene = Scene::create();
-	auto layer = EatCandiesScene::create(diff, loop);
-	scene->addChild(layer);
-	return scene;
-}
-
-cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
-{
-	auto pRef = new EatCandiesScene();
-	if (pRef && pRef->init(diff, loop))
-	{
-		pRef->autorelease();
-		return pRef;
-	}
-	else
-	{
-		CC_SAFE_DELETE(pRef);
-		return nullptr;
-	}
-}
-
-void EatCandiesGrid::setFlower(Flower* flower, int x, int y)
-{
-	flower->setPosition(x * grid_width +  left_margin, y * grid_width + bottom_margin);
-}
-
-
-EatCandiesGrid* EatCandiesGrid::create(int diff, int loop, int row, int col)
-{
-	auto pRef = new EatCandiesGrid();
-	if (pRef && pRef->init(diff, loop, row, col))
-	{
-		pRef->autorelease();
-		return pRef;
-	}
-	else
-	{
-		CC_SAFE_DELETE(pRef);
-		return nullptr;
-	}
-}
-
-bool EatCandiesGrid::init(int diff, int loop, int row, int col)
-{
-	if (!Layer::init())
-		return false;
-
-	Sprite* sprite = Sprite::create("zergling_big_1.jpg");
-	auto size = Director::getInstance()->getVisibleSize();
-	sprite->setPosition(size.height / 2, size.width / 2);
-	this->addChild(sprite);
-
-	m_row = row;
-	m_col = col;
-	m_loop = loop;
-	m_isRunning = false;
-	
-
->>>>>>> a8bf9fd8ec3ad10b573d29659c621a7fbdb16601
-	m_flowerGrid.resize(m_col);
-	for (auto &vec : m_flowerGrid)
-		vec.resize(m_row);
-
-	for (int x = 0; x < m_col; x++)
-	{
-		for (int y = 0; y < m_row; y++)
-		{
-			m_flowerGrid[x][y] = createFlower((Flower::FlowerColor)m_f[0][y][x], x, y);
-		}
-	}
-
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = CC_CALLBACK_2(EatCandiesGrid::onTouchBegan, this);
-		
-
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
-	return true;
-}
-
-bool EatCandiesGrid::onTouchBegan(Touch * touch, Event * unused_event)
-{
-	//Vec2 pos = touch->getLocation();
-	//log("x = %f, y = %f", pos.x, pos.y);
-	
-}
-
-Flower* EatCandiesGrid::createFlower(Flower::FlowerColor color, int x, int y)
-{
-	Flower * flower = nullptr;
-	if (color <= 0)
-		return nullptr;
-	flower = Flower::createByColor(color);
-
-	setFlower(flower, x, y);
-	addChild(flower);
-
-	return flower;
-
-}
-
-cocos2d::Vec2 EatCandiesGrid::convertToGridPos(cocos2d::Vec2 pixPos)
-{
-	float x, y;
-	x = (pixPos.x - left_margin) / grid_width;
-	y = (pixPos.y - bottom_margin) / grid_width;
-	return Vec2(x, y);
-}
-*/
 using namespace std;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -334,8 +74,14 @@ bool EatCandiesScene::init(int diff, int loop)
 
 	auto winSize = Director::getInstance()->getWinSize();
 
-	auto UI = CSLoader::createNode("Tollgates/DoubleTapScene.csb");
+	auto UI = CSLoader::createNode("Tollgates/EatCandiesScene.csb");
 	addChild(UI);
+
+
+	m_controlLayer = TollgateControlLayer::create();
+	m_controlLayer->initTimeBar();
+	m_controlLayer->scheduleUpdate();
+	addChild(m_controlLayer);
 
 	m_pauseBtn = (Button*)(UI->getChildByName("Button_pause"));
 	m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
@@ -494,6 +240,12 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 		m_flowersesGrid[x1][y1] = nullptr;
 
 		m_flowersesGrid[r][b] = createflower(Flower::BLUE, r, b);
+
+		if (getLivingFlowersNum() <= 0 && m_loop <= 0)
+		{
+			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
+			CCLOG("EatFlowers clear");
+		}
 
 		flower->tapped();
 
