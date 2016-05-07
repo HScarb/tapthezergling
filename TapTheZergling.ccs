@@ -1,5 +1,5 @@
 <Solution>
-  <PropertyGroup Name="TapTheZergling" Version="3.10.0.0" Type="CocosStudio" />
+  <PropertyGroup Name="tapthezergling" Version="3.10.0.0" Type="CocosStudio" />
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
@@ -275,6 +275,7 @@
           <Project Name="EatCandiesScene.csd" Type="Scene" />
           <Project Name="SlideCutScene.csd" Type="Scene" />
           <Project Name="TollgateControlLayer.csd" Type="Layer" />
+          <Project Name="FeedZerglingScene.csd" Type="Scene" />
         </Folder>
         <Project Name="CardEnhancer.csd" Type="Layer" />
         <Project Name="MainScene.csd" Type="Scene" />

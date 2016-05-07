@@ -16,7 +16,8 @@ public:
 	{
 		DoubleTapScene,
 		SlideCutScene,
-		EatCandiesScene
+		EatCandiesScene,
+		FeedZerglingScene
 	};
 	static SceneManager * getInstance();
 	virtual bool init();
