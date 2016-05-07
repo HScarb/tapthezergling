@@ -3,6 +3,7 @@
 #include "SimpleAudioEngine.h"
 #include "AnimationUtil.h"
 #include "SceneManager.h"
+#include "DataManager.h"
 USING_NS_CC;
 using namespace CocosDenshion;
 const int TOTAL_TEXTURE_NUM = 12;
@@ -50,6 +51,10 @@ bool LoadingScene::init()
 
 	// 开启加载进度检测
 	schedule(schedule_selector(LoadingScene::onTextureLoading));
+
+	// 加载用户记录
+	DataManager::getInstance()->loadData();
+
 	return true;
 }
 

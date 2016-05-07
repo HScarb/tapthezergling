@@ -22,8 +22,6 @@ public:
 	void tapped();
 	CC_SYNTHESIZE(int, m_colorType, ColorType);
 
-	bool onTouch
-
-	bool onTouchBegan()
+	
 };
 #endif

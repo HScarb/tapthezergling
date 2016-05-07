@@ -45,7 +45,6 @@ public:
 
 static Map<int, TouchPoint*> s_map;
 
-
 Scene* DoubleTapScene::createScene(int diff, int loop)
 {
 	auto scene = Scene::create();
@@ -60,17 +59,21 @@ bool DoubleTapScene::init(int diff, int loop)
 		return false;
 	
 	auto winSize = Director::getInstance()->getWinSize();
-	m_controlLayer = CSLoader::createNode("Tollgates/TollgateControlLayer.csb");
 	auto UI = CSLoader::createNode("Tollgates/DoubleTapScene.csb");
 	addChild(UI);
-	addChild(m_controlLayer);
 
-//	auto tollgateControlLayer = TollgateControlLayer::create();
-//	addChild(tollgateControlLayer);
+	m_controlLayer = TollgateControlLayer::create();		// 创建关卡控制层
+	m_controlLayer->initTimeBar();			// 初始化时间条
+	m_controlLayer->scheduleUpdate();		// 开始刷新
+	addChild(m_controlLayer);
 	
 	m_grid = DoubleTapGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);
 	this->addChild(m_grid);
+
+	// add custom event listener
+	auto clearListener = EventListenerCustom::create("tollgate_clear", CC_CALLBACK_1(DoubleTapScene::tollgateClear, this));
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(clearListener,this);
 
 	return true;
 }
@@ -88,6 +91,17 @@ cocos2d::Layer* DoubleTapScene::create(int diff, int loop)
 		CC_SAFE_DELETE(pRef);
 		return nullptr;
 	}
+}
+
+void DoubleTapScene::tollgateClear(EventCustom * event)
+{
+	m_controlLayer->unscheduleUpdate();		// stop time countdown
+	CCLOG("Double tap scene tollgate clear");
+}
+
+void DoubleTapScene::tollgateFail(EventCustom * event)
+{
+	
 }
 
 void DoubleTapScene::newLevel(int diff)
@@ -169,13 +183,6 @@ Zergling* DoubleTapGrid::createAZergling(Zergling::ZerglingColor color, int x, i
 
 void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
 {
-	// 如果倒计时还没有开始，则开始倒计时
-	if (!m_isRunning)
-	{
-		m_isRunning = true;
-		TimeManager::getInstance()->startCountDown();
-	}
-	
 	for (auto &item : touches)
 	{
 		auto touch = item;
@@ -214,6 +221,12 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 				== m_zerglingGrid[x2][y2]->getColorType())
 			{
 				log("crush!");
+				// 如果倒计时还没有开始，则开始倒计时
+				if (!m_isRunning)
+				{
+					m_isRunning = true;
+					TimeManager::getInstance()->startCountDown();
+				}
 				// * add animation
 				auto zergling1 = m_zerglingGrid[x1][y1];
 				auto zergling2 = m_zerglingGrid[x2][y2];
@@ -229,10 +242,16 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 				{
 					generateNewZerglingGrid(m_diff);
 				}
+				// 如果狗被消光，而且loop<=0,关卡清除
+				else if(getLivingZerglingsNum() == 0 && m_loop <= 0)
+				{
+					_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"DoubleTap");
+					CCLOG("DoubleTap clear");
+				}
 			}
 		}
 	}
-	else if (s_map.size() == 1)
+	/*else if (s_map.size() == 1)
 	{
 		Vec2 p;
 		vector<int> keys;
@@ -256,7 +275,7 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 		}
 		else
 			log("none zergling.");
-	}
+	}*/
 }
 
 void DoubleTapGrid::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)

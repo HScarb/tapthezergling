@@ -3,6 +3,9 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "SceneManager.h"
+#include "TimeManager.h"
+#include "GameManager.h"
+#include "Global.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -58,7 +61,21 @@ bool TollgateScene::init()
 	m_jewelText->setText("0");
 	m_energyBar->setPercent(10.0f);
 	m_timeBar->setPercent(100.0f);
-	m_timeText->setText("00:00");
+	m_timeText->setText("00.00");
+	
+	// 设置时间
+	if (GameManager::getInstance()->getIsGameOn() == false)		// 如果游戏还没有开始
+	{
+		TimeManager::getInstance()->setTime(INITIAL_TIME);
+		GameManager::getInstance()->setIsGameOn(true);			// set game is on
+	}
+	else
+	{
+		TimeManager::getInstance()->addTime(2.0f);				// add 2 seconds
+		CCLOG("added 2 seconds.");
+	}
+
+	m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 
 	// 关联触摸函数
 	// m_homeBtn->addTouchEventListener(CC_CALLBACK_1(TollgateScene::onHomeBtnClicked, this));
@@ -95,11 +112,15 @@ void TollgateScene::onItem2Clicked(Ref* pSender, TouchEventType type)
 	if(type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
 		log("tollgate 2");
-		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::SlideCutScene, 0, 1);
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::SlideCutScene, 0, 2);
 	}
 }
 
 void TollgateScene::onItem3Clicked(Ref* pSender, TouchEventType type)
 {
-	log("tollgate 3");
+	if (type == TouchEventType::TOUCH_EVENT_ENDED)
+	{
+		log("tollgate 3");
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::EatCandiesScene, 0, 1);
+	}
 }

@@ -414,7 +414,7 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 	{
 		for (int y = 0; y < m_row; y++)
 		{
-			m_flowersesGrid[x][y] = createflower((Flower::FlowerColor)n_g[0][y][x], x, y);//鲜花只有三种:flower_1~3.png
+			m_flowersesGrid[x][y] = createflower((Flower::FlowerColor)n_g[0][y][x], x, y);
 		}
 	}
 
@@ -447,56 +447,10 @@ Flower* EatCandiesGrid::createflower(Flower::FlowerColor color, int x, int y)
 }
 
 
-
-bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
+void EatCandiesGrid::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-	// 如果倒计时还没有开始，则开始倒计时
-	if (!m_isRunning)
-	{
-		m_isRunning = true;
-		TimeManager::getInstance()->startCountDown();
-	}
-		// log("touches count: %d", count);
-		Vec2 p[1];
-		int c = 0;
-		vector<int> keys;
-		keys = s_map.keys();
-		for (auto key : keys)
-		{
-			p[c] = (s_map.at(key))->getPt();
-			// 将坐标转化成格子坐标
 
-			p[c] = convertToGridPos(p[c]);
-			c++;
-		}
-		
-		//////////////////////////////////////////////////////////////////////
-
-
-		m_touchesLabel->setString(StringUtils::format("1:(%d,%d)", (int)p[0].x, (int)p[0].y));
-		int x1 = (int)p[0].x;
-		int y1 = (int)p[0].y;
-		
-		// 如果被点击的位置在矩阵内且有花
-		if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3)
-			&& m_flowersesGrid[x1][y1] )
-		{
-			if (m_flowersesGrid[x1][y1]->getColorType())
-			{
-				log("crush!");
-				// * add animation
-				auto flower1 = m_flowersesGrid[x1][y1];
-
-				// 清空矩阵中的狗的指针
-				m_flowersesGrid[x1][y1] = nullptr;
-
-				// 将花从矩阵的绘制节点中移除
-				flower1->tapped();
-			}
-		}
-	return true;
 }
-
 
 //坐标获取，范围坐标与触屏坐标
 cocos2d::Vec2 EatCandiesGrid::convertToGridPos(cocos2d::Vec2 pixPos)
@@ -506,6 +460,63 @@ cocos2d::Vec2 EatCandiesGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 	y = (pixPos.y - bottom_MARGIN) / grid_WIDTH;
 	return Vec2(x, y);
 }
+
+bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
+{
+	if (!m_isRunning)
+	{
+		m_isRunning = true;
+		TimeManager::getInstance()->startCountDown();
+	}
+
+	int r = 0;
+	int b = 0;
+	r = random(0, 2);
+	b = random(2, 5);
+	auto pos = touch->getLocation();
+	pos = convertToGridPos(pos);
+
+	int x1 = (int)pos.x;
+	int y1 = (int)pos.y;
+	if ((0 <= x1 && x1 < 10) && (0 <= y1 && y1 < 6) && m_flowersesGrid[x1][y1] && (x1!= 3 && y1 != 1) )//中心的狗不能被消除
+	{
+		// 如果倒计时还没有开始，则开始倒计时
+		if (!m_isRunning)
+		{
+			m_isRunning = true;
+			TimeManager::getInstance()->startCountDown();
+		}
+		// * add animation
+		auto flower = m_flowersesGrid[x1][y1];
+		log("farmer pos x = %f, y = %f", flower->getPosition().x, flower->getPosition().y);
+
+		// 清空矩阵中的花的指针
+		m_flowersesGrid[x1][y1] = nullptr;
+
+		m_flowersesGrid[r][b] = createflower(Flower::BLUE, r, b);
+
+		flower->tapped();
+
+	}
+	return true;
+}
+
+int EatCandiesGrid::getLivingFlowersNum()
+{
+	int count = 0;
+	for (int x = 0; x < m_col; x++)
+	{
+		for (int y = 0; y < m_row; y++)
+		{
+			if (m_flowersesGrid[x][y] != nullptr)
+				count++;
+		}
+	}
+	return count;
+}
+
+
+
 
 
 

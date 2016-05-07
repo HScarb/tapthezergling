@@ -4,6 +4,7 @@
 #include "ui\CocosGUI.h"
 #include <vector>
 #include "Zergling.h"
+#include "TollgateControlLayer.h"
 const int GRID_ROW = 3;				// 设定默认的行数和列数
 const int GRID_COL = 6;
 const int GRID_WIDTH = 120;			// 小狗方块的宽度(和高度)
@@ -36,11 +37,14 @@ public:
 	static cocos2d::Layer * create(int diff, int loop);
 
 private:
+	void tollgateClear(cocos2d::EventCustom *);				// tollgate clear
+	void tollgateFail(cocos2d::EventCustom *);				// game over
+
 	void newLevel(int diff);				// 根据难度创建一个新的轮次
 	virtual void update();					// 主要用于刷新时间
 
 private:
-	cocos2d::Node * m_controlLayer;
+	TollgateControlLayer * m_controlLayer;
 	DoubleTapGrid * m_grid;
 
 };

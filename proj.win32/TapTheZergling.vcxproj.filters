@@ -111,6 +111,12 @@
     <ClCompile Include="..\Classes\TollgateControlLayer.cpp">
       <Filter>Classes\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameManager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DataManager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -181,6 +187,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\TollgateControlLayer.h">
       <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DataManager.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameManager.h">
+      <Filter>Classes\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -12,11 +12,14 @@ public:
 	void reduceTime(float t);		// 减少时间
 	void startCountDown();
 	void pauseCountDown();
+
+	bool isCountingDown();			// 返回是否在倒数
 	
-	void update(float dt);
+	virtual void update(float dt) override;
 private:
 	static TimeManager * m_timeManager;
 	bool m_isCountingDown;
 	
+	CC_SYNTHESIZE(float, m_preTime, PreTime);
 	CC_SYNTHESIZE(float, m_time, Time);
 };
