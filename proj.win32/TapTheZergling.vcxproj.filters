@@ -132,6 +132,9 @@
     <ClCompile Include="..\Classes\JumpingOnPoolScene.cpp">
       <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\SmallZergling.cpp">
+      <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -216,6 +219,9 @@
       <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\JumpingOnPoolScene.h">
+      <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SmallZergling.h">
       <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
     </ClInclude>
   </ItemGroup>

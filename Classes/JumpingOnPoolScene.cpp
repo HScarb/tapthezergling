@@ -201,6 +201,12 @@ void JumpingOnPoolScene::movePools()
 			{
 				m_poolShowVector.eraseObject(item);
 				item->removeFromParent();
+
+				if(m_poolVector.size() == 0 && m_poolShowVector.size() <= 1)
+				{
+					_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"JumpingOnPool");
+					CCLOG("Jumping on pool clear");
+				}
 			});
 			auto moveTo = MoveTo::create(0.2, item->convertToPos());
 			auto scaleTo = ScaleTo::create(0.2, 1.0 - 0.16 * item->getRow());
