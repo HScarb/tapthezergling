@@ -1,7 +1,7 @@
 #include "Flower.h"
 USING_NS_CC;
 
-Flower* Flower::createByColor(FlowerColor color)
+Flower* Flower::createByColor(int color)
 {
 	auto flower = new Flower();
 
@@ -24,9 +24,7 @@ bool Flower::init(int color)
 
 	m_colorType = color;
 
-	// 根据资源名加载不同颜色的花
-	// this->initWithTexture(Texture2D::, Rect::ZERO);
-	this->initWithFile(StringUtils::format("Res/flower_%d.png", m_colorType));//暂时只有三种
+	this->initWithFile(StringUtils::format("Res/flower_%d.png",color));
 
 	this->setAnchorPoint(Vec2(0, 0));		// 设置锚点为左下角
 

@@ -15,7 +15,7 @@ public:
 		BLUE
 	};
 
-	static Flower * createByColor(FlowerColor color = NONE);
+	static Flower * createByColor(int color = NONE);
 	bool init(int color);
 
 	void eatAnimation();

@@ -23,8 +23,8 @@ static const int n_g[3][grid_ROW][grid_COL] =
 	// easy
 	{
 		{ 0, 1, 0, 0, 3, 0 },
-		{ 0, 0, 0, 4, 0, 0 },
-		{ 0, 0, 2, 0, 0, 0 }
+		{ 0, 0, 3, 4, 0, 0 },
+		{ 0, 0, 2, 0, 0, 1 }
 	},
 };
 
@@ -60,14 +60,14 @@ public:
 	void setZerglingPixPos(Flower* zergling, int x, int y);
 
 	// 根据颜色和网格坐标创建一个小狗，并且加入到渲染节点
-	Flower * createflower(Flower::FlowerColor color, int x, int y);
+	Flower * createflower(int color, int x, int y);
 
 	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 
 private:
 	int m_row, m_col;
-	int m_loop;
+	int m_loop, m_diff;
 	bool m_isRunning;
 	cocos2d::Label * m_touchesLabel;
 	std::vector<std::vector<Flower*>> m_flowersesGrid;
@@ -75,6 +75,7 @@ private:
 private:
 	cocos2d::Vec2 convertToGridPos(cocos2d::Vec2 pixPos);		// 将像素坐标转化成格子矩阵中的坐标
 	int getLivingFlowersNum();
+	void generateNewZerglingGrid(const int diff);
 };
 
 #endif
