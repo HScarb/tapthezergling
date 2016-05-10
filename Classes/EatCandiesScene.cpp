@@ -166,12 +166,26 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 
 	//generateNewZerglingGrid(m_diff);
 
+	/*
 	for (int x = 0; x < m_col; x++)
 	{
 		for (int y = 0; y < m_row; y++)
 		{
 			m_flowersesGrid[x][y] = createflower((Flower::FlowerColor)n_g[0][y][x], x, y);
 		}
+	}
+	*/
+
+	int q;
+	int w;
+	int o;
+	
+	for (int n = 0; n <= 2; n++)
+	{
+		q = random(0, 5);
+		w = random(0, 2);
+		o = random(1, 3);
+		m_flowersesGrid[q][w] = createflower(o, q, w);
 	}
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -255,7 +269,25 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 
 		if (m_loop > 0 && getLivingFlowersNum() > 0)
 		{
-			m_flowersesGrid[r][b] = createflower(n, r, b);
+			if (m_flowersesGrid[r][b] == nullptr)
+			{
+				m_flowersesGrid[r][b] = createflower(n, r, b);
+			}
+
+			else if (m_flowersesGrid[r][b] != nullptr)
+			{
+				m_flowersesGrid[r + 1][b] = createflower(n, r + 1, b);
+			}
+
+			else if (m_flowersesGrid[r + 1][b] != nullptr)
+			{
+				m_flowersesGrid[r][b+1] = createflower(n, r , b+1);
+			}
+
+			else  if(m_flowersesGrid[r][b+1] != nullptr)
+			{
+				m_flowersesGrid[r+1][b+1] = createflower(n, r+1, b+1);
+			}
 
 			m_loop--;
 		}
@@ -291,7 +323,7 @@ int EatCandiesGrid::getLivingFlowersNum()
 	}
 	*/
 
-	count--;
+	//count--;
 
 	return count;
 }
