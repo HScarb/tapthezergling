@@ -32,7 +32,11 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/PauseLayer.cpp \
 				   ../../Classes/Flower.cpp \
 				   ../../Classes/GameManager.cpp \
-				   ../../Classes/DataManager.cpp
+				   ../../Classes/DataManager.cpp \
+				   ../../Classes/JumpingOnPoolScene.cpp \
+				   ../../Classes/BurrowAndAttack.cpp \
+				   ../../Classes/SmallZergling.cpp \
+				   ../../Classes/Food.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
