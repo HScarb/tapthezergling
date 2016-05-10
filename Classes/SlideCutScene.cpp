@@ -8,7 +8,6 @@
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
-using namespace cocos2d;
 
 
 Scene* SlideCutScene::createScene(int diff, int loop)

@@ -1,5 +1,5 @@
 //FeedzerglingScene
-#include"FeedZerglingScene.h"
+#include "BurrowAndAttack.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
@@ -90,7 +90,7 @@ bool FeedZerglingGrid::init(int diff, int loop, int row, int col)
 	for (auto &vec : m_foodGrid)
 		vec.resize(m_row);
 
-	m_zergling = Sprite::create("Res / zergling_small_1.png");
+	m_zergling = Sprite::create("Res/zergling_small_1.png");
 	m_zergling->setPosition(480, 320);
 	this->setAnchorPoint(Vec2(0, 0));// 设置锚点为左下角
 	this->addChild(m_zergling);

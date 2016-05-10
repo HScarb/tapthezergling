@@ -9,7 +9,8 @@
 #include "DoubleTapScene.h"
 #include "SlideCutScene.h"
 #include "EatCandiesScene.h"
-#include"FeedZerglingScene.h"
+#include "BurrowAndAttack.h"
+#include "JumpingOnPoolScene.h"
 USING_NS_CC;
 
 SceneManager * SceneManager::m_sceneManager = nullptr;
@@ -86,9 +87,11 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 	case EatCandiesScene:
 		pScene = EatCandiesScene::createScene(diff,loop);
 		break;
-	case FeedZerglingScene:
+	case BurrowAndAttackScene:
 		pScene = FeedZerglingScene::createScene(diff, loop);
 		break;
+	case JumpingOnPoolScene:
+		pScene = JumpingOnPoolScene::createScene(diff, loop);
 	default: break;
 	}
 

@@ -17,7 +17,8 @@ public:
 		DoubleTapScene,
 		SlideCutScene,
 		EatCandiesScene,
-		FeedZerglingScene
+		BurrowAndAttackScene,
+		JumpingOnPoolScene,
 	};
 	static SceneManager * getInstance();
 	virtual bool init();

@@ -57,6 +57,7 @@ bool TollgateScene::init()
 	m_t2 = (Text*)(m_scrollView->getChildByName("Text_2"));
 	m_t3 = (Text*)(m_scrollView->getChildByName("Text_3"));
 	m_t4 = (Text*)(m_scrollView->getChildByName("Text_4"));
+	m_t5 = (Text*)(m_scrollView->getChildByName("Text_5"));
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
@@ -85,6 +86,7 @@ bool TollgateScene::init()
 	m_t2->addTouchEventListener(this, toucheventselector(TollgateScene::onItem2Clicked));
 	m_t3->addTouchEventListener(this, toucheventselector(TollgateScene::onItem3Clicked));
 	m_t4->addTouchEventListener(this, toucheventselector(TollgateScene::onItem4Clicked));
+	m_t5->addTouchEventListener(this, toucheventselector(TollgateScene::onItem5Clicked));
 	return true;
 }
 
@@ -130,6 +132,15 @@ void TollgateScene::onItem4Clicked(Ref* pSender, TouchEventType type)
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
 		log("tollgate 4");
-		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::FeedZerglingScene, 0, 1);
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::BurrowAndAttackScene, 0, 1);
+	}
+}
+
+void TollgateScene::onItem5Clicked(Ref* pSender, TouchEventType type)
+{
+	if(type == TOUCH_EVENT_ENDED)
+	{
+		log("tollgate 5");
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::JumpingOnPoolScene, 1, 2);
 	}
 }
