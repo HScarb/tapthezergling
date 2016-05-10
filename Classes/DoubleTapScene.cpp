@@ -72,8 +72,8 @@ bool DoubleTapScene::init(int diff, int loop)
 	this->addChild(m_grid);
 
 	// add custom event listener
-	auto clearListener = EventListenerCustom::create("tollgate_clear", CC_CALLBACK_1(DoubleTapScene::tollgateClear, this));
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(clearListener,this);
+//	auto clearListener = EventListenerCustom::create("tollgate_clear", CC_CALLBACK_1(DoubleTapScene::tollgateClear, this));
+//	_eventDispatcher->addEventListenerWithSceneGraphPriority(clearListener,this);
 
 	return true;
 }
@@ -91,17 +91,6 @@ cocos2d::Layer* DoubleTapScene::create(int diff, int loop)
 		CC_SAFE_DELETE(pRef);
 		return nullptr;
 	}
-}
-
-void DoubleTapScene::tollgateClear(EventCustom * event)
-{
-	m_controlLayer->unscheduleUpdate();		// stop time countdown
-	CCLOG("Double tap scene tollgate clear");
-}
-
-void DoubleTapScene::tollgateFail(EventCustom * event)
-{
-	
 }
 
 void DoubleTapScene::newLevel(int diff)

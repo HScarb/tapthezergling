@@ -172,14 +172,38 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_3" ActionTag="787125517" Tag="63" IconVisible="False" LeftMargin="99.0000" RightMargin="99.0000" TopMargin="129.0000" BottomMargin="629.0000" TouchEnable="True" FontSize="34" LabelText="3 EatFlowers" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+              <AbstractNodeData Name="Text_3" ActionTag="787125517" Tag="63" IconVisible="False" LeftMargin="99.0001" RightMargin="98.9999" TopMargin="129.0000" BottomMargin="629.0000" TouchEnable="True" FontSize="34" LabelText="3 EatFlowers" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="202.0000" Y="42.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="200.0000" Y="650.0000" />
+                <Position X="200.0001" Y="650.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.8125" />
                 <PreSize X="0.5050" Y="0.0525" />
+                <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_4" ActionTag="-1902892923" Tag="64" IconVisible="False" LeftMargin="48.5000" RightMargin="48.5000" TopMargin="179.0001" BottomMargin="578.9999" TouchEnable="True" FontSize="34" LabelText="4 BurrowAndAttack" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="303.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="599.9999" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.7500" />
+                <PreSize X="0.7575" Y="0.0525" />
+                <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_5" ActionTag="-564699128" Tag="27" IconVisible="False" LeftMargin="57.5000" RightMargin="57.5000" TopMargin="229.0000" BottomMargin="529.0000" TouchEnable="True" FontSize="34" LabelText="5 JumpingOnPools" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="285.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="550.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.6875" />
+                <PreSize X="0.7125" Y="0.0525" />
                 <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />

@@ -23,14 +23,19 @@
     </Item>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
-        <LastPublishType Value="VS" />
-        <IsLastPublish Value="False" />
+        <LastPublishType Value="Resource" />
+        <IsLastPublish Value="True" />
         <LastRunType Value="Windows" />
       </Value>
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
-        <ActiveDocument />
+        <OpenedDocuments>
+          <FilePathData Path="Tollgates/BurrowAndAttack.csd" />
+          <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
+          <FilePathData Path="TollgateScene.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="TollgateScene.csd" />
       </Value>
     </Item>
   </Properties>

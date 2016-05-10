@@ -8,7 +8,6 @@
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
-using namespace cocos2d;
 
 
 Scene* SlideCutScene::createScene(int diff, int loop)
@@ -95,9 +94,14 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 	for (auto &vec : m_farmerGrid)
 		vec.resize(m_row);
 
-	generateNewFarmersGrid(m_diff);
 
-	
+	// 流星拖尾MotionStreak
+	streak = MotionStreak::create(0.5f, 50, 10, Color3B::WHITE, "Res/Workers/blade.png");
+	//    streak = MotionStreak::create(0.5f, 1, 10, Color3B::RED, "steak.png");
+	streak->setPosition(0,0); // 设置拖尾streak的位置
+	this->addChild(streak);
+
+	generateNewFarmersGrid(m_diff);
 
 	//创建一个事件监听器类型为 单点触摸
 	auto touchListener = EventListenerTouchOneByOne::create();
@@ -115,6 +119,11 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 //单点触摸事件响应函数
 bool SlideCutGrid::onTouchBegan(Touch *touch, Event *unused_event)
 {
+	Vec2 Spos = touch->getLocation();
+	streak->setPosition(Spos);
+	// 删除所有活动条带段
+	streak->reset();
+
 	auto pos = touch->getLocation();
 	pos = convertToGridPos(pos);
 	int x1 = (int)pos.x;
@@ -129,8 +138,17 @@ void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event)
 		m_isRunning = true;
 		TimeManager::getInstance()->startCountDown();
 	}
+	// 触摸移动的偏移量
+	Vec2 delta = touch->getDelta();
+	auto Spos = touch->getLocation();
+	// 设置位置
+	streak->setPosition(Spos+delta);
+
+
 	auto pos = touch->getLocation();
 	pos = convertToGridPos(pos);
+
+
 	int x1 = (int)pos.x;
 	int y1 = (int)pos.y;
 	if ((0 <= x1 && x1 < 10) && (0 <= y1 && y1 < 6) && m_farmerGrid[x1][y1])

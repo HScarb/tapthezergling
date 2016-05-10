@@ -37,8 +37,8 @@ public:
 	static cocos2d::Layer * create(int diff, int loop);
 
 private:
-	void tollgateClear(cocos2d::EventCustom *);				// tollgate clear
-	void tollgateFail(cocos2d::EventCustom *);				// game over
+//	void tollgateClear(cocos2d::EventCustom *);				// tollgate clear
+//	void tollgateFail(cocos2d::EventCustom *);				// game over
 
 	void newLevel(int diff);				// 根据难度创建一个新的轮次
 	virtual void update();					// 主要用于刷新时间

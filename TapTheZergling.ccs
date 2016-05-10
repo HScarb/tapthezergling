@@ -271,8 +271,10 @@
           <Image Name="zergling_small_7.png" />
         </Folder>
         <Folder Name="Tollgates">
+          <Project Name="BurrowAndAttack.csd" Type="Scene" />
           <Project Name="DoubleTapScene.csd" Type="Scene" />
           <Project Name="EatCandiesScene.csd" Type="Scene" />
+          <Project Name="JumpingOnPoolScene.csd" Type="Scene" />
           <Project Name="SlideCutScene.csd" Type="Scene" />
           <Project Name="TollgateControlLayer.csd" Type="Layer" />
         </Folder>

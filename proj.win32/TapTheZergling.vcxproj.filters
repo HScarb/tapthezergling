@@ -40,6 +40,12 @@
     <Filter Include="Classes\Scenes\Tollgates\EatCandies">
       <UniqueIdentifier>{b8d09fb3-dd41-40b6-881c-aea985c02efb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\JumpingOnPool">
+      <UniqueIdentifier>{c4976620-4d8c-418b-b5f0-2191fc151ed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\BurrowAndAttack">
+      <UniqueIdentifier>{45e9c6ea-73df-4d80-91cc-f9581a41e569}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -117,6 +123,18 @@
     <ClCompile Include="..\Classes\DataManager.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Food.cpp">
+      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BurrowAndAttack.cpp">
+      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\JumpingOnPoolScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SmallZergling.cpp">
+      <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -193,6 +211,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameManager.h">
       <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Food.h">
+      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BurrowAndAttack.h">
+      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\JumpingOnPoolScene.h">
+      <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SmallZergling.h">
+      <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
