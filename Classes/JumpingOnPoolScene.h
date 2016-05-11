@@ -2,6 +2,7 @@
 #pragma once
 #include "cocos2d.h"
 #include "TollgateControlLayer.h"
+#include "SmallZergling.h"
 const int INTERVAL = 80;		// 每行的间隔
 const float SCALE[] = { 1.0,0.84,0.68,0.52,0.36 };
 /*
@@ -40,10 +41,11 @@ private:
 
 private:
 	int m_diff, m_loop;
-	bool m_isRunning;
+	bool m_isRunning, m_isMoving;		// if the scene is running \ if the pools and dogs are moving
 	cocos2d::Vector<Pool*> m_poolVector;
 	cocos2d::Vector<Pool*> m_poolShowVector;
-	cocos2d::Sprite * m_zergling;
 	TollgateControlLayer * m_controlLayer;
+
+	SmallZergling * m_smallZergling;
 };
 

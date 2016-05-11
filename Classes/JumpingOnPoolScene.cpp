@@ -3,9 +3,11 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
+#include "Global.h"
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
+const float DURATION = 0.24f;
 
 Pool* Pool::create(bool isEnd)
 {
@@ -63,6 +65,8 @@ bool JumpingOnPoolScene::init(int diff, int loop)
 	m_diff = diff;
 	m_loop = loop;
 	m_isRunning = false;
+	m_isMoving = false;
+	m_smallZergling = nullptr;
 	
 	auto UI = CSLoader::createNode("Tollgates/JumpingOnPoolScene.csb");
 	addChild(UI);
@@ -72,6 +76,14 @@ bool JumpingOnPoolScene::init(int diff, int loop)
 	m_controlLayer->scheduleUpdate();
 	addChild(m_controlLayer);
 
+	
+	// 创建狗
+	m_smallZergling = SmallZergling::create();
+	m_smallZergling->setPosition(CENTER);
+	this->addChild(m_smallZergling,5);
+	m_smallZergling->idle();
+
+	// 初始化pool和狗
 	initPools(diff, loop);
 
 	// 添加触摸监听
@@ -135,6 +147,9 @@ void JumpingOnPoolScene::initPools(int diff, int loop)
 		item->setScale(SCALE[item->getRow()]);
 		this->addChild(item);
 	}
+	m_smallZergling->setPosition(m_poolShowVector.at(0)->getPosition());
+	if (m_poolShowVector.at(0)->getDir() == 0)
+		m_smallZergling->setScale(-1.0, 1.0);
 }
 
 void JumpingOnPoolScene::addAGroupOfPools(int diff)
@@ -171,6 +186,7 @@ void JumpingOnPoolScene::addAGroupOfPools(int diff)
 
 void JumpingOnPoolScene::movePools()
 {
+	m_isMoving = true;
 	auto pPoolShowVector = &m_poolShowVector;
 
 	// 添加新的pool进入场景
@@ -191,14 +207,15 @@ void JumpingOnPoolScene::movePools()
 		item->setRow(item->getRow() - 1);
 		if(item->getRow() >= 0)		// 如果不用移出屏幕外
 		{
-			auto moveTo = MoveTo::create(0.2, item->convertToPos());
-			auto scaleTo = ScaleTo::create(0.2, 1.0 - 0.16 * item->getRow());
+			auto moveTo = MoveTo::create(DURATION, item->convertToPos());
+			auto scaleTo = ScaleTo::create(DURATION, 1.0 - 0.16 * item->getRow());
 			item->runAction(Spawn::create(moveTo, scaleTo, nullptr));
 		}
 		else						// 如果要移出屏幕外
 		{
 			auto erase = CallFunc::create([pPoolShowVector, item, this]()
 			{
+				m_isMoving = false;
 				m_poolShowVector.eraseObject(item);
 				item->removeFromParent();
 
@@ -208,17 +225,39 @@ void JumpingOnPoolScene::movePools()
 					CCLOG("Jumping on pool clear");
 				}
 			});
-			auto moveTo = MoveTo::create(0.2, item->convertToPos());
-			auto scaleTo = ScaleTo::create(0.2, 1.0 - 0.16 * item->getRow());
+			auto moveTo = MoveTo::create(DURATION, item->convertToPos());
+			auto scaleTo = ScaleTo::create(DURATION, 1.0 - 0.16 * item->getRow());
 			item->runAction(Sequence::create(Spawn::create(moveTo, scaleTo, nullptr), erase, nullptr));
 		}
 	}
 
+	// 移动狗
+	bool zerglingTurn = false;		// 是否要将zergling改变面向
+	if(m_poolShowVector.size() >= 2)
+	{
+		if (m_poolShowVector.at(1)->getDir() != m_poolShowVector.at(0)->getDir())
+			zerglingTurn = true;		// 反向
+	}
+
+	auto moveBy = MoveBy::create(DURATION, Vec2((280.0f * (m_poolShowVector.at(1)->getDir() - m_poolShowVector.at(0)->getDir())), 0));
+	auto jump = JumpBy::create(DURATION, Vec2((280.0f * (m_poolShowVector.at(1)->getDir() - m_poolShowVector.at(0)->getDir())), 0), 100.0f, 1);
+	auto call = CallFunc::create([this, zerglingTurn]()
+	{
+		if (zerglingTurn)
+			m_smallZergling->setScale(-(m_smallZergling->getScaleX()), 1.0);		// 反向
+		m_smallZergling->idle();
+	});
+	m_smallZergling->run();
+	m_smallZergling->runAction(Sequence::create(jump, call, nullptr));
 }
 
 bool JumpingOnPoolScene::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)
 {
+	if (m_isMoving)
+		return false;
+
 	auto pos = pTouch->getLocation();
+	
 	if(!m_isRunning)
 	{
 		m_isRunning = true;
@@ -246,7 +285,6 @@ bool JumpingOnPoolScene::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pE
 			// zergling jump
 		}
 	}
-
 
 	return true;
 }

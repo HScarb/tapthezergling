@@ -185,6 +185,9 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\FilterSprite.h" />
     <ClInclude Include="..\Classes\Flower.h" />
     <ClInclude Include="..\Classes\Food.h" />
+    <ClInclude Include="..\Classes\Global.h" />
+    <ClInclude Include="..\Classes\GlobalConst.h" />
+    <ClInclude Include="..\Classes\GlobalDefine.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\JumpingOnPoolScene.h" />
     <ClInclude Include="..\Classes\LoadingScene.h" />

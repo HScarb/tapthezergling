@@ -4,3 +4,4 @@
 */
 #pragma once
 #include "GlobalConst.h"
+#include "GlobalDefine.h"

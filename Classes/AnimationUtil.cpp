@@ -56,3 +56,28 @@ Animation* AnimationUtil::createWithFrameNameAndNum(const char* iName, int iNum,
 
 	return animation;
 }
+
+Animation* AnimationUtil::createWithFrameNameAndNumRange(const char* iName, int startNum, int endNum, float delay, int iLoops, bool restoreOriginalFrame)
+{
+	SpriteFrameCache * cache = SpriteFrameCache::getInstance();
+	TextureCache * textureCache = TextureCache::getInstance();
+
+	Vector<SpriteFrame*> frameVec;
+	SpriteFrame * frame = nullptr;
+
+	for (int i = startNum; i <= endNum; i++)
+	{
+		auto texture = textureCache->getTextureForKey(StringUtils::format("%s%d.png", iName, i));
+		frame = SpriteFrame::createWithTexture(texture,
+			Rect(0, 0, texture->getPixelsWide(),
+				texture->getPixelsHigh()));
+		frameVec.pushBack(frame);
+	}
+
+	Animation * animation = Animation::createWithSpriteFrames(frameVec);
+	animation->setLoops(iLoops);
+	animation->setDelayPerUnit(delay);
+	animation->setRestoreOriginalFrame(restoreOriginalFrame);
+
+	return animation;
+}

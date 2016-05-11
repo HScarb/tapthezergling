@@ -6,7 +6,7 @@
 #include "DataManager.h"
 USING_NS_CC;
 using namespace CocosDenshion;
-const int TOTAL_TEXTURE_NUM = 12;
+const int TOTAL_TEXTURE_NUM = 149;	// 12 + small zerglings(137) = 149
 
 Scene* LoadingScene::createScene() 
 {
@@ -36,7 +36,7 @@ bool LoadingScene::init()
 	auto addTextureCallback = [ptexture_num](Texture2D* texture)
 	{
 		(*ptexture_num)++;
-		log("loaded a texture async, now num = %d", *ptexture_num);
+//		log("loaded a texture async, now num = %d", *ptexture_num);
 	};
 
 	// 异步加载图片
@@ -47,6 +47,12 @@ bool LoadingScene::init()
 	for (int i = 0; i <= 7;i++)
 	{
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("zergling_small_%d.png", i), addTextureCallback);
+	}
+	// small zerglings, 137 pics
+	for (int i = 1; i <= 137;i++)
+	{
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("zergling/SCs_Zergling_C3_%02d.png", i), addTextureCallback);
+//		CCLOG("SCs_Zergling_C3_%02d.png", i);
 	}
 
 	// 开启加载进度检测

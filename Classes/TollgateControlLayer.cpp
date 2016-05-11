@@ -52,7 +52,7 @@ void TollgateControlLayer::update(float dt)
 	if(TimeManager::getInstance()->isCountingDown())
 	{
 		TimeManager::getInstance()->update(dt);
-		CCLOG("time = %f, pretime = %f", TimeManager::getInstance()->getTime(), TimeManager::getInstance()->getPreTime());
+//		CCLOG("time = %f, pretime = %f", TimeManager::getInstance()->getTime(), TimeManager::getInstance()->getPreTime());
 		m_timeBar->setPercent(TimeManager::getInstance()->getTime() / TimeManager::getInstance()->getPreTime() * 100.0f);		// 设置时间进度条进度
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));
 	}

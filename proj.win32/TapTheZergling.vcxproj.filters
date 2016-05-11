@@ -46,6 +46,9 @@
     <Filter Include="Classes\Scenes\Tollgates\BurrowAndAttack">
       <UniqueIdentifier>{45e9c6ea-73df-4d80-91cc-f9581a41e569}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Global">
+      <UniqueIdentifier>{69c315b5-1461-43b0-a093-304545c367e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -223,6 +226,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SmallZergling.h">
       <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Global.h">
+      <Filter>Classes\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GlobalConst.h">
+      <Filter>Classes\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GlobalDefine.h">
+      <Filter>Classes\Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
