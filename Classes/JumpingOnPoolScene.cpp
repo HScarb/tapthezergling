@@ -140,7 +140,7 @@ void JumpingOnPoolScene::initPools(int diff, int loop)
 			m_poolVector.eraseObject(temp);
 		}
 	}
-	// 为显示容器中的Pool设置位置，并且显示
+	// 为显示容器中的Pool和zergling设置位置，并且显示
 	for(auto item : m_poolShowVector)
 	{
 		item->setPosition(item->convertToPos());

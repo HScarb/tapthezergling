@@ -11,6 +11,7 @@
 #include "EatCandiesScene.h"
 #include "BurrowAndAttack.h"
 #include "JumpingOnPoolScene.h"
+#include "ClassifyUnits.h"
 USING_NS_CC;
 
 SceneManager * SceneManager::m_sceneManager = nullptr;
@@ -92,6 +93,10 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 		break;
 	case JumpingOnPoolScene:
 		pScene = JumpingOnPoolScene::createScene(diff, loop);
+		break;
+	case ClassifyUnits:
+		pScene = ClassifyUnits::createScene(diff, loop);
+		break;
 	default: break;
 	}
 

@@ -37,7 +37,6 @@ public:
 	void movePools();			// ÒÆ¶¯Ò»¸ñ
 
 	virtual bool onTouchBegan(cocos2d::Touch * pTouch, cocos2d::Event * pEvent);
-private:
 
 private:
 	int m_diff, m_loop;

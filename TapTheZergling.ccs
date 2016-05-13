@@ -272,6 +272,7 @@
         </Folder>
         <Folder Name="Tollgates">
           <Project Name="BurrowAndAttack.csd" Type="Scene" />
+          <Project Name="ClassifyUnits.csd" Type="Scene" />
           <Project Name="DoubleTapScene.csd" Type="Scene" />
           <Project Name="EatCandiesScene.csd" Type="Scene" />
           <Project Name="JumpingOnPoolScene.csd" Type="Scene" />

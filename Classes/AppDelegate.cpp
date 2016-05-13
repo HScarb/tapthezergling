@@ -41,12 +41,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     FileUtils::getInstance()->addSearchPath("res");
+    FileUtils::getInstance()->addSearchPath("res/Res");
 	FileUtils::getInstance()->addSearchPath("res/images");			// 添加资源搜索路径
 	FileUtils::getInstance()->addSearchPath("res/images/zergling");
 	FileUtils::getInstance()->addSearchPath("res/fonts");
 	FileUtils::getInstance()->addSearchPath("res/RESOURCE");
 	FileUtils::getInstance()->addSearchPath("res/star crafts");
-	FileUtils::getInstance()->addSearchPath("res/zergling");
 	
 	auto diff = random(5, 10);
 	log("%d", diff);
