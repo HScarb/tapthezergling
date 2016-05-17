@@ -10,7 +10,12 @@ public:
 		LoadingScene,
 		MainScene,
 		SettingsScene,
-		TollgateScene
+		TollgateScene,
+		BOSS1,
+		BOSS2,
+		BOSS3,
+		BOSS4,
+		BOSS5
 	};
 	enum TollgateSceneType
 	{

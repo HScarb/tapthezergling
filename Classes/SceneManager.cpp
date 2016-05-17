@@ -12,6 +12,7 @@
 #include "BurrowAndAttack.h"
 #include "JumpingOnPoolScene.h"
 #include "ClassifyUnits.h"
+#include "BOSS1ZerglingKing.h"
 USING_NS_CC;
 
 SceneManager * SceneManager::m_sceneManager = nullptr;
@@ -56,6 +57,17 @@ void SceneManager::changeScene(SceneType sceneType)
 		break;
 	case SceneManager::SettingsScene:
 		pScene = SettingsScene::createScene();
+		break;
+	case SceneManager::BOSS1:
+		pScene = BOSS1ZerglingKing::createScene();
+		break;
+	case SceneManager::BOSS2:
+		break;
+	case SceneManager::BOSS3:
+		break;
+	case SceneManager::BOSS4:
+		break;
+	case SceneManager::BOSS5:
 		break;
 	default:
 		break;

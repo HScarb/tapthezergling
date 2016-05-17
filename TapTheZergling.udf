@@ -28,20 +28,5 @@
         <LastRunType Value="Windows" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="Tollgates/BurrowAndAttack.csd" />
-          <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
-          <FilePathData Path="TollgateScene.csd" />
-          <FilePathData Path="Tollgates/SlideCutScene.csd" />
-          <FilePathData Path="Tollgates/JumpingOnPoolScene.csd" />
-          <FilePathData Path="Tollgates/EatCandiesScene.csd" />
-          <FilePathData Path="Tollgates/DoubleTapScene.csd" />
-          <FilePathData Path="Tollgates/ClassifyUnits.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="TollgateScene.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

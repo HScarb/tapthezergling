@@ -145,7 +145,7 @@
             <OutlineColor A="255" R="0" G="128" B="0" />
             <ShadowColor A="255" R="0" G="128" B="0" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView" ActionTag="2122249046" Tag="60" IconVisible="False" LeftMargin="280.0039" RightMargin="279.9961" TopMargin="130.0000" BottomMargin="10.0000" ClipAble="False" BackColorAlpha="0" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="ScrollView" ActionTag="886168443" Tag="42" IconVisible="False" LeftMargin="279.4240" RightMargin="280.5760" TopMargin="118.5528" BottomMargin="21.4472" TouchEnable="True" ClipAble="False" BackColorAlpha="97" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
             <Size X="400.0000" Y="400.0000" />
             <Children>
               <AbstractNodeData Name="Text_1" ActionTag="1813621424" Tag="61" IconVisible="False" LeftMargin="43.0000" RightMargin="43.0000" TopMargin="29.0000" BottomMargin="729.0000" TouchEnable="True" FontSize="34" LabelText="1 DoubleTapZergling" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -220,12 +220,36 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
+              <AbstractNodeData Name="Text_7" ActionTag="1672175959" Tag="33" IconVisible="False" LeftMargin="37.5000" RightMargin="37.5000" TopMargin="329.0000" BottomMargin="429.0000" TouchEnable="True" FontSize="34" LabelText="7 BOSS1ZerglingKing" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="325.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="450.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.5625" />
+                <PreSize X="0.8125" Y="0.0525" />
+                <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_8" ActionTag="-2061351026" Tag="39" IconVisible="False" LeftMargin="29.0000" RightMargin="29.0000" TopMargin="379.0000" BottomMargin="379.0000" TouchEnable="True" FontSize="34" LabelText="8 BOSS2ZerglingNinja" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="342.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="400.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.5000" />
+                <PreSize X="0.8550" Y="0.0525" />
+                <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
             </Children>
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="480.0039" Y="210.0000" />
+            <AnchorPoint />
+            <Position X="279.4240" Y="21.4472" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.3889" />
+            <PrePosition X="0.2911" Y="0.0397" />
             <PreSize X="0.4167" Y="0.7407" />
             <SingleColor A="255" R="255" G="150" B="100" />
             <FirstColor A="255" R="255" G="150" B="100" />
