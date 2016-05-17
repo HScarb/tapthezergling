@@ -55,6 +55,9 @@
     <Filter Include="Classes\Scenes\Tollgates\BOSS1ZerglingKing">
       <UniqueIdentifier>{7abd44e7-0e2a-43e2-b539-425057ec37d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\BOSS2ZerglingNinja">
+      <UniqueIdentifier>{cfd15cf9-52e1-42a6-8359-978ff237b808}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -149,6 +152,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\BOSS1ZerglingKing.cpp">
       <Filter>Classes\Scenes\Tollgates\BOSS1ZerglingKing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BOSS2ZerglingNinja.cpp">
+      <Filter>Classes\Scenes\Tollgates\BOSS2ZerglingNinja</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BOSS1ZerglingKing.h">
       <Filter>Classes\Scenes\Tollgates\BOSS1ZerglingKing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BOSS2ZerglingNinja.h">
+      <Filter>Classes\Scenes\Tollgates\BOSS2ZerglingNinja</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
