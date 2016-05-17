@@ -105,10 +105,10 @@ bool ClassifyUnits::init(int diff, int loop)
 	m_spawningPool = Sprite::create(PATH_SPAWNINGPOOL);
 	m_spawningPool->setPosition(POS_SPAWNPOOL);
 
-	addChild(m_terranBase, 10);
-	addChild(m_zergBase, 10);
-	addChild(m_protossBase, 10);
-	addChild(m_spawningPool, 10);
+	addChild(m_terranBase, 100);
+	addChild(m_zergBase, 100);
+	addChild(m_protossBase, 100);
+	addChild(m_spawningPool, 100);
 
 	// 初始化Units
 	initUnits();
@@ -165,7 +165,7 @@ void ClassifyUnits::initUnits()
 	{
 		item->setPosition(item->getPosByRow());
 		item->setScale(SCALE[item->getRow()]);
-		this->addChild(item, 6 - item->getRow());
+		this->addChild(item, 60 - item->getRow());
 	}
 }
 
@@ -200,12 +200,14 @@ void ClassifyUnits::moveUnits()
 	if(!m_unitVector.empty())
 	{
 		Unit * unit = m_unitVector.front();
+		int ZOrder = m_unitShowVector.back()->getZOrder();
+		CCLOG("ZOrder = %d", ZOrder);
 		m_unitShowVector.pushBack(unit);
 		m_unitVector.eraseObject(unit);
 		unit->setRow(5);
 		unit->setPosition(unit->getPosByRow());
 		unit->setScale(0.5);
-		this->addChild(unit, 6 - unit->getRow());
+		this->addChild(unit, ZOrder - 1);
 	}
 	// 移动Units
 	for(auto item : m_unitShowVector)
@@ -219,12 +221,12 @@ void ClassifyUnits::moveUnits()
 		}
 		else		// 如果要飞到基地里
 		{
-			auto erase = CallFunc::create([this, item] ()
+			auto erase = CallFunc::create([=] ()
 			{
 				m_isMoving = true;
 				m_unitShowVector.eraseObject(item);
 			});
-			auto eraseend = CallFunc::create([this, item]()
+			auto eraseend = CallFunc::create([=]()
 			{
 				item->removeFromParent();
 				if(m_unitVector.size() == 0 && m_unitShowVector.size() == 0)
@@ -252,7 +254,7 @@ void ClassifyUnits::moveUnits()
 			default: break;
 			}
 
-			item->runAction(Sequence::create(erase, jumpTo, erase, nullptr));
+			item->runAction(Sequence::create(erase, jumpTo, eraseend, nullptr));
 		}
 	}
 }

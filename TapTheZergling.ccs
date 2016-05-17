@@ -272,14 +272,13 @@
         </Folder>
         <Folder Name="Tollgates">
           <Project Name="BOSS1ZerglingKing.csd" Type="Scene" />
+          <Project Name="BOSS2ZerglingNinja.csd" Type="Scene" />
           <Project Name="BurrowAndAttack.csd" Type="Scene" />
-          <Project Name="ClassifyUnits.csd" Type="Scene" />
           <Project Name="DoubleTapScene.csd" Type="Scene" />
           <Project Name="EatCandiesScene.csd" Type="Scene" />
           <Project Name="JumpingOnPoolScene.csd" Type="Scene" />
           <Project Name="SlideCutScene.csd" Type="Scene" />
           <Project Name="TollgateControlLayer.csd" Type="Layer" />
-          <Project Name="BOSS2ZerglingNinja.csd" Type="Scene" />
         </Folder>
         <Project Name="CardEnhancer.csd" Type="Layer" />
         <Project Name="MainScene.csd" Type="Scene" />
