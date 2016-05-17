@@ -219,12 +219,14 @@ void ClassifyUnits::moveUnits()
 		}
 		else		// 如果要飞到基地里
 		{
-			auto erase = CallFunc::create([this, item]()
+			auto erase = CallFunc::create([this, item] ()
 			{
-				m_isMoving = false;
+				m_isMoving = true;
 				m_unitShowVector.eraseObject(item);
+			});
+			auto eraseend = CallFunc::create([this, item]()
+			{
 				item->removeFromParent();
-
 				if(m_unitVector.size() == 0 && m_unitShowVector.size() == 0)
 				{
 					_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"ClassifyUnits");
@@ -250,7 +252,7 @@ void ClassifyUnits::moveUnits()
 			default: break;
 			}
 
-			item->runAction(Sequence::create(jumpTo, erase, nullptr));
+			item->runAction(Sequence::create(erase, jumpTo, erase, nullptr));
 		}
 	}
 }
