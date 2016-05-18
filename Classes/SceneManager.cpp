@@ -13,6 +13,7 @@
 #include "JumpingOnPoolScene.h"
 #include "ClassifyUnits.h"
 #include "BOSS1ZerglingKing.h"
+#include "BOSS2ZerglingNinja.h"
 USING_NS_CC;
 
 SceneManager * SceneManager::m_sceneManager = nullptr;
@@ -62,6 +63,7 @@ void SceneManager::changeScene(SceneType sceneType)
 		pScene = BOSS1ZerglingKing::createScene();
 		break;
 	case SceneManager::BOSS2:
+		pScene = BOSS2ZerglingNinja::createScene();
 		break;
 	case SceneManager::BOSS3:
 		break;

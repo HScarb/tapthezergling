@@ -60,6 +60,7 @@ bool TollgateScene::init()
 	m_t5 = (Text*)(m_scrollView->getChildByName("Text_5"));
 	m_t6 = (Text*)(m_scrollView->getChildByName("Text_6"));
 	m_t7 = (Text*)(m_scrollView->getChildByName("Text_7"));
+	m_t8 = (Text*)(m_scrollView->getChildByName("Text_8"));
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
@@ -91,6 +92,7 @@ bool TollgateScene::init()
 	m_t5->addTouchEventListener(this, toucheventselector(TollgateScene::onItem5Clicked));
 	m_t6->addTouchEventListener(this, toucheventselector(TollgateScene::onItem6Clicked));
 	m_t7->addTouchEventListener(this, toucheventselector(TollgateScene::onItem7Clicked));
+	m_t8->addTouchEventListener(this, toucheventselector(TollgateScene::onItem8Clicked));
 	return true;
 }
 
@@ -164,5 +166,14 @@ void TollgateScene::onItem7Clicked(Ref* pSender, cocos2d::ui::TouchEventType typ
 	{
 		log("tollgate 7");
 		SceneManager::getInstance()->changeScene(SceneManager::SceneType::BOSS1);
+	}
+}
+
+void TollgateScene::onItem8Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
+{
+	if(type == TOUCH_EVENT_ENDED)
+	{
+		log("tollgate 8");
+		SceneManager::getInstance()->changeScene(SceneManager::SceneType::BOSS2);
 	}
 }

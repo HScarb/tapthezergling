@@ -3,6 +3,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
+#include "AnimationUtil.h"
 using namespace std;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -22,6 +23,15 @@ bool BOSS2ZerglingNinja::init()
 		return false;
 
 	m_isRunning = false;
+	m_posVector.push_back(Pt(Vec2(200, 40), 0));
+	m_posVector.push_back(Pt(Vec2(480, 40), 1));
+	m_posVector.push_back(Pt(Vec2(760, 40), 2));
+	m_posVector.push_back(Pt(Vec2(200, 190), 3));
+	m_posVector.push_back(Pt(Vec2(480, 190), 4));
+	m_posVector.push_back(Pt(Vec2(760, 190), 5));
+	m_posVector.push_back(Pt(Vec2(200, 340), 6));
+	m_posVector.push_back(Pt(Vec2(480, 340), 7));
+	m_posVector.push_back(Pt(Vec2(760, 340), 8));
 
 	auto UI = CSLoader::createNode("Tollgates/BOSS2ZerglingNinja.csb");
 	addChild(UI);
@@ -31,13 +41,89 @@ bool BOSS2ZerglingNinja::init()
 	m_controlLayer->scheduleUpdate();
 	addChild(m_controlLayer);
 
+	// create wood
+	int c;
+	for(auto item : m_posVector)
+	{
+		Vec2 pos = item.pos;
+		c = item.num;
+		m_woods[c] = Sprite::create("RESOURCE/loading_bar.png");
+		m_woods[c]->setScale(0.15);
+		m_woods[c]->setPosition(pos);
+		this->addChild(m_woods[c]);
+	}
 
+	// create zerging ninja
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	m_zerglingNinja = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("zergling_big_1.png"));
+//	m_zerglingNinja->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 200);
+//	m_curNum = random(0, (int)m_posVector.size());
+	m_curPt = m_posVector.at(random(0, (int)m_posVector.size() - 1));
+	m_zerglingNinja->setPosition(m_curPt.pos);
+
+	m_zerglingNinja->setAnchorPoint(Vec2(0.5f, 0));
+	m_zerglingNinja->setScale(0.15, 0.15);
+	this->addChild(m_zerglingNinja);
+	Animation * animation = AnimationUtil::createWithFrameNameAndNum("zergling_big_", 4, 0.08f, -1, true);
+	m_zerglingNinja->runAction(Animate::create(animation));
+
+	// add touch listener
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(BOSS2ZerglingNinja::onTouchBegan, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return true;
 }
 
-bool BOSS2ZerglingNinja::onTouchBegan()
+bool BOSS2ZerglingNinja::onTouchBegan(Touch * pTouch, Event * pEvent)
 {
-	
+	auto pos = pTouch->getLocation();
+	if (m_zerglingNinja->getBoundingBox().containsPoint(pos))
+	{
+		if(!m_isRunning)
+		{
+			m_isRunning = true;
+			TimeManager::getInstance()->startCountDown();
+		}
+//		m_posVector.erase(m_curPt);
+		m_woods[m_curPt.num]->removeFromParent();
+		for (auto iter = m_posVector.begin(); iter != m_posVector.end();)
+		{
+			if ((*iter) == m_curPt)
+			{
+				iter = m_posVector.erase(iter);
+			}
+			else
+			{
+				++iter;
+			}
+		}
+		// move to a new pos
+		if(m_posVector.size() <= 0)
+		{
+			if (m_isRunning)
+			{
+				m_isRunning = false;
+				auto drop = MoveTo::create(0.4, Vec2(m_zerglingNinja->getPositionX(), 20));
+				auto stopTimer = CallFunc::create([&]()
+				{
+					TimeManager::getInstance()->pauseCountDown();
+				});
+				auto callback = CallFunc::create([&]()
+				{
+					m_zerglingNinja->removeFromParent();
+					_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"BOSS2ZerglingNinja");
+					CCLOG("BOSS2 ZerglingNinja clear");
+				});
+				auto sleep = DelayTime::create(0.2);
+				m_zerglingNinja->runAction(Sequence::create(drop, stopTimer, sleep, callback, nullptr));
+			}
+		}
+		else
+		{
+			m_curPt = m_posVector.at(random(0, (int)m_posVector.size() - 1));
+			m_zerglingNinja->setPosition(m_curPt.pos);
+		}
+	}
 	return true;
 }

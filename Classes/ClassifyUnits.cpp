@@ -280,4 +280,3 @@ bool ClassifyUnits::onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent)
 	}
 	return true;
 }
-
