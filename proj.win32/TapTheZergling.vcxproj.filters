@@ -135,9 +135,6 @@
     <ClCompile Include="..\Classes\DataManager.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Food.cpp">
-      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\BurrowAndAttack.cpp">
       <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
     </ClCompile>
@@ -155,6 +152,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\BOSS2ZerglingNinja.cpp">
       <Filter>Classes\Scenes\Tollgates\BOSS2ZerglingNinja</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Worker.cpp">
+      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,9 +233,6 @@
     <ClInclude Include="..\Classes\GameManager.h">
       <Filter>Classes\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Food.h">
-      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\BurrowAndAttack.h">
       <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
     </ClInclude>
@@ -262,6 +259,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BOSS2ZerglingNinja.h">
       <Filter>Classes\Scenes\Tollgates\BOSS2ZerglingNinja</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Worker.h">
+      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

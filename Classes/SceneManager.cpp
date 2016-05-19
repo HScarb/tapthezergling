@@ -103,7 +103,7 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 		pScene = EatCandiesScene::createScene(diff,loop);
 		break;
 	case BurrowAndAttackScene:
-		pScene = FeedZerglingScene::createScene(diff, loop);
+		pScene = BurrowAndAttackScene::createScene(diff, loop);
 		break;
 	case JumpingOnPoolScene:
 		pScene = JumpingOnPoolScene::createScene(diff, loop);

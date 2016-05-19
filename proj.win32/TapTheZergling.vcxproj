@@ -158,7 +158,6 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\BurrowAndAttack.cpp" />
     <ClCompile Include="..\Classes\FilterSprite.cpp" />
     <ClCompile Include="..\Classes\Flower.cpp" />
-    <ClCompile Include="..\Classes\Food.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\JumpingOnPoolScene.cpp" />
@@ -174,6 +173,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\TollgateControlLayer.cpp" />
     <ClCompile Include="..\Classes\TollgateScene.cpp" />
     <ClCompile Include="..\Classes\VisibleRect.cpp" />
+    <ClCompile Include="..\Classes\Worker.cpp" />
     <ClCompile Include="..\Classes\Zergling.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -190,7 +190,6 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\BurrowAndAttack.h" />
     <ClInclude Include="..\Classes\FilterSprite.h" />
     <ClInclude Include="..\Classes\Flower.h" />
-    <ClInclude Include="..\Classes\Food.h" />
     <ClInclude Include="..\Classes\Global.h" />
     <ClInclude Include="..\Classes\GlobalConst.h" />
     <ClInclude Include="..\Classes\GlobalDefine.h" />
@@ -209,6 +208,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\TollgateScene.h" />
     <ClInclude Include="..\Classes\GameManager.h" />
     <ClInclude Include="..\Classes\VisibleRect.h" />
+    <ClInclude Include="..\Classes\Worker.h" />
     <ClInclude Include="..\Classes\Zergling.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
