@@ -86,6 +86,7 @@ bool BurrowAndAttackGrid::init(int diff, int loop, int row, int col)
 	m_col = col;
 	m_loop = loop;
 	m_diff = diff;
+	m_isRunning = false;
 	//根据行列初始化一个空的二维容器
 	m_workergrid.resize(m_col);
 	for (auto &vec : m_workergrid)
@@ -125,12 +126,12 @@ bool BurrowAndAttackGrid::init(int diff, int loop, int row, int col)
 //单点触摸事件响应函数
 bool BurrowAndAttackGrid::onTouchBegan(Touch* touch, Event* unused_event)
 {
-	m_Bpos = touch->getLocation();
 	if (!m_isRunning)
 	{
 		m_isRunning = true;
 		TimeManager::getInstance()->startCountDown();
 	}
+	m_Bpos = touch->getLocation();
 	return true;
 }
 void BurrowAndAttackGrid::onTouchMoved(Touch* touch, Event* unused_event)
