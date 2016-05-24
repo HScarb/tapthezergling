@@ -23,9 +23,9 @@ static const int m_w[1][GRID_Row][GRID_Col] =
 {
 	// easy
 	{
-		{ 1, 0, 1, 0, 1, 0 },
-		{ 0, 1, 0, 1, 0, 1 },
-		{ 0, 0, 1, 0, 1, 0 }
+		{ 0, 0, 1, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 1 },
+		{ 0, 0, 0, 0, 1, 0 }
 	}
 	// medium
 	// hard
@@ -54,9 +54,11 @@ public:
 
 	// 根据网格坐标设置农民的具体像素坐标
 	void SetWorkerPixPos(Worker* worker,int x,int y);
+	void SetZerglingPixPos(Worker* worker, int x, int y);
 
 	// 根据网格坐标创建一个农民，并且加入到渲染节点
 	Worker * createAWorker(int, int x, int y);
+	Worker * createAZerglingWithZOrder(int type, int x, int y, int ZOrder);
 
 	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
@@ -64,7 +66,7 @@ public:
 
 private:
 	int m_row, m_col;
-	int m_diff, m_loop;
+	int m_diff, m_loop, m_Loop;
 	bool m_isRunning;
 	cocos2d::Sprite *m_zergling;
 	cocos2d::Vec2 m_delta, m_Bpos, m_Epos;

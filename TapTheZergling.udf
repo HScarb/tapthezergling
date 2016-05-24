@@ -31,8 +31,9 @@
           <FilePathData Path="TestScene.csd" />
           <FilePathData Path="SettingsScene.csd" />
           <FilePathData Path="TollgateScene.csd" />
+          <FilePathData Path="Tollgates/BurrowAndAttack.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="TollgateScene.csd" />
+        <ActiveDocument Path="Tollgates/BurrowAndAttack.csd" />
       </Value>
     </Item>
   </Properties>
