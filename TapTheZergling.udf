@@ -17,22 +17,12 @@
         <AndroidVersion Value="android-19" />
         <iOS_Target Value="TapTheZergling-mobile" />
         <iOS_BundleID Value="" />
-        <Platform Value="None" />
+        <Platform Value="Android" />
         <RunPlatform Value="None" />
         <FrameworkVersion Value="cocos2d-x-3.10" />
         <IsDebugKeystore Value="True" />
         <EnableSourceMap Value="False" />
         <EnableHTML5Advanced Value="False" />
-      </Value>
-    </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="TestScene.csd" />
-          <FilePathData Path="SettingsScene.csd" />
-          <FilePathData Path="TollgateScene.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="TollgateScene.csd" />
       </Value>
     </Item>
   </Properties>

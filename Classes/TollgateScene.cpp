@@ -61,6 +61,9 @@ bool TollgateScene::init()
 	m_t6 = (Text*)(m_scrollView->getChildByName("Text_6"));
 	m_t7 = (Text*)(m_scrollView->getChildByName("Text_7"));
 	m_t8 = (Text*)(m_scrollView->getChildByName("Text_8"));
+	
+	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
+//	m_scrollView->setVisible(false);
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
@@ -76,11 +79,16 @@ bool TollgateScene::init()
 	}
 	else
 	{
-		TimeManager::getInstance()->addTime(2.0f);				// add 2 seconds
-		CCLOG("added 2 seconds.");
+		if (GameManager::getInstance()->getIsWaitToAddTime())
+		{
+			addSeconds();
+			CCLOG("added 2 seconds.");
+			GameManager::getInstance()->setIsWaitToAddTime(false);
+		}
 	}
 
 	m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
+	m_timeBar->setPercent(TimeManager::getInstance()->getTime() / TimeManager::getInstance()->getPreTime() * 100.0f);		// 设置时间进度条进度
 
 	// 关联触摸函数
 	// m_homeBtn->addTouchEventListener(CC_CALLBACK_1(TollgateScene::onHomeBtnClicked, this));
@@ -93,7 +101,44 @@ bool TollgateScene::init()
 	m_t6->addTouchEventListener(this, toucheventselector(TollgateScene::onItem6Clicked));
 	m_t7->addTouchEventListener(this, toucheventselector(TollgateScene::onItem7Clicked));
 	m_t8->addTouchEventListener(this, toucheventselector(TollgateScene::onItem8Clicked));
+	
 	return true;
+}
+
+void TollgateScene::addSeconds()
+{
+	auto swooth = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_BUTTON_ACCEPT_1));
+	swooth->setPosition(CENTER);
+	swooth->setScale(0.0);
+	auto delay0 = DelayTime::create(0.3);
+	auto big1 = ScaleTo::create(0.35, 0.5);
+	auto delay1 = DelayTime::create(0.35);
+	auto small1 = ScaleTo::create(0.35, 0.0);
+	auto callFunc1 = CallFunc::create([swooth]()
+	{
+		swooth->setTexture(TextureCache::getInstance()->getTextureForKey(PATH_ADD_TWO));
+	});
+	auto big2 = ScaleTo::create(0.35, 0.5);
+	auto delay2 = DelayTime::create(0.35);
+	auto small2 = ScaleTo::create(0.2, 0.0);
+	auto moveBy = MoveBy::create(0.25, Vec2(0, 100));
+	auto callFunc2 = CallFunc::create([swooth]()
+	{
+		swooth->removeFromParent();
+	});
+	
+	this->addChild(swooth);
+	swooth->runAction(Sequence::create(delay0, big1, delay1, small1, callFunc1, big2, delay2, Spawn::createWithTwoActions(small2, moveBy), callFunc2, nullptr));
+
+	TimeManager::getInstance()->addTime(2.0f);				// add 2 seconds
+	m_timeBar->setPercent(100);
+
+	setNextTollgate();
+}
+
+void TollgateScene::setNextTollgate()
+{
+	
 }
 
 void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)

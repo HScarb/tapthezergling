@@ -16,6 +16,9 @@
             <TTF Name="Skranji-Regular.ttf" />
           </Folder>
           <Folder Name="RESOURCE">
+            <Image Name="add_two.png" />
+            <Image Name="button_accept_1.png" />
+            <Image Name="button_accept_2.png" />
             <Image Name="button_base.png" />
             <Image Name="button_cards_1.png" />
             <Image Name="button_cards_2.png" />

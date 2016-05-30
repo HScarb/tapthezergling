@@ -22,3 +22,7 @@
 #define PATH_TERRAN_BASE "zergling_small_6.png"
 #define PATH_PROTOSS_BASE "zergling_small_3.png"
 #define PATH_SPAWNINGPOOL "zergling_small_0.png"
+	// pics
+#define PATH_BUTTON_ACCEPT_1 "RESOURCE/button_accept_1.png"
+#define PATH_BUTTON_ACCEPT_2 "RESOURCE/button_accept_2.png"
+#define PATH_ADD_TWO "RESOURCE/add_two.png"

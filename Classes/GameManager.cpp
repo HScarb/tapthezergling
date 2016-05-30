@@ -33,6 +33,8 @@ bool GameManager::init()
 	m_tollgateNum = 0;
 	m_jewel = 0;
 	m_energy = 0;
+	m_diff = 0;
+	m_loop = 0;
 	m_isGameOn = false;
 
 	return true;

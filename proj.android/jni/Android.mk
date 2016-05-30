@@ -36,7 +36,11 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/JumpingOnPoolScene.cpp \
 				   ../../Classes/BurrowAndAttack.cpp \
 				   ../../Classes/SmallZergling.cpp \
-				   ../../Classes/Food.cpp
+				   ../../Classes/EatFlowersScene.cpp \
+				   ../../Classes/ClassifyUnits.cpp \
+				   ../../Classes/BOSS2ZerglingNinja.cpp \
+				   ../../Classes/BOSS1ZerglingKing.cpp \
+				   ../../Classes/Worker.cpp 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 

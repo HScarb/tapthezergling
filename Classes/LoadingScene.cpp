@@ -6,7 +6,7 @@
 #include "DataManager.h"
 USING_NS_CC;
 using namespace CocosDenshion;
-const int TOTAL_TEXTURE_NUM = 152;	// 12 + small zerglings(137) + 3 workers = 152
+const int TOTAL_TEXTURE_NUM = 167;	// 12 + small zerglings(137) + 3 workers + 15 RESOURCE = 167
 
 Scene* LoadingScene::createScene() 
 {
@@ -54,10 +54,26 @@ bool LoadingScene::init()
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("zergling/SCs_Zergling_C3_%02d.png", i), addTextureCallback);
 //		CCLOG("SCs_Zergling_C3_%02d.png", i);
 	}
-	// workers
+	// workers 3
 	TextureCache::getInstance()->addImageAsync(StringUtils::format("Workers/SCs_Drone_C_01.png"), addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(StringUtils::format("Workers/SCs_Probe_C_01.png"), addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(StringUtils::format("Workers/SCs_SCV_C_01.png"), addTextureCallback);
+	// RESOURCE 15
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/add_two.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button_accept_1.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button_accept_2.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button_play_1.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button_play_2.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button_x_1.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button_x_2.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button-cards-1.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button-cards-2.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button-home-1.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button-home-2.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button-pause-1.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button-pause-2.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button-setting-1.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button-setting-2.png"), addTextureCallback);
 
 	// 开启加载进度检测
 	schedule(schedule_selector(LoadingScene::onTextureLoading));
