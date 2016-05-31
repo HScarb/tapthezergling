@@ -145,7 +145,7 @@
             <OutlineColor A="255" R="0" G="128" B="0" />
             <ShadowColor A="255" R="0" G="128" B="0" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView" ActionTag="886168443" Tag="42" IconVisible="False" LeftMargin="279.4240" RightMargin="280.5760" TopMargin="118.5528" BottomMargin="21.4472" TouchEnable="True" ClipAble="False" BackColorAlpha="97" ComboBoxIndex="1" ColorAngle="90.0000" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="ScrollView" ActionTag="886168443" Tag="42" IconVisible="False" LeftMargin="279.4240" RightMargin="280.5760" TopMargin="118.5528" BottomMargin="21.4472" TouchEnable="True" ClipAble="False" BackColorAlpha="97" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
             <Size X="400.0000" Y="400.0000" />
             <Children>
               <AbstractNodeData Name="Text_1" ActionTag="1813621424" Tag="61" IconVisible="False" LeftMargin="43.0000" RightMargin="43.0000" TopMargin="29.0000" BottomMargin="729.0000" TouchEnable="True" FontSize="34" LabelText="1 DoubleTapZergling" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -240,6 +240,18 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.5000" />
                 <PreSize X="0.8550" Y="0.0525" />
+                <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_9" ActionTag="-1595958681" Tag="78" IconVisible="False" LeftMargin="72.0000" RightMargin="72.0000" TopMargin="429.0000" BottomMargin="329.0000" TouchEnable="True" FontSize="34" LabelText="9 CheckThething" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="256.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="200.0000" Y="350.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.4375" />
+                <PreSize X="0.6400" Y="0.0525" />
                 <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />

@@ -1,5 +1,12 @@
 <UserData Version="3.10.0.0">
   <Properties>
+    <Item Key="CocosRecentOperation">
+      <Value ctype="CocosRecentOperation">
+        <LastPublishType Value="Resource" />
+        <IsLastPublish Value="True" />
+        <LastRunType Value="Windows" />
+      </Value>
+    </Item>
     <Item Key="PackageParamsKey">
       <Value ctype="PackageParams">
         <LuaIsEncrypt Value="False" />
@@ -7,25 +14,34 @@
         <LuaEncryptSign Value="" />
         <Android_PackageName Value="org.cocos.TapTheZergling" />
         <AndroidkeyStore Value="" />
-        <AndroidVersion Value="android-10" />
+        <AndroidVersion Value="android-19" />
         <iOS_Target Value="TapTheZergling-mobile" />
         <iOS_BundleID Value="" />
-        <Platform Value="Android" />
+        <Platform Value="None" />
         <RunPlatform Value="None" />
         <FrameworkVersion Value="cocos2d-x-3.10" />
         <IsDebugKeystore Value="True" />
-        <KeystorePassword Value="" />
-        <KeystoreAliasName Value="" />
-        <KeystoreAliasPassword Value="" />
         <EnableSourceMap Value="False" />
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
-    <Item Key="CocosRecentOperation">
-      <Value ctype="CocosRecentOperation">
-        <LastPublishType Value="Resource" />
-        <IsLastPublish Value="True" />
-        <LastRunType Value="Windows" />
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="TestScene.csd" />
+          <FilePathData Path="SettingsScene.csd" />
+          <FilePathData Path="TollgateScene.csd" />
+          <FilePathData Path="Tollgates/BOSS1ZerglingKing.csd" />
+          <FilePathData Path="Tollgates/BOSS2ZerglingNinja.csd" />
+          <FilePathData Path="Tollgates/BurrowAndAttack.csd" />
+          <FilePathData Path="Tollgates/DoubleTapScene.csd" />
+          <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
+          <FilePathData Path="Tollgates/SlideCutScene.csd" />
+          <FilePathData Path="Tollgates/CheckTheThing.csd" />
+          <FilePathData Path="CardEnhancer.csd" />
+          <FilePathData Path="MainScene.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="Tollgates/CheckTheThing.csd" />
       </Value>
     </Item>
   </Properties>

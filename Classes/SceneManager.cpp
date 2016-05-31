@@ -13,6 +13,8 @@
 #include "JumpingOnPoolScene.h"
 #include "ClassifyUnits.h"
 #include "BOSS1ZerglingKing.h"
+#include "BOSS2ZerglingNinja.h"
+#include "CheckThethingScene.h"
 USING_NS_CC;
 
 SceneManager * SceneManager::m_sceneManager = nullptr;
@@ -62,6 +64,7 @@ void SceneManager::changeScene(SceneType sceneType)
 		pScene = BOSS1ZerglingKing::createScene();
 		break;
 	case SceneManager::BOSS2:
+		pScene = BOSS2ZerglingNinja::createScene();
 		break;
 	case SceneManager::BOSS3:
 		break;
@@ -101,7 +104,7 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 		pScene = EatCandiesScene::createScene(diff,loop);
 		break;
 	case BurrowAndAttackScene:
-		pScene = FeedZerglingScene::createScene(diff, loop);
+		pScene = BurrowAndAttackScene::createScene(diff, loop);
 		break;
 	case JumpingOnPoolScene:
 		pScene = JumpingOnPoolScene::createScene(diff, loop);
@@ -109,9 +112,11 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 	case ClassifyUnits:
 		pScene = ClassifyUnits::createScene(diff, loop);
 		break;
+	case CheckThethingScene:
+		pScene = CheckThethingScene::createScene(diff, loop);
+		break;
 	default: break;
 	}
-
 	auto pDirector = Director::getInstance();
 	auto curScene = pDirector->getRunningScene();
 	if (curScene == nullptr)

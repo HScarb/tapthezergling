@@ -24,7 +24,8 @@ public:
 		EatCandiesScene,
 		BurrowAndAttackScene,
 		JumpingOnPoolScene,
-		ClassifyUnits
+		ClassifyUnits,
+		CheckThethingScene
 	};
 	static SceneManager * getInstance();
 	virtual bool init();

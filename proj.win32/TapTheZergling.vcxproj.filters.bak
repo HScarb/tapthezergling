@@ -56,10 +56,14 @@
       <UniqueIdentifier>{7abd44e7-0e2a-43e2-b539-425057ec37d1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\Scenes\Tollgates\BOSS2ZerglingNinja">
+<<<<<<< HEAD
       <UniqueIdentifier>{234c0a0e-03de-43b2-b757-9f65e71555b7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\Scenes\Tollgates\CheckThething">
       <UniqueIdentifier>{7e0f20c1-99b4-4fcd-932f-a2dc4cf26164}</UniqueIdentifier>
+=======
+      <UniqueIdentifier>{cfd15cf9-52e1-42a6-8359-978ff237b808}</UniqueIdentifier>
+>>>>>>> a4fbf078aa400e2221a7edb943e166a73e3aafd4
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -156,14 +160,13 @@
     <ClCompile Include="..\Classes\BOSS2ZerglingNinja.cpp">
       <Filter>Classes\Scenes\Tollgates\BOSS2ZerglingNinja</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\Classes\CheckThethingScene.cpp">
       <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
-    </ClCompile>
+=======
     <ClCompile Include="..\Classes\Worker.cpp">
       <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\farmerandflower.cpp">
-      <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
+>>>>>>> a4fbf078aa400e2221a7edb943e166a73e3aafd4
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,14 +272,13 @@
     <ClInclude Include="..\Classes\BOSS2ZerglingNinja.h">
       <Filter>Classes\Scenes\Tollgates\BOSS2ZerglingNinja</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\Classes\CheckThethingScene.h">
       <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
-    </ClInclude>
+=======
     <ClInclude Include="..\Classes\Worker.h">
       <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\farmerandflower.h">
-      <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
+>>>>>>> a4fbf078aa400e2221a7edb943e166a73e3aafd4
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
