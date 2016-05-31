@@ -85,7 +85,9 @@ bool BurrowAndAttackGrid::init(int diff, int loop, int row, int col)
 	m_row = row;
 	m_col = col;
 	m_loop = loop;
+	m_Loop = loop;
 	m_diff = diff;
+	m_isRunning = false;
 	//根据行列初始化一个空的二维容器
 	m_workergrid.resize(m_col);
 	for (auto &vec : m_workergrid)
@@ -102,11 +104,7 @@ bool BurrowAndAttackGrid::init(int diff, int loop, int row, int col)
 		x = random(0, 5);
 		y = random(0, 2);
 	}
-	/*m_zergling = Sprite::create("Res/zergling_small_7.png");
-	m_zergling->setPosition(x* GRID_Width + LEFT_Margin, y*GRID_Width + BOTTOM_Margin);
-	this->setAnchorPoint(Vec2(0, 0));// 设置锚点为左下角
-	this->addChild(m_zergling,4);*/
-	m_zergling = createAWorker(7, x, y);
+	m_zergling = createAZerglingWithZOrder(7, x, y,2 );
 	
 
 	//创建一个时间监听器类型为单点触控
@@ -125,24 +123,16 @@ bool BurrowAndAttackGrid::init(int diff, int loop, int row, int col)
 //单点触摸事件响应函数
 bool BurrowAndAttackGrid::onTouchBegan(Touch* touch, Event* unused_event)
 {
-	m_Bpos = touch->getLocation();
 	if (!m_isRunning)
 	{
 		m_isRunning = true;
 		TimeManager::getInstance()->startCountDown();
 	}
+	m_Bpos = touch->getLocation();
+	
 	return true;
 }
-void BurrowAndAttackGrid::onTouchMoved(Touch* touch, Event* unused_event)
-{
-	// 如果倒计时还没有开始，则开始倒计时
-	if (!m_isRunning)
-	{
-		m_isRunning = true;
-		TimeManager::getInstance()->startCountDown();
-	}
-	
-}
+void BurrowAndAttackGrid::onTouchMoved(Touch* touch, Event* unused_event){}
 void BurrowAndAttackGrid::onTouchEnded(Touch* touch, Event* unused_event)
 {
 	m_Epos = touch->getLocation();
@@ -156,14 +146,16 @@ void BurrowAndAttackGrid::onTouchEnded(Touch* touch, Event* unused_event)
 	auto pos = m_zergling->getPosition();
 	if ((x1 >= 0 && x1 < 6) && (y1 >= 0 && y1<3))
 	{
+		MoveTo *moveto = nullptr;
+		
 		if ((abs(m_delta.x)) >(abs(m_delta.y)))
 		{
 			if ((m_Bpos.x - m_Epos.x) < 0)
 			{
 				if (x1 != 5)
 				{
-					MoveTo* moveto = MoveTo::create(0.2f, Point(pos.x + GRID_Width, pos.y));
-					m_zergling->runAction(moveto);
+					moveto = MoveTo::create(0.1f, Point(pos.x + GRID_Width, pos.y));
+					//m_zergling->runAction(moveto);
 				}
 				
 			}
@@ -171,8 +163,8 @@ void BurrowAndAttackGrid::onTouchEnded(Touch* touch, Event* unused_event)
 			{
 				if (x1 != 0)
 				{
-					MoveTo* moveto = MoveTo::create(0.2f, Point(pos.x - GRID_Width, pos.y));
-					m_zergling->runAction(moveto);
+					moveto = MoveTo::create(0.1f, Point(pos.x - GRID_Width, pos.y));
+					//m_zergling->runAction(moveto);
 				}
 			}
 		}
@@ -182,8 +174,8 @@ void BurrowAndAttackGrid::onTouchEnded(Touch* touch, Event* unused_event)
 			{
 				if (y1 != 2)
 				{
-					MoveTo* moveto = MoveTo::create(0.2f, Point(pos.x, pos.y + GRID_Width));
-					m_zergling->runAction(moveto);
+					moveto = MoveTo::create(0.1f, Point(pos.x, pos.y + GRID_Width));
+					//m_zergling->runAction(moveto);
 				}
 				
 			}
@@ -191,40 +183,54 @@ void BurrowAndAttackGrid::onTouchEnded(Touch* touch, Event* unused_event)
 			{
 				if (y1 != 0)
 				{
-					MoveTo* moveto = MoveTo::create(0.2f, Point(pos.x, pos.y - GRID_Width));
-					m_zergling->runAction(moveto);
+					moveto = MoveTo::create(0.1f, Point(pos.x, pos.y - GRID_Width));
+					//m_zergling->runAction(moveto);
 				}
 			}
 		}
-	}
-	if ( m_workergrid[x1][y1])
-	{
+		CallFunc * moveEndCall = CallFunc::create([&]()
+		{
+			auto Zpos = m_zergling->getPosition();
+			Zpos = convertToGridPos(Zpos);
+			int x2 = (int)Zpos.x;
+			int y2 = (int)Zpos.y;
+			if (m_workergrid[x2][y2])
+			{
+
+				// * add animation
+				auto worker = m_workergrid[x2][y2];
+				// 清空矩阵中的狗的指针
+				m_workergrid[x2][y2] = nullptr;
+				// 将狗从矩阵的绘制节点中移除
+				worker->tapped();
+				if (getLivingWorkerNum() == 0 && m_loop > 0)
+				{
+					generateNewWorkerGrid(m_diff);
+				}
+				else if (getLivingWorkerNum() <= 0 && m_loop <= 0)
+				{
+					_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"BurrowAndAttack");
+					CCLOG("BurrowAndAttack clear");
+				}
+			}
+		});
+		if (moveto)
+			m_zergling->runAction(Sequence::create(moveto, moveEndCall, nullptr));
 		
-		// * add animation
-		auto worker = m_workergrid[x1][y1];
-		// 清空矩阵中的狗的指针
-		m_workergrid[x1][y1] = nullptr;
-		// 将狗从矩阵的绘制节点中移除
-		worker->tapped();
-		// 如果狗被消光，但是loop>0
-		if (getLivingWorkerNum() == 0 && m_loop > 0)
-		{
-			generateNewWorkerGrid(m_diff);
-		}
-		else if (getLivingWorkerNum() <= 0 && m_loop <= 0)
-		{
-			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"BurrowAndAttack");
-			CCLOG("BurrowAndAttack clear");
-		}
 	}
 }
 
 
 
-void BurrowAndAttackGrid::SetWorkerPixPos(Worker* worker, int x, int y)
+void BurrowAndAttackGrid::SetZerglingPixPos(Worker* worker, int x, int y)
 {
 	worker->setPosition(x* GRID_Width + LEFT_Margin, y*GRID_Width + BOTTOM_Margin);
 }
+void BurrowAndAttackGrid::SetWorkerPixPos(Worker* worker, int x, int y)
+{
+	worker->setPosition(x* GRID_Width + LEFT_Margin + 25, y*GRID_Width + BOTTOM_Margin + 25);
+}
+
 
 Worker* BurrowAndAttackGrid::createAWorker(int type, int x, int y)
 {
@@ -236,6 +242,19 @@ Worker* BurrowAndAttackGrid::createAWorker(int type, int x, int y)
 	worker = Worker::Workertype(type);
 	SetWorkerPixPos(worker, x, y);
 	addChild(worker);
+	return worker;
+}
+
+Worker* BurrowAndAttackGrid::createAZerglingWithZOrder(int type, int x, int y, int ZOrder)
+{
+	Worker* worker = nullptr;
+	if (type == 0)
+	{
+		return nullptr;
+	}
+	worker = Worker::Workertype(type);
+	SetZerglingPixPos(worker, x, y);
+	addChild(worker, ZOrder);
 	return worker;
 }
 
@@ -259,13 +278,45 @@ Vec2 BurrowAndAttackGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 void BurrowAndAttackGrid::generateNewWorkerGrid(const int diff)
 {
 	m_loop--;
-	int r = random(1, 3);
-	for (int x = 0; x < m_col; x++)
+	if ( (m_Loop-1)==m_loop)
 	{
-		for (int y = 0; y < m_row; y++)
+		
+		for (int x = 0; x < m_col; x++)
 		{
-			if (m_w[0][y][x] != 0)
-				m_workergrid[x][y] = createAWorker(r, x, y);
+			for (int y = 0; y < m_row; y++)
+			{
+				if (m_w[0][y][x] != 0)
+				{
+					int r = random(1, 3);
+					m_workergrid[x][y] = createAWorker(r, x, y);
+				}
+			}
+		}
+	}
+	else
+	{
+		int t = random(1, 3);
+		int x = random(0, 5);
+		int y = random(0, 2);
+		auto Zpos = m_zergling->getPosition();
+		Zpos = convertToGridPos(Zpos);
+		int x1 = (int)Zpos.x;
+		int y1 = (int)Zpos.y;
+		for (int j = 0; j < 3; j++)
+		{
+			for (; m_workergrid[x][y] != 0;)
+			{
+				t = random(1, 3);
+				x = random(0, 5);
+				y = random(0, 2);
+			}
+			if (x == x1&&y == y1)
+			{
+				t = random(1, 3);
+				x = random(0, 5);
+				y = random(0, 2);
+			}
+			m_workergrid[x][y] = createAWorker(t, x, y);
 		}
 	}
 }

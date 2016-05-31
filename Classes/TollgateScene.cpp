@@ -191,7 +191,7 @@ void TollgateScene::onItem4Clicked(Ref* pSender, TouchEventType type)
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
 		log("tollgate 4");
-		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::BurrowAndAttackScene, 0, 1);
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::BurrowAndAttackScene, 0, 2);
 	}
 }
 
