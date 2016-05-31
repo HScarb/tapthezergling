@@ -182,11 +182,15 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 	
 	for (int n = 0; n <= 2; n++)
 	{
-		q = random(0, 5);
-		w = random(0, 2);
-		o = random(1, 3);
+		do
+		{
+			q = random(0, 5);
+			w = random(0, 2);
+			o = random(1, 3);
+		} while (m_flowersesGrid[q][w]);
 		m_flowersesGrid[q][w] = createflower(o, q, w);
 	}
+	
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(EatCandiesGrid::onTouchBegan, this);

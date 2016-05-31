@@ -7,13 +7,13 @@
 
 const float INITIAL_TIME = 5.0f;
 const int TOTAL_TOLLGATE_TYPE = 6;
-const std::string TOLLGATE_NAME[TOTAL_TOLLGATE_TYPE + 1] = 
+const std::string TOLLGATE_NAME[7] = 
 {
-	"None",
-	"Double Tap Zergling",
-	"Slide Cut",
-	"Eat Flowers",
-	"Burrow And Attack",
-	"Jumping On Pools",
-	"Classify Units"
+	"0: None",
+	"1: Double Tap Zergling",
+	"2: Slide Cut",
+	"3: Eat Flowers",
+	"4: Burrow And Attack",
+	"5: Jumping On Pools",
+	"6: Classify Units"
 };

@@ -63,7 +63,7 @@ bool TollgateScene::init()
 	m_t8 = (Text*)(m_scrollView->getChildByName("Text_8"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-	m_scrollView->setVisible(false);
+//	m_scrollView->setVisible(false);
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
@@ -78,7 +78,7 @@ bool TollgateScene::init()
 		GameManager::getInstance()->setIsGameOn(true);			// set game is on
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 
-		setNextTollgate();		// 随机下一关
+//		setNextTollgate();		// 随机下一关
 	}
 	else
 	{
@@ -159,7 +159,7 @@ void TollgateScene::setNextTollgate()
 	}
 
 	// 显示关卡简介
-	auto label = Label::createWithTTF(StringUtils::format("Tollgate %d: %s", r, TOLLGATE_NAME[r]), "fonts/AveriaSansLibre-Bold.ttf", 40);
+	auto label = Label::createWithTTF(TOLLGATE_NAME[r], "fonts/AveriaSansLibre-Bold.ttf", 40);
 	auto menuItemLabel = MenuItemLabel::create(label, CC_CALLBACK_1(TollgateScene::onTollgateLabelClicked, this));
 	auto menu = Menu::create(menuItemLabel, nullptr);
 	menu->setPosition(CENTER);
