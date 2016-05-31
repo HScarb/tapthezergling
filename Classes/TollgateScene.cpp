@@ -63,7 +63,7 @@ bool TollgateScene::init()
 	m_t8 = (Text*)(m_scrollView->getChildByName("Text_8"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-//	m_scrollView->setVisible(false);
+	m_scrollView->setVisible(false);
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
@@ -76,9 +76,13 @@ bool TollgateScene::init()
 	{
 		TimeManager::getInstance()->setTime(INITIAL_TIME);
 		GameManager::getInstance()->setIsGameOn(true);			// set game is on
+		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 	}
 	else
 	{
+		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
+		m_timeBar->setPercent(TimeManager::getInstance()->getTime() / TimeManager::getInstance()->getPreTime() * 100.0f);		// 设置时间进度条进度
+
 		if (GameManager::getInstance()->getIsWaitToAddTime())
 		{
 			addSeconds();
@@ -86,9 +90,6 @@ bool TollgateScene::init()
 			GameManager::getInstance()->setIsWaitToAddTime(false);
 		}
 	}
-
-	m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
-	m_timeBar->setPercent(TimeManager::getInstance()->getTime() / TimeManager::getInstance()->getPreTime() * 100.0f);		// 设置时间进度条进度
 
 	// 关联触摸函数
 	// m_homeBtn->addTouchEventListener(CC_CALLBACK_1(TollgateScene::onHomeBtnClicked, this));
@@ -122,23 +123,30 @@ void TollgateScene::addSeconds()
 	auto delay2 = DelayTime::create(0.35);
 	auto small2 = ScaleTo::create(0.2, 0.0);
 	auto moveBy = MoveBy::create(0.25, Vec2(0, 100));
-	auto callFunc2 = CallFunc::create([swooth]()
+	auto callFunc2 = CallFunc::create([=]()
 	{
 		swooth->removeFromParent();
+		TimeManager::getInstance()->addTime(2.0f);				// add 2 seconds
+		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
+		m_timeBar->setPercent(100);
 	});
 	
 	this->addChild(swooth);
 	swooth->runAction(Sequence::create(delay0, big1, delay1, small1, callFunc1, big2, delay2, Spawn::createWithTwoActions(small2, moveBy), callFunc2, nullptr));
-
-	TimeManager::getInstance()->addTime(2.0f);				// add 2 seconds
-	m_timeBar->setPercent(100);
 
 	setNextTollgate();
 }
 
 void TollgateScene::setNextTollgate()
 {
-	
+	if(GameManager::getInstance()->getTollgate() == 0)
+	{
+		int r = random(1, TOTAL_TOLLGATE_TYPE);
+		// 显示关卡简介
+		auto label = Label::createWithSystemFont(StringUtils::format("Tollgate %d", r), "Marker Felt", 40);
+		auto item = MenuItemLabel::create(label, []() {CCLOG("Callback!!!"); });
+		this->addChild(item);
+	}
 }
 
 void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
