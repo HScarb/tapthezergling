@@ -5,7 +5,7 @@
 class SceneManager : public cocos2d::Ref
 {
 public:
-	enum SceneType
+	typedef enum 
 	{
 		LoadingScene,
 		MainScene,
@@ -16,16 +16,17 @@ public:
 		BOSS3,
 		BOSS4,
 		BOSS5
-	};
-	enum TollgateSceneType
+	}SceneType;
+	typedef enum
 	{
+		None,
 		DoubleTapScene,
 		SlideCutScene,
 		EatCandiesScene,
 		BurrowAndAttackScene,
 		JumpingOnPoolScene,
 		ClassifyUnits
-	};
+	}TollgateSceneType;
 	static SceneManager * getInstance();
 	virtual bool init();
 

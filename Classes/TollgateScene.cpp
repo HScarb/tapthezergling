@@ -77,6 +77,8 @@ bool TollgateScene::init()
 		TimeManager::getInstance()->setTime(INITIAL_TIME);
 		GameManager::getInstance()->setIsGameOn(true);			// set game is on
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
+
+		setNextTollgate();		// 随机下一关
 	}
 	else
 	{
@@ -129,24 +131,39 @@ void TollgateScene::addSeconds()
 		TimeManager::getInstance()->addTime(2.0f);				// add 2 seconds
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 		m_timeBar->setPercent(100);
+		setNextTollgate();
 	});
 	
 	this->addChild(swooth);
 	swooth->runAction(Sequence::create(delay0, big1, delay1, small1, callFunc1, big2, delay2, Spawn::createWithTwoActions(small2, moveBy), callFunc2, nullptr));
-
-	setNextTollgate();
+	
 }
 
 void TollgateScene::setNextTollgate()
 {
+	int r = 0;
+	// 如果第一次随机，之前没有关卡
 	if(GameManager::getInstance()->getTollgate() == 0)
 	{
-		int r = random(1, TOTAL_TOLLGATE_TYPE);
-		// 显示关卡简介
-		auto label = Label::createWithSystemFont(StringUtils::format("Tollgate %d", r), "Marker Felt", 40);
-		auto item = MenuItemLabel::create(label, []() {CCLOG("Callback!!!"); });
-		this->addChild(item);
+		r = random(1, TOTAL_TOLLGATE_TYPE);
+		GameManager::getInstance()->setNextTollgate(r);
 	}
+	// 如果之前有关卡
+	else
+	{
+		do
+		{
+			r = random(1, TOTAL_TOLLGATE_TYPE);
+		} while (r == GameManager::getInstance()->getTollgate());
+		GameManager::getInstance()->setNextTollgate(r);
+	}
+
+	// 显示关卡简介
+	auto label = Label::createWithTTF(StringUtils::format("Tollgate %d: %s", r, TOLLGATE_NAME[r]), "fonts/AveriaSansLibre-Bold.ttf", 40);
+	auto menuItemLabel = MenuItemLabel::create(label, CC_CALLBACK_1(TollgateScene::onTollgateLabelClicked, this));
+	auto menu = Menu::create(menuItemLabel, nullptr);
+	menu->setPosition(CENTER);
+	this->addChild(menu);
 }
 
 void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
@@ -158,6 +175,14 @@ void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
 void TollgateScene::onCardBtnClicked(Ref* pSender, TouchEventType type)
 {
 	
+}
+
+void TollgateScene::onTollgateLabelClicked(Ref* pSender)
+{
+	int nextTollgate = GameManager::getInstance()->getNextTollgate();
+	GameManager::getInstance()->setTollgate(nextTollgate);
+	CCLOG("Tollgate %d change scene...", nextTollgate);
+	SceneManager::getInstance()->changeScene((SceneManager::TollgateSceneType)nextTollgate, 1, 1);
 }
 
 void TollgateScene::onItem1Clicked(Ref* pSender, TouchEventType type)

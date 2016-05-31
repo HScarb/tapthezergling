@@ -17,6 +17,8 @@ private:
 
 	void onHomeBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onCardBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
+
+	void onTollgateLabelClicked(Ref * pSender);
 	
 	void onItem1Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem2Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
