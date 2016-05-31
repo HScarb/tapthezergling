@@ -1,5 +1,5 @@
 <Solution>
-  <PropertyGroup Name="TapTheZergling" Version="3.10.0.0" Type="CocosStudio" />
+  <PropertyGroup Name="tapthezergling" Version="3.10.0.0" Type="CocosStudio" />
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
@@ -16,6 +16,9 @@
             <TTF Name="Skranji-Regular.ttf" />
           </Folder>
           <Folder Name="RESOURCE">
+            <Image Name="add_two.png" />
+            <Image Name="button_accept_1.png" />
+            <Image Name="button_accept_2.png" />
             <Image Name="button_base.png" />
             <Image Name="button_cards_1.png" />
             <Image Name="button_cards_2.png" />

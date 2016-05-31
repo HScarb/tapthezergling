@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "ui\CocosGUI.h"
 
+
 class TollgateScene : public cocos2d::Layer
 {
 public:
@@ -11,8 +12,13 @@ public:
 	CREATE_FUNC(TollgateScene);
 
 private:
+	void addSeconds();				// 增加时间(动画效果)
+	void setNextTollgate();			// 随机下一关
+
 	void onHomeBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onCardBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
+
+	void onTollgateLabelClicked(Ref * pSender);
 	
 	void onItem1Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem2Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);

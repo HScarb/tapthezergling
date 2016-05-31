@@ -65,6 +65,7 @@ void TollgateControlLayer::tollgateClear(cocos2d::EventCustom * event)
 
 	TimeManager::getInstance()->pauseCountDown();
 	this->unscheduleUpdate();		// stop update for tollgate control layer
+	GameManager::getInstance()->setIsWaitToAddTime(true);
 	SceneManager::getInstance()->changeScene(SceneManager::SceneType::TollgateScene);
 }
 
