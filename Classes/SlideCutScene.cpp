@@ -5,6 +5,12 @@
 #include "TimeManager.h"
 #include "TollgateControlLayer.h"
 
+const int diff0 = 9;
+const int diff1 = 11;
+const int diff2 = 12;
+const int diff3 = 13;
+const int diff4 = 14;
+
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -217,6 +223,41 @@ Vec2 SlideCutGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 void SlideCutGrid::generateNewFarmersGrid(const int diff)
 {
 	m_loop--;
+	int sum = 0;
+	if (m_diff == 0 || m_diff == 1)
+	{
+		sum = random(diff0, diff1);
+	}
+	else if (m_diff == 2)
+	{
+		sum = random(diff0, diff2);
+	}
+	else if (m_diff == 3)
+	{
+		sum = random(diff0, diff3);
+	}
+	else
+	{
+		sum = random(diff0, diff4);
+	}
+	int t = random(1, 3);
+	int x = random(0, 9);
+	int y = random(0, 5);
+	for (int i = 0; i < sum; i++)
+	{
+		for (; m_farmerGrid[x][y] != 0;)
+		{
+			t = random(1, 3);
+			x = random(0, 9);
+			y = random(0, 5);
+		}
+		m_farmerGrid[x][y] = createAFarmer(t, x, y);
+	}
+}
+/*
+void SlideCutGrid::generateNewFarmersGrid(const int diff)
+{
+	m_loop--;
 	int r = random(1, 3);
 	for (int x = 0; x < m_col; x++)
 	{
@@ -227,7 +268,7 @@ void SlideCutGrid::generateNewFarmersGrid(const int diff)
 		}
 	}
 	log("loop=%d", m_loop);
-}
+}*/
 int SlideCutGrid::getLivingFarmersNum()
 {
 	int count = 0;

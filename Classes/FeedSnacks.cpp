@@ -159,7 +159,7 @@ bool FeedSnacksGrid::init(int diff, int loop, int row, int col)
 	m_snackVector.resize(m_col);
 	for (auto &vec : m_snackVector)
 		vec.resize(m_col);
-	
+
 	//根据难度来创建关卡内容
 	generateNewSnacksGrid(m_diff);
 	//创建要消除的对象
@@ -203,28 +203,25 @@ void FeedSnacksGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches,
 			if (getLivingAtypeSnackNum() == 0)
 			{
 				m_SnacktempBase->removeFromParent();
-				if (m_counter < Typemax(m_Type))
+				if (getLivingAllSnackNum() != 0)
 				{
-					m_SnacktempBase = generateNTSnack();
+					m_SnacktempBase = createATSnack();
 				}
-				else if (m_counter == Typemax(m_Type))
+				else if (getLivingAllSnackNum() == 0 && m_loop > 0)
 				{
 					generateNewSnacksGrid(m_diff);
+				}
+				else if (getLivingAllSnackNum() <= 0 && m_loop <= 0)
+				{
+					_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"FeedSnacks");
+					CCLOG("FeedSnacks clear");
 				}
 			}
 
 		}
 	}
 }
-int FeedSnacksGrid::Typemax(Snack::SnackType type)
-{
-	if (type >= 1 && type <= 3)
-		return 3;
-	else if (type >= 4 && type <= 6)
-		return 6;
-	if (type >= 7 && type <= 13)
-		return 13;
-}
+
 void FeedSnacksGrid::generateNewSnacksGrid(const int diff)
 {
 	m_loop--;
@@ -271,6 +268,7 @@ void FeedSnacksGrid::generateNewSnacksGrid(const int diff)
 		this->addChild(temp);
 		m_snackVector[x][y] = temp;
 	}
+	
 }
 
 Snack * FeedSnacksGrid::createATSnack()
@@ -289,46 +287,23 @@ Snack * FeedSnacksGrid::createATSnack()
 	{
 		type = (Snack::SnackType)random(7, 13);
 	}
+	/*for (int x = 0; x < m_col; x++)
+	{
+		for (int y = 0; y < m_row; y++)
+		{
+			if (m_snackVector[x][y] != nullptr)
+			{
+				if (m_snackVector[x][y]->getType() == m_temp)
+					break;
+			}
+		}
+	}*/
 	m_temp = type;
 	temp = Snack::create(type);
 	temp->setPosition(530, 400);
 	this->addChild(temp, 3);
-	return temp;
-}
-Snack * FeedSnacksGrid::generateNTSnack()
-{
-	Snack * temp;
-	Snack::SnackType type = (Snack::SnackType)0;
-	if (m_Type >= 1 && m_Type <= 3)
-	{
-		type = (Snack::SnackType)random(1, 3);
-	}
-	else if (m_Type >= 4 && m_Type <= 6)
-	{
-		type = (Snack::SnackType)random(4, 6);
-	}
-	else if (m_Type >= 7 && m_Type <= 13)
-	{
-		type = (Snack::SnackType)random(7, 13);
-	}
-	for (; m_temp == type;)
-	{
-		if (m_Type >= 1 && m_Type <= 3)
-		{
-			type = (Snack::SnackType)random(1, 3);
-		}
-		else if (m_Type >= 4 && m_Type <= 6)
-		{
-			type = (Snack::SnackType)random(4, 6);
-		}
-		else if (m_Type >= 7 && m_Type <= 13)
-		{
-			type = (Snack::SnackType)random(7, 13);
-		}
-	}
-	temp = Snack::create(type);
-	temp->setPosition(530, 400);
-	this->addChild(temp, 3);
+	if (getLivingAtypeSnackNum() == 0)
+		m_SnacktempBase = createATSnack();
 	return temp;
 }
 
@@ -337,10 +312,9 @@ void FeedSnacksGrid::SetSnackPixPos(Snack* snack, int x, int y)
 	snack->setPosition(x* GRID_WIDTh + LEFT_MARGIn + 25, y*GRID_WIDTh + BOTTOM_MARGIn + 25);
 }
 
-
 int FeedSnacksGrid::getLivingAtypeSnackNum()
 {
-	int count = 0, counter = 0;
+	int count = 0;
 	for (int x = 0; x < m_col; x++)
 	{
 		for (int y = 0; y < m_row; y++)
@@ -352,7 +326,21 @@ int FeedSnacksGrid::getLivingAtypeSnackNum()
 			}
 		}
 	}
-	if (count == 0)
-		m_counter++;
+	return count;
+}
+
+int FeedSnacksGrid::getLivingAllSnackNum()
+{
+	int count = 0;
+	for (int x = 0; x < m_col; x++)
+	{
+		for (int y = 0; y < m_row; y++)
+		{
+			if (m_snackVector[x][y] != nullptr)
+			{
+				count++;
+			}
+		}
+	}
 	return count;
 }

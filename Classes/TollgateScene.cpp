@@ -86,11 +86,7 @@ bool TollgateScene::init()
 		GameManager::getInstance()->setIsGameOn(true);			// set game is on
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 
-<<<<<<< HEAD
-		//setNextTollgate();		// 随机下一关
-=======
 		setNextTollgate();		// 随机下一关
->>>>>>> 8436be0f6f6c33af882ecfab488bc0750ec7ef23
 	}
 	else
 	{

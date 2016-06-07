@@ -80,10 +80,8 @@ public:
 
 	// 创建需要消除的Snack
 	Snack * createATSnack();
-	Snack * generateNTSnack();
 
 	virtual void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
-	int Typemax(Snack::SnackType type);
 
 private:
 	int m_row, m_col;
@@ -96,8 +94,8 @@ private:
 	cocos2d::Vec2 convertToGridPos(cocos2d::Vec2 pixPos);// 将像素坐标转化成格子矩阵中的坐标
 	void generateNewSnacksGrid(const int diff);
 	int getLivingAtypeSnackNum();			// 得到活的农民的数量
+	int getLivingAllSnackNum();
 	// building
-	cocos2d::Sprite * m_ZerglingBase;
 	cocos2d::Sprite * m_SnacktempBase;
 };
 #endif
