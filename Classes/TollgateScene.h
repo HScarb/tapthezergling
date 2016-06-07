@@ -32,6 +32,7 @@ private:
 	void onItem9Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 
 private:
+	cocos2d::Label * m_tollgateNumLabel;
 	// 标签和按钮和进度条
 	cocos2d::ui::Text * m_jewelText;
 	cocos2d::ui::Text * m_energyText;
