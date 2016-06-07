@@ -62,6 +62,7 @@ bool TollgateScene::init()
 	m_t7 = (Text*)(m_scrollView->getChildByName("Text_7"));
 	m_t8 = (Text*)(m_scrollView->getChildByName("Text_8"));
 	m_t9 = (Text*)(m_scrollView->getChildByName("Text_9"));
+	m_t10 = (Text*)(m_scrollView->getChildByName("Text_10"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
 //	m_scrollView->setVisible(false);
@@ -79,7 +80,7 @@ bool TollgateScene::init()
 		GameManager::getInstance()->setIsGameOn(true);			// set game is on
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 
-//		setNextTollgate();		// 随机下一关
+		//setNextTollgate();		// 随机下一关
 	}
 	else
 	{
@@ -106,6 +107,7 @@ bool TollgateScene::init()
 	m_t7->addTouchEventListener(this, toucheventselector(TollgateScene::onItem7Clicked));
 	m_t8->addTouchEventListener(this, toucheventselector(TollgateScene::onItem8Clicked));
 	m_t9->addTouchEventListener(this, toucheventselector(TollgateScene::onItem9Clicked));
+	m_t10->addTouchEventListener(this, toucheventselector(TollgateScene::onItem10Clicked));
 
 	return true;
 }
@@ -202,6 +204,7 @@ void TollgateScene::onItem2Clicked(Ref* pSender, TouchEventType type)
 	{
 		log("tollgate 2");
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::SlideCutScene, 0, 2);
+
 	}
 }
 
@@ -264,5 +267,13 @@ void TollgateScene::onItem9Clicked(Ref* pSender, cocos2d::ui::TouchEventType typ
 	{
 		log("tollgate 9");
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::CheckThethingScene,1,2);
+	}
+}
+void TollgateScene::onItem10Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
+{
+	if (type == TOUCH_EVENT_ENDED)
+	{
+		log("tollgate 10");
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::FeedSnacks, 1, 1);
 	}
 }

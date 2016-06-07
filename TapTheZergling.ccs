@@ -280,6 +280,7 @@
           <Project Name="CheckTheThing.csd" Type="Scene" />
           <Project Name="DoubleTapScene.csd" Type="Scene" />
           <Project Name="EatCandiesScene.csd" Type="Scene" />
+          <Project Name="FeedSnacks.csd" Type="Scene" />
           <Project Name="JumpingOnPoolScene.csd" Type="Scene" />
           <Project Name="SlideCutScene.csd" Type="Scene" />
           <Project Name="TollgateControlLayer.csd" Type="Layer" />

@@ -15,6 +15,7 @@
 #include "BOSS1ZerglingKing.h"
 #include "BOSS2ZerglingNinja.h"
 #include "CheckThethingScene.h"
+#include"FeedSnacks.h"
 USING_NS_CC;
 
 SceneManager * SceneManager::m_sceneManager = nullptr;
@@ -114,6 +115,9 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 		break;
 	case CheckThethingScene:
 		pScene = CheckThethingScene::createScene(diff, loop);
+		break;
+	case FeedSnacks:
+		pScene = FeedSnacks::createScene(diff, loop);
 		break;
 	default: break;
 	}

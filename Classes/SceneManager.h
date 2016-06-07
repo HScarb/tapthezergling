@@ -26,7 +26,8 @@ public:
 		BurrowAndAttackScene,
 		JumpingOnPoolScene,
 		ClassifyUnits,
-		CheckThethingScene
+		CheckThethingScene,
+		FeedSnacks
 	}TollgateSceneType;
 	static SceneManager * getInstance();
 	virtual bool init();

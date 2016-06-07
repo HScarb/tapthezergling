@@ -26,15 +26,12 @@ bool Worker::init(int type)
 	switch (type)
 	{
 	case 1:
-		//this->initWithFile("Res/zergling_small_0.png");
 		this->initWithFile("Res/Workers/SCs_SCV_C_01.PNG");
 		break;
 	case 2:
-		//this->initWithFile("Res/zergling_small_1.png");
 		this->initWithFile("Res/Workers/SCs_Drone_C_01.PNG");
 		break;
 	case 3:
-		//this->initWithFile("Res/zergling_small_2.png");
 		this->initWithFile("Res/Workers/SCs_Probe_C_01.PNG");
 		break;
 	case 7:

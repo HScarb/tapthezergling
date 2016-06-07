@@ -61,6 +61,9 @@
     <Filter Include="Classes\Scenes\Tollgates\CheckThething">
       <UniqueIdentifier>{7e0f20c1-99b4-4fcd-932f-a2dc4cf26164}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\FeedSnacks">
+      <UniqueIdentifier>{5bf8579b-ad60-4afb-8faf-eaf5f7536339}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -164,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\farmerandflower.cpp">
       <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FeedSnacks.cpp">
+      <Filter>Classes\Scenes\Tollgates\FeedSnacks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\farmerandflower.h">
       <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FeedSnacks.h">
+      <Filter>Classes\Scenes\Tollgates\FeedSnacks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,358 @@
+//FeedSnack.cpp
+#include"FeedSnacks.h"
+#include "cocostudio/CocoStudio.h"
+#include "ui/CocosGUI.h"
+#include "TimeManager.h"
+#include"TollgateControlLayer.h"
+USING_NS_CC;
+using namespace cocos2d::ui;
+using namespace cocostudio::timeline;
+
+Snack* Snack::create(SnackType type)
+{
+	auto bRet = new Snack();
+	if (bRet && bRet->initWithType(type))
+	{
+		bRet->autorelease();
+	}
+	else
+	{
+		CC_SAFE_DELETE(bRet);
+	}
+	return bRet;
+}
+bool Snack::initWithType(SnackType type)
+{
+	switch (type)
+	{
+	case NONE:
+		return false;
+	case SCV:
+		this->initWithFile("Res/Workers/SCs_SCV_C_01.PNG");
+		break;
+	case Drone:
+		this->initWithFile("Res/Workers/SCs_Drone_C_01.PNG");
+		break;
+	case Probe:
+		this->initWithFile("Res/Workers/SCs_Probe_C_01.PNG");
+		break;
+	case FRED:
+		this->initWithFile("Res/flower_1.png");
+		break;
+	case FYELLOW:
+		this->initWithFile("Res/flower_2.png");
+		break;
+	case FBLUE:
+		this->initWithFile("Res/flower_3.png");
+		break;
+	case RED:
+		this->initWithFile("Res/zergling_small_0.png");
+		this->setScale(0.5f);
+		break;
+	case ORANGE:
+		this->initWithFile("Res/zergling_small_1.png");
+		this->setScale(0.5f);
+		break;
+	case YELLOW:
+		this->initWithFile("Res/zergling_small_2.png");
+		this->setScale(0.5f);
+		break;
+	case GREEN:
+		this->initWithFile("Res/zergling_small_3.png");
+		this->setScale(0.5f);
+		break;
+	case CYAN:
+		this->initWithFile("Res/zergling_small_4.png");
+		this->setScale(0.5f);
+		break;
+	case BLUE:
+		this->initWithFile("Res/zergling_small_5.png");
+		this->setScale(0.5f);
+		break;
+	case PURPLE:
+		this->initWithFile("Res/zergling_small_6.png");
+		this->setScale(0.5f);
+		break;
+	default: break;
+	}
+	this->setAnchorPoint(Vec2(0, 0));// 设置锚点为左下角
+	m_type = type;
+	return true;
+}
+
+Scene* FeedSnacks::createScene(int diff, int loop)
+{
+	auto scene = Scene::create();
+	auto layer = FeedSnacks::create(diff, loop);
+	scene->addChild(layer);
+	return scene;
+}
+
+bool FeedSnacks::init(int diff, int loop)
+{
+	if (!Layer::init())
+		return false;
+	auto winSize = Director::getInstance()->getWinSize();
+
+	auto UI = CSLoader::createNode("Tollgates/FeedSnacks.csb");
+	addChild(UI);
+
+	m_controlLayer = TollgateControlLayer::create();
+	m_controlLayer->initTimeBar();
+	m_controlLayer->scheduleUpdate();
+	addChild(m_controlLayer);
+
+	m_grid = FeedSnacksGrid::create(diff, loop);
+	m_grid->setPosition(0, 0);
+	this->addChild(m_grid);
+	return true;
+}
+
+Layer *FeedSnacks::create(int diff, int loop)
+{
+	auto pRef = new FeedSnacks();
+	if (pRef&&pRef->init(diff, loop))
+	{
+		pRef->autorelease();
+		return pRef;
+	}
+	else
+	{
+		CC_SAFE_DELETE(pRef);
+		return nullptr;
+	}
+}
+void FeedSnacks::update()
+{
+
+}
+
+/*
+Feed Snacks Grid
+*/
+
+FeedSnacksGrid* FeedSnacksGrid::create(int diff, int loop, int row, int col)
+{
+	auto pRef = new FeedSnacksGrid();
+	if (pRef&&pRef->init(diff, loop, row, col))
+	{
+		pRef->autorelease();
+		return pRef;
+	}
+	else
+	{
+		CC_SAFE_DELETE(pRef);
+		return nullptr;
+	}
+}
+
+bool FeedSnacksGrid::init(int diff, int loop, int row, int col)
+{
+	if (!Layer::init())
+		return false;
+	m_row = row;
+	m_col = col;
+	m_loop = loop;
+	m_diff = diff;
+	m_isRunning = false;
+	//根据行列初始化一个空的二维容器
+	m_snackVector.resize(m_col);
+	for (auto &vec : m_snackVector)
+		vec.resize(m_col);
+	
+	//根据难度来创建关卡内容
+	generateNewSnacksGrid(m_diff);
+	//创建要消除的对象
+	m_SnacktempBase = createATSnack();
+
+	auto listener = EventListenerTouchAllAtOnce::create();
+	listener->onTouchesBegan = CC_CALLBACK_2(FeedSnacksGrid::onTouchesBegan, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	return true;
+}
+cocos2d::Vec2 FeedSnacksGrid::convertToGridPos(cocos2d::Vec2 pixPos)
+{
+	float x, y;
+	x = (pixPos.x - LEFT_MARGIn) / GRID_WIDTh;
+	y = (pixPos.y - BOTTOM_MARGIn) / GRID_WIDTh;
+	if (x < 0.0)
+		x = -1.0;
+	if (y < 0.0)
+		y = -1.0;
+	return Vec2(x, y);
+}
+
+void FeedSnacksGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
+{
+	for (auto &item : touches)
+	{
+		auto touch = item;
+		auto location = touch->getLocation();
+		location = convertToGridPos(location);
+		int x1 = (int)location.x;
+		int y1 = (int)location.y;
+		if ((m_snackVector[x1][y1]->getType() == m_temp) && (x1 >= 0 && x1 < 6) && (y1 >= 0 && y1 < 3))
+		{
+			// * add animation
+			auto snack = m_snackVector[x1][y1];
+			// 清空矩阵中的狗的指针
+			m_snackVector[x1][y1] = nullptr;
+			// 将狗从矩阵的绘制节点中移除
+			snack->removeFromParent();
+			if (getLivingAtypeSnackNum() == 0)
+			{
+				m_SnacktempBase->removeFromParent();
+				if (m_counter < Typemax(m_Type))
+				{
+					m_SnacktempBase = generateNTSnack();
+				}
+				else if (m_counter == Typemax(m_Type))
+				{
+					generateNewSnacksGrid(m_diff);
+				}
+			}
+
+		}
+	}
+}
+int FeedSnacksGrid::Typemax(Snack::SnackType type)
+{
+	if (type >= 1 && type <= 3)
+		return 3;
+	else if (type >= 4 && type <= 6)
+		return 6;
+	if (type >= 7 && type <= 13)
+		return 13;
+}
+void FeedSnacksGrid::generateNewSnacksGrid(const int diff)
+{
+	m_loop--;
+	int sum = 0;
+	if (m_diff == 0)
+	{
+		sum = 8;
+	}
+	else if (m_diff == 1)
+	{
+		sum = random(8, 10);
+	}
+	else if (m_diff == 2)
+	{
+		sum = random(8, 12);
+	}
+	int t = random(1, 13);
+	log("t=%d", t);
+	Snack::SnackType type = ((Snack::SnackType)t);
+	m_Type = type;
+	for (int i = 1; i <= sum; i++)
+	{
+		int x = random(0, 5);
+		int y = random(0, 2);
+		for (; (m_snackVector[x][y] != nullptr) || (x == 2 && y == 1) || (x == 3 && y == 1) || (x == 2 && y == 2) || (x == 3 && y == 2);)
+		{
+			x = random(0, 5);
+			y = random(0, 2);
+		}
+		Snack * temp=0;
+		if (type >= 1 && type <= 3)
+		{
+			temp = Snack::create((Snack::SnackType)random(1, 3));
+		}
+		else if (type >= 4 && type <= 6)
+		{
+			temp = Snack::create((Snack::SnackType)random(4, 6));
+		}
+		else if (type >= 7 && type <= 13)
+		{
+			temp = Snack::create((Snack::SnackType)random(7, 13));
+		}
+		SetSnackPixPos(temp, x, y);
+		this->addChild(temp);
+		m_snackVector[x][y] = temp;
+	}
+}
+
+Snack * FeedSnacksGrid::createATSnack()
+{
+	Snack * temp;
+	Snack::SnackType type = (Snack::SnackType)0;
+	if (m_Type >= 1 && m_Type <= 3)
+	{
+		type = (Snack::SnackType)random(1, 3);
+	}
+	else if (m_Type >= 4 && m_Type <= 6)
+	{
+		type = (Snack::SnackType)random(4, 6);
+	}
+	else if (m_Type >= 7 && m_Type <= 13)
+	{
+		type = (Snack::SnackType)random(7, 13);
+	}
+	m_temp = type;
+	temp = Snack::create(type);
+	temp->setPosition(530, 400);
+	this->addChild(temp, 3);
+	return temp;
+}
+Snack * FeedSnacksGrid::generateNTSnack()
+{
+	Snack * temp;
+	Snack::SnackType type = (Snack::SnackType)0;
+	if (m_Type >= 1 && m_Type <= 3)
+	{
+		type = (Snack::SnackType)random(1, 3);
+	}
+	else if (m_Type >= 4 && m_Type <= 6)
+	{
+		type = (Snack::SnackType)random(4, 6);
+	}
+	else if (m_Type >= 7 && m_Type <= 13)
+	{
+		type = (Snack::SnackType)random(7, 13);
+	}
+	for (; m_temp == type;)
+	{
+		if (m_Type >= 1 && m_Type <= 3)
+		{
+			type = (Snack::SnackType)random(1, 3);
+		}
+		else if (m_Type >= 4 && m_Type <= 6)
+		{
+			type = (Snack::SnackType)random(4, 6);
+		}
+		else if (m_Type >= 7 && m_Type <= 13)
+		{
+			type = (Snack::SnackType)random(7, 13);
+		}
+	}
+	temp = Snack::create(type);
+	temp->setPosition(530, 400);
+	this->addChild(temp, 3);
+	return temp;
+}
+
+void FeedSnacksGrid::SetSnackPixPos(Snack* snack, int x, int y)
+{
+	snack->setPosition(x* GRID_WIDTh + LEFT_MARGIn + 25, y*GRID_WIDTh + BOTTOM_MARGIn + 25);
+}
+
+
+int FeedSnacksGrid::getLivingAtypeSnackNum()
+{
+	int count = 0, counter = 0;
+	for (int x = 0; x < m_col; x++)
+	{
+		for (int y = 0; y < m_row; y++)
+		{
+			if (m_snackVector[x][y] != nullptr)
+			{
+				if (m_snackVector[x][y]->getType() == m_temp)
+					count++;
+			}
+		}
+	}
+	if (count == 0)
+		m_counter++;
+	return count;
+}

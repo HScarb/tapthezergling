@@ -29,6 +29,7 @@ private:
 	void onItem7Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem8Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem9Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onItem10Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 
 private:
 	// 标签和按钮和进度条
@@ -53,4 +54,5 @@ private:
 	cocos2d::ui::Text * m_t7;
 	cocos2d::ui::Text * m_t8;
 	cocos2d::ui::Text * m_t9;
+	cocos2d::ui::Text * m_t10;
 };
