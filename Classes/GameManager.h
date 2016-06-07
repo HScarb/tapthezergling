@@ -14,8 +14,14 @@ public:
 	static GameManager * getInstance();
 	virtual bool init() override;
 
+	void setNextTollgate(int i);
+	int getNextTollgate();
+
+protected:
+	int m_nextTollgate;
+	
+
 	CC_SYNTHESIZE(int, m_tollgate, Tollgate);			// 当前关卡类型
-	CC_SYNTHESIZE(int, m_nextTollgate, NextTollgate);	// 下一关类型
 	CC_SYNTHESIZE(int, m_score, Score);					// 当前分数
 	CC_SYNTHESIZE(int, m_tollgateNum, TollgateNum);		// 当前关卡序号
 	CC_SYNTHESIZE(int, m_jewel, Jewel);					// 当前的宝石数量
