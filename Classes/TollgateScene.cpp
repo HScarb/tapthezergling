@@ -64,7 +64,7 @@ bool TollgateScene::init()
 	m_t9 = (Text*)(m_scrollView->getChildByName("Text_9"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-//	m_scrollView->setVisible(false);
+	m_scrollView->setVisible(false);
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
@@ -79,7 +79,7 @@ bool TollgateScene::init()
 		GameManager::getInstance()->setIsGameOn(true);			// set game is on
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 
-//		setNextTollgate();		// 随机下一关
+		setNextTollgate();		// 随机下一关
 	}
 	else
 	{
@@ -92,6 +92,8 @@ bool TollgateScene::init()
 			CCLOG("added 2 seconds.");
 			GameManager::getInstance()->setIsWaitToAddTime(false);
 		}
+		else
+			showNextTollgate();
 	}
 
 	// 关联触摸函数
@@ -168,6 +170,17 @@ void TollgateScene::setNextTollgate()
 	this->addChild(menu);
 }
 
+void TollgateScene::showNextTollgate()
+{
+	int r = GameManager::getInstance()->getNextTollgate();
+	// 显示关卡简介
+	auto label = Label::createWithTTF(TOLLGATE_NAME[r], "fonts/AveriaSansLibre-Bold.ttf", 40);
+	auto menuItemLabel = MenuItemLabel::create(label, CC_CALLBACK_1(TollgateScene::onTollgateLabelClicked, this));
+	auto menu = Menu::create(menuItemLabel, nullptr);
+	menu->setPosition(CENTER);
+	this->addChild(menu);
+}
+
 void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
@@ -184,7 +197,9 @@ void TollgateScene::onTollgateLabelClicked(Ref* pSender)
 	int nextTollgate = GameManager::getInstance()->getNextTollgate();
 	GameManager::getInstance()->setTollgate(nextTollgate);
 	CCLOG("Tollgate %d change scene...", nextTollgate);
-	SceneManager::getInstance()->changeScene((SceneManager::TollgateSceneType)nextTollgate, 1, 1);
+	int diff = GameManager::getInstance()->getDiff();
+	int loop = GameManager::getInstance()->getLoop();
+	SceneManager::getInstance()->changeScene((SceneManager::TollgateSceneType)nextTollgate, diff, loop);
 }
 
 void TollgateScene::onItem1Clicked(Ref* pSender, TouchEventType type)

@@ -14,6 +14,7 @@ public:
 private:
 	void addSeconds();				// 增加时间(动画效果)
 	void setNextTollgate();			// 随机下一关
+	void showNextTollgate();		// 将已经生成的下一关显示出来
 
 	void onHomeBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onCardBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);

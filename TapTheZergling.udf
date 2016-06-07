@@ -2,7 +2,7 @@
   <Properties>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
-        <LastPublishType Value="Resource" />
+        <LastPublishType Value="VS" />
         <IsLastPublish Value="True" />
         <LastRunType Value="Windows" />
       </Value>
@@ -27,21 +27,7 @@
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="TestScene.csd" />
-          <FilePathData Path="SettingsScene.csd" />
-          <FilePathData Path="TollgateScene.csd" />
-          <FilePathData Path="Tollgates/BOSS1ZerglingKing.csd" />
-          <FilePathData Path="Tollgates/BOSS2ZerglingNinja.csd" />
-          <FilePathData Path="Tollgates/BurrowAndAttack.csd" />
-          <FilePathData Path="Tollgates/DoubleTapScene.csd" />
-          <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
-          <FilePathData Path="Tollgates/SlideCutScene.csd" />
-          <FilePathData Path="Tollgates/CheckTheThing.csd" />
-          <FilePathData Path="CardEnhancer.csd" />
-          <FilePathData Path="MainScene.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="Tollgates/CheckTheThing.csd" />
+        <ActiveDocument />
       </Value>
     </Item>
   </Properties>
