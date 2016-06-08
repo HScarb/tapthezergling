@@ -239,7 +239,6 @@ void FeedSnacksGrid::generateNewSnacksGrid(const int diff)
 		sum = random(8, 12);
 	}
 	int t = random(1, 13);
-	log("t=%d", t);
 	Snack::SnackType type = ((Snack::SnackType)t);
 	m_Type = type;
 	for (int i = 1; i <= sum; i++)
@@ -287,17 +286,6 @@ Snack * FeedSnacksGrid::createATSnack()
 	{
 		type = (Snack::SnackType)random(7, 13);
 	}
-	/*for (int x = 0; x < m_col; x++)
-	{
-		for (int y = 0; y < m_row; y++)
-		{
-			if (m_snackVector[x][y] != nullptr)
-			{
-				if (m_snackVector[x][y]->getType() == m_temp)
-					break;
-			}
-		}
-	}*/
 	m_temp = type;
 	temp = Snack::create(type);
 	temp->setPosition(530, 400);
