@@ -97,6 +97,7 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 
 	// Á÷ĞÇÍÏÎ²MotionStreak
 	streak = MotionStreak::create(0.5f, 50, 10, Color3B::WHITE, "Res/Workers/blade.png");
+
 	//    streak = MotionStreak::create(0.5f, 1, 10, Color3B::RED, "steak.png");
 	streak->setPosition(0,0); // ÉèÖÃÍÏÎ²streakµÄÎ»ÖÃ
 	this->addChild(streak);

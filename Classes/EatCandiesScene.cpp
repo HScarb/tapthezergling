@@ -94,7 +94,7 @@ bool EatCandiesScene::init(int diff, int loop)
 	return true;
 }
 
-//下面的Layer* create代码差不多，固定
+
 cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
 {
 	auto pRef = new EatCandiesScene();
@@ -111,7 +111,6 @@ cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
 }
 
 
-//接下去两个虚函数
 void EatCandiesScene::newLevel(int diff)
 {
 
@@ -186,7 +185,7 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 		{
 			q = random(0, 5);
 			w = random(0, 2);
-			o = random(1, 3);
+			o = random(1, 4);
 		} while (m_flowersesGrid[q][w]);
 		m_flowersesGrid[q][w] = createflower(o, q, w);
 	}
@@ -225,6 +224,32 @@ void EatCandiesGrid::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_
 {
 
 }
+
+
+
+/*cocos2d::Animate* EatCandiesGrid::createAnimate()
+{
+	int iFrameNum = 4;
+	SpriteFrame* frame = NULL;
+	Vector<SpriteFrame*>frameVec;
+
+	for (int i = 1; i <= iFrameNum; i++)
+	{
+		frame = SpriteFrame::create(StringUtils::format("flower_1.%d.png", i), Rect(0, 0, 130, 130));
+		frameVec.pushBack((frame));
+	}
+
+	Animation* animation = Animation::createWithSpriteFrames(frameVec);
+	animation->setLoops(-1);
+	animation->setDelayPerUnit(0.1f);
+
+	Animate* action = Animate::create(animation);
+
+	return action;
+}
+*/
+
+
 
 //坐标获取，范围坐标与触屏坐标
 cocos2d::Vec2 EatCandiesGrid::convertToGridPos(cocos2d::Vec2 pixPos)
@@ -266,6 +291,10 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 		auto flower = m_flowersesGrid[x1][y1];
 		log("farmer pos x = %f, y = %f", flower->getPosition().x, flower->getPosition().y);
 
+		Blink* blink = Blink::create(3.0f, 3);
+
+		flower->runAction(blink);
+
 		// 清空矩阵中的花的指针
 		m_flowersesGrid[x1][y1] = nullptr;
 
@@ -275,7 +304,7 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 		{
 			if (m_flowersesGrid[r][b] == nullptr)
 			{
-				m_flowersesGrid[r][b] = createflower(n, r, b);
+				m_flowersesGrid[r][b] = createflower(n+1, r, b);
 			}
 
 			else if (m_flowersesGrid[r][b] != nullptr)
@@ -285,7 +314,7 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 
 			else if (m_flowersesGrid[r + 1][b] != nullptr)
 			{
-				m_flowersesGrid[r][b+1] = createflower(n, r , b+1);
+				m_flowersesGrid[r][b+1] = createflower(n+1, r , b+1);
 			}
 
 			else  if(m_flowersesGrid[r][b+1] != nullptr)
@@ -301,6 +330,8 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
 			CCLOG("EatFlowers clear");
 		}
+
+		//flower->runAction(createAnimate());
 
 		flower->tapped();
 

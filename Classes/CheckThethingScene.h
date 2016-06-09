@@ -9,22 +9,22 @@
 #include "TollgateControlLayer.h"
 
 class Farmerandflower;
-const int hang = 6;
-const int lie = 6;
-const int width = 200;
-const int l_margin = 200;
-const int b_margin = 100;
+const int hang = 3;
+const int lie = 3;
+const int width = 80;
+const int l_margin = 300;
+const int b_margin = 120;
 
 class CheckThethingGrid;
 class IntMatrix;
 
-static const int c_g[3][hang][lie] =
+static const int c_g[6][hang][lie] =
 {
+	//临时矩阵
 	{
 		{ 1, 2, 3 },
 		{ 1, 0, 0 },
-		{ 0, 4, 0 },
-		{ 0, 0, 2 }
+		{ 0, 4, 0 }
 	},
 };
 
@@ -61,6 +61,11 @@ public:
 	// 根据网格坐标创建一个小狗，并且加入到渲染节点
 	Farmerandflower * farmerandflowerAppear(int type, int x, int y);
 
+
+	void setSamplePixPos(Farmerandflower * farmerandflower, int y);
+	Farmerandflower * sampleAppear(int type, int y);
+
+
 	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 
@@ -69,11 +74,11 @@ private:
 	int m_loop, m_diff;
 	bool m_isRunning;
 	cocos2d::Label * m_touchesLabel;
-	std::vector<std::vector<Farmerandflower*>> m_farmerandflowerGrid;
+	std::vector<Farmerandflower*> m_farmerandflowerGrid;
+	std::vector<std::vector<Farmerandflower*>> m_thingGrid;
 
 private:
 	cocos2d::Vec2 convertToGridPos(cocos2d::Vec2 pixPos);		// 将像素坐标转化成格子矩阵中的坐标
-	void generateNewFarmersGrid(const int diff);
 	int getLivingFarmersNum();			// 得到活的农民的数量
 };
 

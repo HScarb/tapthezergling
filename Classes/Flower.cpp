@@ -24,7 +24,25 @@ bool Flower::init(int color)
 
 	m_colorType = color;
 
-	this->initWithFile(StringUtils::format("Res/flower_%d.png",color));
+	//this->initWithFile(StringUtils::format("Res/flower_%d.png",color));
+
+	switch (color)
+	{
+	case 1:
+		this->initWithFile("res/Res/flower_1.png");
+		break;
+	case 2:
+		this->initWithFile("res/Res/flower_2.png");
+		break;
+	case 3:
+		this->initWithFile("res/Res/flower_3.png");
+		break;
+	case 4:
+		this->initWithFile("res/Res/flower_4.png");
+		break;
+	default:
+		break;
+	}
 
 	this->setAnchorPoint(Vec2(0, 0));		// 设置锚点为左下角
 

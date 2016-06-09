@@ -15,10 +15,11 @@ public:
 		BLUE,
 		GREEN,
 		PINK,
-		BLCAK
+		BLCAK,
+		PURPLE
 	};
 
-	static Farmerandflower * farmerandflowerAppear(int type = 0);
+	static Farmerandflower * farmerandflowerAppear(int color = NONE);
 	bool init(int color);
 
 	void tapped();

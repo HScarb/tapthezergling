@@ -8,8 +8,8 @@
 #include "Flower.h"
 #include "TollgateControlLayer.h"
 
-const int grid_ROW = 3;				// 设定默认的行数和列数
-const int grid_COL = 6;
+const int grid_ROW = 9;				// 设定默认的行数和列数
+const int grid_COL = 9;
 const int grid_WIDTH = 120;			// 方块的宽度(和高度)
 const int left_MARGIN = 120;		// 矩阵距离左边的距离
 const int bottom_MARGIN = 80;		// 矩阵距离底部的距离
@@ -70,6 +70,8 @@ private:
 	int m_loop, m_diff;
 	bool m_isRunning;
 	cocos2d::Label * m_touchesLabel;
+	//std::vector<cocos2d::SpriteFrame*> spriteFrameVec;
+	//cocos2d::Animate* createAnimate();
 	std::vector<std::vector<Flower*>> m_flowersesGrid;
 
 private:
