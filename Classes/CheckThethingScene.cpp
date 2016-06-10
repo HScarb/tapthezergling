@@ -240,6 +240,7 @@ bool CheckThethingGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unus
 
 	if ((0 <= x1 && x1 < 3) && (0 <= y1 && y1 < 3) && m_thingGrid[x1][y1])
 	{
+
 		if (
 			(m_thingGrid[x1][y1] == m_farmerandflowerGrid[0]) ||
 			(m_thingGrid[x1][y1] == m_farmerandflowerGrid[1]) ||
