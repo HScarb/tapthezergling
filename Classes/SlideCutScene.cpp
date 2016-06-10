@@ -5,6 +5,12 @@
 #include "TimeManager.h"
 #include "TollgateControlLayer.h"
 
+const int diff0 = 0;
+const int diff1 = 5;
+const int diff2 = 6;
+const int diff3 = 11;
+const int diff4 = 12;
+const int diff5 = 17;
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -215,19 +221,32 @@ Vec2 SlideCutGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 	}
 	return Vec2(x, y);
 }
+
 void SlideCutGrid::generateNewFarmersGrid(const int diff)
 {
 	m_loop--;
+	int sum = 0;
+	if (m_diff>=0&&m_diff<=5)
+	{
+		sum = random(diff0, diff1);
+	}
+	else if (m_diff >= 6 && m_diff <= 11)
+	{
+		sum = random(diff2, diff3);
+	}
+	else if (m_diff >= 12 && m_diff <= 17)
+	{
+		sum = random(diff4, diff5);
+	}
 	int r = random(1, 3);
 	for (int x = 0; x < m_col; x++)
 	{
 		for (int y = 0; y < m_row; y++)
 		{
-			if (m_a[0][y][x] != 0)
+			if (m_a[sum][y][x] != 0)
 				m_farmerGrid[x][y] = createAFarmer(r, x, y);
 		}
 	}
-	log("loop=%d", m_loop);
 }
 int SlideCutGrid::getLivingFarmersNum()
 {

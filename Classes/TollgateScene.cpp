@@ -23,7 +23,6 @@ bool TollgateScene::init()
 {
 	if (!Layer::init())
 		return false;
-
 	m_energyText = nullptr;
 	m_jewelText = nullptr;
 	m_addJewelBtn = nullptr;
@@ -38,9 +37,16 @@ bool TollgateScene::init()
 	m_t2 = nullptr;
 	m_t3 = nullptr;
 
+	m_tollgateNumLabel = nullptr;
+
 	// 加载UI
 	auto rootNode = CSLoader::createNode("TollgateScene.csb");
 	addChild(rootNode);
+
+	// tollgate Num label
+	m_tollgateNumLabel = Label::createWithTTF(StringUtils::format("%d", GameManager::getInstance()->getTollgateNum()), "fonts/AveriaSansLibre-Bold.ttf", 50);
+	m_tollgateNumLabel->setPosition(486, 70);
+	this->addChild(m_tollgateNumLabel);
 
 	// 载入其他
 	m_energyText = (Text*)(rootNode->getChildByName("Text_energy"));
@@ -62,9 +68,10 @@ bool TollgateScene::init()
 	m_t7 = (Text*)(m_scrollView->getChildByName("Text_7"));
 	m_t8 = (Text*)(m_scrollView->getChildByName("Text_8"));
 	m_t9 = (Text*)(m_scrollView->getChildByName("Text_9"));
+	m_t10 = (Text*)(m_scrollView->getChildByName("Text_10"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-//	m_scrollView->setVisible(false);
+	m_scrollView->setVisible(false);
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
@@ -79,7 +86,7 @@ bool TollgateScene::init()
 		GameManager::getInstance()->setIsGameOn(true);			// set game is on
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 
-//		setNextTollgate();		// 随机下一关
+		setNextTollgate();		// 随机下一关
 	}
 	else
 	{
@@ -92,6 +99,8 @@ bool TollgateScene::init()
 			CCLOG("added 2 seconds.");
 			GameManager::getInstance()->setIsWaitToAddTime(false);
 		}
+		else
+			showNextTollgate();
 	}
 
 	// 关联触摸函数
@@ -106,6 +115,7 @@ bool TollgateScene::init()
 	m_t7->addTouchEventListener(this, toucheventselector(TollgateScene::onItem7Clicked));
 	m_t8->addTouchEventListener(this, toucheventselector(TollgateScene::onItem8Clicked));
 	m_t9->addTouchEventListener(this, toucheventselector(TollgateScene::onItem9Clicked));
+	m_t10->addTouchEventListener(this, toucheventselector(TollgateScene::onItem10Clicked));
 
 	return true;
 }
@@ -147,7 +157,7 @@ void TollgateScene::setNextTollgate()
 	// 如果第一次随机，之前没有关卡
 	if(GameManager::getInstance()->getTollgate() == 0)
 	{
-		r = random(1, TOTAL_TOLLGATE_TYPE);
+		r = random(2, TOTAL_TOLLGATE_TYPE);
 		GameManager::getInstance()->setNextTollgate(r);
 	}
 	// 如果之前有关卡
@@ -155,22 +165,44 @@ void TollgateScene::setNextTollgate()
 	{
 		do
 		{
-			r = random(1, TOTAL_TOLLGATE_TYPE);
+			r = random(2, TOTAL_TOLLGATE_TYPE);
 		} while (r == GameManager::getInstance()->getTollgate());
 		GameManager::getInstance()->setNextTollgate(r);
 	}
+	CCLOG("Current Tollgate Num %d", GameManager::getInstance()->getTollgateNum());
+	showNextTollgate();
+}
 
+void TollgateScene::showNextTollgate()
+{
+	int r = GameManager::getInstance()->getNextTollgate();
+	int num = GameManager::getInstance()->getTollgateNum();
+	Label * label = nullptr;
 	// 显示关卡简介
-	auto label = Label::createWithTTF(TOLLGATE_NAME[r], "fonts/AveriaSansLibre-Bold.ttf", 40);
+	if(num % 10 == 0)
+	{
+		label = Label::createWithTTF(StringUtils::format("BOSS %d", (num / 10)), "fonts/AveriaSansLibre-Bold.ttf", 40);
+	}
+	else
+		label = Label::createWithTTF(TOLLGATE_NAME[r], "fonts/AveriaSansLibre-Bold.ttf", 40);
 	auto menuItemLabel = MenuItemLabel::create(label, CC_CALLBACK_1(TollgateScene::onTollgateLabelClicked, this));
 	auto menu = Menu::create(menuItemLabel, nullptr);
 	menu->setPosition(CENTER);
 	this->addChild(menu);
+
+	auto scale1 = ScaleTo::create(0.2, 0.0);
+	auto changeText = CallFunc::create([this]()
+	{
+		m_tollgateNumLabel->setString(StringUtils::format("%d", GameManager::getInstance()->getTollgateNum()));
+	});
+	auto scale2 = ScaleTo::create(0.2, 1.0);
+	m_tollgateNumLabel->runAction(Sequence::create(scale1, changeText, scale2, nullptr));
 }
 
 void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
+
 		SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
 }
 
@@ -182,9 +214,19 @@ void TollgateScene::onCardBtnClicked(Ref* pSender, TouchEventType type)
 void TollgateScene::onTollgateLabelClicked(Ref* pSender)
 {
 	int nextTollgate = GameManager::getInstance()->getNextTollgate();
-	GameManager::getInstance()->setTollgate(nextTollgate);
-	CCLOG("Tollgate %d change scene...", nextTollgate);
-	SceneManager::getInstance()->changeScene((SceneManager::TollgateSceneType)nextTollgate, 1, 1);
+	int num = GameManager::getInstance()->getTollgateNum();
+	if(num % 10 == 0)
+	{
+		SceneManager::getInstance()->changeScene((SceneManager::SceneType)(100 + num / 10));
+	}
+	else 
+	{
+		GameManager::getInstance()->setTollgate(nextTollgate);
+		CCLOG("Tollgate %d change scene...", nextTollgate);
+		int diff = GameManager::getInstance()->getDiff();
+		int loop = GameManager::getInstance()->getLoop();
+		SceneManager::getInstance()->changeScene((SceneManager::TollgateSceneType)nextTollgate, diff, loop);
+	}
 }
 
 void TollgateScene::onItem1Clicked(Ref* pSender, TouchEventType type)
@@ -202,6 +244,7 @@ void TollgateScene::onItem2Clicked(Ref* pSender, TouchEventType type)
 	{
 		log("tollgate 2");
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::SlideCutScene, 0, 2);
+
 	}
 }
 
@@ -264,5 +307,13 @@ void TollgateScene::onItem9Clicked(Ref* pSender, cocos2d::ui::TouchEventType typ
 	{
 		log("tollgate 9");
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::CheckThethingScene,1,2);
+	}
+}
+void TollgateScene::onItem10Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
+{
+	if (type == TOUCH_EVENT_ENDED)
+	{
+		log("tollgate 10");
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::FeedSnacks, 1, 1);
 	}
 }

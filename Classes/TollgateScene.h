@@ -14,6 +14,7 @@ public:
 private:
 	void addSeconds();				// 增加时间(动画效果)
 	void setNextTollgate();			// 随机下一关
+	void showNextTollgate();		// 将已经生成的下一关显示出来
 
 	void onHomeBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onCardBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
@@ -29,8 +30,10 @@ private:
 	void onItem7Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem8Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem9Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onItem10Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 
 private:
+	cocos2d::Label * m_tollgateNumLabel;
 	// 标签和按钮和进度条
 	cocos2d::ui::Text * m_jewelText;
 	cocos2d::ui::Text * m_energyText;
@@ -53,4 +56,5 @@ private:
 	cocos2d::ui::Text * m_t7;
 	cocos2d::ui::Text * m_t8;
 	cocos2d::ui::Text * m_t9;
+	cocos2d::ui::Text * m_t10;
 };

@@ -23,9 +23,9 @@ static const int m_w[1][GRID_Row][GRID_Col] =
 {
 	// easy
 	{
-		{ 0, 0, 1, 0, 0, 0 },
-		{ 0, 0, 0, 0, 0, 1 },
-		{ 0, 0, 0, 0, 1, 0 }
+		{ 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0 },
+		{ 0, 0, 0, 0, 0, 0 }
 	}
 	// medium
 	// hard
@@ -66,7 +66,7 @@ public:
 
 private:
 	int m_row, m_col;
-	int m_diff, m_loop, m_Loop;
+	int m_diff, m_loop;
 	bool m_isRunning;
 	cocos2d::Sprite *m_zergling;
 	cocos2d::Vec2 m_delta, m_Bpos, m_Epos;

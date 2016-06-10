@@ -1,5 +1,5 @@
 <Solution>
-  <PropertyGroup Name="tapthezergling" Version="3.10.0.0" Type="CocosStudio" />
+  <PropertyGroup Name="TapTheZergling" Version="3.10.0.0" Type="CocosStudio" />
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
@@ -39,6 +39,7 @@
             <Image Name="dialog_card_enhancer.png" />
             <Image Name="Energy-bar.png" />
             <Image Name="Energy-progress.png" />
+            <Image Name="frame_level.png" />
             <Image Name="Gem-board.png" />
             <Image Name="loading_bar.png" />
             <Image Name="loading_progress.png" />
@@ -280,6 +281,7 @@
           <Project Name="CheckTheThing.csd" Type="Scene" />
           <Project Name="DoubleTapScene.csd" Type="Scene" />
           <Project Name="EatCandiesScene.csd" Type="Scene" />
+          <Project Name="FeedSnacks.csd" Type="Scene" />
           <Project Name="JumpingOnPoolScene.csd" Type="Scene" />
           <Project Name="SlideCutScene.csd" Type="Scene" />
           <Project Name="TollgateControlLayer.csd" Type="Layer" />

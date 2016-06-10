@@ -11,7 +11,7 @@ public:
 		MainScene,
 		SettingsScene,
 		TollgateScene,
-		BOSS1,
+		BOSS1 = 101,
 		BOSS2,
 		BOSS3,
 		BOSS4,
@@ -26,7 +26,8 @@ public:
 		BurrowAndAttackScene,
 		JumpingOnPoolScene,
 		ClassifyUnits,
-		CheckThethingScene
+		CheckThethingScene,
+		FeedSnacks
 	}TollgateSceneType;
 	static SceneManager * getInstance();
 	virtual bool init();

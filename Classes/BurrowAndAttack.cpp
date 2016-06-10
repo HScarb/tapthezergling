@@ -6,6 +6,9 @@
 #include"TollgateControlLayer.h"
 #include"math.h"
 
+const int diff1 = 1;
+const int diff2 = 2;
+const int diff3 = 3;
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -85,16 +88,12 @@ bool BurrowAndAttackGrid::init(int diff, int loop, int row, int col)
 	m_row = row;
 	m_col = col;
 	m_loop = loop;
-	m_Loop = loop;
 	m_diff = diff;
 	m_isRunning = false;
 	//根据行列初始化一个空的二维容器
 	m_workergrid.resize(m_col);
 	for (auto &vec : m_workergrid)
 		vec.resize(m_col);
-
-	//根据难度来创建关卡内容
-	generateNewWorkerGrid(m_diff);
 
 	//随机出现一只狗
 	int x = random(0, 5);
@@ -104,7 +103,11 @@ bool BurrowAndAttackGrid::init(int diff, int loop, int row, int col)
 		x = random(0, 5);
 		y = random(0, 2);
 	}
-	m_zergling = createAZerglingWithZOrder(7, x, y,2 );
+	m_zergling = createAZerglingWithZOrder(7, x, y, 2);
+	//根据难度来创建关卡内容
+	generateNewWorkerGrid(m_diff);
+
+	
 	
 
 	//创建一个时间监听器类型为单点触控
@@ -261,7 +264,6 @@ Worker* BurrowAndAttackGrid::createAZerglingWithZOrder(int type, int x, int y, i
 Vec2 BurrowAndAttackGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 {
 	float x, y;
-	
 	x = (pixPos.x - LEFT_Margin) / GRID_Width;
 	y = (pixPos.y - BOTTOM_Margin) / GRID_Width;
 	if (x < 0.0)
@@ -278,46 +280,39 @@ Vec2 BurrowAndAttackGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 void BurrowAndAttackGrid::generateNewWorkerGrid(const int diff)
 {
 	m_loop--;
-	if ( (m_Loop-1)==m_loop)
+	auto Zpos = m_zergling->getPosition();
+	Zpos = convertToGridPos(Zpos);
+	int x1 = (int)Zpos.x;
+	int y1 = (int)Zpos.y;
+	int sum = 0;
+	if (m_diff == 0 || m_diff == 1)
 	{
-		
-		for (int x = 0; x < m_col; x++)
-		{
-			for (int y = 0; y < m_row; y++)
-			{
-				if (m_w[0][y][x] != 0)
-				{
-					int r = random(1, 3);
-					m_workergrid[x][y] = createAWorker(r, x, y);
-				}
-			}
-		}
+		sum = random(diff1, diff2);
+	}
+	else if (m_diff == 2)
+	{
+		sum = random(diff1,diff3);
 	}
 	else
+		sum = random(diff2,diff3);
+	int t = random(1, 3);
+	int x = random(0, 5);
+	int y = random(0, 2);
+	for (int j = 0; j < sum; j++)
 	{
-		int t = random(1, 3);
-		int x = random(0, 5);
-		int y = random(0, 2);
-		auto Zpos = m_zergling->getPosition();
-		Zpos = convertToGridPos(Zpos);
-		int x1 = (int)Zpos.x;
-		int y1 = (int)Zpos.y;
-		for (int j = 0; j < 3; j++)
+		for (; m_workergrid[x][y] != 0;)
 		{
-			for (; m_workergrid[x][y] != 0;)
-			{
-				t = random(1, 3);
-				x = random(0, 5);
-				y = random(0, 2);
-			}
-			if (x == x1&&y == y1)
-			{
-				t = random(1, 3);
-				x = random(0, 5);
-				y = random(0, 2);
-			}
-			m_workergrid[x][y] = createAWorker(t, x, y);
+			t = random(1, 3);
+			x = random(0, 5);
+			y = random(0, 2);
 		}
+		if (x == x1&&y == y1)
+		{
+			t = random(1, 3);
+			x = random(0, 5);
+			y = random(0, 2);
+		}
+		m_workergrid[x][y] = createAWorker(t, x, y);
 	}
 }
 int BurrowAndAttackGrid::getLivingWorkerNum()
