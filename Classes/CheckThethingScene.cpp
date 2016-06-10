@@ -241,9 +241,9 @@ bool CheckThethingGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unus
 	if ((0 <= x1 && x1 < 3) && (0 <= y1 && y1 < 3) && m_thingGrid[x1][y1])
 	{
 		if (
-			(m_thingGrid[x1][y1]->getColorType() == m_farmerandflowerGrid[0]->getColorType()) ||
-			(m_thingGrid[x1][y1]->getColorType() == m_farmerandflowerGrid[1]->getColorType()) ||
-			(m_thingGrid[x1][y1]->getColorType() == m_farmerandflowerGrid[2]->getColorType())
+			(m_thingGrid[x1][y1] == m_farmerandflowerGrid[0]) ||
+			(m_thingGrid[x1][y1] == m_farmerandflowerGrid[1]) ||
+			(m_thingGrid[x1][y1] == m_farmerandflowerGrid[2])
 			)
 		{
 			// 如果倒计时还没有开始，则开始倒计时
@@ -253,19 +253,19 @@ bool CheckThethingGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unus
 				TimeManager::getInstance()->startCountDown();
 			}
 
-			auto flower = m_thingGrid[x1][y1];
+			auto farmerandflower = m_thingGrid[x1][y1];
 			//log("farmer pos x = %f, y = %f", flower->getPosition().x, flower->getPosition().y);
 
 			m_thingGrid[x1][y1] = nullptr;
 
-			flower->tapped();
+			//flower->tapped();
 
 			if (getLivingFarmersNum() <= 0 && m_loop <= 0)
 			{
 				_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
 				CCLOG("EatFlowers clear");
 			}
-
+			farmerandflower->tapped();
 		}
 	}
 	return true;
