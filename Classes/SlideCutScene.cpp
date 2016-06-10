@@ -103,6 +103,7 @@ bool SlideCutGrid::init(int diff, int loop, int row, int col)
 
 	// Á÷ÐÇÍÏÎ²MotionStreak
 	streak = MotionStreak::create(0.5f, 50, 10, Color3B::WHITE, "Res/Workers/blade.png");
+
 	//    streak = MotionStreak::create(0.5f, 1, 10, Color3B::RED, "steak.png");
 	streak->setPosition(0,0); // ÉèÖÃÍÏÎ²streakµÄÎ»ÖÃ
 	this->addChild(streak);
@@ -225,15 +226,15 @@ void SlideCutGrid::generateNewFarmersGrid(const int diff)
 {
 	m_loop--;
 	int sum = 0;
-	if (m_diff>=0&&m_diff<=5)
+	if (m_diff == 0)
 	{
 		sum = random(diff0, diff1);
 	}
-	else if (m_diff >= 6 && m_diff <= 11)
+	else if (m_diff == 1)
 	{
 		sum = random(diff2, diff3);
 	}
-	else if (m_diff >= 12 && m_diff <= 17)
+	else if (m_diff == 2)
 	{
 		sum = random(diff4, diff5);
 	}

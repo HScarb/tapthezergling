@@ -2,18 +2,18 @@
 USING_NS_CC;
 
 
-Farmerandflower* Farmerandflower::farmerandflowerAppear(int type)
+Farmerandflower* Farmerandflower::farmerandflowerAppear(int color)
 {
-	auto flower = new Farmerandflower();
+	auto flowerandflower = new Farmerandflower();
 
-	if (flower && flower->init(type))
+	if (flowerandflower && flowerandflower->init(color))
 	{
-		flower->autorelease();
-		return flower;
+		flowerandflower->autorelease();
+		return flowerandflower;
 	}
 	else
 	{
-		CC_SAFE_DELETE(flower);
+		CC_SAFE_DELETE(flowerandflower);
 		return nullptr;
 	}
 }
@@ -58,3 +58,4 @@ void Farmerandflower::tapped()
 {
 	this->removeFromParent();
 }
+

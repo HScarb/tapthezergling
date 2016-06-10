@@ -11,8 +11,9 @@ public:
 	{
 		NONE = 0,
 		RED = 1,
-		YELLOW,
-		BLUE
+		YELLOW = 2,
+		BLUE = 3,
+		PINK = 4
 	};
 
 	static Flower * createByColor(int color = NONE);
