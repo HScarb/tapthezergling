@@ -153,7 +153,7 @@ bool CheckThethingGrid::init(int diff, int loop, int row, int col)
 
 	m_farmerandflowerGrid.resize(m_row);
 
-
+	//稍硬性规定出现顺序，勉强算随机
 	int o;
 	int i;
 	int l;
@@ -169,20 +169,31 @@ bool CheckThethingGrid::init(int diff, int loop, int row, int col)
 	for (auto &vec : m_thingGrid)
 		vec.resize(m_row);
 
+
 	int j;
 	int k;
-	int c;
+	int c,d,e;
 	for (int n = 0; n <= 2; n++)
 	{
 		do
 		{
 			j = random(0, 2);
 			k = random(0, 2);
-			c = random(1, 6);
+
+			c = random(1, 2);
+			d = random(3, 4);
+			e = random(5, 6);
 		} while (m_thingGrid[j][k]);
-		m_thingGrid[j][k] = farmerandflowerAppear(c, j, k);
+		if (n == 1)
+			m_thingGrid[j][k] = farmerandflowerAppear(c, j, k);
+		if (n == 2)
+			m_thingGrid[j][k] = farmerandflowerAppear(d, j, k);
+		if (n == 3)
+			m_thingGrid[j][k] = farmerandflowerAppear(e, j, k);
+
 	}
 	
+
 	auto touchListener = EventListenerTouchOneByOne::create();
 
 	touchListener->onTouchBegan = CC_CALLBACK_2(CheckThethingGrid::onTouchBegan, this);
@@ -198,11 +209,13 @@ void CheckThethingGrid::setFarmerPixPos(Farmerandflower* farmerandflower, int x,
 	farmerandflower->setPosition(x * width + l_margin, y * width + b_margin);
 }
 
+//设置单行矩阵
 void CheckThethingGrid::setSamplePixPos(Farmerandflower* farmerandflower, int y)
 {
 	farmerandflower->setPosition(200, y * width + b_margin);
 }
 
+//设置单行矩阵
 Farmerandflower* CheckThethingGrid::sampleAppear(int type, int y)
 {
 	Farmerandflower * farmerandflower = nullptr;
@@ -238,15 +251,10 @@ bool CheckThethingGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unus
 	int y1 = (int)pos.y;
 
 
-	if ((0 <= x1 && x1 < 3) && (0 <= y1 && y1 < 3) && m_thingGrid[x1][y1])
+	if ((0 <= x1 && x1 < 3) && (0 <= y1 && y1 < 3) && m_thingGrid[x1][y1] &&((m_thingGrid[x1][y1] == m_farmerandflowerGrid[0]) ||
+		(m_thingGrid[x1][y1] == m_farmerandflowerGrid[1]) ||
+		(m_thingGrid[x1][y1] == m_farmerandflowerGrid[2])))
 	{
-
-		if (
-			(m_thingGrid[x1][y1] == m_farmerandflowerGrid[0]) ||
-			(m_thingGrid[x1][y1] == m_farmerandflowerGrid[1]) ||
-			(m_thingGrid[x1][y1] == m_farmerandflowerGrid[2])
-			)
-		{
 			// 如果倒计时还没有开始，则开始倒计时
 			if (!m_isRunning)
 			{
@@ -259,15 +267,12 @@ bool CheckThethingGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unus
 
 			m_thingGrid[x1][y1] = nullptr;
 
-			//flower->tapped();
-
 			if (getLivingFarmersNum() <= 0 && m_loop <= 0)
 			{
 				_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
 				CCLOG("EatFlowers clear");
 			}
 			farmerandflower->tapped();
-		}
 	}
 	return true;
 
