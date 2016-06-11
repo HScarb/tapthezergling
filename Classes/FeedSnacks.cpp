@@ -154,7 +154,7 @@ bool FeedSnacksGrid::init(int diff, int loop, int row, int col)
 	m_col = col;
 	m_loop = loop;
 	m_diff = diff;
-	//m_isRunning = false;
+	m_isRunning = false;
 	//根据行列初始化一个空的二维容器
 	m_snackVector.resize(m_col);
 	for (auto &vec : m_snackVector)
@@ -192,8 +192,8 @@ void FeedSnacksGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches,
 		location = convertToGridPos(location);
 		int x1 = (int)location.x;
 		int y1 = (int)location.y;
-		log("x1=%d,x2=%d", x1, y1);
-		if ((x1 >= 0 && x1 < 6) && (y1 >= 0 && y1 < 3) && (m_snackVector[x1][y1]->getType() == m_temp))
+		log("x1=%d,y1=%d", x1, y1);
+		if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3) && m_snackVector[x1][y1] && (m_snackVector[x1][y1]->getType() == m_temp))
 		{
 			// 如果倒计时还没有开始，则开始倒计时
 			if (!m_isRunning)
@@ -217,6 +217,7 @@ void FeedSnacksGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches,
 				else if (getLivingAllSnackNum() == 0 && m_loop > 0)
 				{
 					generateNewSnacksGrid(m_diff);
+					m_SnacktempBase = createATSnack();
 				}
 				else if (getLivingAllSnackNum() <= 0 && m_loop <= 0)
 				{
@@ -239,11 +240,13 @@ void FeedSnacksGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches,
 	}
 	else
 		smalls = ScaleTo::create(1.0, 0);
-	auto callFunc1 = CallFunc::create([=]()
+	/*auto callFunc1 = CallFunc::create([=]()
 	{
 		m_SnacktempBase->removeFromParent();
 	});
 	m_SnacktempBase->runAction(Sequence::create(smalls, callFunc1, nullptr));
+	m_SnacktempBase->runAction(smalls);
+	m_SnacktempBase->removeFromParent();
 }*/
 void FeedSnacksGrid::generateNewSnacksGrid(const int diff)
 {
@@ -312,8 +315,7 @@ Snack * FeedSnacksGrid::createATSnack()
 	m_temp = type;
 	temp = Snack::create(type);
 	temp->setPosition(530, 400);
-
-	/*temp->setScale(0.0);
+	temp->setScale(0.0);
 	cocos2d::ScaleTo *big;
 	if (m_temp >= 7 && m_temp <= 13)
 	{
@@ -321,11 +323,13 @@ Snack * FeedSnacksGrid::createATSnack()
 	}
 	else
 		big = ScaleTo::create(0.35, 1.0);
-	temp->runAction(big);*/
 	this->addChild(temp, 3);
+	temp->runAction(big);
 	if (getLivingAtypeSnackNum() == 0)
-		m_SnacktempBase = createATSnack();
-
+	{
+		temp->removeFromParent();
+		temp = createATSnack();
+	}
 	return temp;
 }
 
