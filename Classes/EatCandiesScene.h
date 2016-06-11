@@ -69,7 +69,6 @@ private:
 	int m_row, m_col;
 	int m_loop, m_diff;
 	bool m_isRunning;
-	cocos2d::Label * m_touchesLabel;
 	//std::vector<cocos2d::SpriteFrame*> spriteFrameVec;
 	//cocos2d::Animate* createAnimate();
 	std::vector<std::vector<Flower*>> m_flowersesGrid;

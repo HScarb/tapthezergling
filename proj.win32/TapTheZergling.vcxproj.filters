@@ -171,6 +171,9 @@
     <ClCompile Include="..\Classes\FeedSnacks.cpp">
       <Filter>Classes\Scenes\Tollgates\FeedSnacks</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Shake.cpp">
+      <Filter>Classes\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -286,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\FeedSnacks.h">
       <Filter>Classes\Scenes\Tollgates\FeedSnacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shake.h">
+      <Filter>Classes\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -96,14 +96,18 @@ bool ClassifyUnits::init(int diff, int loop)
 	this->addChild(m_controlLayer);
 
 	// ´´½¨Bases
-	m_terranBase = Sprite::create(PATH_TERRAN_BASE);
+	m_terranBase = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_TERRAN_BASE));
+	m_terranBase->setScale(0.25);
 	m_terranBase->setPosition(POS_TERRAN_BASE);
-	m_zergBase = Sprite::create(PATH_ZERG_BASE);
+	m_zergBase = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_ZERG_BASE));
+	m_zergBase->setScale(0.25);
 	m_zergBase->setPosition(POS_ZERG_BASE);
-	m_protossBase = Sprite::create(PATH_PROTOSS_BASE);
+	m_protossBase = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_PROTOSS_BASE));
 	m_protossBase->setPosition(POS_PROTOSS_BASE);
-	m_spawningPool = Sprite::create(PATH_SPAWNINGPOOL);
+	m_protossBase->setScale(0.25);
+	m_spawningPool = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_SPAWNINGPOOL));
 	m_spawningPool->setPosition(POS_SPAWNPOOL);
+	m_spawningPool->setScale(0.5);
 
 	addChild(m_terranBase, 100);
 	addChild(m_zergBase, 100);

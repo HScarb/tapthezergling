@@ -14,21 +14,7 @@ const int BOTTOM_MARGIn = 80;		// 小狗矩阵距离底部的距离
 
 class FeedSnacksGrid;
 class IntMatrix;
-/*
-定死的狗狗矩阵
-0表示空，1表示狗的出现
-*/
-static const int m_f[1][GRID_ROw][GRID_COl] =
-{
-	// easy
-	{
-		{ 0, 0, 0, 0, 0, 0 },
-		{ 0, 0, 0, 0, 0, 0 },
-		{ 0, 0, 0, 0, 0, 0 }
-	}
-	// medium
-	// hard
-};
+
 class Snack : public cocos2d::Sprite
 {
 public:
@@ -80,6 +66,8 @@ public:
 
 	// 创建需要消除的Snack
 	Snack * createATSnack();
+	//移除效果
+	void Remove();
 
 	virtual void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
 

@@ -6,9 +6,9 @@
 #include"TollgateControlLayer.h"
 #include"math.h"
 
-const int diff1 = 1;
-const int diff2 = 2;
-const int diff3 = 3;
+const int diff0 = 1;
+const int diff1 = 2;
+const int diff2 = 3;
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -285,16 +285,18 @@ void BurrowAndAttackGrid::generateNewWorkerGrid(const int diff)
 	int x1 = (int)Zpos.x;
 	int y1 = (int)Zpos.y;
 	int sum = 0;
-	if (m_diff == 0 || m_diff == 1)
+	if (m_diff == 0)
 	{
-		sum = random(diff1, diff2);
+		sum = diff0;
+	}
+	else if (m_diff == 1)
+	{
+		sum = random(diff0, diff1);
 	}
 	else if (m_diff == 2)
 	{
-		sum = random(diff1,diff3);
+		sum = random(diff1, diff2);
 	}
-	else
-		sum = random(diff2,diff3);
 	int t = random(1, 3);
 	int x = random(0, 5);
 	int y = random(0, 2);

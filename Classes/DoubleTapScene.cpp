@@ -132,9 +132,6 @@ bool DoubleTapGrid::init(int diff, int loop, int row, int col)
 	m_loop = loop;
 	m_diff = diff;
 	m_isRunning = false;
-	m_touchesLabel = Label::create("0000", "Arial", 30);
-	m_touchesLabel->setPosition(100, 500);
-	this->addChild(m_touchesLabel);
 
 	// 根据行、列，初始化一个空的二维容器
 	m_zerglingGrid.resize(m_col);
@@ -172,6 +169,7 @@ Zergling* DoubleTapGrid::createAZergling(Zergling::ZerglingColor color, int x, i
 
 void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
 {
+/*
 	for (auto &item : touches)
 	{
 		auto touch = item;
@@ -181,6 +179,7 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 		addChild(touchPoint);
 		s_map.insert(touch->getID(), touchPoint);
 	}
+*/
 	if(s_map.size() == 2)
 	{
 		// log("touches count: %d", count);
@@ -195,7 +194,6 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 			p[c] = convertToGridPos(p[c]);
 			c++;
 		}
-		m_touchesLabel->setString(StringUtils::format("1:(%d,%d), 2:(%d,%d)", (int)p[0].x, (int)p[0].y, (int)p[1].x, (int)p[1].y));
 		int x1 = (int)p[0].x;
 		int y1 = (int)p[0].y;
 		int x2 = (int)p[1].x;
@@ -354,11 +352,12 @@ cocos2d::Vec2 DoubleTapGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 void DoubleTapGrid::generateNewZerglingGrid(const int diff)
 {
 	m_loop--;
+	int index = random(0, 5 * (diff + 1) - 1);
 	for (int x = 0; x < m_col; x++)
 	{
 		for (int y = 0; y < m_row; y++)
 		{
-			m_zerglingGrid[x][y] = createAZergling((Zergling::ZerglingColor)m_g[diff][y][x], x, y);
+			m_zerglingGrid[x][y] = createAZergling((Zergling::ZerglingColor)m_g[index][y][x], x, y);
 		}
 	}
 }

@@ -71,7 +71,7 @@ bool TollgateScene::init()
 	m_t10 = (Text*)(m_scrollView->getChildByName("Text_10"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-	m_scrollView->setVisible(false);
+//	m_scrollView->setVisible(false);
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
@@ -86,7 +86,7 @@ bool TollgateScene::init()
 		GameManager::getInstance()->setIsGameOn(true);			// set game is on
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 
-		setNextTollgate();		// 随机下一关
+//		setNextTollgate();		// 随机下一关
 	}
 	else
 	{
@@ -100,7 +100,8 @@ bool TollgateScene::init()
 			GameManager::getInstance()->setIsWaitToAddTime(false);
 		}
 		else
-			showNextTollgate();
+			;
+			//showNextTollgate();
 	}
 
 	// 关联触摸函数
@@ -314,6 +315,6 @@ void TollgateScene::onItem10Clicked(Ref* pSender, cocos2d::ui::TouchEventType ty
 	if (type == TOUCH_EVENT_ENDED)
 	{
 		log("tollgate 10");
-		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::FeedSnacks, 1, 1);
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::FeedSnacks, 2, 2);
 	}
 }
