@@ -100,7 +100,8 @@ bool TollgateScene::init()
 			GameManager::getInstance()->setIsWaitToAddTime(false);
 		}
 		else
-			showNextTollgate();
+			;
+			//showNextTollgate();
 	}
 
 	// ¹ØÁª´¥Ãþº¯Êý
@@ -314,6 +315,6 @@ void TollgateScene::onItem10Clicked(Ref* pSender, cocos2d::ui::TouchEventType ty
 	if (type == TOUCH_EVENT_ENDED)
 	{
 		log("tollgate 10");
-		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::FeedSnacks, 1, 1);
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::FeedSnacks, 2, 2);
 	}
 }

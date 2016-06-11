@@ -66,7 +66,6 @@ public:
 
 	// 创建需要消除的Snack
 	Snack * createATSnack();
-
 	//移除效果
 	void Remove();
 
