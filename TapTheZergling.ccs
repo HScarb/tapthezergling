@@ -57,6 +57,7 @@
             <Image Name="SCs_Bush_01.png" />
             <Image Name="SCs_Bush_02.png" />
             <Image Name="SCs_Bush_03.png" />
+            <Image Name="SCs_CommandCenter_C.png" />
             <Image Name="SCs_DancingFlowers_00.png" />
             <Image Name="SCs_DancingFlowers_01.png" />
             <Image Name="SCs_DancingFlowers_02.png" />
@@ -103,6 +104,19 @@
             <Image Name="SCs_GrassLightGreen_03.png" />
             <Image Name="SCs_GrassLightGreen_04.png" />
             <Image Name="SCs_GrassLightGreen_05.png" />
+            <Image Name="SCs_Hatchery_C.png" />
+            <Image Name="SCs_Nexus_C.png" />
+            <Image Name="SCs_SpawningPool_C.png" />
+            <Image Name="starcrafts_SmallUnit_Death_01.png" />
+            <Image Name="starcrafts_SmallUnit_Death_02.png" />
+            <Image Name="starcrafts_SmallUnit_Death_03.png" />
+            <Image Name="starcrafts_SmallUnit_Death_04.png" />
+            <Image Name="starcrafts_SmallUnit_Death_05.png" />
+            <Image Name="starcrafts_SmallUnit_Death_06.png" />
+            <Image Name="starcrafts_SmallUnit_Death_07.png" />
+            <Image Name="starcrafts_SmallUnit_Death_08.png" />
+            <Image Name="starcrafts_SmallUnit_Death_09.png" />
+            <Image Name="starcrafts_SmallUnit_Death_10.png" />
             <Image Name="starcrafts_Terrain_DarkGrass.png" />
             <Image Name="starcrafts_Terrain_Dirt.png" />
             <Image Name="starcrafts_Terrain_LightGrass.png" />

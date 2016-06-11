@@ -4,6 +4,7 @@
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
 #include "AnimationUtil.h"
+#include "Shake.h"
 using namespace std;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -64,6 +65,8 @@ void BOSS1ZerglingKing::onTouchesBegan(const std::vector<cocos2d::Touch*>& touch
 				TimeManager::getInstance()->startCountDown();
 			}
 			m_hitPoint--;
+			auto shake = CCShake::create(0.2, 10);
+			m_zerglingKing->runAction(shake);
 			m_zerglingKing->setScale(m_zerglingKing->getScale() * 0.95);
 			if(m_hitPoint <= 0)
 			{

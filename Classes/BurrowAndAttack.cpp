@@ -291,7 +291,7 @@ void BurrowAndAttackGrid::generateNewWorkerGrid(const int diff)
 	}
 	else if (m_diff == 1)
 	{
-		sum = random(diff0,diff1);
+		sum = random(diff0, diff1);
 	}
 	else if (m_diff == 2)
 	{

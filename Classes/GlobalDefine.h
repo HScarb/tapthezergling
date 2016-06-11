@@ -18,10 +18,10 @@
 #define PATH_PROBE "Workers/SCs_Probe_C_01.png"
 #define PATH_SMALLZERGLING "zergling/SCs_Zergling_C3_04.png"
 	// buildings
-#define PATH_ZERG_BASE "zergling_small_7.png"
-#define PATH_TERRAN_BASE "zergling_small_6.png"
-#define PATH_PROTOSS_BASE "zergling_small_3.png"
-#define PATH_SPAWNINGPOOL "zergling_small_0.png"
+#define PATH_ZERG_BASE "star crafts/SCs_Hatchery_C.png"
+#define PATH_TERRAN_BASE "star crafts/SCs_CommandCenter_C.png"
+#define PATH_PROTOSS_BASE "star crafts/SCs_Nexus_C.png"
+#define PATH_SPAWNINGPOOL "star crafts/SCs_SpawningPool_C.png"
 	// pics
 #define PATH_BUTTON_ACCEPT_1 "RESOURCE/button_accept_1.png"
 #define PATH_BUTTON_ACCEPT_2 "RESOURCE/button_accept_2.png"

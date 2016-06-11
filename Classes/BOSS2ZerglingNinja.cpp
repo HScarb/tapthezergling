@@ -46,9 +46,11 @@ bool BOSS2ZerglingNinja::init()
 	for(auto item : m_posVector)
 	{
 		Vec2 pos = item.pos;
+		int r = random(1, 2);
 		c = item.num;
-		m_woods[c] = Sprite::create("RESOURCE/loading_bar.png");
-		m_woods[c]->setScale(0.15);
+		m_woods[c] = Sprite::create(StringUtils::format("star crafts/SCs_Doodad_log0%d.png", r));
+		m_woods[c]->setScaleX(0.5);
+		m_woods[c]->setScaleY(0.20);
 		m_woods[c]->setPosition(pos);
 		this->addChild(m_woods[c]);
 	}
@@ -92,6 +94,13 @@ bool BOSS2ZerglingNinja::onTouchBegan(Touch * pTouch, Event * pEvent)
 			if ((*iter) == m_curPt)
 			{
 				iter = m_posVector.erase(iter);
+				// ²¥·Å±¬Õ¨¶¯»­
+				Sprite * virtualBurstSprite = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("star crafts/starcrafts_SmallUnit_Death_1.png"));
+				virtualBurstSprite->setPosition(m_curPt.pos.x, m_curPt.pos.y + 40);
+				this->addChild(virtualBurstSprite);
+				auto burst = AnimationUtil::createWithFrameNameAndNumRange("star crafts/starcrafts_SmallUnit_Death_", 1, 10, 1 / 12.0, 1, true);
+				auto unShow = CallFunc::create([virtualBurstSprite]() {virtualBurstSprite->removeFromParent(); });
+				virtualBurstSprite->runAction(Sequence::create(Animate::create(burst), unShow, nullptr));
 			}
 			else
 			{
@@ -122,7 +131,10 @@ bool BOSS2ZerglingNinja::onTouchBegan(Touch * pTouch, Event * pEvent)
 		else
 		{
 			m_curPt = m_posVector.at(random(0, (int)m_posVector.size() - 1));
+			m_zerglingNinja->setScale(0.0);
+			auto big = ScaleTo::create(0.15, 0.15);
 			m_zerglingNinja->setPosition(m_curPt.pos);
+			m_zerglingNinja->runAction(big);
 		}
 	}
 	return true;
