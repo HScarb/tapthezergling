@@ -154,7 +154,7 @@ bool FeedSnacksGrid::init(int diff, int loop, int row, int col)
 	m_col = col;
 	m_loop = loop;
 	m_diff = diff;
-	m_isRunning = false;
+	//m_isRunning = false;
 	//根据行列初始化一个空的二维容器
 	m_snackVector.resize(m_col);
 	for (auto &vec : m_snackVector)
@@ -230,24 +230,7 @@ void FeedSnacksGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches,
 	}
 }
 
-/*void FeedSnacksGrid::Remove()
-{
 
-	cocos2d::ScaleTo *smalls;
-	if (m_temp >= 6 && m_temp <= 13)
-	{
-		smalls = ScaleTo::create(0.5, 0);
-	}
-	else
-		smalls = ScaleTo::create(1.0, 0);
-	/*auto callFunc1 = CallFunc::create([=]()
-	{
-		m_SnacktempBase->removeFromParent();
-	});
-	m_SnacktempBase->runAction(Sequence::create(smalls, callFunc1, nullptr));
-	m_SnacktempBase->runAction(smalls);
-	m_SnacktempBase->removeFromParent();
-}*/
 void FeedSnacksGrid::generateNewSnacksGrid(const int diff)
 {
 	m_loop--;
@@ -327,6 +310,7 @@ Snack * FeedSnacksGrid::createATSnack()
 	temp->runAction(big);
 	if (getLivingAtypeSnackNum() == 0)
 	{
+
 		temp->removeFromParent();
 		temp = createATSnack();
 	}
