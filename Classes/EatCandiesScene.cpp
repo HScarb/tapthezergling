@@ -143,7 +143,7 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 		{
 			q = random(0, 5);
 			w = random(0, 2);
-			o = random(1, 4);
+			o = random(1, 3);
 		} while (m_flowersesGrid[q][w]);
 		m_flowersesGrid[q][w] = createflower(o, q, w);
 	}
