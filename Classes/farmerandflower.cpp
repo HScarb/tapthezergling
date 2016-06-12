@@ -1,49 +1,50 @@
 #include "farmerandflower.h"
 USING_NS_CC;
 
-
-Farmerandflower* Farmerandflower::farmerandflowerAppear(int color)
+farmerandflower* farmerandflower::createByColor(int color)
 {
-	auto flowerandflower = new Farmerandflower();
+	auto flower = new farmerandflower();
 
-	if (flowerandflower && flowerandflower->init(color))
+	if (flower && flower->init(color))
 	{
-		flowerandflower->autorelease();
-		return flowerandflower;
+		flower->autorelease();
+		return flower;
 	}
 	else
 	{
-		CC_SAFE_DELETE(flowerandflower);
+		CC_SAFE_DELETE(flower);
 		return nullptr;
 	}
 }
 
-bool Farmerandflower::init(int color)
+bool farmerandflower::init(int color)
 {
 	if (!FilterSprite::init())
 		return false;
 
 	m_colorType = color;
 
+	//this->initWithFile(StringUtils::format("Res/flower_%d.png",color));
+
 	switch (color)
 	{
 	case 1:
-		this->initWithFile("Res/Workers/SCs_SCV_C_01.PNG");
+		this->initWithFile("res/Res/flower_1.png");
 		break;
 	case 2:
-		this->initWithFile("Res/Workers/SCs_Drone_C_01.PNG");
+		this->initWithFile("res/Res/flower_2.png");
 		break;
 	case 3:
-		this->initWithFile("Res/Workers/SCs_Probe_C_01.PNG");
+		this->initWithFile("res/Res/flower_3.png");
 		break;
 	case 4:
-		this->initWithFile("Res/flower_1.png");
+		this->initWithFile("res/Res/flower_4.png");
 		break;
 	case 5:
-		this->initWithFile("Res/flower_2.png");
+		this->initWithFile("Res/flower_5.png");
 		break;
 	case 6:
-		this->initWithFile("Res/flower_3.png");
+		this->initWithFile("Res/flower_6.png");
 		break;
 	default:
 		break;
@@ -54,7 +55,12 @@ bool Farmerandflower::init(int color)
 	return true;
 }
 
-void Farmerandflower::tapped()
+void farmerandflower::eatAnimation()
+{
+
+}
+
+void farmerandflower::tapped()
 {
 	this->removeFromParent();
 }

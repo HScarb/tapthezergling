@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "TollgateControlLayer.h"
 #include "ui\CocosGUI.h"
+#include "AnimationUtil.h"
 
 class BOSS2ZerglingNinja : public cocos2d::Layer
 {

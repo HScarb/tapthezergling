@@ -13,45 +13,6 @@ using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 
 
-// multi touches test
-static const Color3B* s_TouchColors[5] = {
-	&Color3B::YELLOW,
-	&Color3B::BLUE,
-	&Color3B::GREEN,
-	&Color3B::RED,
-	&Color3B::MAGENTA
-};
-
-class TouchPoint : public Node
-{
-public:
-	TouchPoint(const Vec2 &touchPoint, const Color3B &touchColor)
-	{
-		m_point = touchPoint;
-		DrawNode* drawNode = DrawNode::create();
-		auto s = Director::getInstance()->getWinSize();
-		Color4F color(touchColor.r / 255.0f, touchColor.g / 255.0f, touchColor.b / 255.0f, 1.0f);
-		drawNode->drawLine(Vec2(0, touchPoint.y), Vec2(s.width, touchPoint.y), color);
-		drawNode->drawLine(Vec2(touchPoint.x, 0), Vec2(touchPoint.x, s.height), color);
-		drawNode->drawDot(touchPoint, 3, color);
-		addChild(drawNode);
-	}
-
-	static TouchPoint* touchPointWithParent(Node* pParent, const Vec2 &touchPoint, const Color3B &touchColor)
-	{
-		auto pRet = new (std::nothrow) TouchPoint(touchPoint, touchColor);
-		pRet->setContentSize(pParent->getContentSize());
-		pRet->setAnchorPoint(Vec2(0.0f, 0.0f));
-		pRet->autorelease();
-		return pRet;
-	}
-	CC_SYNTHESIZE(Vec2, m_point, Pt);
-};
-
-static Map<int, TouchPoint*> s_map;
-
-
-
 Scene* EatCandiesScene::createScene(int diff, int loop)
 {
 	auto scene = Scene::create();
@@ -147,9 +108,6 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 	m_loop = loop;
 	m_diff = diff;
 	m_isRunning = false;
-	m_touchesLabel = Label::create("0000", "Arial", 30);
-	m_touchesLabel->setPosition(100, 500);
-	this->addChild(m_touchesLabel);
 
 	/*
 	Sprite* sprite = Sprite::create("Res/smallzer.png");
@@ -185,7 +143,7 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 		{
 			q = random(0, 5);
 			w = random(0, 2);
-			o = random(1, 4);
+			o = random(1, 3);
 		} while (m_flowersesGrid[q][w]);
 		m_flowersesGrid[q][w] = createflower(o, q, w);
 	}
