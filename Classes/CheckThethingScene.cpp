@@ -151,10 +151,11 @@ bool CheckThethingGrid::init(int diff, int loop, int row, int col)
 	{
 		do
 		{
-			q = random(1, 5);
-			w = random(0, 2);
+			q = random(1, 3);
+			w = random(1, 3);
 			o = random(1, 6);
 		} while (m_thingGrid[q][w]);
+		//if ((q != 0 && w != 1) && (q != 0 && w != 2) && (q != 0 && w != 3))
 		m_thingGrid[q][w] = createflower(o, q, w);
 	}
 
@@ -244,70 +245,79 @@ bool CheckThethingGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * un
 
 	int x1 = (int)pos.x;
 	int y1 = (int)pos.y;
-	if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3) && m_thingGrid[x1][y1] &&
-		(
-		(m_thingGrid[x1][y1]->getColorType() == m_thingGrid[0][1]->getColorType()) ||
-		(m_thingGrid[x1][y1]->getColorType() == m_thingGrid[0][2]->getColorType()) ||
-		(m_thingGrid[x1][y1]->getColorType() == m_thingGrid[0][3]->getColorType())
-		)
-		)
+	if ((0 <= x1 && x1 < 12) && (0 <= y1 && y1 < 12) && m_thingGrid[x1][y1])
 	{
-		// 如果倒计时还没有开始，则开始倒计时
-		if (!m_isRunning)
+		if (
+			(m_thingGrid[x1][y1]->getColorType() == m_thingGrid[0][1]->getColorType()) ||
+			(m_thingGrid[x1][y1]->getColorType() == m_thingGrid[0][2]->getColorType()) ||
+			(m_thingGrid[x1][y1]->getColorType() == m_thingGrid[0][3]->getColorType())
+			)
 		{
-			m_isRunning = true;
-			TimeManager::getInstance()->startCountDown();
+			// 如果倒计时还没有开始，则开始倒计时
+			if (!m_isRunning)
+			{
+				m_isRunning = true;
+				TimeManager::getInstance()->startCountDown();
+			}
+			// * add animation
+			auto flower = m_thingGrid[x1][y1];
+			log("farmer pos x = %f, y = %f", flower->getPosition().x, flower->getPosition().y);
+
+			Blink* blink = Blink::create(3.0f, 3);
+
+			flower->runAction(blink);
+
+			// 清空矩阵中的花的指针
+			m_thingGrid[x1][y1] = nullptr;
+
+
+			if (getLivingFarmersNum() == 2 && m_loop <= 0)
+			{
+				_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"CheckThething");
+				CCLOG("CheckThething clear");
+			}
+
+			//flower->runAction(createAnimate());
+
+			flower->tapped();
+
 		}
-		// * add animation
-		auto flower = m_thingGrid[x1][y1];
-		log("farmer pos x = %f, y = %f", flower->getPosition().x, flower->getPosition().y);
-
-		Blink* blink = Blink::create(3.0f, 3);
-
-		flower->runAction(blink);
-
-		// 清空矩阵中的花的指针
-		m_thingGrid[x1][y1] = nullptr;
-
-		
-		if (getLivingFarmersNum() <= 0 && m_loop <= 0)
-		{
-			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
-			CCLOG("EatFlowers clear");
-		}
-
-		//flower->runAction(createAnimate());
-
-		flower->tapped();
-
 	}
 	return true;
 }
 
 int CheckThethingGrid::getLivingFarmersNum()
 {
-	int count = 0;
-	for (int x = 0; x < m_col; x++)
+	int count = -3;
+	for (int x = 1; x < m_col; x++)
 	{
 		for (int y = 0; y < m_row; y++)
 		{
 			if (m_thingGrid[x][y] != nullptr &&
-				((m_thingGrid[x][y]->getColorType() != m_thingGrid[0][1]->getColorType()) ||
-				(m_thingGrid[x][y]->getColorType() != m_thingGrid[0][2]->getColorType()) ||
+				((m_thingGrid[x][y]->getColorType() != m_thingGrid[0][1]->getColorType()) &&
+				(m_thingGrid[x][y]->getColorType() != m_thingGrid[0][2]->getColorType()) &&
 				(m_thingGrid[x][y]->getColorType() != m_thingGrid[0][3]->getColorType())))
 				count++;
 		}
 	}
 
 	/*
-	if (m_flowersesGrid[3][1] != nullptr)
+	if (m_thingGrid[0][1] != nullptr)
 	{
 	count--;
+	}
+	if (m_thingGrid[0][2] != nullptr)
+	{
+		count--;
+	}
+	if (m_thingGrid[0][3] != nullptr)
+	{
+		count--;
 	}
 	*/
 
 	//count--;
-	count = count - 3;
+	//count = count - 3;
 	return count;
 }
 

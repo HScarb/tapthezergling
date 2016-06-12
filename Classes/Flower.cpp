@@ -29,16 +29,16 @@ bool Flower::init(int color)
 	switch (color)
 	{
 	case 1:
-		this->initWithFile("res/Res/flower_1.png");
+		this->initWithFile("res/Res/flower/flower_1.png");
 		break;
 	case 2:
-		this->initWithFile("res/Res/flower_2.png");
+		this->initWithFile("res/Res/flower/flower_2.png");
 		break;
 	case 3:
-		this->initWithFile("res/Res/flower_3.png");
+		this->initWithFile("res/Res/flower/flower_3.png");
 		break;
 	case 4:
-		this->initWithFile("res/Res/flower_4.png");
+		this->initWithFile("res/Res/flower/flower_4.png");
 		break;
 	default:
 		break;

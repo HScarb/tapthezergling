@@ -9,8 +9,8 @@
 #include "TollgateControlLayer.h"
 #include <vector>
 
-const int hang = 9;
-const int lie = 9;
+const int hang = 12;
+const int lie = 12;
 const int width = 80;
 const int l_margin = 300;
 const int b_margin = 120;
