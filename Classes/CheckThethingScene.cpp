@@ -1,12 +1,12 @@
-
-//EacCandiesScnen.cpp
+// CheckThethingScene.cpp
 #include "CheckThethingScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
-#include "Flower.h"
 #include "TollgateControlLayer.h"
-
+#include "Global.h"
+#include "AnimationUtil.h"
+#define MAX_UNIT_TYPE 10
 USING_NS_CC;
 
 using namespace std;
@@ -110,37 +110,22 @@ bool CheckThethingGrid::init(int diff, int loop, int row, int col)
 	m_diff = diff;
 	m_isRunning = false;
 
-	/*
-	Sprite* sprite = Sprite::create("Res/smallzer.png");
-	auto size = Director::getInstance()->getVisibleSize();
-	sprite->setPosition(size.height / 2, size.width / 2);
-	this->addChild(sprite);
-	*/
-
 	// 根据行、列，初始化一个空的二维容器
 	m_thingGrid.resize(m_col);
 	for (auto &vec : m_thingGrid)
 		vec.resize(m_row);
+	m_sampleGrid.resize(m_col);
 
-	//generateNewZerglingGrid(m_diff);
+	generateNewThingGrid(m_diff);
 
-	/*
-	for (int x = 0; x < m_col; x++)
-	{
-	for (int y = 0; y < m_row; y++)
-	{
-	m_flowersesGrid[x][y] = createflower((Flower::FlowerColor)n_g[0][y][x], x, y);
-	}
-	}
-	*/
-	//这部分是对的，设置了三个不重复的标志
+/*	//这部分是对的，设置了三个不重复的标志
 	int j, k, c;
 	j = random(1, 2);
 	k = random(3, 4);
 	c = random(5, 6);
-	m_thingGrid[0][1] = createflower(j, 1, 0);
-	m_thingGrid[0][2] = createflower(k, 2, 0);
-	m_thingGrid[0][3] = createflower(c, 3, 0);
+	m_thingGrid[0][1] = createUnit(j, 1, 0);
+	m_thingGrid[0][2] = createUnit(k, 2, 0);
+	m_thingGrid[0][3] = createUnit(c, 3, 0);
 
 
 	int q;
@@ -156,13 +141,11 @@ bool CheckThethingGrid::init(int diff, int loop, int row, int col)
 			o = random(1, 6);
 		} while (m_thingGrid[q][w]);
 		//if ((q != 0 && w != 1) && (q != 0 && w != 2) && (q != 0 && w != 3))
-		m_thingGrid[q][w] = createflower(o, q, w);
-	}
-
+		m_thingGrid[q][w] = createUnit(o, q, w);
+	}*/
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(CheckThethingGrid::onTouchBegan, this);
-	listener->onTouchEnded = CC_CALLBACK_2(CheckThethingGrid::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return true;
@@ -174,51 +157,22 @@ void CheckThethingGrid::setZerglingPixPos(farmerandflower* zergling, int x, int 
 	zergling->setPosition(x * width + l_margin, y * width + b_margin);
 }
 
-farmerandflower* CheckThethingGrid::createflower(int color, int x, int y)
+farmerandflower* CheckThethingGrid::createUnit(int type, int x, int y)
 {
-	farmerandflower * farmerandflower = nullptr;
-	if (color <= 0)
+	farmerandflower * unit = nullptr;
+	if (type <= 0)
 		return nullptr;
 
-	farmerandflower = farmerandflower::createByColor(color);
+	unit = farmerandflower::createByType(type);
 
-	setZerglingPixPos(farmerandflower, x, y);
-	addChild(farmerandflower);
+	setZerglingPixPos(unit, x, y);
+	unit->setScale(0.0);
+	addChild(unit);
+	auto big = ScaleTo::create(0.2, 1.0);
+	unit->runAction(big);
 
-	return farmerandflower;
+	return unit;
 }
-
-
-void CheckThethingGrid::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
-{
-
-}
-
-
-
-/*cocos2d::Animate* EatCandiesGrid::createAnimate()
-{
-int iFrameNum = 4;
-SpriteFrame* frame = NULL;
-Vector<SpriteFrame*>frameVec;
-
-for (int i = 1; i <= iFrameNum; i++)
-{
-frame = SpriteFrame::create(StringUtils::format("flower_1.%d.png", i), Rect(0, 0, 130, 130));
-frameVec.pushBack((frame));
-}
-
-Animation* animation = Animation::createWithSpriteFrames(frameVec);
-animation->setLoops(-1);
-animation->setDelayPerUnit(0.1f);
-
-Animate* action = Animate::create(animation);
-
-return action;
-}
-*/
-
-
 
 //坐标获取，范围坐标与触屏坐标
 cocos2d::Vec2 CheckThethingGrid::convertToGridPos(cocos2d::Vec2 pixPos)
@@ -231,112 +185,144 @@ cocos2d::Vec2 CheckThethingGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 
 bool CheckThethingGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
-	if (!m_isRunning)
-	{
-		m_isRunning = true;
-		TimeManager::getInstance()->startCountDown();
-	}
-
-	int r = random(0, 4);
-	int b = random(0, 1);
-	int n = random(1, 6);
 	auto pos = touch->getLocation();
-	pos = convertToGridPos(pos);
-
-	int x1 = (int)pos.x;
-	int y1 = (int)pos.y;
-	if ((0 <= x1 && x1 < 12) && (0 <= y1 && y1 < 12) && m_thingGrid[x1][y1])
-	{
-		if (
-			(m_thingGrid[x1][y1]->getColorType() == m_thingGrid[0][1]->getColorType()) ||
-			(m_thingGrid[x1][y1]->getColorType() == m_thingGrid[0][2]->getColorType()) ||
-			(m_thingGrid[x1][y1]->getColorType() == m_thingGrid[0][3]->getColorType())
-			)
+	for (int x = 0; x < m_col; x++)
+		for (int y = 0; y < m_row; y++)
 		{
-			// 如果倒计时还没有开始，则开始倒计时
-			if (!m_isRunning)
+			if (m_thingGrid[x][y] != nullptr && m_thingGrid[x][y]->getBoundingBox().containsPoint(pos)) 
 			{
-				m_isRunning = true;
-				TimeManager::getInstance()->startCountDown();
+				int type = m_thingGrid[x][y]->getColorType();
+				for (int k = 0; k < m_col; k++)
+				{
+					if (m_sampleGrid[k] != nullptr && type == m_sampleGrid[k]->getColorType())
+					{
+						// 如果找到可以消除的
+						if (!m_isRunning)
+						{
+							m_isRunning = true;
+							TimeManager::getInstance()->startCountDown();
+						}
+
+						PLAY_BURST_ANIMATION(m_sampleGrid[k]->getPosition(), 0.8f);
+						m_sampleGrid[k]->removeFromParent();
+						m_sampleGrid[k] = nullptr;
+						PLAY_BURST_ANIMATION(m_thingGrid[x][y]->getPosition(), 0.8);
+						m_thingGrid[x][y]->removeFromParent();
+						m_thingGrid[x][y] = nullptr;
+						
+						// 如果被消光，但是loop>0
+						if (getLivingSamplesNum() <= 0 && m_loop > 0)
+						{
+							generateNewThingGrid(0);
+						}
+						if(getLivingSamplesNum() <= 0 && m_loop <= 0)
+						{
+							_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"CheckTheUnit");
+							CCLOG("CheckTheUnit clear");
+						}
+					}
+				}
+				return true;
 			}
-			// * add animation
-			auto flower = m_thingGrid[x1][y1];
-			log("farmer pos x = %f, y = %f", flower->getPosition().x, flower->getPosition().y);
-
-			Blink* blink = Blink::create(3.0f, 3);
-
-			flower->runAction(blink);
-
-			// 清空矩阵中的花的指针
-			m_thingGrid[x1][y1] = nullptr;
-
-
-			if (getLivingFarmersNum() == 2 && m_loop <= 0)
-			{
-				_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"CheckThething");
-				CCLOG("CheckThething clear");
-			}
-
-			//flower->runAction(createAnimate());
-
-			flower->tapped();
-
 		}
-	}
+	
 	return true;
 }
 
-int CheckThethingGrid::getLivingFarmersNum()
+int CheckThethingGrid::getLivingSamplesNum()
 {
-	int count = -3;
-	for (int x = 1; x < m_col; x++)
+	int count = 0;
+	for (int x = 0; x < m_col; x++)
 	{
-		for (int y = 0; y < m_row; y++)
-		{
-			if (m_thingGrid[x][y] != nullptr &&
-				((m_thingGrid[x][y]->getColorType() != m_thingGrid[0][1]->getColorType()) &&
-				(m_thingGrid[x][y]->getColorType() != m_thingGrid[0][2]->getColorType()) &&
-				(m_thingGrid[x][y]->getColorType() != m_thingGrid[0][3]->getColorType())))
-				count++;
-		}
+		if (m_sampleGrid[x] != nullptr)
+			count++;
 	}
 
-	/*
-	if (m_thingGrid[0][1] != nullptr)
-	{
-	count--;
-	}
-	if (m_thingGrid[0][2] != nullptr)
-	{
-		count--;
-	}
-	if (m_thingGrid[0][3] != nullptr)
-	{
-		count--;
-	}
-	*/
-
-	//count--;
-	//count = count - 3;
 	return count;
 }
 
-void CheckThethingGrid::generateNewZerglingGrid(const int diff)
+void CheckThethingGrid::generateNewThingGrid(const int diff)
 {
-	m_loop--;
 	for (int x = 0; x < m_col; x++)
-	{
 		for (int y = 0; y < m_row; y++)
+			if (m_thingGrid[x][y] != nullptr)
+			{
+				m_thingGrid[x][y]->removeFromParent();
+				m_thingGrid[x][y] = nullptr;
+			}
+	for (int x = 0; x < m_col; x++)
+		if (m_sampleGrid[x] != nullptr)
 		{
-			m_thingGrid[x][y] = createflower((farmerandflower::FlowerColor)c_g[diff][y][x], x, y);
+			m_sampleGrid[x]->removeFromParent();
+			m_sampleGrid[x] = nullptr;
 		}
+
+	m_loop--;
+	int sum;
+	int r, x, y;
+	bool type[MAX_UNIT_TYPE + 1];		// 单位类型是否已经被创建
+	for (int i = 0; i < MAX_UNIT_TYPE + 1; i++)
+		type[i] = false;
+	// 设置难度
+	if (diff == 0)
+		sum = 1;
+	else if (diff == 1)
+		sum = 2;
+	else if (diff == 2)
+		sum = 3;
+	// create sample units
+	for (int i = 0; i < m_col; i++)
+	{
+		CCLOG("CREATE first");
+		r = random(1, MAX_UNIT_TYPE);
+		if (i == 0)
+		{
+			m_sampleGrid[i] = farmerandflower::createByType(r);
+			m_sampleGrid[i]->setPosition(Vec2(380 + 100 * i, 400));
+			addChild(m_sampleGrid[i]);
+		}
+		else if(i == 1)
+		{
+			while (r == m_sampleGrid[0]->getColorType())
+				r = random(1, MAX_UNIT_TYPE);
+			m_sampleGrid[i] = farmerandflower::createByType(r);
+			m_sampleGrid[i]->setPosition(Vec2(380 + 100 * i, 400));
+			addChild(m_sampleGrid[i]);
+		}
+		else
+		{
+			while (r == m_sampleGrid[0]->getColorType() || r == m_sampleGrid[1]->getColorType())
+				r = random(1, MAX_UNIT_TYPE);
+			m_sampleGrid[i] = farmerandflower::createByType(r);
+			m_sampleGrid[i]->setPosition(Vec2(380 + 100 * i, 400));
+			addChild(m_sampleGrid[i]);
+		}
+		// 创建对应可以消除的单位
+		type[r] = true;
+		do
+		{
+			x = random(0, m_col - 1);
+			y = random(0, m_row - 1);
+		} while (m_thingGrid[x][y] != nullptr);
+		m_thingGrid[x][y] = createUnit(r, x, y);
+		CCLOG("CREATE %d at %d, %d", r, x, y);
+	}
+	// create grid units
+	CCLOG("CREATE then");
+	while(sum--)
+	{
+		do
+		{
+			r = random(1, MAX_UNIT_TYPE);
+		} while (type[r] == true);
+		type[r] = true;
+		
+		do
+		{
+			x = random(0, m_col - 1);
+			y = random(0, m_row - 1);
+		} while (m_thingGrid[x][y] != nullptr);
+		m_thingGrid[x][y] = createUnit(r, x, y);
+		CCLOG("CREATE %d at %d, %d", r, x, y);
 	}
 }
-
-
-
-
-
-
-
-

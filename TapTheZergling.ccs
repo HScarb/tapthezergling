@@ -24,6 +24,7 @@
             <Image Name="button_cards_2.png" />
             <Image Name="button_play_1.png" />
             <Image Name="button_play_2.png" />
+            <Image Name="button_reload.png" />
             <Image Name="button_settings_1.png" />
             <Image Name="button_settings_2.png" />
             <Image Name="button_x_1.png" />
@@ -50,6 +51,7 @@
             <Image Name="long_button_red_1.png" />
             <Image Name="long_button_red_2.png" />
             <Image Name="MainScene_final.png" />
+            <Image Name="score_dialog.png" />
           </Folder>
           <Folder Name="star crafts">
             <Image Name="belshir_cliff0_diff.png" />
@@ -306,6 +308,7 @@
         <Project Name="SettingsScene.csd" Type="Scene" />
         <Project Name="TestScene.csd" Type="Scene" />
         <Project Name="TollgateScene.csd" Type="Scene" />
+        <Project Name="ScoreScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>

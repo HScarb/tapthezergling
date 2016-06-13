@@ -7,14 +7,14 @@
 class Flower :public FilterSprite
 {
 public:
-	enum FlowerColor
+	typedef enum
 	{
 		NONE = 0,
 		RED = 1,
 		YELLOW = 2,
 		BLUE = 3,
 		PINK = 4
-	};
+	}FlowerColor;
 
 	static Flower * createByColor(int color = NONE);
 	bool init(int color);

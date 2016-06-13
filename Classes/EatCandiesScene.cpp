@@ -121,14 +121,14 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 	for (auto &vec : m_flowersesGrid)
 		vec.resize(m_row);
 
-	//generateNewZerglingGrid(m_diff);
+	//generateNewThingGrid(m_diff);
 
 	/*
 	for (int x = 0; x < m_col; x++)
 	{
 		for (int y = 0; y < m_row; y++)
 		{
-			m_flowersesGrid[x][y] = createflower((Flower::FlowerColor)n_g[0][y][x], x, y);
+			m_flowersesGrid[x][y] = createflower((Flower::UnitType)n_g[0][y][x], x, y);
 		}
 	}
 	*/
@@ -172,7 +172,10 @@ Flower* EatCandiesGrid::createflower(int color, int x, int y)
 	flower = Flower::createByColor(color);
 
 	setZerglingPixPos(flower, x, y);
+	flower->setScale(0.0);
 	addChild(flower);
+	auto big = ScaleTo::create(0.2, 1.0);
+	flower->runAction(big);
 
 	return flower;
 }
@@ -324,11 +327,12 @@ int EatCandiesGrid::getLivingFlowersNum()
 void EatCandiesGrid::generateNewZerglingGrid(const int diff)
 {
 	m_loop--;
+	int r = random(1, 4);
 	for (int x = 0; x < m_col; x++)
 	{
 		for (int y = 0; y < m_row; y++)
 		{
-			m_flowersesGrid[x][y] = createflower((Flower::FlowerColor)n_g[diff][y][x], x, y);
+			m_flowersesGrid[x][y] = createflower(r, x, y);
 		}
 	}
 }

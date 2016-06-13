@@ -11,6 +11,7 @@ public:
 		MainScene,
 		SettingsScene,
 		TollgateScene,
+		ScoreScene,
 		BOSS1 = 101,
 		BOSS2,
 		BOSS3,

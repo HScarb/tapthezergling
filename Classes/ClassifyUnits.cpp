@@ -37,19 +37,19 @@ bool Unit::initWithType(UnitType type)
 	case NONE: 
 		return false;
 	case SCV: 
-		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_SCV)))
+		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_SCV_SMALL)))
 			return false;
 		break;
 	case Drone: 
-		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_DRONE)))
+		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_DRONE_SMALL)))
 			return false;
 		break;
 	case Probe: 
-		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_PROBE)))
+		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_PROBE_SMALL)))
 			return false;
 		break;
 	case Zergling: 
-		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_SMALLZERGLING)))
+		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_ZERGLING_SMALL)))
 			return false;
 		break;
 	default: break;

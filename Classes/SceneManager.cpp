@@ -5,6 +5,7 @@
 #include "TollgateControlLayer.h"
 #include "TollgateScene.h"
 #include "SettingsScene.h"
+#include "ScoreScene.h"
 
 #include "DoubleTapScene.h"
 #include "SlideCutScene.h"
@@ -60,6 +61,9 @@ void SceneManager::changeScene(SceneType sceneType)
 		break;
 	case SceneManager::SettingsScene:
 		pScene = SettingsScene::createScene();
+		break;
+	case SceneManager::ScoreScene:
+		pScene = ScoreScene::createScene();
 		break;
 	case SceneManager::BOSS1:
 		pScene = BOSS1ZerglingKing::createScene();

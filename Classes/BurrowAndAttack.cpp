@@ -208,7 +208,7 @@ void BurrowAndAttackGrid::onTouchEnded(Touch* touch, Event* unused_event)
 				worker->tapped();
 				if (getLivingWorkerNum() == 0 && m_loop > 0)
 				{
-					generateNewWorkerGrid(m_diff);
+					generateNewWorkerGrid(0);
 				}
 				else if (getLivingWorkerNum() <= 0 && m_loop <= 0)
 				{
@@ -291,11 +291,11 @@ void BurrowAndAttackGrid::generateNewWorkerGrid(const int diff)
 	}
 	else if (m_diff == 1)
 	{
-		sum = random(diff0, diff1);
+		sum = diff1;
 	}
 	else if (m_diff == 2)
 	{
-		sum = random(diff1, diff2);
+		sum = diff2;
 	}
 	int t = random(1, 3);
 	int x = random(0, 5);

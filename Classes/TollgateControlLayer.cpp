@@ -75,8 +75,7 @@ void TollgateControlLayer::tollgateFail(cocos2d::EventCustom * event)
 	CCLOG("%s failed.\nGAME OVER", tollgate);
 	// change to main scene
 	TimeManager::getInstance()->pauseCountDown();
-	GameManager::getInstance()->setIsGameOn(false);
-	SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
+	SceneManager::getInstance()->changeScene(SceneManager::SceneType::ScoreScene);
 }
 
 void TollgateControlLayer::initTimeBar()

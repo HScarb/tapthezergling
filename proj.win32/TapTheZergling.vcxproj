@@ -168,6 +168,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\PauseLayer.cpp" />
     <ClCompile Include="..\Classes\SceneManager.cpp" />
+    <ClCompile Include="..\Classes\ScoreScene.cpp" />
     <ClCompile Include="..\Classes\SettingsScene.cpp" />
     <ClCompile Include="..\Classes\Shake.cpp" />
     <ClCompile Include="..\Classes\SlideCutScene.cpp" />
@@ -206,6 +207,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\PauseLayer.h" />
     <ClInclude Include="..\Classes\SceneManager.h" />
+    <ClInclude Include="..\Classes\ScoreScene.h" />
     <ClInclude Include="..\Classes\SettingsScene.h" />
     <ClInclude Include="..\Classes\Shake.h" />
     <ClInclude Include="..\Classes\SlideCutScene.h" />

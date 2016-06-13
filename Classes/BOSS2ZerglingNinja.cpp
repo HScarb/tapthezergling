@@ -4,6 +4,7 @@
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
 #include "AnimationUtil.h"
+#include "Global.h"
 using namespace std;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -95,12 +96,7 @@ bool BOSS2ZerglingNinja::onTouchBegan(Touch * pTouch, Event * pEvent)
 			{
 				iter = m_posVector.erase(iter);
 				// ²¥·Å±¬Õ¨¶¯»­
-				Sprite * virtualBurstSprite = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("star crafts/starcrafts_SmallUnit_Death_1.png"));
-				virtualBurstSprite->setPosition(m_curPt.pos.x, m_curPt.pos.y + 40);
-				this->addChild(virtualBurstSprite);
-				auto burst = AnimationUtil::createWithFrameNameAndNumRange("star crafts/starcrafts_SmallUnit_Death_", 1, 10, 1 / 12.0, 1, true);
-				auto unShow = CallFunc::create([virtualBurstSprite]() {virtualBurstSprite->removeFromParent(); });
-				virtualBurstSprite->runAction(Sequence::create(Animate::create(burst), unShow, nullptr));
+				PLAY_BURST_ANIMATION(Vec2(m_curPt.pos.x, m_curPt.pos.y + 40), 1.0);
 			}
 			else
 			{

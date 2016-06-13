@@ -44,7 +44,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/FeedSnacks.cpp \
 				   ../../Classes/farmerandflower.cpp \
 				   ../../Classes/CheckThethingScene.cpp \
-				   ../../Classes/Shake.cpp
+				   ../../Classes/Shake.cpp \
+				   ../../Classes/ScoreScene.cpp
 				   
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

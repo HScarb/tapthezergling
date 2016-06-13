@@ -17,6 +17,8 @@ public:
 	void setNextTollgate(int i);
 	int getNextTollgate();
 
+	void resetTollgateData();							// 在游戏失败后重设关卡信息
+
 protected:
 	int m_nextTollgate;
 	

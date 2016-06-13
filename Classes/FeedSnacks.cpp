@@ -216,7 +216,7 @@ void FeedSnacksGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches,
 				}
 				else if (getLivingAllSnackNum() == 0 && m_loop > 0)
 				{
-					generateNewSnacksGrid(m_diff);
+					generateNewSnacksGrid(0);
 					m_SnacktempBase = createATSnack();
 				}
 				else if (getLivingAllSnackNum() <= 0 && m_loop <= 0)
@@ -237,17 +237,17 @@ void FeedSnacksGrid::generateNewSnacksGrid(const int diff)
 	int sum = 0;
 	if (m_diff == 0)
 	{
-		sum = 8;
+		sum = 6;
 	}
 	else if (m_diff == 1)
 	{
-		sum = random(8, 10);
+		sum = 8;
 	}
 	else if (m_diff == 2)
 	{
-		sum = random(8, 12);
+		sum = 10;
 	}
-	int t = random(1, 13);
+	int t = random(1, 6);
 	Snack::SnackType type = ((Snack::SnackType)t);
 	m_Type = type;
 	for (int i = 1; i <= sum; i++)

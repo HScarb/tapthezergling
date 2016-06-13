@@ -1,11 +1,12 @@
 #include "farmerandflower.h"
+#include "Global.h"
 USING_NS_CC;
 
-farmerandflower* farmerandflower::createByColor(int color)
+farmerandflower* farmerandflower::createByType(int type)
 {
 	auto flower = new farmerandflower();
 
-	if (flower && flower->init(color))
+	if (flower && flower->initByType(type))
 	{
 		flower->autorelease();
 		return flower;
@@ -17,40 +18,61 @@ farmerandflower* farmerandflower::createByColor(int color)
 	}
 }
 
-bool farmerandflower::init(int color)
+bool farmerandflower::initByType(int color)
 {
 	if (!Sprite::init())
 		return false;
 
 	m_colorType = color;
 
-	//this->initWithFile(StringUtils::format("Res/flower_%d.png",color));
-
 	switch (color)
 	{
-	case 1:
-		this->initWithFile("res/Res/flower_1.png");
+	case NONE:
+		return false;
+	case SCV:
+		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_SCV_SMALL)))
+			return false;
 		break;
-	case 2:
-		this->initWithFile("res/Res/flower_2.png");
+	case Drone:
+		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_DRONE_SMALL)))
+			return false;
 		break;
-	case 3:
-		this->initWithFile("res/Res/flower_3.png");
+	case Probe:
+		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_PROBE_SMALL)))
+			return false;
 		break;
-	case 4:
-		this->initWithFile("res/Res/flower_4.png");
+	case Zergling:
+		if (!Sprite::initWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_ZERGLING_SMALL)))
+			return false;
 		break;
-	case 5:
-		this->initWithFile("Res/flower_5.png");
+	case Marine:
+		if (!Sprite::initWithTexture(TEXTURECACHE->getTextureForKey(PATH_MARINE_SMALL)))
+			return false;
 		break;
-	case 6:
-		this->initWithFile("Res/flower_6.png");
+	case Marauder:
+		if (!Sprite::initWithTexture(TEXTURECACHE->getTextureForKey(PATH_MARAUDER_SMALL)))
+			return false;
 		break;
-	default:
+	case Overlord:
+		if (!Sprite::initWithTexture(TEXTURECACHE->getTextureForKey(PATH_OVERLORD_SMALL)))
+			return false;
 		break;
+	case Roach:
+		if (!Sprite::initWithTexture(TEXTURECACHE->getTextureForKey(PATH_ROACH_SMALL)))
+			return false;
+		break;
+	case Zealot:
+		if (!Sprite::initWithTexture(TEXTURECACHE->getTextureForKey(PATH_ZEALOT_SMALL)))
+			return false;
+		break;
+	case Stalker:
+		if (!Sprite::initWithTexture(TEXTURECACHE->getTextureForKey(PATH_STALKER_SMALL)))
+			return false;
+		break;
+	default: break;
 	}
 
-	this->setAnchorPoint(Vec2(0, 0));		// 设置锚点为左下角
+	this->setAnchorPoint(Vec2(0.5, 0.5));		// 设置锚点为左下角
 
 	return true;
 }

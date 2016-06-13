@@ -3,6 +3,7 @@
 #include "AnimationUtil.h"
 #include "cocostudio/CocoStudio.h"
 #include "SceneManager.h"
+#include "DataManager.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -53,9 +54,11 @@ bool MainScene::init()
 	// m_addJewelBtn = (Button*)(rootNode->getChildByName(""));
 	m_energyBar = (LoadingBar*)(rootNode->getChildByName("LoadingBar_energy"));
 
+	DataManager::getInstance()->loadData();
+
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
-	m_scoreText->setText("0");
+	m_scoreText->setText(StringUtils::format("%d", DataManager::getInstance()->getBestScore()));
 	m_energyBar->setPercent(10.0f);
 
 	// 为按钮添加点击事件

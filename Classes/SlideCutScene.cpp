@@ -176,7 +176,7 @@ void SlideCutGrid::onTouchMoved(Touch *touch, Event *unused_event)
 		// 如果狗被消光，但是loop>0
 		if (getLivingFarmersNum() == 0 && m_loop > 0)
 		{
-			generateNewFarmersGrid(m_diff);
+			generateNewFarmersGrid(0);
 		}
 		else if(getLivingFarmersNum() <= 0 && m_loop <= 0)
 		{

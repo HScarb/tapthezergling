@@ -7,7 +7,7 @@
 #include "Global.h"
 USING_NS_CC;
 using namespace CocosDenshion;
-const int TOTAL_TEXTURE_NUM = 181;	// 12 + small zerglings(137) + 3 workers + 15 RESOURCE + 4 bases + 10 smallUnitDeath= 167
+const int TOTAL_TEXTURE_NUM = 188;	// 12 + small zerglings(137) + 3 workers + 15 RESOURCE + 4 bases + 10 smallUnitDeath + 7 other units= 188
 
 Scene* LoadingScene::createScene() 
 {
@@ -61,9 +61,17 @@ bool LoadingScene::init()
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("star crafts/starcrafts_SmallUnit_Death_%d.png", i), addTextureCallback);
 	}
 	// workers 3
-	TextureCache::getInstance()->addImageAsync(StringUtils::format("Workers/SCs_Drone_C_01.png"), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format("Workers/SCs_Probe_C_01.png"), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format("Workers/SCs_SCV_C_01.png"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_SCV_SMALL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_DRONE_SMALL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_PROBE_SMALL), addTextureCallback);
+	// other units 7
+	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_MARINE_SMALL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_MARAUDER_SMALL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_ZERGLING_SMALL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_OVERLORD_SMALL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_ROACH_SMALL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_ZEALOT_SMALL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_STALKER_SMALL), addTextureCallback);
 	// RESOURCE 15
 	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/add_two.png"), addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button_accept_1.png"), addTextureCallback);

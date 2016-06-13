@@ -42,5 +42,6 @@ bool SettingsScene::init()
 
 void SettingsScene::onHomeBtnClick(Ref* pSender, TouchEventType type)
 {
-	SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
+	if (type == TOUCH_EVENT_ENDED)
+		SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
 }

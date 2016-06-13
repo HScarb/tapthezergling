@@ -104,7 +104,6 @@ bool TollgateScene::init()
 	}
 
 	// ¹ØÁª´¥Ãþº¯Êý
-	// m_homeBtn->addTouchEventListener(CC_CALLBACK_1(TollgateScene::onHomeBtnClicked, this));
 	m_homeBtn->addTouchEventListener(this, toucheventselector(TollgateScene::onHomeBtnClicked));
 	m_t1->addTouchEventListener(this, toucheventselector(TollgateScene::onItem1Clicked));
 	m_t2->addTouchEventListener(this, toucheventselector(TollgateScene::onItem2Clicked));
@@ -306,7 +305,7 @@ void TollgateScene::onItem9Clicked(Ref* pSender, cocos2d::ui::TouchEventType typ
 	if (type == TOUCH_EVENT_ENDED)
 	{
 		log("tollgate 9");
-		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::CheckThethingScene, 1, 2);
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::CheckThethingScene, 2, 5);
 	}
 }
 void TollgateScene::onItem10Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)

@@ -2,22 +2,27 @@
 #define __FARMERANDFLOWER_H__
 #pragma once
 #include "cocos2d.h"
-#include "FilterSprite.h"
 
 class farmerandflower :public cocos2d::Sprite
 {
 public:
-	enum FlowerColor
+	typedef enum
 	{
 		NONE = 0,
-		RED = 1,
-		YELLOW = 2,
-		BLUE = 3,
-		PINK = 4
-	};
+		SCV,
+		Marine,
+		Marauder,
+		Drone,
+		Zergling,
+		Overlord,
+		Roach,
+		Probe,
+		Zealot,
+		Stalker		// 10
+	}UnitType;
 
-	static farmerandflower * createByColor(int color = NONE);
-	bool init(int color);
+	static farmerandflower * createByType(int type = NONE);
+	bool initByType(int type);
 
 	void eatAnimation();
 	void tapped();
