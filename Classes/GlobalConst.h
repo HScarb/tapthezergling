@@ -16,6 +16,6 @@ const std::string TOLLGATE_NAME[9] =
 	"4: Burrow And Attack",
 	"5: Jumping On Pools",
 	"6: Classify Units",
-	"7: Check The Thing",
+	"7: Check The Units",
 	"8: Feed Snakes"
 };
