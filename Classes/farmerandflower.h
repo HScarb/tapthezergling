@@ -7,21 +7,19 @@
 class Farmerandflower :public cocos2d::Sprite
 {
 public:
-	enum Color
+	enum FlowerColor
 	{
 		NONE = 0,
 		RED = 1,
-		YELLOW,
-		BLUE,
-		GREEN,
-		PINK,
-		BLCAK,
-		PURPLE
+		YELLOW = 2,
+		BLUE = 3,
+		PINK = 4
 	};
 
-	static Farmerandflower * farmerandflowerAppear(int color = NONE);
+	static farmerandflower * createByColor(int color = NONE);
 	bool init(int color);
 
+	void eatAnimation();
 	void tapped();
 	CC_SYNTHESIZE(int, m_colorType, ColorType);
 

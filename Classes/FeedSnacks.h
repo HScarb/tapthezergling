@@ -66,8 +66,6 @@ public:
 
 	// 创建需要消除的Snack
 	Snack * createATSnack();
-	//移除效果
-	void Remove();
 
 	virtual void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event *unused_event);
 
