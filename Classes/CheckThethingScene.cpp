@@ -256,7 +256,7 @@ bool CheckThethingGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unus
 
 			auto farmerandflower = m_thingGrid[x1][y1];
 			//log("farmer pos x = %f, y = %f", flower->getPosition().x, flower->getPosition().y);
-
+			farmerandflower->tapped();
 			m_thingGrid[x1][y1] = nullptr;
 
 			//flower->tapped();
@@ -266,7 +266,6 @@ bool CheckThethingGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unus
 				_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
 				CCLOG("EatFlowers clear");
 			}
-			farmerandflower->tapped();
 		}
 	}
 	return true;

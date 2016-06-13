@@ -27,11 +27,7 @@
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="Tollgates/FeedSnacks.csd" />
-          <FilePathData Path="TollgateScene.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="TollgateScene.csd" />
+        <ActiveDocument />
       </Value>
     </Item>
   </Properties>

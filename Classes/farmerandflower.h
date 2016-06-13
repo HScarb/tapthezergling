@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 #include "FilterSprite.h"
 
-class Farmerandflower :public FilterSprite
+class Farmerandflower :public cocos2d::Sprite
 {
 public:
 	enum Color

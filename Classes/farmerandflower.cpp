@@ -20,7 +20,7 @@ Farmerandflower* Farmerandflower::farmerandflowerAppear(int color)
 
 bool Farmerandflower::init(int color)
 {
-	if (!FilterSprite::init())
+	if (!Sprite::init())
 		return false;
 
 	m_colorType = color;
