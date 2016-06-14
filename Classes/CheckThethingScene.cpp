@@ -118,31 +118,6 @@ bool CheckThethingGrid::init(int diff, int loop, int row, int col)
 
 	generateNewThingGrid(m_diff);
 
-/*	//这部分是对的，设置了三个不重复的标志
-	int j, k, c;
-	j = random(1, 2);
-	k = random(3, 4);
-	c = random(5, 6);
-	m_thingGrid[0][1] = createUnit(j, 1, 0);
-	m_thingGrid[0][2] = createUnit(k, 2, 0);
-	m_thingGrid[0][3] = createUnit(c, 3, 0);
-
-
-	int q;
-	int w;
-	int o;
-
-	for (int n = 0; n <= 2; n++)
-	{
-		do
-		{
-			q = random(1, 3);
-			w = random(1, 3);
-			o = random(1, 6);
-		} while (m_thingGrid[q][w]);
-		//if ((q != 0 && w != 1) && (q != 0 && w != 2) && (q != 0 && w != 3))
-		m_thingGrid[q][w] = createUnit(o, q, w);
-	}*/
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(CheckThethingGrid::onTouchBegan, this);
@@ -305,10 +280,8 @@ void CheckThethingGrid::generateNewThingGrid(const int diff)
 			y = random(0, m_row - 1);
 		} while (m_thingGrid[x][y] != nullptr);
 		m_thingGrid[x][y] = createUnit(r, x, y);
-		CCLOG("CREATE %d at %d, %d", r, x, y);
 	}
 	// create grid units
-	CCLOG("CREATE then");
 	while(sum--)
 	{
 		do
@@ -323,6 +296,5 @@ void CheckThethingGrid::generateNewThingGrid(const int diff)
 			y = random(0, m_row - 1);
 		} while (m_thingGrid[x][y] != nullptr);
 		m_thingGrid[x][y] = createUnit(r, x, y);
-		CCLOG("CREATE %d at %d, %d", r, x, y);
 	}
 }

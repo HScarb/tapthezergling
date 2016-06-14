@@ -169,17 +169,14 @@ Zergling* DoubleTapGrid::createAZergling(Zergling::ZerglingColor color, int x, i
 
 void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event* unused_event)
 {
-/*
 	for (auto &item : touches)
 	{
 		auto touch = item;
 		auto location = touch->getLocation();
 		auto touchPoint = TouchPoint::touchPointWithParent(this, location, *s_TouchColors[touch->getID() % 5]);
 
-		addChild(touchPoint);
 		s_map.insert(touch->getID(), touchPoint);
 	}
-*/
 	if(s_map.size() == 2)
 	{
 		// log("touches count: %d", count);

@@ -1,5 +1,6 @@
 //Farmer.cpp
 #include"Farmer.h"
+#include "Global.h"
 USING_NS_CC;
 
 Farmer* Farmer::FarmerAppear(int type)
@@ -27,14 +28,14 @@ bool Farmer::init(int type)
 	switch (type)
 	{
 	case 1:
-		this->initWithFile("Res/Workers/SCs_SCV_C_01.PNG");
+		this->initWithFile(PATH_SCV_SMALL);
 		break;
 	case 2:
-		this->initWithFile("Res/Workers/SCs_Drone_C_01.PNG");
+		this->initWithFile(PATH_DRONE_SMALL);
 		break;
 	case 3:
-		this->initWithFile("Res/Workers/SCs_Probe_C_01.PNG");
-			break;
+		this->initWithFile(PATH_PROBE_SMALL);
+		break;
 	default:
 		break;
 	}
