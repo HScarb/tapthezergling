@@ -6,16 +6,19 @@ DataManager * DataManager::m_dataManager = nullptr;
 
 DataManager* DataManager::getInstance()
 {
-	m_dataManager = new DataManager();
-	if(m_dataManager && m_dataManager->init())
+	if (m_dataManager == nullptr)
 	{
-		m_dataManager->autorelease();
-		m_dataManager->retain();
-	}
-	else
-	{
-		CC_SAFE_DELETE(m_dataManager);
-		m_dataManager = nullptr;
+		m_dataManager = new DataManager();
+		if (m_dataManager && m_dataManager->init())
+		{
+			m_dataManager->autorelease();
+			m_dataManager->retain();
+		}
+		else
+		{
+			CC_SAFE_DELETE(m_dataManager);
+			m_dataManager = nullptr;
+		}
 	}
 	return m_dataManager;
 }
@@ -43,7 +46,9 @@ void DataManager::saveData()
 
 void DataManager::loadData()
 {
-	m_bestScore = UserDefault::getInstance()->getIntegerForKey("bestScore", 0);
+	int loaded_bestScore = UserDefault::getInstance()->getIntegerForKey("bestScore", 0);
+	if (loaded_bestScore > m_bestScore)
+		m_bestScore = loaded_bestScore;
 	m_jewel = UserDefault::getInstance()->getIntegerForKey("jewel", 0);
 	m_energy = UserDefault::getInstance()->getIntegerForKey("energy", 0);
 	CCLOG("Data loaded.\n");

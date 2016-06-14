@@ -29,13 +29,13 @@ bool Snack::initWithType(SnackType type)
 	case NONE:
 		return false;
 	case SCV:
-		this->initWithFile("Units/scv_small.png");
+		this->initWithFile(PATH_SCV_SMALL);
 		break;
 	case Drone:
-		this->initWithFile("Units/drone_small.png");
+		this->initWithFile(PATH_DRONE_SMALL);
 		break;
 	case Probe:
-		this->initWithFile("Units/probe_small.png");
+		this->initWithFile(PATH_PROBE_SMALL);
 		break;
 	case FRED:
 		this->initWithFile("Res/flower_1.png");

@@ -40,7 +40,10 @@ bool ScoreScene::init()
 
 	if (DataManager::getInstance()->getBestScore() < GameManager::getInstance()->getScore())
 	{
-		DataManager::getInstance()->setBestScore(GameManager::getInstance()->getScore());
+		auto dm = DataManager::getInstance();
+		int s = GameManager::getInstance()->getScore();
+		if (s > dm->getBestScore())
+			dm->setBestScore(s);
 		DataManager::getInstance()->saveData();
 	}
 	GameManager::getInstance()->resetTollgateData();

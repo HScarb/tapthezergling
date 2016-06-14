@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: C:\\WorkSpace\\TapTheZergling\\proj.android\\src\\com\\enhance\\gameservice\\IGameTuningService.aidl
+ * Original file: I:\\WS-Cocos_Git\\tapthezergling\\proj.android\\src\\com\\enhance\\gameservice\\IGameTuningService.aidl
  */
 package com.enhance.gameservice;
 public interface IGameTuningService extends android.os.IInterface

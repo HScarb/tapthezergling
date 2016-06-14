@@ -24,6 +24,7 @@
             <Image Name="button_cards_2.png" />
             <Image Name="button_play_1.png" />
             <Image Name="button_play_2.png" />
+            <Image Name="button_reload.png" />
             <Image Name="button_settings_1.png" />
             <Image Name="button_settings_2.png" />
             <Image Name="button_x_1.png" />
@@ -50,6 +51,7 @@
             <Image Name="long_button_red_1.png" />
             <Image Name="long_button_red_2.png" />
             <Image Name="MainScene_final.png" />
+            <Image Name="score_dialog.png" />
           </Folder>
           <Folder Name="star crafts">
             <Image Name="belshir_cliff0_diff.png" />
@@ -109,6 +111,19 @@
             <Image Name="ui_loadingbar_bar_highlighted_protoss.png" />
             <Image Name="ui_loadingbar_metalframe_protoss.png" />
             <Image Name="zcreep.png" />
+          </Folder>
+          <Folder Name="Units">
+            <Image Name="blade.png" />
+            <Image Name="drone_small.PNG" />
+            <Image Name="marauder_small.png" />
+            <Image Name="marine_small.png" />
+            <Image Name="overlord_small.png" />
+            <Image Name="probe_small.PNG" />
+            <Image Name="roach_small.png" />
+            <Image Name="scv_small.PNG" />
+            <Image Name="stalker_small.png" />
+            <Image Name="zealot_small.png" />
+            <Image Name="zergling_small.png" />
           </Folder>
           <Folder Name="zergling">
             <Image Name="SCs_Zergling_C3_01.png" />
@@ -273,19 +288,6 @@
           <Image Name="zergling_small_5.png" />
           <Image Name="zergling_small_6.png" />
           <Image Name="zergling_small_7.png" />
-          <Folder Name="Units">
-            <Image Name="blade.png" />
-            <Image Name="drone_small.PNG" />
-            <Image Name="marauder_small.png" />
-            <Image Name="marine_small.png" />
-            <Image Name="overlord_small.png" />
-            <Image Name="probe_small.PNG" />
-            <Image Name="roach_small.png" />
-            <Image Name="scv_small.PNG" />
-            <Image Name="stalker_small.png" />
-            <Image Name="zealot_small.png" />
-            <Image Name="zergling_small.png" />
-          </Folder>
         </Folder>
         <Folder Name="Tollgates">
           <Project Name="BOSS1ZerglingKing.csd" Type="Scene" />

@@ -71,7 +71,7 @@ bool TollgateScene::init()
 	m_t10 = (Text*)(m_scrollView->getChildByName("Text_10"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-//	m_scrollView->setVisible(false);
+	m_scrollView->setVisible(false);
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
