@@ -4,6 +4,7 @@
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
 #include"TollgateControlLayer.h"
+#include "Global.h"
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -28,13 +29,13 @@ bool Snack::initWithType(SnackType type)
 	case NONE:
 		return false;
 	case SCV:
-		this->initWithFile("Res/Workers/SCs_SCV_C_01.PNG");
+		this->initWithFile("Units/scv_small.png");
 		break;
 	case Drone:
-		this->initWithFile("Res/Workers/SCs_Drone_C_01.PNG");
+		this->initWithFile("Units/drone_small.png");
 		break;
 	case Probe:
-		this->initWithFile("Res/Workers/SCs_Probe_C_01.PNG");
+		this->initWithFile("Units/probe_small.png");
 		break;
 	case FRED:
 		this->initWithFile("Res/flower_1.png");

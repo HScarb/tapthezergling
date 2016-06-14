@@ -24,7 +24,6 @@
             <Image Name="button_cards_2.png" />
             <Image Name="button_play_1.png" />
             <Image Name="button_play_2.png" />
-            <Image Name="button_reload.png" />
             <Image Name="button_settings_1.png" />
             <Image Name="button_settings_2.png" />
             <Image Name="button_x_1.png" />
@@ -51,7 +50,6 @@
             <Image Name="long_button_red_1.png" />
             <Image Name="long_button_red_2.png" />
             <Image Name="MainScene_final.png" />
-            <Image Name="score_dialog.png" />
           </Folder>
           <Folder Name="star crafts">
             <Image Name="belshir_cliff0_diff.png" />
@@ -59,7 +57,6 @@
             <Image Name="SCs_Bush_01.png" />
             <Image Name="SCs_Bush_02.png" />
             <Image Name="SCs_Bush_03.png" />
-            <Image Name="SCs_CommandCenter_C.png" />
             <Image Name="SCs_DancingFlowers_00.png" />
             <Image Name="SCs_DancingFlowers_01.png" />
             <Image Name="SCs_DancingFlowers_02.png" />
@@ -106,19 +103,6 @@
             <Image Name="SCs_GrassLightGreen_03.png" />
             <Image Name="SCs_GrassLightGreen_04.png" />
             <Image Name="SCs_GrassLightGreen_05.png" />
-            <Image Name="SCs_Hatchery_C.png" />
-            <Image Name="SCs_Nexus_C.png" />
-            <Image Name="SCs_SpawningPool_C.png" />
-            <Image Name="starcrafts_SmallUnit_Death_01.png" />
-            <Image Name="starcrafts_SmallUnit_Death_02.png" />
-            <Image Name="starcrafts_SmallUnit_Death_03.png" />
-            <Image Name="starcrafts_SmallUnit_Death_04.png" />
-            <Image Name="starcrafts_SmallUnit_Death_05.png" />
-            <Image Name="starcrafts_SmallUnit_Death_06.png" />
-            <Image Name="starcrafts_SmallUnit_Death_07.png" />
-            <Image Name="starcrafts_SmallUnit_Death_08.png" />
-            <Image Name="starcrafts_SmallUnit_Death_09.png" />
-            <Image Name="starcrafts_SmallUnit_Death_10.png" />
             <Image Name="starcrafts_Terrain_DarkGrass.png" />
             <Image Name="starcrafts_Terrain_Dirt.png" />
             <Image Name="starcrafts_Terrain_LightGrass.png" />
@@ -289,6 +273,19 @@
           <Image Name="zergling_small_5.png" />
           <Image Name="zergling_small_6.png" />
           <Image Name="zergling_small_7.png" />
+          <Folder Name="Units">
+            <Image Name="blade.png" />
+            <Image Name="drone_small.PNG" />
+            <Image Name="marauder_small.png" />
+            <Image Name="marine_small.png" />
+            <Image Name="overlord_small.png" />
+            <Image Name="probe_small.PNG" />
+            <Image Name="roach_small.png" />
+            <Image Name="scv_small.PNG" />
+            <Image Name="stalker_small.png" />
+            <Image Name="zealot_small.png" />
+            <Image Name="zergling_small.png" />
+          </Folder>
         </Folder>
         <Folder Name="Tollgates">
           <Project Name="BOSS1ZerglingKing.csd" Type="Scene" />
@@ -297,7 +294,6 @@
           <Project Name="CheckTheThing.csd" Type="Scene" />
           <Project Name="DoubleTapScene.csd" Type="Scene" />
           <Project Name="EatCandiesScene.csd" Type="Scene" />
-          <Project Name="FeedSnacks.csd" Type="Scene" />
           <Project Name="JumpingOnPoolScene.csd" Type="Scene" />
           <Project Name="SlideCutScene.csd" Type="Scene" />
           <Project Name="TollgateControlLayer.csd" Type="Layer" />

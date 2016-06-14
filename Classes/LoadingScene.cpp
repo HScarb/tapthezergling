@@ -61,17 +61,17 @@ bool LoadingScene::init()
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("star crafts/starcrafts_SmallUnit_Death_%d.png", i), addTextureCallback);
 	}
 	// workers 3
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_SCV_SMALL), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_DRONE_SMALL), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_PROBE_SMALL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_SCV_SMALL, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_DRONE_SMALL, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_PROBE_SMALL, addTextureCallback);
 	// other units 7
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_MARINE_SMALL), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_MARAUDER_SMALL), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_ZERGLING_SMALL), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_OVERLORD_SMALL), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_ROACH_SMALL), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_ZEALOT_SMALL), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_STALKER_SMALL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_MARINE_SMALL, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_MARAUDER_SMALL, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_ZERGLING_SMALL, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_OVERLORD_SMALL, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_ROACH_SMALL, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_ZEALOT_SMALL, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_STALKER_SMALL, addTextureCallback);
 	// RESOURCE 15
 	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/add_two.png"), addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button_accept_1.png"), addTextureCallback);
@@ -89,10 +89,10 @@ bool LoadingScene::init()
 	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button-setting-1.png"), addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(StringUtils::format("RESOURCE/button-setting-2.png"), addTextureCallback);
 	// Bases 4
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_TERRAN_BASE), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_ZERG_BASE), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_PROTOSS_BASE), addTextureCallback);
-	TextureCache::getInstance()->addImageAsync(StringUtils::format(PATH_SPAWNINGPOOL), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_TERRAN_BASE, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_ZERG_BASE, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_PROTOSS_BASE, addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(PATH_SPAWNINGPOOL, addTextureCallback);
 
 	// 开启加载进度检测
 	schedule(schedule_selector(LoadingScene::onTextureLoading));

@@ -1,5 +1,6 @@
 //Worker.cpp
 #include"Worker.h"
+#include "Global.h"
 USING_NS_CC;
 
 Worker* Worker::Workertype(int type)
@@ -26,16 +27,16 @@ bool Worker::init(int type)
 	switch (type)
 	{
 	case 1:
-		this->initWithFile("Res/Workers/SCs_SCV_C_01.PNG");
+		this->initWithFile(PATH_SCV_SMALL);
 		break;
 	case 2:
-		this->initWithFile("Res/Workers/SCs_Drone_C_01.PNG");
+		this->initWithFile(PATH_DRONE_SMALL);
 		break;
 	case 3:
-		this->initWithFile("Res/Workers/SCs_Probe_C_01.PNG");
+		this->initWithFile(PATH_PROBE_SMALL);
 		break;
 	case 7:
-		this->initWithFile("Res/zergling_small_7.png");
+		this->initWithFile("zergling_small_7.png");
 		this->setScale(0.9f);
 		break;
 	default:

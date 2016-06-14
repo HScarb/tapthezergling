@@ -71,7 +71,7 @@ bool TollgateScene::init()
 	m_t10 = (Text*)(m_scrollView->getChildByName("Text_10"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-	m_scrollView->setVisible(false);
+//	m_scrollView->setVisible(false);
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
@@ -305,7 +305,7 @@ void TollgateScene::onItem9Clicked(Ref* pSender, cocos2d::ui::TouchEventType typ
 	if (type == TOUCH_EVENT_ENDED)
 	{
 		log("tollgate 9");
-		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::CheckThethingScene, 2, 5);
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::CheckThethingScene, 2, 2);
 	}
 }
 void TollgateScene::onItem10Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
