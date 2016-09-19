@@ -2,6 +2,8 @@
 #include "SettingsScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "SceneManager.h"
+#include "SimpleAudioEngine.h"
+
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -44,4 +46,6 @@ void SettingsScene::onHomeBtnClick(Ref* pSender, TouchEventType type)
 {
 	if (type == TOUCH_EVENT_ENDED)
 		SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+		"D:/Creative/tapthezergling/Resources/res/sounds/Back2new.mp3", true);
 }

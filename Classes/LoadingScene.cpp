@@ -22,6 +22,9 @@ bool LoadingScene::init()
 	if (!Layer::init())
 		return false;
 
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+		"D:/Creative/tapthezergling/Resources/res/sounds/Back2new.mp3", true);
+
 	m_texture_num = 0;		// 当前已加载图片置零
 	m_total_time = 0.0;
 	int *ptexture_num = &m_texture_num;

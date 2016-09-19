@@ -6,6 +6,7 @@
 #include "TimeManager.h"
 #include "GameManager.h"
 #include "Global.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -203,6 +204,8 @@ void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 
 		SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+		"D:/Creative/tapthezergling/Resources/res/sounds/Back2new.mp3", true);
 }
 
 void TollgateScene::onCardBtnClicked(Ref* pSender, TouchEventType type)
