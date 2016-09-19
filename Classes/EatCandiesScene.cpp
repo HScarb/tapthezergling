@@ -1,5 +1,6 @@
 //EacCandiesScnen.cpp
 #include "EatCandiesScene.h"
+#include "SimpleAudioEngine.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
@@ -11,6 +12,7 @@ USING_NS_CC;
 using namespace std;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
+using namespace CocosDenshion;
 
 
 Scene* EatCandiesScene::createScene(int diff, int loop)
@@ -51,6 +53,10 @@ bool EatCandiesScene::init(int diff, int loop)
 	m_grid = EatCandiesGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);
 	this->addChild(m_grid);
+
+	auto audioengine = SimpleAudioEngine::getInstance();
+	//audioengine->preloadBackgroundMusic("res/Res/ÖÜÖ¾»ª - ä½»¨Ï´½£ - ´¿ÒôÀÖ°æ.mp3");
+	audioengine->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/Back2new.mp3",1);
 
 	return true;
 }

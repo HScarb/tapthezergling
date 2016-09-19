@@ -5,7 +5,10 @@
 #include "SceneManager.h"
 #include "DataManager.h"
 #include "Global.h"
+#include "SimpleAudioEngine.h"
+
 USING_NS_CC;
+using namespace CocosDenshion;
 using namespace CocosDenshion;
 const int TOTAL_TEXTURE_NUM = 188;	// 12 + small zerglings(137) + 3 workers + 15 RESOURCE + 4 bases + 10 smallUnitDeath + 7 other units= 188
 
@@ -21,10 +24,8 @@ bool LoadingScene::init()
 {
 	if (!Layer::init())
 		return false;
-
 	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
 		"D:/Creative/tapthezergling/Resources/res/sounds/Back2new.mp3", true);
-
 	m_texture_num = 0;		// 当前已加载图片置零
 	m_total_time = 0.0;
 	int *ptexture_num = &m_texture_num;
