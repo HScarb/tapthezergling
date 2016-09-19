@@ -6,10 +6,12 @@
 #include "TimeManager.h"
 #include "GameManager.h"
 #include "Global.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
+using namespace CocosDenshion;
 
 cocos2d::Scene* TollgateScene::createScene()
 {
@@ -38,6 +40,10 @@ bool TollgateScene::init()
 	m_t3 = nullptr;
 
 	m_tollgateNumLabel = nullptr;
+
+	//加载背景音乐
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/class.mp3",1);
+
 
 	// 加载UI
 	auto rootNode = CSLoader::createNode("TollgateScene.csb");
@@ -71,7 +77,7 @@ bool TollgateScene::init()
 	m_t10 = (Text*)(m_scrollView->getChildByName("Text_10"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-	m_scrollView->setVisible(false);
+	//m_scrollView->setVisible(false);
 
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
@@ -86,7 +92,7 @@ bool TollgateScene::init()
 		GameManager::getInstance()->setIsGameOn(true);			// set game is on
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 
-		setNextTollgate();		// 随机下一关
+		//setNextTollgate();		// 随机下一关
 	}
 	else
 	{
@@ -203,6 +209,7 @@ void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 
 		SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
+		SimpleAudioEngine::getInstance()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/pal4.mp3", 1);
 }
 
 void TollgateScene::onCardBtnClicked(Ref* pSender, TouchEventType type)
