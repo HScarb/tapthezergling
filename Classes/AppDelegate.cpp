@@ -35,7 +35,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->getOpenGLView()->setDesignResolutionSize(960, 540, ResolutionPolicy::SHOW_ALL);
 
     // turn on display FPS
-    director->setDisplayStats(true);
+    director->setDisplayStats(false);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
@@ -48,10 +48,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("res/RESOURCE");
 	FileUtils::getInstance()->addSearchPath("res/star crafts");
 	
-	auto diff = random(5, 10);
-	log("%d", diff);
-	auto loop = random(1, 5);
-	log("%d", loop);
 	
     // create a scene. it's an autorelease object
 	SceneManager::getInstance()->changeScene(SceneManager::SceneType::LoadingScene);
