@@ -4,6 +4,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "SceneManager.h"
 #include "DataManager.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -75,6 +76,8 @@ bool MainScene::init()
 	listener->onTouchBegan = CC_CALLBACK_2(MainScene::onTouchBegan, this);
 	listener->onTouchEnded = CC_CALLBACK_2(MainScene::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+
 
 	return true;
 }

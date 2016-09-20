@@ -75,18 +75,6 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_music" ActionTag="-368654671" Tag="58" IconVisible="False" LeftMargin="384.0000" RightMargin="384.0000" TopMargin="165.0000" BottomMargin="325.0000" FontSize="40" LabelText="MUSIC ON" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="192.0000" Y="50.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="480.0000" Y="350.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.6481" />
-            <PreSize X="0.2000" Y="0.0926" />
-            <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-BoldItalic.ttf" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
           <AbstractNodeData Name="Button_restore" ActionTag="261833926" Tag="59" IconVisible="False" LeftMargin="155.0000" RightMargin="155.0000" TopMargin="215.0000" BottomMargin="135.0000" TouchEnable="True" FontSize="100" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="1179" Scale9Height="356" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="650.0000" Y="190.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

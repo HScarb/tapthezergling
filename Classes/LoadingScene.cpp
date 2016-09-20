@@ -25,7 +25,7 @@ bool LoadingScene::init()
 	if (!Layer::init())
 		return false;
 
-	SimpleAudioEngine::getInstance()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/pal4.mp3", 1);
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/White Album.mp3", true);
 
 
 

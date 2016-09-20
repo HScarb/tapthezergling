@@ -12,6 +12,10 @@ public:
 
 private:
 	void onHomeBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onSoundBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onMusciBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onRestoreBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onAboutBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);
 
 private:
 	// °´Å¥

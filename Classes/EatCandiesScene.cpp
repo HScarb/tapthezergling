@@ -56,7 +56,10 @@ bool EatCandiesScene::init(int diff, int loop)
 
 	auto audioengine = SimpleAudioEngine::getInstance();
 	//audioengine->preloadBackgroundMusic("res/Res/ÖÜÖ¾»ª - ä½»¨Ï´½£ - ´¿ÒôÀÖ°æ.mp3");
-	audioengine->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/Back2new.mp3",1);
+	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
+	{
+		audioengine->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/Back2new.mp3", true);
+	}
 
 	return true;
 }

@@ -42,7 +42,10 @@ bool TollgateScene::init()
 	m_tollgateNumLabel = nullptr;
 
 	//¼ÓÔØ±³¾°ÒôÀÖ
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/class.mp3",1);
+	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
+	{
+		SimpleAudioEngine::sharedEngine()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/class.mp3", 1);
+	}
 
 
 	// ¼ÓÔØUI
@@ -209,7 +212,11 @@ void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 
 		SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
-		SimpleAudioEngine::getInstance()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/pal4.mp3", 1);
+	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
+	{
+		SimpleAudioEngine::getInstance()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/White Album.mp3", true);
+	}
+		
 }
 
 void TollgateScene::onCardBtnClicked(Ref* pSender, TouchEventType type)
