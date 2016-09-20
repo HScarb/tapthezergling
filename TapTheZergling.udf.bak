@@ -32,11 +32,14 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="SettingsScene.csd" />
+<<<<<<< HEAD
         </OpenedDocuments>
         <ActiveDocument Path="SettingsScene.csd" />
+=======
           <FilePathData Path="TollgateScene.csd" />
         </OpenedDocuments>
         <ActiveDocument Path="TollgateScene.csd" />
+>>>>>>> a4d973c2e226cd8fbdf547fb35aa55fd5219ab6a
       </Value>
     </Item>
   </Properties>
