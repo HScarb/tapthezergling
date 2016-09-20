@@ -39,9 +39,18 @@ bool SettingsScene::init()
 
 	Button* music = (Button*)Helper::seekWidgetByName(m_musicBtn, "music");
 	//m_musictext = (*)
-	//m_musicText = (*)Helper::seekWidgetByName(m_musicBtn, "music_text");
-	m_musicBtn->setTitleFontSize(85);
-	m_musicBtn->setTitleText("MUSIC ON");
+	//m_musicText = (*)Helper::seekWidg
+	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
+	{
+		m_musicBtn->setTitleFontSize(83);
+		m_musicBtn->setTitleText("MUSIC ON");
+	}
+
+	if (!SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
+	{
+		m_musicBtn->setTitleFontSize(83);
+		m_musicBtn->setTitleText("MUSIC OFF");
+	}
 
 //	m_homeBtn->addTouchEventListener(CC_CALLBACK_1(SettingsScene::onHomeBtnClick, this));
 	m_homeBtn->addTouchEventListener(this, toucheventselector(SettingsScene::onHomeBtnClick));
