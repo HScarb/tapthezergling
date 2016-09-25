@@ -42,13 +42,26 @@ bool SettingsScene::init()
 	//m_musicText = (*)Helper::seekWidg
 	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
 	{
-		m_musicBtn->setTitleFontSize(83);
+		/*
+		LabelTTF *label1 = LabelTTF::create("MUSIC ON", "fonts/AveriaSansLibre-BoldItalic.ttf", 40);
+		label1->setPosition(480, 351);
+		label1->enableShadow(Size(1.50, -1.50), 2, 2);
+		addChild(label1);
+		*/
+		m_musicBtn->setTitleFontSize(84);
 		m_musicBtn->setTitleText("MUSIC ON");
 	}
 
 	if (!SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
 	{
-		m_musicBtn->setTitleFontSize(83);
+		
+		/*
+		LabelTTF *label1 = LabelTTF::create("MUSIC OFF", "fonts/AveriaSansLibre-BoldItalic.ttf", 40);
+		label1->setPosition(480, 351);
+		label1->enableShadow(Size(1.50, -1.50), 2, 2);
+		addChild(label1);
+		*/
+		m_musicBtn->setTitleFontSize(84);
 		m_musicBtn->setTitleText("MUSIC OFF");
 	}
 
@@ -97,19 +110,32 @@ void SettingsScene::onMusciBtnClick(Ref* pSender, cocos2d::ui::TouchEventType ty
 	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
 	{
 		SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+		//SimpleAudioEngine::sharedEngine()->pauseAllEffects();
 		//此处修改off
-		m_musicBtn->setTitleFontSize(83);
-		m_musicBtn->setTitleColor(Color3B::WHITE);
+		m_musicBtn->setTitleFontSize(84);
+		//m_musicBtn->setTitleColor(Color3B::WHITE);默认是白色
 		m_musicBtn->setTitleText("MUSIC OFF");
+		/*
+		LabelTTF *label1 = LabelTTF::create("MUSIC ON", "fonts/AveriaSansLibre-BoldItalic.ttf", 40);
+		label1->setPosition(480, 351);
+		label1->enableShadow(Size(1.50, -1.50), 2, 2);
+		addChild(label1);
+		*/
 	}
 
 	else
 	{
 		SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 		//此处修改on
-		m_musicBtn->setTitleFontSize(83);
-		m_musicBtn->setTitleColor(Color3B::WHITE);
+		m_musicBtn->setTitleFontSize(84);
+		//m_musicBtn->setTitleColor(Color3B::WHITE);
 		m_musicBtn->setTitleText("MUSIC ON");
+		/*
+		LabelTTF *label2 = LabelTTF::create("MUSIC OFF", "fonts/AveriaSansLibre-BoldItalic.ttf", 40);
+		label2->setPosition(480, 351);
+		label2->enableShadow(Size(1.50, -1.50), 2, 2);
+		addChild(label2);
+		*/
 	}
 
 }

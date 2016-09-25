@@ -44,7 +44,7 @@ bool TollgateScene::init()
 	//¼ÓÔØ±³¾°ÒôÀÖ
 	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
 	{
-		SimpleAudioEngine::sharedEngine()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/class.mp3", 1);
+		SimpleAudioEngine::sharedEngine()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/class.mp3", true);
 	}
 
 

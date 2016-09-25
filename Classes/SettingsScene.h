@@ -9,6 +9,7 @@ public:
 	static cocos2d::Scene * createScene();
 	CREATE_FUNC(SettingsScene);
 	virtual bool init() override;
+	//cocos2d::FontShadow _shadow;
 
 private:
 	void onHomeBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);

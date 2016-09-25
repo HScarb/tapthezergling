@@ -295,16 +295,21 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 			m_loop--;
 		}
 
+		
+		auto spec = SimpleAudioEngine::getInstance();
+		spec->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/eatflower.wav", 1);
+		
+
 		if (getLivingFlowersNum() <= 0 && m_loop <= 0 )
 		{
 			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
 			CCLOG("EatFlowers clear");
+	
 		}
 
 		//flower->runAction(createAnimate());
 
 		flower->tapped();
-
 	}
 	return true;
 }

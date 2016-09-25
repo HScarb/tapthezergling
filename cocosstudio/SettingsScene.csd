@@ -47,7 +47,19 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_music" ActionTag="366595192" Tag="56" IconVisible="False" LeftMargin="156.0872" RightMargin="153.9128" TopMargin="95.0000" BottomMargin="255.0000" TouchEnable="True" FontSize="100" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="1179" Scale9Height="356" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Text_sound" ActionTag="13016635" Tag="57" IconVisible="False" LeftMargin="379.0000" RightMargin="377.0000" TopMargin="44.0000" BottomMargin="446.0000" FontSize="40" LabelText="SOUND ON" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ctype="TextObjectData">
+            <Size X="204.0000" Y="50.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="481.0000" Y="471.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5010" Y="0.8722" />
+            <PreSize X="0.2125" Y="0.0926" />
+            <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-BoldItalic.ttf" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Button_music" ActionTag="366595192" Tag="56" IconVisible="False" LeftMargin="156.0872" RightMargin="153.9128" TopMargin="95.0000" BottomMargin="255.0000" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="1179" Scale9Height="356" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="650.0000" Y="190.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="481.0872" Y="350.0000" />
@@ -60,18 +72,6 @@
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
             <PressedFileData Type="Normal" Path="Res/RESOURCE/long_button_orange_2.png" Plist="" />
             <NormalFileData Type="Normal" Path="Res/RESOURCE/long_button_green_1.png" Plist="" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="Text_sound" ActionTag="13016635" Tag="57" IconVisible="False" LeftMargin="378.0000" RightMargin="378.0000" TopMargin="45.0000" BottomMargin="445.0000" FontSize="40" LabelText="SOUND ON" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="204.0000" Y="50.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="480.0000" Y="470.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.8704" />
-            <PreSize X="0.2125" Y="0.0926" />
-            <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-BoldItalic.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -91,7 +91,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_restore" ActionTag="775363183" Tag="60" IconVisible="False" LeftMargin="338.0000" RightMargin="338.0000" TopMargin="291.5000" BottomMargin="211.5000" FontSize="30" LabelText="RESTORE PURCHASE" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_restore" ActionTag="775363183" Tag="60" IconVisible="False" LeftMargin="338.0000" RightMargin="338.0000" TopMargin="291.5000" BottomMargin="211.5000" FontSize="30" LabelText="RESTORE PURCHASE" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ctype="TextObjectData">
             <Size X="284.0000" Y="37.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="230.0000" />
@@ -119,7 +119,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_about" ActionTag="-1801763011" Tag="62" IconVisible="False" LeftMargin="410.9542" RightMargin="417.0458" TopMargin="404.3872" BottomMargin="85.6128" FontSize="40" LabelText="ABOUT" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_about" ActionTag="-1801763011" Tag="62" IconVisible="False" LeftMargin="410.9542" RightMargin="417.0458" TopMargin="404.3872" BottomMargin="85.6128" FontSize="40" LabelText="ABOUT" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ctype="TextObjectData">
             <Size X="132.0000" Y="50.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="476.9542" Y="110.6128" />
