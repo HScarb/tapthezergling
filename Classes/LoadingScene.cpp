@@ -102,11 +102,24 @@ bool LoadingScene::init()
 	schedule(schedule_selector(LoadingScene::onTextureLoading));
 
 	// 预加载音效
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/Back1");
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/Back2");
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/Back3");
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/boom");
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/MainMenu.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/Back2.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/Back3.mp3");
+	SimpleAudioEngine::getInstance()->preloadEffect("Sounds/1.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/boom.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/buttonclick.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/chomp.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/dao.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/grassstep.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/kernelpult.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/losthead.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/plant.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/points.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/polevault.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/shoop.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/splat1.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/splat2.mp3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/winmusic.mp3");
 
 
 	// 加载用户记录

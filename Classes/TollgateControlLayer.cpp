@@ -6,6 +6,7 @@
 #include "TimeManager.h"
 #include "SceneManager.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 using namespace std;
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -44,6 +45,9 @@ bool TollgateControlLayer::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(clearListener, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(failListener, this);
 
+	// ²¥·Å±³¾°ÒôÀÖ
+	SoundManager::getInstance()->playTollgateMusic();
+
 	return true;
 }
 
@@ -66,6 +70,8 @@ void TollgateControlLayer::tollgateClear(cocos2d::EventCustom * event)
 	TimeManager::getInstance()->pauseCountDown();
 	this->unscheduleUpdate();		// stop update for tollgate control layer
 	GameManager::getInstance()->setIsWaitToAddTime(true);
+	// ²¥·Å²Ëµ¥±³¾°ÒôÀÖ
+	SoundManager::getInstance()->forcePlayMenuMusic();
 	SceneManager::getInstance()->changeScene(SceneManager::SceneType::TollgateScene);
 }
 
@@ -75,6 +81,9 @@ void TollgateControlLayer::tollgateFail(cocos2d::EventCustom * event)
 	CCLOG("%s failed.\nGAME OVER", tollgate);
 	// change to main scene
 	TimeManager::getInstance()->pauseCountDown();
+	// Í£Ö¹±³¾°ÒôÀÖ²¢ÇÒ²¥·ÅÊ¤ÀûÒôÐ§
+	SoundManager::getInstance()->stopMusic();
+	SoundManager::getInstance()->playEffect("Sounds/winmusic.mp3");
 	SceneManager::getInstance()->changeScene(SceneManager::SceneType::ScoreScene);
 }
 

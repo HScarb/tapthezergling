@@ -54,12 +54,6 @@ bool EatCandiesScene::init(int diff, int loop)
 	m_grid->setPosition(0, 0);
 	this->addChild(m_grid);
 
-	auto audioengine = SimpleAudioEngine::getInstance();
-	//audioengine->preloadBackgroundMusic("res/Res/ÖÜÖ¾»ª - ä½»¨Ï´½£ - ´¿ÒôÀÖ°æ.mp3");
-	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
-	{
-		audioengine->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/Back2new.mp3", true);
-	}
 
 	return true;
 }
@@ -295,10 +289,7 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 			m_loop--;
 		}
 
-		
-		auto spec = SimpleAudioEngine::getInstance();
-		spec->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/eatflower.wav", 1);
-		
+				
 
 		if (getLivingFlowersNum() <= 0 && m_loop <= 0 )
 		{
@@ -350,18 +341,3 @@ void EatCandiesGrid::generateNewZerglingGrid(const int diff)
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-

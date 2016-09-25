@@ -8,6 +8,7 @@
 #include "Global.h"
 #include <ChString.h>
 #include "SimpleAudioEngine.h"
+#include "SoundManager.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -41,8 +42,6 @@ bool TollgateScene::init()
 	m_t3 = nullptr;
 
 	m_tollgateNumLabel = nullptr;
-
-	SimpleAudioEngine::getInstance()->playBackgroundMusic("Sounds/class.mp3", true);
 
 	// ¼ÓÔØUI
 	auto rootNode = CSLoader::createNode("TollgateScene.csb");
@@ -120,6 +119,9 @@ bool TollgateScene::init()
 	m_t8->addTouchEventListener(this, toucheventselector(TollgateScene::onItem8Clicked));
 	m_t9->addTouchEventListener(this, toucheventselector(TollgateScene::onItem9Clicked));
 	m_t10->addTouchEventListener(this, toucheventselector(TollgateScene::onItem10Clicked));
+
+//	SimpleAudioEngine::getInstance()->playBackgroundMusic("Sounds/MainMenu.mp3", true);
+	SoundManager::getInstance()->playMenuMusic();
 
 	return true;
 }
@@ -209,13 +211,9 @@ void TollgateScene::showNextTollgate()
 void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
-
-		SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
-	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
 	{
-		SimpleAudioEngine::getInstance()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/White Album.mp3", true);
-	}
-		
+		SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
+	}	
 }
 
 void TollgateScene::onCardBtnClicked(Ref* pSender, TouchEventType type)
