@@ -24,11 +24,16 @@ bool LoadingScene::init()
 {
 	if (!Layer::init())
 		return false;
-
+<<<<<<< HEAD
 
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/White Album.mp3", true);
 
 
+
+=======
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+		"D:/Creative/tapthezergling/Resources/res/sounds/Back2new.mp3", true);
+>>>>>>> a4d973c2e226cd8fbdf547fb35aa55fd5219ab6a
 	m_texture_num = 0;		// 当前已加载图片置零
 	m_total_time = 0.0;
 	int *ptexture_num = &m_texture_num;

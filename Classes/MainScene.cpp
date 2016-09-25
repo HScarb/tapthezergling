@@ -93,6 +93,8 @@ void MainScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event
 	if(m_zergling->getBoundingBox().containsPoint(pos))
 	{
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateScene);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+			"D:/Creative/tapthezergling/Resources/res/sounds/class.mp3", true);
 	}
 }
 
@@ -100,6 +102,8 @@ void MainScene::onSettingsBtnClick(Ref* pSender, TouchEventType type)
 {
 	if(type == TouchEventType::TOUCH_EVENT_ENDED)
 		SceneManager::getInstance()->changeScene(SceneManager::SettingsScene);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+		"D:/Creative/tapthezergling/Resources/res/sounds/MainMenu.mp3", true);
 }
 
 void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)
