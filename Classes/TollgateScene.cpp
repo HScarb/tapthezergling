@@ -6,6 +6,7 @@
 #include "TimeManager.h"
 #include "GameManager.h"
 #include "Global.h"
+#include <ChString.h>
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -178,12 +179,15 @@ void TollgateScene::showNextTollgate()
 	int num = GameManager::getInstance()->getTollgateNum();
 	Label * label = nullptr;
 	// ÏÔÊ¾¹Ø¿¨¼ò½é
-	if(num % 10 == 0)
+	if (num % 10 == 0)
 	{
-		label = Label::createWithTTF(StringUtils::format("BOSS %d", (num / 10)), "fonts/AveriaSansLibre-Bold.ttf", 40);
+		//		label = Label::createWithTTF(BOSS_TOLLGATE_NAME[num / 10], "fonts/msyh.ttf", 40);
+		label = Label::create(BOSS_TOLLGATE_NAME[num / 10].c_str(), "Microsoft YaHei", 40);
 	}
 	else
-		label = Label::createWithTTF(TOLLGATE_NAME[r], "fonts/AveriaSansLibre-Bold.ttf", 40);
+				label = Label::createWithTTF(TOLLGATE_NAME[r], "fonts/msyh.ttf", 40);
+//		label = Label::createWithSystemFont(, "Microsoft YaHei", 40);
+
 	auto menuItemLabel = MenuItemLabel::create(label, CC_CALLBACK_1(TollgateScene::onTollgateLabelClicked, this));
 	auto menu = Menu::create(menuItemLabel, nullptr);
 	menu->setPosition(CENTER);

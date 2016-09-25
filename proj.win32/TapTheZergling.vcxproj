@@ -188,6 +188,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\BOSS1ZerglingKing.h" />
     <ClInclude Include="..\Classes\BOSS2ZerglingNinja.h" />
     <ClInclude Include="..\Classes\CheckThethingScene.h" />
+    <ClInclude Include="..\Classes\ChineseDisplay.h" />
     <ClInclude Include="..\Classes\ClassifyUnits.h" />
     <ClInclude Include="..\Classes\DataManager.h" />
     <ClInclude Include="..\Classes\DoubleTapScene.h" />

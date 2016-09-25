@@ -10,12 +10,18 @@ const int TOTAL_TOLLGATE_TYPE = 8;
 const std::string TOLLGATE_NAME[9] = 
 {
 	"0: None",
-	"1: Double Tap Zergling",
-	"2: Slide Cut",
-	"3: Eat Flowers",
-	"4: Burrow And Attack",
-	"5: Jumping On Pools",
-	"6: Classify Units",
-	"7: Check The Units",
-	"8: Feed Snakes"
+	"小狗成双",
+	"切农民",
+	"吃花朵",
+	"小狗突袭",
+	"小狗跳跃",
+	"单位分类",
+	"鉴别单位",
+	"喂食物"
+};
+const std::string BOSS_TOLLGATE_NAME[3] =
+{
+	"0: None",
+	"巨型小狗",
+	"小狗忍者"
 };
