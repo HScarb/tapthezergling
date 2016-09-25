@@ -4,6 +4,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "SceneManager.h"
 #include "DataManager.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -76,6 +77,8 @@ bool MainScene::init()
 	listener->onTouchEnded = CC_CALLBACK_2(MainScene::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+
+
 	return true;
 }
 
@@ -90,6 +93,8 @@ void MainScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event
 	if(m_zergling->getBoundingBox().containsPoint(pos))
 	{
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateScene);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+			"D:/Creative/tapthezergling/Resources/res/sounds/class.mp3", true);
 	}
 }
 
@@ -97,6 +102,8 @@ void MainScene::onSettingsBtnClick(Ref* pSender, TouchEventType type)
 {
 	if(type == TouchEventType::TOUCH_EVENT_ENDED)
 		SceneManager::getInstance()->changeScene(SceneManager::SettingsScene);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+		"D:/Creative/tapthezergling/Resources/res/sounds/MainMenu.mp3", true);
 }
 
 void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)

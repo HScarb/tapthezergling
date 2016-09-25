@@ -1,5 +1,6 @@
 //EacCandiesScnen.cpp
 #include "EatCandiesScene.h"
+#include "SimpleAudioEngine.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
@@ -11,6 +12,7 @@ USING_NS_CC;
 using namespace std;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
+using namespace CocosDenshion;
 
 
 Scene* EatCandiesScene::createScene(int diff, int loop)
@@ -51,6 +53,13 @@ bool EatCandiesScene::init(int diff, int loop)
 	m_grid = EatCandiesGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);
 	this->addChild(m_grid);
+
+	auto audioengine = SimpleAudioEngine::getInstance();
+	//audioengine->preloadBackgroundMusic("res/Res/ÖÜÖ¾»ª - ä½»¨Ï´½£ - ´¿ÒôÀÖ°æ.mp3");
+	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
+	{
+		audioengine->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/Back2new.mp3", true);
+	}
 
 	return true;
 }
@@ -286,16 +295,21 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 			m_loop--;
 		}
 
+		
+		auto spec = SimpleAudioEngine::getInstance();
+		spec->playBackgroundMusic("H:/xiangmu/tapthezergling/Resources/res/Sounds/eatflower.wav", 1);
+		
+
 		if (getLivingFlowersNum() <= 0 && m_loop <= 0 )
 		{
 			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
 			CCLOG("EatFlowers clear");
+	
 		}
 
 		//flower->runAction(createAnimate());
 
 		flower->tapped();
-
 	}
 	return true;
 }
