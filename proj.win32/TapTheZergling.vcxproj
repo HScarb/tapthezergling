@@ -173,6 +173,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\Shake.cpp" />
     <ClCompile Include="..\Classes\SlideCutScene.cpp" />
     <ClCompile Include="..\Classes\SmallZergling.cpp" />
+    <ClCompile Include="..\Classes\SoundManager.cpp" />
     <ClCompile Include="..\Classes\TemplateScene.cpp" />
     <ClCompile Include="..\Classes\TimeManager.cpp" />
     <ClCompile Include="..\Classes\TollgateControlLayer.cpp" />
@@ -213,6 +214,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\Shake.h" />
     <ClInclude Include="..\Classes\SlideCutScene.h" />
     <ClInclude Include="..\Classes\SmallZergling.h" />
+    <ClInclude Include="..\Classes\SoundManager.h" />
     <ClInclude Include="..\Classes\TemplateScene.h" />
     <ClInclude Include="..\Classes\TimeManager.h" />
     <ClInclude Include="..\Classes\TollgateControlLayer.h" />

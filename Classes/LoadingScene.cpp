@@ -102,7 +102,11 @@ bool LoadingScene::init()
 	schedule(schedule_selector(LoadingScene::onTextureLoading));
 
 	// 预加载音效
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/Back1");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/Back2");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/Back3");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/boom");
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/");
 
 
 	// 加载用户记录
