@@ -28,27 +28,5 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="Tollgates/CheckTheThing.csd" />
-          <FilePathData Path="Tollgates/BurrowAndAttack.csd" />
-          <FilePathData Path="Tollgates/SlideCutScene.csd" />
-          <FilePathData Path="Tollgates/JumpingOnPoolScene.csd" />
-          <FilePathData Path="Tollgates/DoubleTapScene.csd" />
-          <FilePathData Path="Tollgates/EatCandiesScene.csd" />
-          <FilePathData Path="Tollgates/BOSS2ZerglingNinja.csd" />
-          <FilePathData Path="Tollgates/BOSS1ZerglingKing.csd" />
-          <FilePathData Path="CardEnhancer.csd" />
-          <FilePathData Path="MainScene.csd" />
-          <FilePathData Path="PauseLayer.csd" />
-          <FilePathData Path="SettingsScene.csd" />
-          <FilePathData Path="TestScene.csd" />
-          <FilePathData Path="TollgateScene.csd" />
-          <FilePathData Path="ScoreScene.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="ScoreScene.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

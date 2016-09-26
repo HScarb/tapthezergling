@@ -47,13 +47,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_sound" ActionTag="13016635" Tag="57" IconVisible="False" LeftMargin="379.0000" RightMargin="377.0000" TopMargin="44.0000" BottomMargin="446.0000" FontSize="40" LabelText="SOUND ON" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_sound" ActionTag="13016635" Tag="57" IconVisible="False" LeftMargin="378.0000" RightMargin="378.0000" TopMargin="45.0000" BottomMargin="445.0000" FontSize="40" LabelText="SOUND ON" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="204.0000" Y="50.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="481.0000" Y="471.0000" />
+            <Position X="480.0000" Y="470.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5010" Y="0.8722" />
+            <PrePosition X="0.5000" Y="0.8704" />
             <PreSize X="0.2125" Y="0.0926" />
             <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-BoldItalic.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
@@ -91,7 +91,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_restore" ActionTag="775363183" Tag="60" IconVisible="False" LeftMargin="338.0000" RightMargin="338.0000" TopMargin="291.5000" BottomMargin="211.5000" FontSize="30" LabelText="RESTORE PURCHASE" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_restore" ActionTag="775363183" Tag="60" IconVisible="False" LeftMargin="338.0000" RightMargin="338.0000" TopMargin="291.5000" BottomMargin="211.5000" FontSize="30" LabelText="RESTORE PURCHASE" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="284.0000" Y="37.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="230.0000" />
@@ -119,7 +119,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_about" ActionTag="-1801763011" Tag="62" IconVisible="False" LeftMargin="410.9542" RightMargin="417.0458" TopMargin="404.3872" BottomMargin="85.6128" FontSize="40" LabelText="ABOUT" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_about" ActionTag="-1801763011" Tag="62" IconVisible="False" LeftMargin="410.9542" RightMargin="417.0458" TopMargin="404.3872" BottomMargin="85.6128" FontSize="40" LabelText="ABOUT" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="132.0000" Y="50.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="476.9542" Y="110.6128" />
@@ -127,6 +127,18 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.4968" Y="0.2048" />
             <PreSize X="0.1375" Y="0.0926" />
+            <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-BoldItalic.ttf" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Text_music" ActionTag="1833555018" Tag="34" IconVisible="False" LeftMargin="384.0000" RightMargin="384.0000" TopMargin="165.0000" BottomMargin="325.0000" FontSize="40" LabelText="MUSIC ON" ShadowOffsetX="1.5000" ShadowOffsetY="-1.5000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="192.0000" Y="50.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="480.0000" Y="350.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="0.6481" />
+            <PreSize X="0.2000" Y="0.0926" />
             <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-BoldItalic.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
