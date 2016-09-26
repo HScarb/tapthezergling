@@ -155,7 +155,7 @@ bool FeedSnacksGrid::init(int diff, int loop, int row, int col)
 	m_col = col;
 	m_loop = loop;
 	m_diff = diff;
-	//m_isRunning = false;
+	m_isRunning = false;
 	//根据行列初始化一个空的二维容器
 	m_snackVector.resize(m_col);
 	for (auto &vec : m_snackVector)
