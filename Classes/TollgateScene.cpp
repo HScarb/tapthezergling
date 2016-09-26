@@ -6,7 +6,6 @@
 #include "TimeManager.h"
 #include "GameManager.h"
 #include "Global.h"
-#include <ChString.h>
 #include "SimpleAudioEngine.h"
 #include "SoundManager.h"
 
