@@ -19,6 +19,11 @@ public:
 	// 播放音效
 	void playEffect(std::string filePath);
 
+	// 定义控制音乐开关的布尔变量
+	CC_SYNTHESIZE(bool, m_musicOn, MusicOn);
+	// 定义控制音效开关的布尔变量
+	CC_SYNTHESIZE(bool, m_soundOn, SoundOn);
+
 private:
 	static SoundManager * m_soundManager;
 };

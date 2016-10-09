@@ -25,4 +25,7 @@ private:
 	cocos2d::ui::Button * m_musicBtn;
 	cocos2d::ui::Button * m_restoreBtn;
 	cocos2d::ui::Button * m_aboutBtn;
+	// нд╠╬
+	cocos2d::ui::Text * m_soundText;
+	cocos2d::ui::Text * m_musicText;
 };

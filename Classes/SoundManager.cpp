@@ -31,34 +31,47 @@ bool SoundManager::init()
 	if (!Node::init())
 		return false;
 
-
+	m_musicOn = true;
+	m_soundOn = true;
 
 	return true;
 }
 
+// 如果音乐控制开关为真，同时没有其他背景音乐在播放，播放菜单背景音乐
 void SoundManager::playMenuMusic()
 {
-	if (SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying() != true)
+	if(m_musicOn)		
+	{
+		if (SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying() != true)
+		{
+			SimpleAudioEngine::getInstance()->playBackgroundMusic("Sounds/MainMenu.mp3");
+		}
+	}
+}
+
+// 如果音乐控制开关为真，不管有没有其他背景音乐播放，强制替换播放菜单背景音乐
+void SoundManager::forcePlayMenuMusic()
+{
+	if(m_musicOn)
 	{
 		SimpleAudioEngine::getInstance()->playBackgroundMusic("Sounds/MainMenu.mp3");
 	}
 }
 
-void SoundManager::forcePlayMenuMusic()
-{
-	SimpleAudioEngine::getInstance()->playBackgroundMusic("Sounds/MainMenu.mp3");
-}
-
+// 随机播放关卡背景音乐
 void SoundManager::playTollgateMusic()
 {
-	char * musicPath[2] =
+	if(m_musicOn)
 	{
-		"Sounds/Back2.mp3",
-		"Sounds/Back3.mp3"
-	};
-	int i = random(0, 1);
+		char * musicPath[2] =
+			{
+				"Sounds/Back2.mp3",
+				"Sounds/Back3.mp3"
+			};
+		int i = random(0, 1);
 	
-	SimpleAudioEngine::getInstance()->playBackgroundMusic(musicPath[i]);
+		SimpleAudioEngine::getInstance()->playBackgroundMusic(musicPath[i]);
+	}
 }
 
 void SoundManager::stopMusic()
@@ -66,7 +79,11 @@ void SoundManager::stopMusic()
 	SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 
+// 如果音效开关为真，播放音效
 void SoundManager::playEffect(string filePath)
 {
-	SimpleAudioEngine::getInstance()->playEffect(filePath.c_str());
+	if(m_soundOn)
+	{
+		SimpleAudioEngine::getInstance()->playEffect(filePath.c_str());
+	}
 }
