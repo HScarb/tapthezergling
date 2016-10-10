@@ -43,6 +43,16 @@ bool SettingsScene::init()
 	m_soundText = (Text*)ui->getChildByName("Text_sound");
 	m_musicText = (Text*)ui->getChildByName("Text_music");
 
+	// 根据音乐有没有开来更改标签文字
+	if (!SoundManager::getInstance()->getMusicOn())
+	{
+		m_musicText->setText("MUSIC OFF");
+	}
+	if (!SoundManager::getInstance()->getSoundOn())
+	{
+		m_soundText->setText("SOUND OFF");
+	}
+
 	// 绑定按钮按下的回调函数
 	m_homeBtn->addTouchEventListener(this, toucheventselector(SettingsScene::onHomeBtnClick));
 	m_soundBtn->addTouchEventListener(this, toucheventselector(SettingsScene::onSoundBtnClick));
