@@ -6,6 +6,8 @@
 #include "DataManager.h"
 #include "SimpleAudioEngine.h"
 #include "SoundManager.h"
+#include "CardCenter.h"
+#include"NoTouchLayer.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -38,6 +40,15 @@ bool MainScene::init()
 	// 加载UI
 	auto rootNode = CSLoader::createNode("MainScene.csb");
 	addChild(rootNode);
+
+	//加载卡片合成层
+	m_noTouchLayer = NoTouchLayer::create();
+	this->addChild(m_noTouchLayer,1);
+	//m_noTouchLayer->setVisible(false);
+	m_cardLayer = CardControl::create();
+	this->addChild(m_cardLayer, 1);
+	m_cardLayer->setVisible(false);
+	
 
 	// 添加狗的动画
 	auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -107,6 +118,10 @@ void MainScene::onSettingsBtnClick(Ref* pSender, TouchEventType type)
 void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
+	{
+		log("CardLayer");
+		m_cardLayer->setVisible(true);
+	}
 		return;
 }
 

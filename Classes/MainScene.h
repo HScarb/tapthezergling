@@ -2,6 +2,8 @@
 #pragma once
 #include "cocos2d.h"
 #include "ui\CocosGUI.h"
+#include "CardCenter.h"
+#include "NoTouchLayer.h"
 
 class MainScene : public cocos2d::Layer
 {
@@ -31,4 +33,8 @@ private:
 	cocos2d::ui::Button * m_cardBtn;
 	cocos2d::ui::Button * m_addJewelBtn;
 	cocos2d::ui::LoadingBar * m_energyBar;
+
+	//²ã
+	CardControl * m_cardLayer;
+	NoTouchLayer * m_noTouchLayer;
 };

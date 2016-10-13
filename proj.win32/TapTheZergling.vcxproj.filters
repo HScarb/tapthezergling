@@ -180,6 +180,12 @@
     <ClCompile Include="..\Classes\SoundManager.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CardCenter.cpp">
+      <Filter>Classes\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NoTouchLayer.cpp">
+      <Filter>Classes\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -307,6 +313,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SoundManager.h">
       <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardCenter.h">
+      <Filter>Classes\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NoTouchLayer.h">
+      <Filter>Classes\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -32,10 +32,11 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="TollgateScene.csd" />
-          <FilePathData Path="CardEnhancer.csd" />
           <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
+          <FilePathData Path="PauseLayer.csd" />
+          <FilePathData Path="CardEnhancer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="Tollgates/TollgateControlLayer.csd" />
+        <ActiveDocument Path="CardEnhancer.csd" />
       </Value>
     </Item>
   </Properties>
