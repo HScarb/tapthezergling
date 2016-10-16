@@ -2,7 +2,7 @@
 #pragma once
 #include "cocos2d.h"
 #include "ui\CocosGUI.h"
-#include "CardCenter.h"
+#include "CardControlLayer.h"
 
 
 class TollgateScene : public cocos2d::Layer
@@ -59,5 +59,5 @@ private:
 	cocos2d::ui::Text * m_t9;
 	cocos2d::ui::Text * m_t10;
 private:
-	CardControl * m_cardLayer;
+	CardControlLayer * m_cardLayer;
 };

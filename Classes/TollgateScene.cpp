@@ -8,7 +8,7 @@
 #include "Global.h"
 #include "SimpleAudioEngine.h"
 #include "SoundManager.h"
-#include "CardCenter.h"
+#include "CardControlLayer.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -48,7 +48,7 @@ bool TollgateScene::init()
 	addChild(rootNode);
 
 	//¼ÓÔØ¿¨Æ¬ºÏ³É²ã
-	m_cardLayer = CardControl::create();
+	m_cardLayer = CardControlLayer::create();
 	this->addChild(m_cardLayer,1);
 	m_cardLayer->setVisible(false);
 

@@ -2,7 +2,7 @@
 #pragma once
 #include "cocos2d.h"
 #include "ui\CocosGUI.h"
-#include "CardCenter.h"
+#include "CardControlLayer.h"
 #include "NoTouchLayer.h"
 
 class MainScene : public cocos2d::Layer
@@ -35,6 +35,6 @@ private:
 	cocos2d::ui::LoadingBar * m_energyBar;
 
 	//²ã
-	CardControl * m_cardLayer;
+	CardControlLayer * m_cardControlLayer;
 	NoTouchLayer * m_noTouchLayer;
 };
