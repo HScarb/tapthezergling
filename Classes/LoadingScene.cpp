@@ -45,6 +45,11 @@ bool LoadingScene::init()
 	};
 
 	// “Ï≤Ωº”‘ÿÕº∆¨
+	
+	//for (int i = 1; i <= 2; i++)
+	//{
+	//	TextureCache::getInstance()->addImageAsync(StringUtils::format("chest_diamond_open%d.png", i), addTextureCallback);
+	//}
 	for (int i = 1; i <= 4;i++)
 	{
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("zergling_big_%d.png", i), addTextureCallback);

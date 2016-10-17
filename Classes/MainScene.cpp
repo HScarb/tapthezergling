@@ -1,4 +1,5 @@
 // MainScene.cpp
+#include "Chest.h"
 #include "MainScene.h"
 #include "AnimationUtil.h"
 #include "cocostudio/CocoStudio.h"
@@ -34,12 +35,21 @@ bool MainScene::init()
 	m_energyBar = nullptr;
 
 	m_zergling = nullptr;
-
+	chest_sprite = nullptr;
 	// 加载UI
 	auto rootNode = CSLoader::createNode("MainScene.csb");
 	addChild(rootNode);
 
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	Sprite* chest_sprite = Sprite::create("res/images/chest/chest_diamond_open1.png");
+	chest_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+	chest_sprite->setScale(0.75, 0.75);
+	this->addChild(chest_sprite);
+
+	chest_sprite->setVisible(true);
+	//chest_sprite->runAction(createAnimate());
 	// 添加狗的动画
+	/*
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_zergling = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("zergling_big_1.png"));
 	m_zergling->setPosition(visibleSize.width / 2, visibleSize.height / 2 + 20);
@@ -47,6 +57,17 @@ bool MainScene::init()
 	this->addChild(m_zergling);
 	Animation * animation = AnimationUtil::createWithFrameNameAndNum("zergling_big_", 4, 0.08f, -1, true);
 	m_zergling->runAction(Animate::create(animation));
+	*/
+
+	//添加宝箱
+	/*
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	m_chest = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("chest_diamond_open1.png"));
+	m_chest->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+	this->addChild(m_chest);
+	Animation * animation = AnimationUtil::createWithFrameNameAndNum("chest_diamond_open", 2, 0.08f, -1, true);
+	m_chest->runAction(Animate::create(animation));
+	*/
 
 	// 载入其他
 	m_energyText = (Text*)(rootNode->getChildByName("Text_energy"));
@@ -89,19 +110,25 @@ bool MainScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event
 	return true;
 }
 
+
 void MainScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
 	auto pos = touch->getLocation();
-	if(m_zergling->getBoundingBox().containsPoint(pos))
+	if (chest_sprite->getBoundingBox().containsPoint(pos))
 	{
-		SceneManager::getInstance()->changeScene(SceneManager::TollgateScene);
+		//chest_sprite->runAction(createAnimate());
+		chest_sprite->setVisible(false);
 	}
 }
 
+
 void MainScene::onSettingsBtnClick(Ref* pSender, TouchEventType type)
 {
-	if(type == TouchEventType::TOUCH_EVENT_ENDED)
+	if (type == TouchEventType::TOUCH_EVENT_ENDED)
+	{
 		SceneManager::getInstance()->changeScene(SceneManager::SettingsScene);
+	}
+
 }
 
 void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)
@@ -109,6 +136,25 @@ void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 		return;
 }
+
+/*
+cocos2d::Animate* MainScene::createAnimate()
+{
+	int iFrameNum = 2;
+	SpriteFrame* frame = nullptr;
+	Vector<SpriteFrame*> frameVec;
+	
+
+	for (int i = 1; i <= iFrameNum; i++)
+	{
+		frame = animation->getSpriteFrameByName(StringUtils::format("res/images/chest/chest_diamond_open%d.png", i));
+		//frame = SpriteFrame::create(StringUtils::format("res/images/chest/chest_diamond_open%d", i), Rect(0, 0, 130, 130));
+		frameVec.pushBack(frame);
+	}
+	
+	return action;
+}
+*/
 
 void MainScene::onAddJewelBtnClick(Ref* pSender, TouchEventType type)
 {
