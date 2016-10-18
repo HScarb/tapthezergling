@@ -31,13 +31,11 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="SettingsScene.csd" />
           <FilePathData Path="TollgateScene.csd" />
+          <FilePathData Path="CardEnhancer.csd" />
           <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
-          <FilePathData Path="Tollgates/SlideCutScene.csd" />
-          <FilePathData Path="PauseLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="SettingsScene.csd" />
+        <ActiveDocument Path="Tollgates/TollgateControlLayer.csd" />
       </Value>
     </Item>
   </Properties>
