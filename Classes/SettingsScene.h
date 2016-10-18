@@ -28,4 +28,5 @@ private:
 	// нд╠╬
 	cocos2d::ui::Text * m_soundText;
 	cocos2d::ui::Text * m_musicText;
+
 };

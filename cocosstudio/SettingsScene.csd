@@ -6,13 +6,13 @@
       <ObjectData Name="Scene" Tag="32" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="540.0000" />
         <Children>
-          <AbstractNodeData Name="Image_background" ActionTag="-706914367" Tag="38" IconVisible="False" LeftMargin="-1.0000" RightMargin="1.0000" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_background" ActionTag="-706914367" Tag="38" IconVisible="False" LeftMargin="-1.0000" RightMargin="1.0000" TopMargin="-2.0000" BottomMargin="2.0000" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
             <Size X="960.0000" Y="540.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="479.0000" Y="270.0000" />
+            <Position X="479.0000" Y="272.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4990" Y="0.5000" />
+            <PrePosition X="0.4990" Y="0.5037" />
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="Res/star crafts/starcrafts_Terrain_Dirt.png" Plist="" />
           </AbstractNodeData>
@@ -59,13 +59,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_music" ActionTag="366595192" Tag="56" IconVisible="False" LeftMargin="156.0872" RightMargin="153.9128" TopMargin="95.0000" BottomMargin="255.0000" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="1179" Scale9Height="356" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_music" ActionTag="366595192" Tag="56" IconVisible="False" LeftMargin="156.0872" RightMargin="153.9128" TopMargin="96.0000" BottomMargin="254.0000" TouchEnable="True" FontSize="40" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="1179" Scale9Height="356" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="650.0000" Y="190.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="481.0872" Y="350.0000" />
+            <Position X="481.0872" Y="349.0000" />
             <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5011" Y="0.6481" />
+            <PrePosition X="0.5011" Y="0.6463" />
             <PreSize X="0.6771" Y="0.3519" />
             <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-BoldItalic.ttf" Plist="" />
             <TextColor A="255" R="255" G="255" B="255" />

@@ -22,7 +22,7 @@ public:
 protected:
 	int m_nextTollgate;
 	
-
+	
 	CC_SYNTHESIZE(int, m_tollgate, Tollgate);			// 当前关卡类型
 	CC_SYNTHESIZE(int, m_score, Score);					// 当前分数
 	CC_SYNTHESIZE(int, m_tollgateNum, TollgateNum);		// 当前关卡序号
