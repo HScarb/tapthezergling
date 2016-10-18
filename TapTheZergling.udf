@@ -28,16 +28,5 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="TollgateScene.csd" />
-          <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
-          <FilePathData Path="PauseLayer.csd" />
-          <FilePathData Path="CardEnhancer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="CardEnhancer.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>

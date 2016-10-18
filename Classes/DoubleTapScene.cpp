@@ -4,6 +4,7 @@
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
 #include "TollgateControlLayer.h"
+#include "Global.h"
 
 USING_NS_CC;
 using namespace std;
@@ -65,7 +66,7 @@ bool DoubleTapScene::init(int diff, int loop)
 	m_controlLayer = TollgateControlLayer::create();		// 创建关卡控制层
 	m_controlLayer->initTimeBar();			// 初始化时间条
 	m_controlLayer->scheduleUpdate();		// 开始刷新
-	addChild(m_controlLayer);
+	addChild(m_controlLayer, ZORDER_TOLLGATECONTROLLAYER);
 	
 	m_grid = DoubleTapGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);

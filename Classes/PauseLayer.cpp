@@ -1,11 +1,18 @@
 // PauseLayer.cpp
 #include "PauseLayer.h"
+#include "cocostudio/CocoStudio.h"
 USING_NS_CC;
+using namespace cocos2d::ui;
+using namespace cocostudio::timeline;
 
 bool PauseLayer::init()
 {
 	if (!Layer::init())
 		return false;
+
+	auto UI = CSLoader::createNode("PauseLayer.csb");
+	addChild(UI);
+	m_resumeBtn = (Button*)(UI->getChildByName("Button_resume"));
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(PauseLayer::onTouchBegan, this);

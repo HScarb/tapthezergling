@@ -6,6 +6,7 @@
 #include "TimeManager.h"
 #include "Flower.h"
 #include "TollgateControlLayer.h"
+#include "Global.h"
 
 USING_NS_CC;
 
@@ -44,7 +45,7 @@ bool EatCandiesScene::init(int diff, int loop)
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
 	m_controlLayer->scheduleUpdate();
-	addChild(m_controlLayer);
+	addChild(m_controlLayer, ZORDER_TOLLGATECONTROLLAYER);
 
 	m_pauseBtn = (Button*)(UI->getChildByName("Button_pause"));
 	m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
@@ -226,12 +227,6 @@ cocos2d::Vec2 EatCandiesGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 
 bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
-	if (!m_isRunning)
-	{
-		m_isRunning = true;
-		TimeManager::getInstance()->startCountDown();
-	}
-
 	int n = 0;
 	int r = 0;
 	int b = 0;

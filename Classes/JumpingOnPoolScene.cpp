@@ -74,7 +74,7 @@ bool JumpingOnPoolScene::init(int diff, int loop)
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
 	m_controlLayer->scheduleUpdate();
-	addChild(m_controlLayer);
+	addChild(m_controlLayer, ZORDER_TOLLGATECONTROLLAYER);
 
 	
 	// ´´½¨¹·

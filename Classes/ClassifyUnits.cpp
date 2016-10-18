@@ -93,7 +93,7 @@ bool ClassifyUnits::init(int diff, int loop)
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
 	m_controlLayer->scheduleUpdate();
-	this->addChild(m_controlLayer);
+	this->addChild(m_controlLayer, ZORDER_TOLLGATECONTROLLAYER);
 
 	// ´´½¨Bases
 	m_terranBase = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey(PATH_TERRAN_BASE));

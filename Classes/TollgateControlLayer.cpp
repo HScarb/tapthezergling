@@ -1,7 +1,6 @@
 // TollgateControlLayer.cpp
 #include "TollgateControlLayer.h"
 #include "cocostudio/CocoStudio.h"
-#include "ui/CocosGUI.h"
 #include "PauseLayer.h"
 #include "TimeManager.h"
 #include "SceneManager.h"
@@ -93,16 +92,15 @@ void TollgateControlLayer::initTimeBar()
 	return;
 }
 
+// 当暂停按钮被点击
 void TollgateControlLayer::onPauseBtnClick(Ref*, cocos2d::ui::TouchEventType type)
 {
-	switch(type)
+	if(type == TOUCH_EVENT_ENDED)
 	{
-	case TOUCH_EVENT_BEGAN: break;
-	case TOUCH_EVENT_MOVED: break;
-	case TOUCH_EVENT_ENDED: 
-		CCLOG("Pause btn tapped");
-		break;
-	case TOUCH_EVENT_CANCELED: break;
-	default: break;
+		CCLOG("Pause button clicked");
+		auto pauseLayer = PauseLayer::create();
+		this->addChild(pauseLayer);
+		TimeManager::getInstance()->pauseCountDown();
 	}
+	
 }

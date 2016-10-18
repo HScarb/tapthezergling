@@ -101,7 +101,7 @@ bool FeedSnacks::init(int diff, int loop)
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
 	m_controlLayer->scheduleUpdate();
-	addChild(m_controlLayer);
+	addChild(m_controlLayer, ZORDER_TOLLGATECONTROLLAYER);
 
 	m_grid = FeedSnacksGrid::create(diff, loop);
 	m_grid->setPosition(0, 0);
