@@ -67,6 +67,7 @@ void TollgateControlLayer::tollgateClear(cocos2d::EventCustom * event)
 	CCLOG("%s cleared.", tollgate);
 
 	TimeManager::getInstance()->pauseCountDown();
+	TimeManager::getInstance()->setisTollgateBegin(false);		// 设置关卡没有开始
 	this->unscheduleUpdate();		// stop update for tollgate control layer
 	GameManager::getInstance()->setIsWaitToAddTime(true);
 	// 播放菜单背景音乐
@@ -80,6 +81,7 @@ void TollgateControlLayer::tollgateFail(cocos2d::EventCustom * event)
 	CCLOG("%s failed.\nGAME OVER", tollgate);
 	// change to main scene
 	TimeManager::getInstance()->pauseCountDown();
+	TimeManager::getInstance()->setisTollgateBegin(false);		// 设置关卡没有开始
 	// 停止背景音乐并且播放胜利音效
 	SoundManager::getInstance()->stopMusic();
 	SoundManager::getInstance()->playEffect("Sounds/winmusic.mp3");

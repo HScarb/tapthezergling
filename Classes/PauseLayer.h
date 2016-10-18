@@ -16,6 +16,7 @@ public:
 	virtual void onTouchMoved(cocos2d::Touch * touch, cocos2d::Event *unused_event);
 	virtual void onTouchEnded(cocos2d::Touch * touch, cocos2d::Event *unused_event);
 
+	void onResumeBtnClick(Ref *, cocos2d::ui::TouchEventType type);		// 恢复按钮点击事件
 private:
 	cocos2d::ui::Button * m_resumeBtn;
 };

@@ -12,6 +12,7 @@ public:
 	void reduceTime(float t);		// 减少时间
 	void startCountDown();
 	void pauseCountDown();
+	void resumeCountDown();			// 从暂停中恢复
 
 	bool isCountingDown();			// 返回是否在倒数
 	
@@ -22,4 +23,5 @@ private:
 	
 	CC_SYNTHESIZE(float, m_preTime, PreTime);
 	CC_SYNTHESIZE(float, m_time, Time);
+	CC_SYNTHESIZE(bool, m_isTollgateBegin, isTollgateBegin);		// 关卡是否已经开始(暂停要用到)
 };
