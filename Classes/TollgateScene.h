@@ -16,6 +16,12 @@ private:
 	void setNextTollgate();			// 随机下一关
 	void showNextTollgate();		// 将已经生成的下一关显示出来
 
+	//宝箱及其动画
+	cocos2d::Sprite * m_chest_sprite;
+	cocos2d::Sprite * m_flash;
+	cocos2d::Animate* m_createAnimate();
+
+
 	void onHomeBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onCardBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 
@@ -31,6 +37,10 @@ private:
 	void onItem8Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem9Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem10Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
+
+private:
+	virtual bool onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event);
+	virtual void onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * unused_event);
 
 private:
 	cocos2d::Label * m_tollgateNumLabel;

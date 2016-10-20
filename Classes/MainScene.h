@@ -22,9 +22,6 @@ private:
 private:
 	// 狗
 	cocos2d::Sprite * m_zergling;
-	//宝箱及其动画
-	cocos2d::Sprite * chest_sprite;
-	cocos2d::Animate* createAnimate();
 
 	// 标签和按钮和进度条
 	cocos2d::ui::Text * m_jewelText;

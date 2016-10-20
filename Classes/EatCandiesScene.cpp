@@ -28,13 +28,6 @@ bool EatCandiesScene::init(int diff, int loop)
 	if (!Layer::init())
 		return false;
 
-	/*Sprite* sprite = Sprite::create("Res\zergling_big_1.png");
-	auto size = Director::getInstance()->getVisibleSize();
-	sprite->setPosition(size.height / 2, size.width / 2);
-	this->addChild(sprite);*/
-
-	//用矩阵中固定一个狗代替
-
 	auto winSize = Director::getInstance()->getWinSize();
 
 	auto UI = CSLoader::createNode("Tollgates/EatCandiesScene.csb");
