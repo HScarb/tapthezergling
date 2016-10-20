@@ -56,14 +56,13 @@
       <UniqueIdentifier>{7abd44e7-0e2a-43e2-b539-425057ec37d1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\Scenes\Tollgates\BOSS2ZerglingNinja">
-<<<<<<< HEAD
       <UniqueIdentifier>{234c0a0e-03de-43b2-b757-9f65e71555b7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\Scenes\Tollgates\CheckThething">
       <UniqueIdentifier>{7e0f20c1-99b4-4fcd-932f-a2dc4cf26164}</UniqueIdentifier>
-=======
-      <UniqueIdentifier>{cfd15cf9-52e1-42a6-8359-978ff237b808}</UniqueIdentifier>
->>>>>>> a4fbf078aa400e2221a7edb943e166a73e3aafd4
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\FeedSnacks">
+      <UniqueIdentifier>{5bf8579b-ad60-4afb-8faf-eaf5f7536339}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -160,13 +159,36 @@
     <ClCompile Include="..\Classes\BOSS2ZerglingNinja.cpp">
       <Filter>Classes\Scenes\Tollgates\BOSS2ZerglingNinja</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="..\Classes\CheckThethingScene.cpp">
       <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
-=======
+    </ClCompile>
     <ClCompile Include="..\Classes\Worker.cpp">
       <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
->>>>>>> a4fbf078aa400e2221a7edb943e166a73e3aafd4
+    </ClCompile>
+    <ClCompile Include="..\Classes\farmerandflower.cpp">
+      <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FeedSnacks.cpp">
+      <Filter>Classes\Scenes\Tollgates\FeedSnacks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Shake.cpp">
+      <Filter>Classes\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ScoreScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SoundManager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="..\Classes\Chest.cpp">
+=======
+    <ClCompile Include="..\Classes\NoTouchLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CardControlLayer.cpp">
+>>>>>>> 5893239f265863abf7bc47db213530e81f1954d4
+      <Filter>Classes\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,13 +294,39 @@
     <ClInclude Include="..\Classes\BOSS2ZerglingNinja.h">
       <Filter>Classes\Scenes\Tollgates\BOSS2ZerglingNinja</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="..\Classes\CheckThethingScene.h">
       <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
-=======
+    </ClInclude>
     <ClInclude Include="..\Classes\Worker.h">
       <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
->>>>>>> a4fbf078aa400e2221a7edb943e166a73e3aafd4
+    </ClInclude>
+    <ClInclude Include="..\Classes\farmerandflower.h">
+      <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FeedSnacks.h">
+      <Filter>Classes\Scenes\Tollgates\FeedSnacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shake.h">
+      <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ScoreScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ChineseDisplay.h">
+      <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SoundManager.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="..\Classes\Chest.h">
+=======
+    <ClInclude Include="..\Classes\NoTouchLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardControlLayer.h">
+>>>>>>> 5893239f265863abf7bc47db213530e81f1954d4
+      <Filter>Classes\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

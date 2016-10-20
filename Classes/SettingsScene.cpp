@@ -43,20 +43,12 @@ bool SettingsScene::init()
 	m_soundText = (Text*)ui->getChildByName("Text_sound");
 	m_musicText = (Text*)ui->getChildByName("Text_music");
 
-	if (SoundManager::getInstance()->getMusicOn())
-	{
-		m_musicText->setText("MUSIC ON");
-	}
-	else
+	// 根据音乐有没有开来更改标签文字
+	if (!SoundManager::getInstance()->getMusicOn())
 	{
 		m_musicText->setText("MUSIC OFF");
 	}
-
-	if (SoundManager::getInstance()->getSoundOn())
-	{
-		m_soundText->setText("SOUND ON");
-	}
-	else
+	if (!SoundManager::getInstance()->getSoundOn())
 	{
 		m_soundText->setText("SOUND OFF");
 	}

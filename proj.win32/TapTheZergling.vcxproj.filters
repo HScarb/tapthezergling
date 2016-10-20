@@ -181,6 +181,10 @@
       <Filter>Classes\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Chest.cpp">
+    <ClCompile Include="..\Classes\NoTouchLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CardControlLayer.cpp">
       <Filter>Classes\Entity</Filter>
     </ClCompile>
   </ItemGroup>
@@ -312,6 +316,10 @@
       <Filter>Classes\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Chest.h">
+    <ClInclude Include="..\Classes\NoTouchLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardControlLayer.h">
       <Filter>Classes\Entity</Filter>
     </ClInclude>
   </ItemGroup>

@@ -48,6 +48,7 @@ bool SceneManager::init()
 void SceneManager::changeScene(SceneType sceneType)
 {
 	Scene * pScene = nullptr;
+	Layer * pLayer = nullptr;
 	switch(sceneType)
 	{
 	case SceneManager::MainScene:
@@ -64,6 +65,7 @@ void SceneManager::changeScene(SceneType sceneType)
 		break;
 	case SceneManager::ScoreScene:
 		pScene = ScoreScene::createScene();
+		break;
 		break;
 	case SceneManager::BOSS1:
 		pScene = BOSS1ZerglingKing::createScene();

@@ -9,6 +9,7 @@
 #include "SimpleAudioEngine.h"
 #include "SoundManager.h"
 #include "MainScene.h"
+#include "CardControlLayer.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -84,6 +85,12 @@ bool TollgateScene::init()
 	chest_sprite->setScale(0.65, 0.65);
 	this->addChild(chest_sprite);
 	chest_sprite->runAction(m_createAnimate());
+
+	//¼ÓÔØ¿¨Æ¬ºÏ³É²ã
+	m_cardLayer = CardControlLayer::create();
+	this->addChild(m_cardLayer,1);
+	m_cardLayer->setVisible(false);
+
 
 	// tollgate Num label
 	m_tollgateNumLabel = Label::createWithTTF(StringUtils::format("%d", GameManager::getInstance()->getTollgateNum()), "fonts/AveriaSansLibre-Bold.ttf", 50);
@@ -163,6 +170,7 @@ bool TollgateScene::init()
 	m_t8->addTouchEventListener(this, toucheventselector(TollgateScene::onItem8Clicked));
 	m_t9->addTouchEventListener(this, toucheventselector(TollgateScene::onItem9Clicked));
 	m_t10->addTouchEventListener(this, toucheventselector(TollgateScene::onItem10Clicked));
+	m_cardBtn->addTouchEventListener(this, toucheventselector(TollgateScene::onCardBtnClicked));
 
 //	SimpleAudioEngine::getInstance()->playBackgroundMusic("Sounds/MainMenu.mp3", true);
 	SoundManager::getInstance()->playMenuMusic();
@@ -281,7 +289,11 @@ void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
 
 void TollgateScene::onCardBtnClicked(Ref* pSender, TouchEventType type)
 {
-	
+	if (type == TouchEventType::TOUCH_EVENT_ENDED)
+	{
+		log("CardLayer");
+		m_cardLayer->setVisible(true);
+	}
 }
 
 void TollgateScene::onTollgateLabelClicked(Ref* pSender)
