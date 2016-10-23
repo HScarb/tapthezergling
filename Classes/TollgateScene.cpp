@@ -50,47 +50,16 @@ bool TollgateScene::init()
 	addChild(rootNode);
 
 	//创建宝箱
-	/*
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Sprite* chest_sprite = Sprite::create("res/images/chest/chest_diamond_open1.png");
-	chest_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-	chest_sprite->setScale(0.65, 0.65);
-	this->addChild(chest_sprite);
-	*/
-
-	//宝箱的动画
-	//auto * fadein = FadeOut::create(2);
-	//Sequence * seq = Sequence::create(fadein, NULL);
-	//Spawn * spawn = Spawn::create(,)
-	//chest_sprite->runAction(fadein);
-
-	auto visibleSize2 = Director::getInstance()->getVisibleSize();
-	Sprite* m_flash = Sprite::create("res/images/chest/flash.png");
-	m_flash->setPosition(visibleSize2.width / 2, visibleSize2.height / 2);
-	m_flash->setScale(0.65, 0.65);
-	this->addChild(m_flash);
-
-	RotateTo *rotateTo = RotateTo::create(2, 90);
-	ScaleBy *scaleBy = ScaleBy::create(2.0, 2.0);
-	//TintBy *tintBy = TintBy::create(3, 255, 255, 0);
-	Sequence * seq1 = Sequence::create(rotateTo, NULL);
-	Sequence * seq2 = Sequence::create(scaleBy, NULL);
-	//Sequence * seq3 = Sequence::create(tintBy, NULL);
-	m_flash->runAction(rotateTo);
-	m_flash->runAction(scaleBy);
-
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Sprite* chest_sprite = Sprite::create("res/images/chest/chest_diamond_open1.png");
-	chest_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-	chest_sprite->setScale(0.65, 0.65);
-	this->addChild(chest_sprite);
-	chest_sprite->runAction(m_createAnimate());
+	m_chest_sprite = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("res/images/chest/chest1.png"));
+	m_chest_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+	m_chest_sprite->setScale(0.65, 0.65);
+	this->addChild(m_chest_sprite,2);
 
 	//加载卡片合成层
 	m_cardLayer = CardControlLayer::create();
 	this->addChild(m_cardLayer,1);
 	m_cardLayer->setVisible(false);
-
 
 	// tollgate Num label
 	m_tollgateNumLabel = Label::createWithTTF(StringUtils::format("%d", GameManager::getInstance()->getTollgateNum()), "fonts/AveriaSansLibre-Bold.ttf", 50);
@@ -260,6 +229,7 @@ void TollgateScene::showNextTollgate()
 	m_tollgateNumLabel->runAction(Sequence::create(scale1, changeText, scale2, nullptr));
 }
 
+//创建开箱子的动画
 cocos2d::Animate* TollgateScene::m_createAnimate()
 {
 		int iFrameNum = 2;
@@ -268,12 +238,12 @@ cocos2d::Animate* TollgateScene::m_createAnimate()
 
 		for (int i = 1; i <= 2; i++)
 		{
-			frame = SpriteFrame::create(StringUtils::format("res/images/chest/chest_diamond_open%d.png", i), Rect(0, 0, 256, 256));
+			frame = SpriteFrame::create(StringUtils::format("res/images/chest/chest%d.png", i), Rect(0, 0, 256, 256));
 			frameVec.pushBack(frame);
 		}
 		Animation* animation = Animation::createWithSpriteFrames(frameVec);
-		animation->setLoops(-1);
-		animation->setDelayPerUnit(0.8f);
+		animation->setLoops(1);
+		animation->setDelayPerUnit(0.05f);
 		Animate* action = Animate::create(animation);
 
 		return action;
@@ -397,26 +367,28 @@ void TollgateScene::onItem9Clicked(Ref* pSender, cocos2d::ui::TouchEventType typ
 
 void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-	
-	auto pos = touch->getLocation();
-	if (m_chest_sprite->getBoundingBox().containsPoint(pos))//这句话有问题，得不到数据m_chest_sprite->..=NULL;
-	{
+		auto pos = touch->getLocationInView();
 		auto visibleSize = Director::getInstance()->getVisibleSize();
+
+		//闪光和动作
 		Sprite* m_flash = Sprite::create("res/images/chest/flash.png");
 		m_flash->setPosition(visibleSize.width / 2, visibleSize.height / 2);
 		m_flash->setScale(0.65, 0.65);
-		this->addChild(m_flash);
+		m_flash->setVisible(false);
+		this->addChild(m_flash,1);
 
-		RotateTo *rotateTo = RotateTo::create(2, 90);
-		//TintBy *tintBy = TintBy::create(3, 255, 255, 0);   //闪烁效果
-		ScaleBy *scaleBy = ScaleBy::create(2.5, 2.5);
-		Sequence * seq1 = Sequence::create(rotateTo, scaleBy);
-		//Sequence * seq2 = Sequence::create(scaleBy,NULL );
-		m_flash->runAction(rotateTo);
-		//m_flash->runAction(tintBy);
-		m_flash->runAction(scaleBy);
-	}
-	
+		RotateTo *rotateTo = RotateTo::create(2, 100);
+		ScaleBy *scaleBy = ScaleBy::create(1.8, 1.8);
+		Sequence * seq1 = Sequence::create(rotateTo, NULL);
+		Sequence * seq3 = Sequence::create(scaleBy, NULL);
+
+		if (m_chest_sprite->getBoundingBox().containsPoint(pos))
+		{
+			m_flash->setVisible(true);
+			m_flash->runAction(rotateTo);
+			m_flash->runAction(scaleBy);
+			m_chest_sprite->runAction(m_createAnimate());
+		}
 }
 
 bool TollgateScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)

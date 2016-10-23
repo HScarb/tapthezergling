@@ -47,7 +47,6 @@ bool MainScene::init()
 	this->addChild(m_cardControlLayer, 11);
 	m_cardControlLayer->setVisible(false);
 	
-
 	// Ìí¼Ó¹·µÄ¶¯»­
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_zergling = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("zergling_big_1.png"));
