@@ -48,9 +48,9 @@ bool TollgateScene::init()
 	addChild(rootNode);
 
 	//¼ÓÔØ¿¨Æ¬ºÏ³É²ã
-	m_cardLayer = CardControlLayer::create();
-	this->addChild(m_cardLayer,1);
-	m_cardLayer->setVisible(false);
+	m_cardControlLayer = CardControlLayer::create();
+	this->addChild(m_cardControlLayer, 11);
+	m_cardControlLayer->setVisible(false);
 
 	// tollgate Num label
 	m_tollgateNumLabel = Label::createWithTTF(StringUtils::format("%d", GameManager::getInstance()->getTollgateNum()), "fonts/AveriaSansLibre-Bold.ttf", 50);
@@ -227,7 +227,7 @@ void TollgateScene::onCardBtnClicked(Ref* pSender, TouchEventType type)
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
 		log("CardLayer");
-		m_cardLayer->setVisible(true);
+		m_cardControlLayer->showLayer();
 	}
 }
 

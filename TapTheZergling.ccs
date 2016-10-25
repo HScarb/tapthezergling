@@ -301,6 +301,7 @@
           <Project Name="TollgateControlLayer.csd" Type="Layer" />
         </Folder>
         <Project Name="CardEnhancer.csd" Type="Layer" />
+        <Project Name="CardInfoLayer.csd" Type="Layer" />
         <Project Name="MainScene.csd" Type="Scene" />
         <Project Name="PauseLayer.csd" Type="Layer" />
         <Project Name="ScoreScene.csd" Type="Scene" />

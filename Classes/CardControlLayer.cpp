@@ -1,6 +1,7 @@
-//Card.cpp
+//CardControlLayer.cpp
 #include"CardControlLayer.h"
 #include "cocostudio/CocoStudio.h"
+#include "CardManager.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -27,11 +28,28 @@ bool CardControlLayer::init()
 	//从ui中加载按钮
 	m_closeBtn = (Button *)ui->getChildByName("Button_x");
 	m_collectBtn = (Button *)ui->getChildByName("Button_collect");
+	//从ui中加载卡片滑动视图
+	m_cardContainer = Layer::create();
+	m_cardView = (ScrollView *)ui->getChildByName("cardView");
+	m_cardContainer->setContentSize(CCSizeMake(960, 100));
+	m_cardView->addChild(m_cardContainer);
+
+	//创建卡片
+	m_cardMsg.pushBack(CreateACard());
+
 
 	m_closeBtn->addTouchEventListener(this, toucheventselector(CardControlLayer::onCloseBtnClick));
 	m_collectBtn->addTouchEventListener(this, toucheventselector(CardControlLayer::onCollectBtnClick));
 	return true;
 
+}
+
+Sprite* CardControlLayer::CreateACard()
+{
+	Sprite *card = Sprite::create("Res/Cards/Card_1.png");
+	card->setPosition(50, 250);
+	m_cardContainer->addChild(card);
+	return card;
 }
 void CardControlLayer::onCloseBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
 {

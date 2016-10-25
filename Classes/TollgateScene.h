@@ -59,5 +59,5 @@ private:
 	cocos2d::ui::Text * m_t9;
 	cocos2d::ui::Text * m_t10;
 private:
-	CardControlLayer * m_cardLayer;
+	CardControlLayer * m_cardControlLayer;
 };

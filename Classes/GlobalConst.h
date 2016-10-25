@@ -25,3 +25,17 @@ const std::string BOSS_TOLLGATE_NAME[3] =
 	"Boss1: Zergling King",
 	"Boss2: Zergling Ninja"
 };
+const std::string CARD_NAME[] =
+{
+	"0: None",
+	"1: Double Tap Zergling Card",
+	"2: Slide Cut Card",
+	"3: Eat Flowers Card",
+	"4: Burrow And Attack Card",
+	"5: Jumping On Pools Card",
+	"6: Classify Units Card",
+	"7: Check The Units Card",
+	"8: Feed Snakes Card"
+	"10: Zergling King Card",
+	"11: Zergling Ninja Card"
+};
