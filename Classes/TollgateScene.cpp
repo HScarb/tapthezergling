@@ -8,6 +8,7 @@
 #include "Global.h"
 #include "SimpleAudioEngine.h"
 #include "SoundManager.h"
+#include "MainScene.h"
 #include "CardControlLayer.h"
 
 USING_NS_CC;
@@ -35,7 +36,8 @@ bool TollgateScene::init()
 	m_energyBar = nullptr;
 	m_timeText = nullptr;
 	m_timeBar = nullptr;
-
+	m_chest_sprite = nullptr;
+	
 	m_scrollView = nullptr;
 	m_t1 = nullptr;
 	m_t2 = nullptr;
@@ -46,6 +48,13 @@ bool TollgateScene::init()
 	// 加载UI
 	auto rootNode = CSLoader::createNode("TollgateScene.csb");
 	addChild(rootNode);
+
+	//创建宝箱
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	m_chest_sprite = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("res/images/chest/chest1.png"));
+	m_chest_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+	m_chest_sprite->setScale(0.65, 0.65);
+	this->addChild(m_chest_sprite,2);
 
 	//加载卡片合成层
 	m_cardControlLayer = CardControlLayer::create();
@@ -114,6 +123,12 @@ bool TollgateScene::init()
 
 	// 关联触摸函数
 	m_homeBtn->addTouchEventListener(this, toucheventselector(TollgateScene::onHomeBtnClicked));
+	
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(TollgateScene::onTouchBegan, this);
+	listener->onTouchEnded = CC_CALLBACK_2(TollgateScene::onTouchEnded, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
 	m_t1->addTouchEventListener(this, toucheventselector(TollgateScene::onItem1Clicked));
 	m_t2->addTouchEventListener(this, toucheventselector(TollgateScene::onItem2Clicked));
 	m_t3->addTouchEventListener(this, toucheventselector(TollgateScene::onItem3Clicked));
@@ -212,6 +227,26 @@ void TollgateScene::showNextTollgate()
 	});
 	auto scale2 = ScaleTo::create(0.2, 1.0);
 	m_tollgateNumLabel->runAction(Sequence::create(scale1, changeText, scale2, nullptr));
+}
+
+//创建开箱子的动画
+cocos2d::Animate* TollgateScene::m_createAnimate()
+{
+		int iFrameNum = 2;
+		SpriteFrame * frame = NULL;
+		Vector<SpriteFrame*> frameVec;
+
+		for (int i = 1; i <= 2; i++)
+		{
+			frame = SpriteFrame::create(StringUtils::format("res/images/chest/chest%d.png", i), Rect(0, 0, 256, 256));
+			frameVec.pushBack(frame);
+		}
+		Animation* animation = Animation::createWithSpriteFrames(frameVec);
+		animation->setLoops(1);
+		animation->setDelayPerUnit(0.05f);
+		Animate* action = Animate::create(animation);
+
+		return action;
 }
 
 void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
@@ -329,6 +364,38 @@ void TollgateScene::onItem9Clicked(Ref* pSender, cocos2d::ui::TouchEventType typ
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::CheckThethingScene, 2, 2);
 	}
 }
+
+void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+		auto pos = touch->getLocationInView();
+		auto visibleSize = Director::getInstance()->getVisibleSize();
+
+		//闪光和动作
+		Sprite* m_flash = Sprite::create("res/images/chest/flash.png");
+		m_flash->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+		m_flash->setScale(0.65, 0.65);
+		m_flash->setVisible(false);
+		this->addChild(m_flash,1);
+
+		RotateTo *rotateTo = RotateTo::create(2, 100);
+		ScaleBy *scaleBy = ScaleBy::create(1.8, 1.8);
+		Sequence * seq1 = Sequence::create(rotateTo, NULL);
+		Sequence * seq3 = Sequence::create(scaleBy, NULL);
+
+		if (m_chest_sprite->getBoundingBox().containsPoint(pos))
+		{
+			m_flash->setVisible(true);
+			m_flash->runAction(rotateTo);
+			m_flash->runAction(scaleBy);
+			m_chest_sprite->runAction(m_createAnimate());
+		}
+}
+
+bool TollgateScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+	return true;
+}
+
 void TollgateScene::onItem10Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
 	if (type == TOUCH_EVENT_ENDED)

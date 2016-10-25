@@ -26,7 +26,7 @@ bool MainScene::init()
 {
 	if (!Layer::init())
 		return false;
-	
+
 	m_energyText = nullptr;
 	m_jewelText = nullptr;
 	m_scoreText = nullptr;
@@ -46,7 +46,6 @@ bool MainScene::init()
 	this->addChild(m_cardControlLayer, 11);
 	m_cardControlLayer->setVisible(false);
 	
-
 	// 添加狗的动画
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_zergling = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("zergling_big_1.png"));
@@ -75,9 +74,9 @@ bool MainScene::init()
 	// 为按钮添加点击事件
 	m_settingsBtn->addTouchEventListener(this, toucheventselector(MainScene::onSettingsBtnClick));
 	m_cardBtn->addTouchEventListener(this, toucheventselector(MainScene::onCardBtnClick));
-//	m_addJewelBtn->addTouchEventListener(this, toucheventselector(MainScene::onAddJewelBtnClick));
-//	m_settingsBtn->addTouchEventListener(CC_CALLBACK_1(MainScene::onSettingsBtnClick, this));
-//	m_cardBtn->addTouchEventListener(CC_CALLBACK_1(MainScene::onCardBtnClick, this));
+	//	m_addJewelBtn->addTouchEventListener(this, toucheventselector(MainScene::onAddJewelBtnClick));
+	//	m_settingsBtn->addTouchEventListener(CC_CALLBACK_1(MainScene::onSettingsBtnClick, this));
+	//	m_cardBtn->addTouchEventListener(CC_CALLBACK_1(MainScene::onCardBtnClick, this));
 	// m_addJewelBtn->addTouchEventListener(CC_CALLBACK_1(MainScene::onAddJewelBtnClick, this));
 
 
@@ -88,7 +87,7 @@ bool MainScene::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	SoundManager::getInstance()->playMenuMusic();
-	
+
 	return true;
 }
 
@@ -100,7 +99,7 @@ bool MainScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event
 void MainScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
 	auto pos = touch->getLocation();
-	if(m_zergling->getBoundingBox().containsPoint(pos))
+	if (m_zergling->getBoundingBox().containsPoint(pos))
 	{
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateScene);
 	}
@@ -108,7 +107,7 @@ void MainScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event
 
 void MainScene::onSettingsBtnClick(Ref* pSender, TouchEventType type)
 {
-	if(type == TouchEventType::TOUCH_EVENT_ENDED)
+	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 		SceneManager::getInstance()->changeScene(SceneManager::SettingsScene);
 }
 
