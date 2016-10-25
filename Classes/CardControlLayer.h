@@ -18,6 +18,11 @@ public:
 
 	cocos2d::ui::ScrollView * m_cardView;
 	Layer * m_cardContainer;
+
+	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+
 private:
 	void onCloseBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onCollectBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);

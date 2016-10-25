@@ -9,7 +9,6 @@
 #include "Card.h"
 #include "cocos2d.h"
 #include "CardControlLayer.h"
-#include "Card.h"
 
 class CardManager : public cocos2d::Node
 {

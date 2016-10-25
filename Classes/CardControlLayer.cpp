@@ -37,7 +37,6 @@ bool CardControlLayer::init()
 	//´´½¨¿¨Æ¬
 	m_cardMsg.pushBack(CreateACard());
 
-
 	m_closeBtn->addTouchEventListener(this, toucheventselector(CardControlLayer::onCloseBtnClick));
 	m_collectBtn->addTouchEventListener(this, toucheventselector(CardControlLayer::onCollectBtnClick));
 	return true;
@@ -78,4 +77,18 @@ void CardControlLayer::unShowLayer()
 	this->removeChild(m_noTouchLayer);
 	// Òþ²Ø¿¨Æ¬¿ØÖÆ²ã
 	this->setVisible(false);
+}
+
+bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+	return true;
+}
+
+void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+}
+
+void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+
 }
