@@ -6,28 +6,25 @@
 	-¿¨Æ¬ÍÏ¶¯Ð§¹û
 */
 #pragma once
-#include "Card.h"
 #include "cocos2d.h"
-#include "CardControlLayer.h"
+#include "Card.h"
+#include "ui\CocosGUI.h"
 
 class CardManager : public cocos2d::Node
 {
 public:
 	static CardManager * getInstance();
 	virtual bool init();
-
-
-	/*Card *CreateACard(Card::CardInfo info);
-	Sprite * CreateACard();*/
-
-	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
-	virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
-	virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
-
+	//·µ»Ø¿¨Æ¬´æ·ÅÈÝÆ÷
+	cocos2d::Vector<Card*> getAllCards();
+	void InsertACard(Card* card);
+	void SortCardMsg();
+	//É¾³ý¿¨Æ¬
+	void DeleteCardByTypeAndLevel(int type,int level);
+	
 private:
 	static CardManager * m_cardManager;
-	/*CardControlLayer * m_CardView;
-	CardControlLayer * m_CardContainer;
-	Vector<Card*> m_cardMsg;
-	Vector<Sprite*>m_cardMsg;*/
+	cocos2d::Vector<Card*> m_cardMsg;
 };
+
+inline bool SortCardsOpreator(const Card* card1, const Card* card2);

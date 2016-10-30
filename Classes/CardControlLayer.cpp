@@ -23,33 +23,52 @@ bool CardControlLayer::init()
 	m_closeBtn = nullptr;
 	m_noTouchLayer = nullptr;
 	auto ui = CSLoader::createNode("CardEnhancer.csb");
-	this->addChild(ui, 1);
+	this->addChild(ui,1);
 
 	//从ui中加载按钮
 	m_closeBtn = (Button *)ui->getChildByName("Button_x");
 	m_collectBtn = (Button *)ui->getChildByName("Button_collect");
 	//从ui中加载卡片滑动视图
-	m_cardContainer = Layer::create();
 	m_cardView = (ScrollView *)ui->getChildByName("cardView");
-	m_cardContainer->setContentSize(CCSizeMake(960, 100));
-	m_cardView->addChild(m_cardContainer);
+	//加载manager里的卡片容器
+	m_CardMsg = CardManager::getInstance()->getAllCards();
+	if (m_CardMsg.size() == 0)
+	{
+		//创建卡片
+		for (int i = 10; i >= 1; i--)
+		{
+			CreateACard(i, 1);
+		}
+	}
+	CreateACard(5, 2);
+	//CardManager::getInstance()->DeleteCardByTypeAndLevel(5, 1);
+	CardManager::getInstance()->SortCardMsg();
+	//显示卡片
+	showCards();
 
-	//创建卡片
-	m_cardMsg.pushBack(CreateACard());
-
+	//触控监听
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(CardControlLayer::onTouchBegan, this);
+	listener->onTouchEnded = CC_CALLBACK_2(CardControlLayer::onTouchEnded, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	m_closeBtn->addTouchEventListener(this, toucheventselector(CardControlLayer::onCloseBtnClick));
 	m_collectBtn->addTouchEventListener(this, toucheventselector(CardControlLayer::onCollectBtnClick));
 	return true;
 
 }
 
-Sprite* CardControlLayer::CreateACard()
+void CardControlLayer::CreateACard(int info,int level)
 {
-	Sprite *card = Sprite::create("Res/Cards/Card_1.png");
-	card->setPosition(50, 250);
-	m_cardContainer->addChild(card);
-	return card;
+	CardManager::getInstance()->InsertACard(CreateACardByTypeAndLevel(
+		(Card::CardInfo)info, level));
 }
+
+void CardControlLayer::DeleteACard(Card* card)
+{
+	card->removeFromParent();
+	CardManager::getInstance()->DeleteCardByTypeAndLevel(card->getCardinfo(), card->getCardLevel());
+}
+
 void CardControlLayer::onCloseBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
 	if (type == TOUCH_EVENT_ENDED)
@@ -79,16 +98,55 @@ void CardControlLayer::unShowLayer()
 	this->setVisible(false);
 }
 
-bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+Card* CardControlLayer::CreateACardByTypeAndLevel(Card::CardInfo info, int level)
 {
-	return true;
+	Card * card = nullptr;
+	if (info == 0)
+		return nullptr;
+	card = Card::createByInfo(info);
+	card->setCardLevel(level);//设置等级
+	return card;
 }
 
-void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+void CardControlLayer::showCards()
 {
+	auto cards = CardManager::getInstance()->getAllCards();
+	int i = 0;
+	for (auto card : cards)
+	{
+		if (card->getCardinfo() == 5 && card->getCardLevel() == 1)
+		{
+			DeleteACard(card);
+			continue;
+		}
+		card = CreateACardByTypeAndLevel((Card::CardInfo)card->getCardinfo(), card->getCardLevel());
+		log("Card Type %d,Card Level %d", card->getCardinfo(), card->getCardLevel());
+		card->setPosition(i * 80, 200);
+		m_cardView->addChild(card);
+		i++;
+	}
+}
+
+bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+/*	auto cards = CardManager::getInstance()->getAllCards();
+	Rect rect;
+	int i;
+	for (auto card : cards)
+	{
+		rect = card->getBoundingBox();
+		i = card->getCardinfo();
+		auto pos = touch->getLocation();
+		if (rect.containsPoint(pos))
+		{
+			log("cardtype%d", i);
+		}
+	}
+	log("12345");*/
+	return true;
 }
 
 void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-
+	
 }

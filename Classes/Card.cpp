@@ -25,8 +25,6 @@ bool Card::init(int info)
 
 	//根据卡片名称加载不同卡片
 	this->initWithFile(StringUtils::format("Res/Cards/Card_%d.png", m_cardInfo));
-	m_cardLevel = 1;
-
 	this->setAnchorPoint(Vec2(0, 0));
 	return true;
 	
