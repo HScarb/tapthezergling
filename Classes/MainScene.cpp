@@ -42,7 +42,6 @@ bool MainScene::init()
 	addChild(rootNode);
 
 	//¼ÓÔØ¿¨Æ¬ºÏ³É²ã
-	//m_noTouchLayer->setVisible(false);
 	m_cardControlLayer = CardControlLayer::create();
 	this->addChild(m_cardControlLayer, 11);
 	m_cardControlLayer->setVisible(false);

@@ -16,7 +16,7 @@
             <PreSize X="0.7688" Y="0.9481" />
             <FileData Type="Normal" Path="Res/RESOURCE/dialog_card_enhancer.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_x" CanEdit="False" ActionTag="106133405" Tag="24" IconVisible="False" LeftMargin="692.0000" RightMargin="12.0000" TopMargin="-38.0000" BottomMargin="322.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="226" Scale9Height="234" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_x" ActionTag="106133405" Tag="24" IconVisible="False" LeftMargin="692.0000" RightMargin="12.0000" TopMargin="-38.0000" BottomMargin="322.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="226" Scale9Height="234" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="256.0000" Y="256.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="820.0000" Y="450.0000" />
@@ -31,7 +31,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_collect" CanEdit="False" ActionTag="-738788882" Tag="25" IconVisible="False" LeftMargin="-118.6034" RightMargin="-130.3966" TopMargin="190.8919" BottomMargin="-28.8919" TouchEnable="True" FontSize="100" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="1179" Scale9Height="356" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_collect" CanEdit="False" ActionTag="-738788882" Tag="25" IconVisible="False" LeftMargin="-118.5000" RightMargin="-130.5000" TopMargin="191.0000" BottomMargin="-29.0000" TouchEnable="True" FontSize="100" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="1179" Scale9Height="356" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="1209.0000" Y="378.0000" />
             <Children>
               <AbstractNodeData Name="Text_collect" CanEdit="False" ActionTag="1249600138" Tag="26" IconVisible="False" LeftMargin="442.6047" RightMargin="421.3953" TopMargin="110.3507" BottomMargin="113.6493" FontSize="100" LabelText="Collect" ShadowOffsetX="4.0000" ShadowOffsetY="-4.0000" ShadowEnabled="True" ctype="TextObjectData">
@@ -48,10 +48,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="485.8966" Y="160.1081" />
+            <Position X="486.0000" Y="160.0000" />
             <Scale ScaleX="0.2000" ScaleY="0.2000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5061" Y="0.2965" />
+            <PrePosition X="0.5063" Y="0.2963" />
             <PreSize X="1.2594" Y="0.7000" />
             <FontResource Type="Default" Path="" Plist="" />
             <TextColor A="255" R="57" G="57" B="57" />
@@ -60,6 +60,32 @@
             <NormalFileData Type="Normal" Path="Res/RESOURCE/long_button_green_1.png" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="cardView" ActionTag="-64893787" Tag="44" IconVisible="False" TopMargin="440.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Horizontal" ctype="ScrollViewObjectData">
+            <Size X="960.0000" Y="100.0000" />
+            <AnchorPoint />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="1.0000" Y="0.1852" />
+            <SingleColor A="255" R="255" G="150" B="100" />
+            <FirstColor A="255" R="255" G="150" B="100" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+            <InnerNodeSize Width="960" Height="300" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Text_time" ActionTag="513317494" Tag="34" IconVisible="False" LeftMargin="453.5000" RightMargin="441.5000" TopMargin="294.0000" BottomMargin="214.0000" FontSize="22" LabelText="99:99" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="65.0000" Y="32.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="486.0000" Y="230.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5063" Y="0.4259" />
+            <PreSize X="0.0677" Y="0.0593" />
+            <FontResource Type="Normal" Path="Res/fonts/Skranji-Bold.ttf" Plist="" />
+            <OutlineColor A="255" R="0" G="128" B="0" />
+            <ShadowColor A="255" R="0" G="128" B="0" />
           </AbstractNodeData>
         </Children>
       </ObjectData>
