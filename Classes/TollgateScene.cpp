@@ -24,6 +24,10 @@ cocos2d::Scene* TollgateScene::createScene()
 	return scene;
 }
 
+int o = 0;   //调试用宝石能量数量初始化
+int p = 0;
+bool act = false;    //初始化宝箱调试
+
 bool TollgateScene::init()
 {
 	if (!Layer::init())
@@ -37,7 +41,8 @@ bool TollgateScene::init()
 	m_timeText = nullptr;
 	m_timeBar = nullptr;
 	m_chest_sprite = nullptr;
-	
+	m_label = nullptr;
+
 	m_scrollView = nullptr;
 	m_t1 = nullptr;
 	m_t2 = nullptr;
@@ -50,11 +55,7 @@ bool TollgateScene::init()
 	addChild(rootNode);
 
 	//创建宝箱
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	m_chest_sprite = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("res/images/chest/chest1.png"));
-	m_chest_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-	m_chest_sprite->setScale(0.65, 0.65);
-	this->addChild(m_chest_sprite,2);
+	setChest();
 
 	//加载卡片合成层
 	m_cardLayer = CardControlLayer::create();
@@ -91,6 +92,7 @@ bool TollgateScene::init()
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
 	m_scrollView->setVisible(false);
 
+	//关键地方
 	m_energyText->setText("0");
 	m_jewelText->setText("0");
 	m_energyBar->setPercent(10.0f);
@@ -145,6 +147,65 @@ bool TollgateScene::init()
 	SoundManager::getInstance()->playMenuMusic();
 
 	return true;
+}
+
+void TollgateScene::addDiamond()
+{
+	int i = random(1, 9);
+	o = o + i;
+	m_jewelText->setText(StringUtils::format("%d", o));
+}
+
+void TollgateScene::addEnergy()
+{
+	int i = random(1, 9);
+	p = p + i;
+	m_energyText->setText(StringUtils::format("%d", p));
+}
+
+/*
+void TollgateScene::removethis()
+{
+	auto child = getChildByTag(2);
+	child->removeChild(child, true);
+
+	getTestSuite()->enterNextTest();
+}
+*/
+
+void TollgateScene::callBack1()			//定义函数，该函数会在MoveTo动作结束后被调用。
+{
+	addEnergy();
+}
+
+void TollgateScene::callBack2()
+{
+	addDiamond();
+}
+
+void TollgateScene::callBack3()
+{
+	auto child = getChildByTag(2);
+	FadeOut * fadeout = FadeOut::create(0.01);
+	child->runAction(fadeout);
+}
+
+void TollgateScene::callBack4()
+{
+	setChest();
+}
+
+void TollgateScene::setChest()
+{
+	//创建宝箱及宝箱出场动作
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	m_chest_sprite = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("res/images/chest/chest1.png"));
+	m_chest_sprite->setPosition(visibleSize.width / 2 + 50, visibleSize.height / 2);
+	m_chest_sprite->setScale(0.65, 0.65);
+	this->addChild(m_chest_sprite, 2);
+
+	JumpTo * jumpto = JumpTo::create(1, ccp(visibleSize.width / 2, visibleSize.height / 2), 50, 2);
+	m_chest_sprite->runAction(jumpto);
 }
 
 void TollgateScene::addSeconds()
@@ -365,30 +426,92 @@ void TollgateScene::onItem9Clicked(Ref* pSender, cocos2d::ui::TouchEventType typ
 	}
 }
 
+
 void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
-{
+{	
 		auto pos = touch->getLocationInView();
 		auto visibleSize = Director::getInstance()->getVisibleSize();
 
-		//闪光和动作
+		//闪光
 		Sprite* m_flash = Sprite::create("res/images/chest/flash.png");
 		m_flash->setPosition(visibleSize.width / 2, visibleSize.height / 2);
 		m_flash->setScale(0.65, 0.65);
 		m_flash->setVisible(false);
-		this->addChild(m_flash,1);
+		this->addChild(m_flash, 1);
 
 		RotateTo *rotateTo = RotateTo::create(2, 100);
 		ScaleBy *scaleBy = ScaleBy::create(1.8, 1.8);
-		Sequence * seq1 = Sequence::create(rotateTo, NULL);
-		Sequence * seq3 = Sequence::create(scaleBy, NULL);
+		Hide *hideAction = Hide::create();
+		ScaleTo * scaleto2 = ScaleTo::create(0.3, 0.000001);
+		Sequence * seq1 = Sequence::create(DelayTime::create(2.3), scaleto2, NULL);
+		Sequence * seq2 = Sequence::create(DelayTime::create(2.3), hideAction, NULL);
+
 
 		if (m_chest_sprite->getBoundingBox().containsPoint(pos))
 		{
+			//打开宝箱时触发文字（需要设置条件）
+			if (act != true)
+			{
+				Label *m_label = Label::create("Do great! Please get a reward", "Skranji-Bold", 40);
+				m_label->setPosition(visibleSize.width / 2, (visibleSize.height / 2) + 100);
+				this->addChild(m_label, 1);
+			}
+
 			m_flash->setVisible(true);
 			m_flash->runAction(rotateTo);
 			m_flash->runAction(scaleBy);
 			m_chest_sprite->runAction(m_createAnimate());
+			m_chest_sprite->runAction(seq1);
+			m_flash->runAction(seq2);
+
+			int i = random(1, 2);
+			if (i == Energy)
+			{
+				//创建能量
+				m_energy_sprite = Sprite::create("res/images/chest/Energy.png");
+				m_energy_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+				m_energy_sprite->setScale(0.48, 0.48);
+				addChild(m_energy_sprite, 1, 2);
+
+				//能量提取
+				auto action = Sequence::create(
+					DelayTime::create(3.45f),
+					MoveBy::create(1, ccp(-420, 220)),
+					CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack1, this)),
+					DelayTime::create(0.05f),
+					CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack3, this)),
+					CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack4, this)),
+					nullptr
+					);
+				m_energy_sprite->runAction(action);
+			}
+			else if (i == Jewel)
+			{
+				//创建宝石
+				m_diamond_sprite = Sprite::create("res/images/chest/Gem.png");
+				m_diamond_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+				m_diamond_sprite->setScale(0.48, 0.48);
+				addChild(m_diamond_sprite, 1, 2);
+
+				//宝石提取
+				auto action = Sequence::create(
+					DelayTime::create(3.45f),
+					MoveBy::create(1, ccp(280, 220)),
+					CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack2, this)),
+					DelayTime::create(0.05f),
+					CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack3, this)),
+					CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack4,this)),
+					nullptr
+					);
+				m_diamond_sprite->runAction(action);
+			}
+			else if (i == Card)
+			{
+				//随机创建卡片
+			}
+			act = true;
 		}
+
 }
 
 bool TollgateScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)

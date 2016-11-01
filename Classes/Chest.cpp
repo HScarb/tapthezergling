@@ -26,7 +26,7 @@ bool Chest::init(int color)
 	m_colorType = color;
 
 	//加载箱子
-	this->initWithFile(StringUtils::format("images/chest/chest_diamond_open%d.png", m_colorType));
+	this->initWithFile(StringUtils::format("images/chest/chest%d.png", m_colorType));
 
 	this->setAnchorPoint(Vec2(0, 0));		// 设置锚点为左下角
 
