@@ -5,8 +5,6 @@
 #include "NoTouchLayer.h"
 #include "Card.h"
 
-class Card;
-
 class CardControlLayer : public cocos2d::Layer
 {
 public:
@@ -30,6 +28,7 @@ public:
 	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 
+	void testMenuEvent(Ref * sender);
 private:
 	void onCloseBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onCollectBtnClick(Ref * pSender, cocos2d::ui::TouchEventType type);

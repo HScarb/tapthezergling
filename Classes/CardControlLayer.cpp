@@ -46,6 +46,14 @@ bool CardControlLayer::init()
 	//显示卡片
 	showCards();
 
+	// 图片菜单项测试
+	// 创建一个图片菜单项，第一个参数是本来的图片，第二个参数是按下后的图片，然后是一个回调函数，注意这个回调函数需要有一个参数
+	MenuItemImage* testMenuItem = MenuItemImage::create("Res/Cards/Card_1.png", "Res/Cards/Card_2.png", CC_CALLBACK_1(CardControlLayer::testMenuEvent, this));
+	// 创建菜单，这里可以把多个菜单向放入一个菜单，用create即可 create(testMenuItem, item2, item3, NULL) 注意用NULL结尾
+	Menu* p_menu = Menu::createWithItem(testMenuItem);
+	// 将菜单加入ScrollView
+	m_cardView->addChild(p_menu);
+
 	//触控监听
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(CardControlLayer::onTouchBegan, this);
@@ -104,7 +112,7 @@ Card* CardControlLayer::CreateACardByTypeAndLevel(Card::CardInfo info, int level
 	if (info == 0)
 		return nullptr;
 	card = Card::createByInfo(info);
-	card->setCardLevel(level);//设置等级
+	card->setCardLevel(level);			//设置等级
 	return card;
 }
 
@@ -149,4 +157,9 @@ bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
 	
+}
+
+void CardControlLayer::testMenuEvent(Ref * sender)
+{
+	log("Menu touched");
 }
