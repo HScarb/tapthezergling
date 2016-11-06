@@ -300,6 +300,7 @@
           <Project Name="SlideCutScene.csd" Type="Scene" />
           <Project Name="TollgateControlLayer.csd" Type="Layer" />
         </Folder>
+        <TTF Name="AveriaSansLibre-Bold.ttf" />
         <Project Name="CardEnhancer.csd" Type="Layer" />
         <Project Name="MainScene.csd" Type="Scene" />
         <Project Name="PauseLayer.csd" Type="Layer" />
