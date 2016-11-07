@@ -61,20 +61,6 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="cardView" ActionTag="-64893787" Tag="44" IconVisible="False" TopMargin="440.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Horizontal" ctype="ScrollViewObjectData">
-            <Size X="960.0000" Y="100.0000" />
-            <AnchorPoint />
-            <Position />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition />
-            <PreSize X="1.0000" Y="0.1852" />
-            <SingleColor A="255" R="255" G="150" B="100" />
-            <FirstColor A="255" R="255" G="150" B="100" />
-            <EndColor A="255" R="255" G="255" B="255" />
-            <ColorVector ScaleY="1.0000" />
-            <InnerNodeSize Width="960" Height="300" />
-          </AbstractNodeData>
           <AbstractNodeData Name="Text_time" ActionTag="513317494" Tag="34" IconVisible="False" LeftMargin="453.5000" RightMargin="441.5000" TopMargin="294.0000" BottomMargin="214.0000" FontSize="22" LabelText="99:99" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="65.0000" Y="32.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />

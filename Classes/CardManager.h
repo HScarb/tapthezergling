@@ -8,7 +8,6 @@
 #pragma once
 #include "cocos2d.h"
 #include "Card.h"
-#include "ui\CocosGUI.h"
 
 class CardManager : public cocos2d::Node
 {
@@ -19,12 +18,14 @@ public:
 	cocos2d::Vector<Card*> getAllCards();
 	void InsertACard(Card* card);
 	void SortCardMsg();
+	void MoveCards(float delta);
 	//É¾³ý¿¨Æ¬
 	void DeleteCardByTypeAndLevel(int type,int level);
 	
 private:
 	static CardManager * m_cardManager;
 	cocos2d::Vector<Card*> m_cardMsg;
+	cocos2d::Size m_frameSize;
 };
 
 inline bool SortCardsOpreator(const Card* card1, const Card* card2);

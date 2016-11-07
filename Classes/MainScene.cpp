@@ -42,9 +42,9 @@ bool MainScene::init()
 	addChild(rootNode);
 
 	//加载卡片合成层
-	m_cardControlLayer = CardControlLayer::create();
+	/*m_cardControlLayer = CardControlLayer::create();
 	this->addChild(m_cardControlLayer, 11);
-	m_cardControlLayer->setVisible(false);
+	m_cardControlLayer->setVisible(false);*/
 	
 	// 添加狗的动画
 	auto visibleSize = Director::getInstance()->getVisibleSize();
@@ -115,7 +115,9 @@ void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
-		m_cardControlLayer->showLayer();
+		//m_cardControlLayer->showLayer();
+		m_cardControlLayer = CardControlLayer::create();
+		this->addChild(m_cardControlLayer);
 	}
 	return;
 }

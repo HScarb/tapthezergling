@@ -28,9 +28,10 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
+          <FilePathData Path="CardInfoLayer.csd" />
           <FilePathData Path="CardEnhancer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="CardEnhancer.csd" />
+        <ActiveDocument Path="CardInfoLayer.csd" />
       </Value>
     </Item>
   </Properties>

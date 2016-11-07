@@ -29,6 +29,12 @@ bool CardManager::init()
 {
 	if (!Node::init())
 		return false;
+	
+	/*m_visibleSize = Director::getInstance()->getVisibleSize();
+	log("m_size=%d", m_visibleSize.width);*/
+	auto glView = Director::getInstance()->getOpenGLView();
+	m_frameSize = glView->getFrameSize();
+	log("size=%f", m_frameSize.width);
 	return true;
 }
 
@@ -45,6 +51,21 @@ void CardManager::InsertACard(Card * card)
 void CardManager::SortCardMsg()
 {
 	std::sort(m_cardMsg.begin(), m_cardMsg.end(),SortCardsOpreator);
+	int i = 0;
+	for (auto card : m_cardMsg)
+	{
+		card->setPosition(i * 80, 0);
+		i++;
+	}
+}
+
+void CardManager::MoveCards(float delta)
+{
+	for (auto card : m_cardMsg)
+	{
+		auto pos=card->getPosition();
+		card->setPosition(pos.x + delta, 0);
+	}
 }
 
 void CardManager::DeleteCardByTypeAndLevel(int type,int level)

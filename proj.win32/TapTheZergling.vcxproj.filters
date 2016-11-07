@@ -181,7 +181,7 @@
       <Filter>Classes\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Chest.cpp">
-	 <Filter>Classes\Entity</Filter>
+      <Filter>Classes\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\NoTouchLayer.cpp">
       <Filter>Classes\Layer</Filter>
@@ -194,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\CardManager.cpp">
       <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CardInfoLayer.cpp">
+      <Filter>Classes\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -324,7 +327,7 @@
       <Filter>Classes\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Chest.h">
-	 <Filter>Classes\Entity</Filter>
+      <Filter>Classes\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\NoTouchLayer.h">
       <Filter>Classes\Layer</Filter>
@@ -337,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CardManager.h">
       <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardInfoLayer.h">
+      <Filter>Classes\Entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
