@@ -22,10 +22,6 @@ public:
 	CREATE_FUNC(TollgateScene);
 
 private:
-	void callBack1();
-	void callBack2();
-	void callBack3();
-	void callBack4();
 	void addEnergy();		//增加能量值
 	void addDiamond();		//增加宝石值
 	void setChest();				//创建宝箱和动画
@@ -43,6 +39,7 @@ private:
 	cocos2d::Label * m_label;
 
 	void onHomeBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onGoonBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onCardBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 
 	void onTollgateLabelClicked(Ref * pSender);
@@ -73,6 +70,9 @@ private:
 	cocos2d::ui::LoadingBar * m_energyBar;
 	cocos2d::ui::LoadingBar * m_timeBar;
 	cocos2d::ui::Text * m_timeText;
+	cocos2d::ui::Text * m_chest_numText;
+	//新加的goon按钮
+	cocos2d::ui::Button * m_goonBtn;
 
 	cocos2d::ui::ScrollView * m_scrollView;
 

@@ -8,6 +8,7 @@
 #include "SoundManager.h"
 #include "CardControlLayer.h"
 #include "NoTouchLayer.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -66,8 +67,8 @@ bool MainScene::init()
 
 	DataManager::getInstance()->loadData();
 
-	m_energyText->setText("0");
-	m_jewelText->setText("0");
+	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
+	m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel()));
 	m_scoreText->setText(StringUtils::format("%d", DataManager::getInstance()->getBestScore()));
 	m_energyBar->setPercent(10.0f);
 
