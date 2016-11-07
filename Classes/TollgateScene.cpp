@@ -28,6 +28,7 @@ cocos2d::Scene* TollgateScene::createScene()
 
 int m = 0;  //记录宝箱的开箱次数
 bool act = false;    //初始化宝箱调试
+bool but = false;	//按钮问题
 
 bool TollgateScene::init()
 {
@@ -45,6 +46,10 @@ bool TollgateScene::init()
 	m_chest_sprite = nullptr;
 	m_label = nullptr;
 	m_chest_numText = nullptr;
+
+
+	//这个按钮是用来不重复生成关卡的
+	but = false;
 
 	m_scrollView = nullptr;
 	m_t1 = nullptr;
@@ -66,9 +71,7 @@ bool TollgateScene::init()
 
 
 	/*
-		再设置一个按钮，当宝箱开启完毕后，显示第十一关的label，继续玩，这个按钮必须实现显示label和隐藏宝箱的功能。
-		（按钮已经设置了，名称是Button_goon，对照着类似的写就可以了)
-		开一个，减少相对应的数量。
+		开一个，减少相对应的宝石数量。
 	*/
 
 
@@ -184,51 +187,6 @@ void TollgateScene::addEnergy()
 	GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() + i);
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 }
-
-void TollgateScene::callBack1()			
-{
-	addEnergy();
-}
-
-void TollgateScene::callBack2()
-{
-	addDiamond();
-}
-
-void TollgateScene::callBack3_1()
-{
-	FadeOut * fadeout = FadeOut::create(0.01);
-	m_energy_sprite->runAction(fadeout);
-}
-
-void TollgateScene::callBack3_2()
-{
-	FadeOut * fadeout = FadeOut::create(0.01);
-	m_diamond_sprite->runAction(fadeout);
-}
-
-void TollgateScene::callBack4()
-{
-	setChest();
-}
-
-void TollgateScene::callBack5()
-{
-	int e = random(10, 12);
-	m_chest_numText->setText(StringUtils::format("Need %d extro diamond",e * m ));
-	m_chest_numText->setVisible(true);
-	/*
-	减少相对应的宝石数量，这一块还有问题，当然是仅剩的问题，讲道理，这不归我管
-	cocos2d::Touch* touch = NULL;
-	auto pos = touch->getLocationInView();
-	if (m_chest_sprite->getBoundingBox().containsPoint(pos) && (GameManager::getInstance()->getJewel() >= (e * m)))
-	{
-		m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel() - (e * m)));
-	}
-	*/
-	act = false;
-}
-
 
 void TollgateScene::setChest()
 {
@@ -362,6 +320,8 @@ cocos2d::Animate* TollgateScene::m_createAnimate()
 //这里设置继续按钮和关闭宝箱系统
 void TollgateScene::onGoonBtnClicked(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
+	//这个按钮有两种想法：一种是显示关卡项目后自己点击进入关卡，另一种点击这个按钮之后直接进入下一关
+
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
 		int r = GameManager::getInstance()->getNextTollgate();
@@ -370,16 +330,25 @@ void TollgateScene::onGoonBtnClicked(Ref* pSender, cocos2d::ui::TouchEventType t
 
 		auto menuItemLabel = MenuItemLabel::create(label, CC_CALLBACK_1(TollgateScene::onTollgateLabelClicked, this));
 		auto menu = Menu::create(menuItemLabel, nullptr);
+		if (menu)
 		menu->setPosition(CENTER);
 		this->addChild(menu);
+
 
 		auto changeText = CallFunc::create([this]()
 		{
 			m_tollgateNumLabel->setString(StringUtils::format("%d", GameManager::getInstance()->getTollgateNum()));
 		});
-		m_tollgateNumLabel->runAction(Sequence::create(changeText, nullptr));
+		if (but != true)
+		{
+			m_tollgateNumLabel->runAction(Sequence::create(changeText, nullptr));
+			but = true;
+		}
 
-		m_chest_sprite->setVisible(false);
+		if (m_chest_sprite)
+		{
+			m_chest_sprite->setVisible(false);
+		}
 		m_chest_sprite = nullptr;
 		m_chest_numText->setVisible(false);
 
@@ -450,6 +419,7 @@ void TollgateScene::onItem3Clicked(Ref* pSender, TouchEventType type)
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::EatCandiesScene, 0, 1);
 	}
 }
+
 void TollgateScene::onItem4Clicked(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
@@ -532,8 +502,8 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 				//这句话要不要考虑一下，暂时没找到更加柔和的线条提示方法（过于生硬）
 				if (act != true)
 				{
-					Label *m_label = Label::create("Do great! Please get a reward", "Skranji-Bold", 40);
-					m_label->setPosition(visibleSize.width / 2, (visibleSize.height / 2) + 100);
+					Label *m_label = Label::create("  great!  ", "AveriaSansLibre-Bold", 40);
+					m_label->setPosition(visibleSize.width / 2, (visibleSize.height / 2) + 135);
 					this->addChild(m_label, 1, 5);
 				}
 
@@ -565,11 +535,32 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					auto action = Sequence::create(
 						DelayTime::create(3.45f),
 						MoveBy::create(1, ccp(-420, 220)),
-						CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack1, this)),
+						CallFunc::create([this]{
+						addEnergy();
+					}),
 						DelayTime::create(0.05f),
-						CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack3_1, this)),
-						CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack4, this)),		//测试无限开箱
-						CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack5, this)),
+						CallFunc::create([this]{
+						FadeOut * fadeout = FadeOut::create(0.01);
+						m_energy_sprite->runAction(fadeout);
+					}),
+						CallFunc::create([this]{
+						setChest();
+					}),					//测试无限开箱
+						CallFunc::create([this]{
+						int e = random(10, 12);
+						m_chest_numText->setText(StringUtils::format("Need %d extro diamond", e * m));
+						m_chest_numText->setVisible(true);
+						act = false;
+						/*
+						Touch* touch = NULL;
+						auto pos = touch->getLocationInView();
+						if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (GameManager::getInstance()->getJewel() >= (e * m)))
+						{
+						GameManager::getInstance()->setJewel(GameManager::getInstance()->getJewel() - (e * m));
+						m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel() - (e * m)));
+						}
+						*/
+					}),
 						nullptr
 						);
 					m_energy_sprite->runAction(action);
@@ -587,11 +578,32 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					auto action = Sequence::create(
 						DelayTime::create(3.45f),
 						MoveBy::create(1, ccp(280, 220)),
-						CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack2, this)),
+						CallFunc::create([this]{
+						addDiamond();
+					}),
 						DelayTime::create(0.05f),
-						CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack3_2, this)),
-						CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack4, this)),		//测试无限开箱
-						CallFunc::create(CC_CALLBACK_0(TollgateScene::callBack5, this)),
+						CallFunc::create([this]{
+						FadeOut * fadeout = FadeOut::create(0.01);
+						m_diamond_sprite->runAction(fadeout);
+					}),
+						CallFunc::create([this]{
+						setChest();
+					}),					//测试无限开箱
+						CallFunc::create([this]{
+						int e = random(10, 12);
+						m_chest_numText->setText(StringUtils::format("Need %d extro diamond", e * m));
+						m_chest_numText->setVisible(true);
+						act = false;
+						/*
+						Touch* touch = NULL;
+						auto pos = touch->getLocationInView();
+						if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (GameManager::getInstance()->getJewel() >= (e * m)))
+						{
+						GameManager::getInstance()->setJewel(GameManager::getInstance()->getJewel() - (e * m));
+						m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel() - (e * m)));
+						}
+						*/
+					}),
 						nullptr
 						);
 					m_diamond_sprite->runAction(action);

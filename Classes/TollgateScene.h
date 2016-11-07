@@ -22,12 +22,6 @@ public:
 	CREATE_FUNC(TollgateScene);
 
 private:
-	void callBack1();		//反馈函数
-	void callBack2();
-	void callBack3_1();
-	void callBack3_2();
-	void callBack4();
-	void callBack5();
 	void addEnergy();		//增加能量值
 	void addDiamond();		//增加宝石值
 	void setChest();				//创建宝箱和动画
