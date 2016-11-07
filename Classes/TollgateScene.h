@@ -8,22 +8,38 @@
 class TollgateScene : public cocos2d::Layer
 {
 public:
+	enum RewardType
+	{
+		None = 0,
+		Energy = 1,
+		Jewel,
+		Card
+	};
+
+public:
 	static cocos2d::Scene * createScene();
 	virtual bool init();
 	CREATE_FUNC(TollgateScene);
 
 private:
+	void addEnergy();		//增加能量值
+	void addDiamond();		//增加宝石值
+	void setChest();				//创建宝箱和动画
 	void addSeconds();				// 增加时间(动画效果)
 	void setNextTollgate();			// 随机下一关
 	void showNextTollgate();		// 将已经生成的下一关显示出来
 
-	//宝箱及其动画
+	//宝箱和附属精灵及其动画
 	cocos2d::Sprite * m_chest_sprite;
+	cocos2d::Sprite * m_card_sprite;
+	cocos2d::Sprite * m_energy_sprite;
+	cocos2d::Sprite * m_diamond_sprite;
 	cocos2d::Sprite * m_flash;
-	cocos2d::Animate* m_createAnimate();
-
+	cocos2d::Animate * m_createAnimate();
+	cocos2d::Label * m_label;
 
 	void onHomeBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onGoonBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onCardBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 
 	void onTollgateLabelClicked(Ref * pSender);
@@ -54,6 +70,9 @@ private:
 	cocos2d::ui::LoadingBar * m_energyBar;
 	cocos2d::ui::LoadingBar * m_timeBar;
 	cocos2d::ui::Text * m_timeText;
+	cocos2d::ui::Text * m_chest_numText;
+	//新加的goon按钮
+	cocos2d::ui::Button * m_goonBtn;
 
 	cocos2d::ui::ScrollView * m_scrollView;
 

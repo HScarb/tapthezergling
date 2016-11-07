@@ -193,7 +193,7 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 
 	int x1 = (int)pos.x;
 	int y1 = (int)pos.y;
-	if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3) && m_flowersesGrid[x1][y1] /*&& ((x1 != 3) && (y1 != 1))*/)//中心的狗不能被消除
+	if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3) && m_flowersesGrid[x1][y1] )
 	{
 		// 如果倒计时还没有开始，则开始倒计时
 		if (!m_isRunning)

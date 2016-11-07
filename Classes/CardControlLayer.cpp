@@ -51,6 +51,7 @@ bool CardControlLayer::init()
 
 	//CardManager::getInstance()->DeleteCardByTypeAndLevel(5, 1);
 	CardManager::getInstance()->SortCardMsg();;
+
 	//´¥¿Ø¼àÌý
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(CardControlLayer::onTouchBegan, this);
