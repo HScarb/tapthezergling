@@ -9,9 +9,9 @@ class Card;
 class CardInfoLayer :public cocos2d::Layer
 {
 public:
-	static cocos2d::Scene * createScene();
-	virtual bool init() override;
-	CREATE_FUNC(CardInfoLayer);
+	static cocos2d::Scene * createScene(int info ,int level);
+	virtual bool init(int info ,int level) ;
+	static CardInfoLayer * create(int info, int level);
 
 	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 
@@ -23,4 +23,6 @@ private:
 	//пео╒
 	cocos2d::ui::Text * m_cardName;
 	cocos2d::ui::Text * m_cardInfo;
+	int m_info;
+	int m_level;
 };

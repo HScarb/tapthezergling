@@ -73,6 +73,26 @@
             <OutlineColor A="255" R="0" G="128" B="0" />
             <ShadowColor A="255" R="0" G="128" B="0" />
           </AbstractNodeData>
+          <AbstractNodeData Name="Image_1" ActionTag="965035397" Tag="37" IconVisible="False" LeftMargin="300.0000" RightMargin="580.0000" TopMargin="160.0000" BottomMargin="300.0000" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
+            <Size X="80.0000" Y="80.0000" />
+            <AnchorPoint />
+            <Position X="300.0000" Y="300.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3125" Y="0.5556" />
+            <PreSize X="0.0833" Y="0.1481" />
+            <FileData Type="Normal" Path="Res/star crafts/starcrafts_Terrain_DarkGrass.png" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Image_1_0" ActionTag="1785087815" Tag="38" IconVisible="False" LeftMargin="600.0000" RightMargin="280.0000" TopMargin="160.0000" BottomMargin="300.0000" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
+            <Size X="80.0000" Y="80.0000" />
+            <AnchorPoint />
+            <Position X="600.0000" Y="300.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6250" Y="0.5556" />
+            <PreSize X="0.0833" Y="0.1481" />
+            <FileData Type="Normal" Path="Res/star crafts/starcrafts_Terrain_DarkGrass.png" Plist="" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

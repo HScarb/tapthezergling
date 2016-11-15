@@ -16,16 +16,22 @@ public:
 	virtual bool init();
 	//·µ»Ø¿¨Æ¬´æ·ÅÈÝÆ÷
 	cocos2d::Vector<Card*> getAllCards();
+	cocos2d::Vector<Card*> getCardsFromEnhancer();
+	cocos2d::Vector<Card*> getCardAfterEnhancer();
+
 	void InsertACard(Card* card);
+	void InsertACardIntoEnhancer(Card * card);
+	void InsertACardToAEnhancer(Card * card);
 	void SortCardMsg();
-	void MoveCards(float delta);
 	//É¾³ý¿¨Æ¬
-	void DeleteCardByTypeAndLevel(int type,int level);
-	
+	void DeleteCardByObject(Card * card);
+	void DeleteCardByObjectFromEnhancer(Card * card);
+
 private:
 	static CardManager * m_cardManager;
-	cocos2d::Vector<Card*> m_cardMsg;
-	cocos2d::Size m_frameSize;
+	cocos2d::Vector<Card*> m_cardVector;
+	cocos2d::Vector<Card*> m_cardInEnhancer;
+	cocos2d::Vector<Card*> m_cardAfterEnhancer;
 };
 
 inline bool SortCardsOpreator(const Card* card1, const Card* card2);
