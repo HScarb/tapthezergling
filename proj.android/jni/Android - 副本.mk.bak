@@ -10,49 +10,50 @@ LOCAL_MODULE := cocos2dcpp_shared
 
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
-LOCAL_SRC_FILES := hellocpp/main.cpp \    
-			../../Classes/HelloWorldScene.cpp \
+LOCAL_SRC_FILES := hellocpp/main.cpp \
+                   
+			../../Classes/AppDelegate.cpp \
+                   
+			../../Classes/HelloWorldScene.cpp
 				   ../../Classes/AnimationUtil.cpp \
-				   ../../Classes/AppDelegate.cpp \
-				   ../../Classes/BOSS2ZerglingNinja.cpp \
-				   ../../Classes/BOSS1ZerglingKing.cpp \
-				   ../../Classes/BurrowAndAttack.cpp \
-				   ../../Classes/Card.cpp \
-				   ../../Classes/CardControlLayer.cpp \
-				   ../../Classes/CardInfoLayer.cpp \
-				   ../../Classes/CardManager.cpp\
-				   ../../Classes/CheckTheThingScene.cpp \
-				   ../../Classes/Chest.cpp \
-				   ../../Classes/ClassifyUnits.cpp \
-				   ../../Classes/DataManager.cpp \
 				   ../../Classes/DoubleTapScene.cpp \
 				   ../../Classes/EatCandiesScene.cpp \
-				   ../../Classes/EatFlowersScene.cpp \
-				   ../../Classes/Farmer.cpp \
-				   ../../Classes/farmerandflower.cpp \
-				   ../../Classes/FeedSnacks.cpp \
 				   ../../Classes/FilterSprite.cpp \
-				   ../../Classes/Flower.cpp \
-				   ../../Classes/GameManager.cpp \
-				   ../../Classes/JumpingOnPoolScene.cpp \
 				   ../../Classes/LoadingScene.cpp \
 				   ../../Classes/MainScene.cpp \
-				   ../../Classes/NoTouchLayer.cpp \
-				   ../../Classes/PauseLayer.cpp \
 				   ../../Classes/SceneManager.cpp \
-				   ../../Classes/ScoreScene.cpp \
-				   ../../Classes/SettingsScene.cpp \
-				   ../../Classes/Shake.cpp \
 				   ../../Classes/SlideCutScene.cpp \
-				   ../../Classes/SmallZergling.cpp \
-				   ../../Classes/SoundManager.cpp \
 				   ../../Classes/TemplateScene.cpp \
 				   ../../Classes/TimeManager.cpp \
-				   ../../Classes/TollgateControlLayer.cpp \
 				   ../../Classes/TollgateScene.cpp \
 				   ../../Classes/VisibleRect.cpp \
-				   ../../Classes/Worker.cpp \
 				   ../../Classes/Zergling.cpp \
+				   ../../Classes/Farmer.cpp \
+				   ../../Classes/SettingsScene.cpp \
+				   ../../Classes/TollgateControlLayer.cpp \
+				   ../../Classes/PauseLayer.cpp \
+				   ../../Classes/Flower.cpp \
+				   ../../Classes/GameManager.cpp \
+				   ../../Classes/DataManager.cpp \
+				   ../../Classes/JumpingOnPoolScene.cpp \
+				   ../../Classes/BurrowAndAttack.cpp \
+				   ../../Classes/SmallZergling.cpp \
+				   ../../Classes/EatFlowersScene.cpp \
+				   ../../Classes/ClassifyUnits.cpp \
+				   ../../Classes/BOSS2ZerglingNinja.cpp \
+				   ../../Classes/BOSS1ZerglingKing.cpp \
+				   ../../Classes/Worker.cpp \
+				   ../../Classes/FeedSnacks.cpp \
+				   ../../Classes/farmerandflower.cpp \
+				   ../../Classes/CheckThethingScene.cpp \
+				   ../../Classes/Shake.cpp \
+				   ../../Classes/ScoreScene.cpp \
+				   ../../Classes/SoundManager.cpp \
+				   ../../Classes/CardControlLayer.cpp \
+			           ../../Classes/NoTouchLayer.cpp \
+				   ../../Classes/Chest.cpp \			        	
+				  
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
 # _COCOS_HEADER_ANDROID_BEGIN
