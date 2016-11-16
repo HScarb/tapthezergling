@@ -5,6 +5,7 @@
 #include "TimeManager.h"
 #include "AnimationUtil.h"
 #include "Shake.h"
+#include "Global.h"
 using namespace std;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -32,7 +33,7 @@ bool BOSS1ZerglingKing::init()
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
 	m_controlLayer->scheduleUpdate();
-	addChild(m_controlLayer);
+	addChild(m_controlLayer, ZORDER_TOLLGATECONTROLLAYER);
 
 	// Ìí¼Ó¹·µÄ¶¯»­
 	auto visibleSize = Director::getInstance()->getVisibleSize();

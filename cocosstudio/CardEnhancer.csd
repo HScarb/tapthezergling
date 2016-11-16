@@ -16,7 +16,7 @@
             <PreSize X="0.7688" Y="0.9481" />
             <FileData Type="Normal" Path="Res/RESOURCE/dialog_card_enhancer.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_x" CanEdit="False" ActionTag="106133405" Tag="24" IconVisible="False" LeftMargin="692.0000" RightMargin="12.0000" TopMargin="-38.0000" BottomMargin="322.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="226" Scale9Height="234" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_x" ActionTag="106133405" Tag="24" IconVisible="False" LeftMargin="692.0000" RightMargin="12.0000" TopMargin="-38.0000" BottomMargin="322.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="226" Scale9Height="234" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="256.0000" Y="256.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="820.0000" Y="450.0000" />
@@ -31,7 +31,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_collect" CanEdit="False" ActionTag="-738788882" Tag="25" IconVisible="False" LeftMargin="-118.6034" RightMargin="-130.3966" TopMargin="190.8919" BottomMargin="-28.8919" TouchEnable="True" FontSize="100" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="1179" Scale9Height="356" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_collect" CanEdit="False" ActionTag="-738788882" Tag="25" IconVisible="False" LeftMargin="-118.5000" RightMargin="-130.5000" TopMargin="191.0000" BottomMargin="-29.0000" TouchEnable="True" FontSize="100" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="1179" Scale9Height="356" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="1209.0000" Y="378.0000" />
             <Children>
               <AbstractNodeData Name="Text_collect" CanEdit="False" ActionTag="1249600138" Tag="26" IconVisible="False" LeftMargin="442.6047" RightMargin="421.3953" TopMargin="110.3507" BottomMargin="113.6493" FontSize="100" LabelText="Collect" ShadowOffsetX="4.0000" ShadowOffsetY="-4.0000" ShadowEnabled="True" ctype="TextObjectData">
@@ -48,10 +48,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="485.8966" Y="160.1081" />
+            <Position X="486.0000" Y="160.0000" />
             <Scale ScaleX="0.2000" ScaleY="0.2000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5061" Y="0.2965" />
+            <PrePosition X="0.5063" Y="0.2963" />
             <PreSize X="1.2594" Y="0.7000" />
             <FontResource Type="Default" Path="" Plist="" />
             <TextColor A="255" R="57" G="57" B="57" />
@@ -60,6 +60,38 @@
             <NormalFileData Type="Normal" Path="Res/RESOURCE/long_button_green_1.png" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Text_time" ActionTag="513317494" Tag="34" IconVisible="False" LeftMargin="453.5000" RightMargin="441.5000" TopMargin="294.0000" BottomMargin="214.0000" FontSize="22" LabelText="99:99" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="65.0000" Y="32.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="486.0000" Y="230.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5063" Y="0.4259" />
+            <PreSize X="0.0677" Y="0.0593" />
+            <FontResource Type="Normal" Path="Res/fonts/Skranji-Bold.ttf" Plist="" />
+            <OutlineColor A="255" R="0" G="128" B="0" />
+            <ShadowColor A="255" R="0" G="128" B="0" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Image_1" ActionTag="965035397" Tag="37" IconVisible="False" LeftMargin="300.0000" RightMargin="580.0000" TopMargin="160.0000" BottomMargin="300.0000" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
+            <Size X="80.0000" Y="80.0000" />
+            <AnchorPoint />
+            <Position X="300.0000" Y="300.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3125" Y="0.5556" />
+            <PreSize X="0.0833" Y="0.1481" />
+            <FileData Type="Normal" Path="Res/star crafts/starcrafts_Terrain_DarkGrass.png" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Image_1_0" ActionTag="1785087815" Tag="38" IconVisible="False" LeftMargin="600.0000" RightMargin="280.0000" TopMargin="160.0000" BottomMargin="300.0000" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
+            <Size X="80.0000" Y="80.0000" />
+            <AnchorPoint />
+            <Position X="600.0000" Y="300.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6250" Y="0.5556" />
+            <PreSize X="0.0833" Y="0.1481" />
+            <FileData Type="Normal" Path="Res/star crafts/starcrafts_Terrain_DarkGrass.png" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

@@ -1,7 +1,6 @@
 // TollgateControlLayer.cpp
 #include "TollgateControlLayer.h"
 #include "cocostudio/CocoStudio.h"
-#include "ui/CocosGUI.h"
 #include "PauseLayer.h"
 #include "TimeManager.h"
 #include "SceneManager.h"
@@ -68,6 +67,7 @@ void TollgateControlLayer::tollgateClear(cocos2d::EventCustom * event)
 	CCLOG("%s cleared.", tollgate);
 
 	TimeManager::getInstance()->pauseCountDown();
+	TimeManager::getInstance()->setisTollgateBegin(false);		// 设置关卡没有开始
 	this->unscheduleUpdate();		// stop update for tollgate control layer
 	GameManager::getInstance()->setIsWaitToAddTime(true);
 	// 播放菜单背景音乐
@@ -81,6 +81,7 @@ void TollgateControlLayer::tollgateFail(cocos2d::EventCustom * event)
 	CCLOG("%s failed.\nGAME OVER", tollgate);
 	// change to main scene
 	TimeManager::getInstance()->pauseCountDown();
+	TimeManager::getInstance()->setisTollgateBegin(false);		// 设置关卡没有开始
 	// 停止背景音乐并且播放胜利音效
 	SoundManager::getInstance()->stopMusic();
 	SoundManager::getInstance()->playEffect("Sounds/winmusic.mp3");
@@ -93,16 +94,15 @@ void TollgateControlLayer::initTimeBar()
 	return;
 }
 
+// 当暂停按钮被点击
 void TollgateControlLayer::onPauseBtnClick(Ref*, cocos2d::ui::TouchEventType type)
 {
-	switch(type)
+	if(type == TOUCH_EVENT_ENDED)
 	{
-	case TOUCH_EVENT_BEGAN: break;
-	case TOUCH_EVENT_MOVED: break;
-	case TOUCH_EVENT_ENDED: 
-		CCLOG("Pause btn tapped");
-		break;
-	case TOUCH_EVENT_CANCELED: break;
-	default: break;
+		CCLOG("Pause button clicked");
+		auto pauseLayer = PauseLayer::create();
+		this->addChild(pauseLayer);
+		TimeManager::getInstance()->pauseCountDown();
 	}
+	
 }

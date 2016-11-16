@@ -25,3 +25,20 @@ const std::string BOSS_TOLLGATE_NAME[3] =
 	"Boss1: Zergling King",
 	"Boss2: Zergling Ninja"
 };
+
+const int ZORDER_TOLLGATECONTROLLAYER = 100;
+
+const std::string CARD_NAME[] =
+{
+	"None",
+	"Double Tap Zergling Card",
+	"Slide Cut Card",
+	"Eat Flowers Card",
+	"Burrow And Attack Card",
+	"Jumping On Pools Card",
+	"Classify Units Card",
+	"Check The Units Card",
+	"Feed Snakes Card"
+	"Zergling King Card",
+	"Zergling Ninja Card"
+};

@@ -43,7 +43,7 @@ bool CheckThethingScene::init(int diff, int loop)
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
 	m_controlLayer->scheduleUpdate();
-	addChild(m_controlLayer);
+	addChild(m_controlLayer, ZORDER_TOLLGATECONTROLLAYER);
 
 	m_pauseBtn = (Button*)(UI->getChildByName("Button_pause"));
 	m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
