@@ -25,40 +25,30 @@ bool CardControlLayer::init()
 	m_collectBtn = nullptr;
 	m_closeBtn = nullptr;
 	m_operatingCard = nullptr;
-	m_sameCardsInVector = 0;
 	m_isEnhancerContaninsACard = false;
-	m_isSingleCard = false;
+	m_isCollectionContainsCard = false;
+	m_isSingleCard = true;
 	auto ui = CSLoader::createNode("CardEnhancer.csb");
 	this->addChild(ui);
-	// 创建一个无触摸层，在卡片控制层的下面
-	/*m_noTouchLayer = NoTouchLayer::create();
-	this->addChild(m_noTouchLayer, 0);*/
 	//从ui中加载按钮
 	m_closeBtn = (Button *)ui->getChildByName("Button_x");
 	m_collectBtn = (Button *)ui->getChildByName("Button_collect");
-/*	//从ui中加载卡片滑动视图
-	m_cardView = (ScrollView *)ui->getChildByName("cardView");*/
-	//加载manager里的卡片容器
-	m_CardMsg = CardManager::getInstance()->getAllCards();
-	m_CardBeforeEnhancer = CardManager::getInstance()->getCardsFromEnhancer();
-	m_CardAfterEnhancer = CardManager::getInstance()->getCardAfterEnhancer();
-	if (m_CardMsg.size() == 0)
+	if (CardManager::getInstance()->getAllCards().size() == 0)
 	{
 		//创建卡片
-		for (int i = 17; i >= 1; i--)
+		for (int i = 9; i >= 1; i--)
 		{
 			if (i > 10)
 			{
 				CreateACard(i - 10, 1, i - 1);
 			}
 			else
-				CreateACard(i, 1, i - 1);
+				CreateACard(1, 1, i - 1);
 		}
 	}
 	else
 		showCards();
 
-	//CardManager::getInstance()->DeleteCardByObject(5, 1);
 	CardManager::getInstance()->SortCardMsg();;
 
 	//获取屏幕分辨率
@@ -87,15 +77,17 @@ void CardControlLayer::CreateACard(int info,int level,int posX)
 
 void CardControlLayer::DeleteACard(Card* card)
 {
-	CardManager::getInstance()->DeleteCardByObject(card);
 	card->removeFromParent();
+	CardManager::getInstance()->DeleteCardByObject(card);
 }
 
 void CardControlLayer::MoveCardIntoEnhancer(Card* card)
 {
-	if (card->getPosition().x >= (CARD_SLOT_X1 - 50) && card->getPosition().x <= (CARD_SLOT_X1 + 50))
+	if (card->getPosition().x >= (CARD_SLOT_X1 - 50) 
+		&& card->getPosition().x <= (CARD_SLOT_X1 + 50))
 		card->setPosition(CARD_SLOT_X1, CARD_SLOT_Y);
-	else if (card->getPosition().x >= (CARD_SLOT_X2 - 50) && card->getPosition().x <= (CARD_SLOT_X2 + 50))
+	else if (card->getPosition().x >= (CARD_SLOT_X2 - 50) 
+		&& card->getPosition().x <= (CARD_SLOT_X2 + 50))
 		card->setPosition(CARD_SLOT_X2, CARD_SLOT_Y);
 	else
 		return;
@@ -112,7 +104,9 @@ void CardControlLayer::onCloseBtnClick(Ref* pSender, cocos2d::ui::TouchEventType
 }
 void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	
+		ClickedToStartCollectCards();
+		m_isCollectionContainsCard = true;
+
 }
 
 Card* CardControlLayer::CreateACardByTypeAndLevel(Card::CardInfo info, int level,int posX)
@@ -122,7 +116,10 @@ Card* CardControlLayer::CreateACardByTypeAndLevel(Card::CardInfo info, int level
 		return nullptr;
 	card = Card::createByInfo(info);
 	card->setCardLevel(level);//设置等级
-	card->setPosition(posX * 80, 0);
+	if (posX != 450)
+		card->setPosition(posX * 80, 0);//设定新增卡片的坐标
+	else
+		card->setPosition(450, 350);//设定合成后的卡片的坐标
 	this->addChild(card);
 	return card;
 }
@@ -134,21 +131,27 @@ void CardControlLayer::showCards()
 		this->addChild(card);
 	}
 	for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
-	{
 		this->addChild(card);
-	}
-}
-
-void CardControlLayer::CardAfterEnhancer(Card* card)
-{
-
+	for (auto card : CardManager::getInstance()->getCardAfterCollection())
+		this->addChild(card);
 }
 
 void CardControlLayer::ClickCardBackToBottom(Card* card)
 {
 	CardManager::getInstance()->InsertACard(card);
-	CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card);
-	//reShowCards();
+	//把卡片合成器中的卡片移动回下方的卡片容器
+	if (card->getPosition().y == 300)
+		CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card);
+	else//把中间位置合成后的卡片移进容器
+		CardManager::getInstance()->DeleteCardByObjectAfterCollection(card);
+	if (CardManager::getInstance()->getCardAfterCollection().size() == 0)
+		m_isCollectionContainsCard = false;
+	if (CardManager::getInstance()->getCardsFromEnhancer().size() == 0)
+		m_isEnhancerContaninsACard = false;
+	for (auto card : CardManager::getInstance()->getAllCards())
+	{
+		log("Name %d,level %d", card->getCardinfo(), card->getCardLevel());
+	}
 }
 
 bool CardControlLayer::IsTheSameCardInEnhancer(Card* card)
@@ -162,18 +165,81 @@ bool CardControlLayer::IsTheSameCardInEnhancer(Card* card)
 	}
 }
 
+bool CardControlLayer::IsSingleInVector(Card* card)
+{
+	bool temp=true;
+	for (auto tempCard : CardManager::getInstance()->getAllCards())
+	{
+		if (card->getCardLevel() == tempCard->getCardLevel()
+			&& card->getCardinfo() == tempCard->getCardinfo())
+		{
+			if (tempCard->getPosition().x <= (card->getPosition().x + 40)
+				&& tempCard->getPosition().x >= (card->getPosition().x - 40))
+			{
+				temp = true;
+			}
+			else
+			{
+				temp = false;
+				break;
+			}
+		}
+	}
+	return temp;
+}
+
+void CardControlLayer::ClickedToStartCollectCards()
+{
+	CardCollectionSucceed();
+}
+
+void CardControlLayer::CardCollectionSucceed()
+{
+	Card * tempCard = nullptr;
+	for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
+	{
+		tempCard = card;
+		break;
+	}
+	if (tempCard != nullptr)
+	{
+		CardManager::getInstance()->InsertCardAfterCollection(CreateACardByTypeAndLevel((Card::CardInfo)tempCard->getCardinfo(), (tempCard->getCardLevel() + 1), 450));
+		for (auto card : CardManager::getInstance()->getCardAfterCollection());
+	}
+	for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
+	{
+		card->removeFromParent();
+		CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card);
+	}
+}
+
 bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
 	
 	m_beginPos = touch->getLocation();
 	log("x=%f",m_beginPos.x);
+	//通过点击的方式从合成器中吧卡片移回下方容器
 	for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
 	{
 		if (card->getBoundingBox().containsPoint(m_beginPos))
 		{
 			log("11111");
-			if (CardManager::getInstance()->getCardsFromEnhancer().size()>0)
+			if (CardManager::getInstance()->getCardsFromEnhancer().size() > 0)
 				ClickCardBackToBottom(card);
+			else
+				m_isEnhancerContaninsACard = false;
+		}
+	}
+	//通过点击的方式吧合成的卡片移进下方容器
+	for (auto card : CardManager::getInstance()->getCardAfterCollection())
+	{
+		if (card->getBoundingBox().containsPoint(m_beginPos))
+		{
+			log("222222");
+			if (CardManager::getInstance()->getCardAfterCollection().size() > 0)
+				ClickCardBackToBottom(card);
+			else
+				m_isCollectionContainsCard = false;
 		}
 	}
 	return true;
@@ -188,7 +254,6 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 	// 当滑动x轴距离大于10时才开始滑动，当点击开始点和目前点y轴大于80时不能滑动
 	if (m_operatingCard == nullptr && abs(m_beginPos.x - m_movedPos.x) >= 10 && m_movedPos.y <= 80 && m_beginPos.y <= 80)
 	{
-		//auto cards = CardManager::getInstance()->getAllCards();
 		if (CardManager::getInstance()->getAllCards().size() >= m_frameSize.width / 80)
 		{
 			for (auto card : CardManager::getInstance()->getAllCards())
@@ -199,53 +264,53 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 		}
 	}
 	// 把卡片移动到卡片管理器
-
-	if (abs(m_movedPos.y - m_beginPos.y) >= 40)
+	if (m_isCollectionContainsCard == false)//在卡片没有卡片在已经合成并且还在合成后预览位置时
 	{
-		for (auto card : CardManager::getInstance()->getAllCards())
+		//当前触点位置和点击初始位置的y轴距离绝对值大于40并且卡片合成器中卡片张数少于2，同时当前没有正在移动的卡片
+		if (abs(m_movedPos.y - m_beginPos.y) >= 40 && CardManager::getInstance()->getCardsFromEnhancer().size() < 2 && m_operatingCard == nullptr)
 		{
-			if (card->getBoundingBox().containsPoint(m_beginPos))
-			{
-				m_operatingCard = card;
-				m_operatingCard->setPosition(m_movedPos.x - 40, m_movedPos.y - 40);
-			}
-		}
-	}
-	if (m_operatingCard != nullptr)
-	{
-		/*if (m_isSingleCard == false)
-		{
-			//判断电机的卡片在卡片容器和合成器中数目之和是否超过1
 			for (auto card : CardManager::getInstance()->getAllCards())
 			{
-				if (card->getCardLevel() == m_operatingCard->getCardLevel() && card->getCardinfo() == m_operatingCard->getCardinfo())
-					m_sameCardsInVector++;
-				log("card %d amount %d", m_operatingCard->getCardinfo(), m_sameCardsInVector);
+				if (card->getBoundingBox().containsPoint(m_beginPos))
+				{
+					m_operatingCard = card;
+					m_operatingCard->setPosition(m_movedPos.x - 40, m_movedPos.y - 40);
+					break;
+				}
 			}
-			if (m_sameCardsInVector == 1)
+			if (m_operatingCard != nullptr)
 			{
-				if (CardManager::getInstance()->getCardsFromEnhancer().size() > 0)
+				for (auto card : CardManager::getInstance()->getAllCards())
 				{
-					for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
+					if (CardManager::getInstance()->getCardsFromEnhancer().size() == 0)
 					{
-						if (card->getCardLevel() == m_operatingCard->getCardLevel() && card->getCardinfo() == m_operatingCard->getCardinfo())
-							m_sameCardsInVector++;
-						log("card %d amount %d", m_operatingCard->getCardinfo(), m_sameCardsInVector);
+						m_isSingleCard = IsSingleInVector(m_operatingCard);
 					}
-					log("card %d amount %d", m_operatingCard->getCardinfo(), m_sameCardsInVector);
+					else if (CardManager::getInstance()->getCardsFromEnhancer().size() == 1)
+					{
+						if (IsTheSameCardInEnhancer(m_operatingCard))
+							m_isSingleCard = false;
+						else
+						{
+							m_operatingCard = nullptr;
+							break;
+						}
+					}
+					else
+						continue;
 				}
-				else
-				{
-					m_operatingCard = nullptr;
-					m_isSingleCard = true;
-					CardManager::getInstance()->SortCardMsg();
-					m_sameCardsInVector = 0;
-				}
+			}
+			if (m_isSingleCard)
+			{
+				m_operatingCard = nullptr;
+				CardManager::getInstance()->SortCardMsg();
 			}
 		}
-		if (m_isSingleCard == false)*/
+		if (m_operatingCard != nullptr && m_isSingleCard == false)
+		{
 			m_operatingCard->setPosition(m_movedPos.x - 40, m_movedPos.y - 40);
-	}	
+		}
+	}
 }
 
 void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
@@ -285,24 +350,26 @@ void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unuse
 			|| m_operatingCard->getPosition().x >= (CARD_SLOT_X2 - 50)
 			&& m_operatingCard->getPosition().x <= (CARD_SLOT_X2 + 50)))
 	{
-		/*if (m_isEnhancerContaninsACard)
+		if (m_isEnhancerContaninsACard)
 		{
 			if (IsTheSameCardInEnhancer(m_operatingCard))
 			{
 				for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
 				{
-					if (CardManager::getInstance()->getCardsFromEnhancer().size() > 0)
+					//如果要移进的卡片合成器的位置上已经有一张卡片
+					if (m_operatingCard->getPosition().x >= (card->getPosition().x - 50)
+						&& m_operatingCard->getPosition().x <= (card->getPosition().x + 50))
 					{
-						if (m_operatingCard->getPosition().x >= (card->getPosition().x - 50)
-							&& m_operatingCard->getPosition().x <= (card->getPosition().x + 50))
-						{
-							m_operatingCard = nullptr;
-							break;
-						}
+						m_operatingCard = nullptr;
+						CardManager::getInstance()->SortCardMsg();
+						break;
+					}
+					else
+					{
+						MoveCardIntoEnhancer(m_operatingCard);
+						m_operatingCard = nullptr;
 					}
 				}
-				MoveCardIntoEnhancer(m_operatingCard);
-				m_operatingCard = nullptr;
 			}
 			else
 			{
@@ -314,16 +381,16 @@ void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unuse
 		{
 			MoveCardIntoEnhancer(m_operatingCard);
 			m_operatingCard = nullptr;
-		}*/
-		MoveCardIntoEnhancer(m_operatingCard);
-		m_operatingCard = nullptr;
+			m_isEnhancerContaninsACard = true;
+
+		}
 	}
 	else
 	{
 		m_operatingCard = nullptr;
 		CardManager::getInstance()->SortCardMsg();
 	}
-	//m_isSingleCard = false;
+	m_isSingleCard = true;
 
 	
 	

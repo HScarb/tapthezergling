@@ -42,9 +42,9 @@ cocos2d::Vector<Card*> CardManager::getCardsFromEnhancer()
 	return m_cardInEnhancer;
 }
 
-cocos2d::Vector<Card*> CardManager::getCardAfterEnhancer()
+cocos2d::Vector<Card*> CardManager::getCardAfterCollection()
 {
-	return m_cardAfterEnhancer;
+	return m_cardAfterCollection;
 }
 
 void CardManager::InsertACard(Card * card)
@@ -57,9 +57,9 @@ void CardManager::InsertACardIntoEnhancer(Card* card)
 	m_cardInEnhancer.pushBack(card);
 }
 
-void CardManager::InsertACardToAEnhancer(Card* card)
+void CardManager::InsertCardAfterCollection(Card* card)
 {
-	m_cardAfterEnhancer.pushBack(card);
+	m_cardAfterCollection.pushBack(card);
 }
 
 void CardManager::SortCardMsg()
@@ -94,11 +94,17 @@ void CardManager::DeleteCardByObjectFromEnhancer(Card* card)
 	SortCardMsg();
 }
 
+void CardManager::DeleteCardByObjectAfterCollection(Card* card)
+{
+	m_cardAfterCollection.eraseObject(card);
+	SortCardMsg();
+}
+
 bool SortCardsOpreator(const Card* card1, const Card* card2)
 {
 	if (card1->getCardinfo() == card2->getCardinfo())
 	{
-		return (card2->getCardLevel()) < (card1->getCardLevel());
+		return (card1->getCardLevel()) < (card2->getCardLevel());
 	}
 	else
 	{

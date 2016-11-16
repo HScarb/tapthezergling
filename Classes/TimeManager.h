@@ -30,7 +30,6 @@ private:
 	CC_SYNTHESIZE(float, m_time, Time);
 
 private:
-	static TimeManager * m_cardtimeManager;
 	bool m_iscardTimeCountingDown;
 
 	CC_SYNTHESIZE(float, m_cardtime, CardTime);
