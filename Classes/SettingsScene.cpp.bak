@@ -3,10 +3,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "SceneManager.h"
 #include "SimpleAudioEngine.h"
-<<<<<<< HEAD
-=======
-
->>>>>>> a4d973c2e226cd8fbdf547fb35aa55fd5219ab6a
+#include "SoundManager.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -30,6 +27,8 @@ bool SettingsScene::init()
 	m_musicBtn = nullptr;
 	m_restoreBtn = nullptr;
 	m_aboutBtn = nullptr;
+	m_soundText = nullptr;
+	m_musicText = nullptr;
 
 	auto ui = CSLoader::createNode("SettingsScene.csb");
 	this->addChild(ui);
@@ -40,15 +39,40 @@ bool SettingsScene::init()
 	m_musicBtn = (Button*)ui->getChildByName("Button_music");
 	m_restoreBtn = (Button*)ui->getChildByName("Button_restore");
 	m_aboutBtn = (Button*)ui->getChildByName("Button_about");
+	// 从ui中加载按钮文本
+	m_soundText = (Text*)ui->getChildByName("Text_sound");
+	m_musicText = (Text*)ui->getChildByName("Text_music");
 
-	Button* music = (Button*)Helper::seekWidgetByName(m_musicBtn, "music");
-	//m_musictext = (*)
-	//m_musicText = (*)Helper::seekWidgetByName(m_musicBtn, "music_text");
-	m_musicBtn->setTitleFontSize(85);
-	m_musicBtn->setTitleText("MUSIC ON");
+<<<<<<< HEAD
+	if (SoundManager::getInstance()->getMusicOn())
+	{
+		m_musicText->setText("MUSIC ON");
+	}
+	else
+	{
+		m_musicText->setText("MUSIC OFF");
+	}
 
-//	m_homeBtn->addTouchEventListener(CC_CALLBACK_1(SettingsScene::onHomeBtnClick, this));
+	if (SoundManager::getInstance()->getSoundOn())
+	{
+		m_soundText->setText("SOUND ON");
+	}
+	else
+=======
+	// 根据音乐有没有开来更改标签文字
+	if (!SoundManager::getInstance()->getMusicOn())
+	{
+		m_musicText->setText("MUSIC OFF");
+	}
+	if (!SoundManager::getInstance()->getSoundOn())
+>>>>>>> 5893239f265863abf7bc47db213530e81f1954d4
+	{
+		m_soundText->setText("SOUND OFF");
+	}
+
+	// 绑定按钮按下的回调函数
 	m_homeBtn->addTouchEventListener(this, toucheventselector(SettingsScene::onHomeBtnClick));
+	m_soundBtn->addTouchEventListener(this, toucheventselector(SettingsScene::onSoundBtnClick));
 	m_musicBtn->addTouchEventListener(this, toucheventselector(SettingsScene::onMusciBtnClick));
 
 	return true;
@@ -58,12 +82,44 @@ void SettingsScene::onHomeBtnClick(Ref* pSender, TouchEventType type)
 {
 	if (type == TOUCH_EVENT_ENDED)
 		SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
-<<<<<<< HEAD
 }
 
 void SettingsScene::onSoundBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
+	if (type == TOUCH_EVENT_ENDED)
+	{
+		// 获得音效开关现在的值，并且反转
+		if(SoundManager::getInstance()->getSoundOn())
+		{
+			m_soundText->setText("SOUND OFF");		// 设置文本
+			SoundManager::getInstance()->setSoundOn(false);
+		}
+		else
+		{
+			m_soundText->setText("SOUND ON");
+			SoundManager::getInstance()->setSoundOn(true);
+		}
+	}
+}
 
+void SettingsScene::onMusciBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
+{
+	if (type == TOUCH_EVENT_ENDED)
+	{
+		// 获得音乐开关现在的值，并且反转
+		if (SoundManager::getInstance()->getMusicOn())
+		{
+			m_musicText->setText("MUSIC OFF");		// 设置为本为关
+			SoundManager::getInstance()->setMusicOn(false);
+			SoundManager::getInstance()->stopMusic();
+		}
+		else
+		{
+			m_musicText->setText("MUSIC ON");
+			SoundManager::getInstance()->setMusicOn(true);
+			SoundManager::getInstance()->playMenuMusic();
+		}
+	}
 }
 
 void SettingsScene::onRestoreBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
@@ -74,42 +130,4 @@ void SettingsScene::onRestoreBtnClick(Ref* pSender, cocos2d::ui::TouchEventType 
 void SettingsScene::onAboutBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
 
-}
-
-void SettingsScene::onMusciBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
-{
-	/*
-	if (type == TOUCH_EVENT_ENDED)
-	{
-		if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
-			SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
-	}
-	else
-	{
-		SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
-	}
-	*/
-	if (type == TOUCH_EVENT_BEGAN)
-	if (SimpleAudioEngine::sharedEngine()->isBackgroundMusicPlaying())
-	{
-		SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
-		//此处修改off
-		m_musicBtn->setTitleFontSize(83);
-		m_musicBtn->setTitleColor(Color3B::WHITE);
-		m_musicBtn->setTitleText("MUSIC OFF");
-	}
-
-	else
-	{
-		SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
-		//此处修改on
-		m_musicBtn->setTitleFontSize(83);
-		m_musicBtn->setTitleColor(Color3B::WHITE);
-		m_musicBtn->setTitleText("MUSIC ON");
-	}
-
-=======
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
-		"D:/Creative/tapthezergling/Resources/res/sounds/Back2new.mp3", true);
->>>>>>> a4d973c2e226cd8fbdf547fb35aa55fd5219ab6a
 }

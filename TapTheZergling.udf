@@ -2,8 +2,8 @@
   <Properties>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
-        <LastPublishType Value="VS" />
-        <IsLastPublish Value="False" />
+        <LastPublishType Value="Resource" />
+        <IsLastPublish Value="True" />
         <LastRunType Value="Windows" />
       </Value>
     </Item>
@@ -12,20 +12,27 @@
         <LuaIsEncrypt Value="False" />
         <LuaEncryptKey Value="" />
         <LuaEncryptSign Value="" />
-        <Android_PackageName Value="org.cocos.TapTheZergling" />
+        <Android_PackageName Value="org.cocos.tapthezergling" />
         <AndroidkeyStore Value="" />
-        <AndroidVersion Value="android-20" />
-        <iOS_Target Value="TapTheZergling-mobile" />
+        <AndroidVersion Value="android-10" />
+        <iOS_Target Value="tapthezergling-mobile" />
         <iOS_BundleID Value="" />
-        <Platform Value="Android" />
-        <RunPlatform Value="Windows" />
+        <Platform Value="None" />
+        <RunPlatform Value="None" />
         <FrameworkVersion Value="cocos2d-x-3.10" />
         <IsDebugKeystore Value="True" />
-        <KeystorePassword Value="" />
-        <KeystoreAliasName Value="" />
-        <KeystoreAliasPassword Value="" />
         <EnableSourceMap Value="False" />
         <EnableHTML5Advanced Value="False" />
+      </Value>
+    </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="CardInfoLayer.csd" />
+          <FilePathData Path="CardEnhancer.csd" />
+          <FilePathData Path="Tollgates/BurrowAndAttack.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="CardEnhancer.csd" />
       </Value>
     </Item>
   </Properties>

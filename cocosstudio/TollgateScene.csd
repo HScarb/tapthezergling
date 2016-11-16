@@ -36,6 +36,21 @@
             <PreSize X="0.5333" Y="0.2500" />
             <FileData Type="Normal" Path="Res/RESOURCE/Gem-board.png" Plist="" />
           </AbstractNodeData>
+          <AbstractNodeData Name="Button_goon" ActionTag="-1816586950" Tag="27" IconVisible="False" LeftMargin="524.2454" RightMargin="-76.2454" TopMargin="219.7601" BottomMargin="-191.7601" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="482" Scale9Height="490" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="512.0000" Y="512.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="780.2454" Y="64.2399" />
+            <Scale ScaleX="0.2300" ScaleY="0.2300" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.8128" Y="0.1190" />
+            <PreSize X="0.5333" Y="0.9481" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+            <PressedFileData Type="Normal" Path="Res/RESOURCE/button_accept_2.png" Plist="" />
+            <NormalFileData Type="Normal" Path="Res/RESOURCE/button_accept_1.png" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
           <AbstractNodeData Name="Button_cards" ActionTag="592308401" Tag="18" IconVisible="False" LeftMargin="640.0000" RightMargin="-192.0000" TopMargin="220.0000" BottomMargin="-192.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="482" Scale9Height="490" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="512.0000" Y="512.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
@@ -144,6 +159,18 @@
             <FontResource Type="Normal" Path="Res/fonts/Skranji-Bold.ttf" Plist="" />
             <OutlineColor A="255" R="0" G="128" B="0" />
             <ShadowColor A="255" R="0" G="128" B="0" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Chest_numText" ActionTag="1686300641" Tag="36" IconVisible="False" LeftMargin="608.9997" RightMargin="351.0003" TopMargin="356.0000" BottomMargin="184.0000" TouchEnable="True" FontSize="34" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="608.9997" Y="184.0000" />
+            <Scale ScaleX="0.7200" ScaleY="1.6000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.6344" Y="0.3407" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="AveriaSansLibre-Bold.ttf" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="255" G="255" B="255" />
           </AbstractNodeData>
           <AbstractNodeData Name="Frame_Level" ActionTag="-1561440359" Tag="30" IconVisible="False" LeftMargin="309.9998" RightMargin="290.0002" TopMargin="318.0000" BottomMargin="-98.0000" LeftEage="109" RightEage="109" TopEage="124" BottomEage="124" Scale9OriginX="109" Scale9OriginY="124" Scale9Width="114" Scale9Height="130" ctype="ImageViewObjectData">
             <Size X="360.0000" Y="320.0000" />

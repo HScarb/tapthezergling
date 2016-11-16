@@ -15,8 +15,14 @@ public:
 	void resumeCountDown();			// 从暂停中恢复
 
 	bool isCountingDown();			// 返回是否在倒数
-	
+
 	virtual void update(float dt) override;
+
+	//卡片管理器时间管理
+	void reduceCardTime(float t);
+	void startCardTimeCountDown();
+	bool isCardTimeCountingDowm();
+
 private:
 	static TimeManager * m_timeManager;
 	bool m_isCountingDown;
@@ -24,4 +30,9 @@ private:
 	CC_SYNTHESIZE(float, m_preTime, PreTime);
 	CC_SYNTHESIZE(float, m_time, Time);
 	CC_SYNTHESIZE(bool, m_isTollgateBegin, isTollgateBegin);		// 关卡是否已经开始(暂停要用到)
+
+	static TimeManager * m_cardtimeManager;
+	bool m_iscardTimeCountingDown;
+
+	CC_SYNTHESIZE(float, m_cardtime, CardTime);
 };

@@ -10,46 +10,18 @@ LOCAL_MODULE := cocos2dcpp_shared
 
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
-LOCAL_SRC_FILES := hellocpp/main.cpp \
-                   ../../Classes/AppDelegate.cpp \
-                   ../../Classes/HelloWorldScene.cpp \
-				   ../../Classes/AnimationUtil.cpp \
-				   ../../Classes/DoubleTapScene.cpp \
-				   ../../Classes/EatCandiesScene.cpp \
-				   ../../Classes/FilterSprite.cpp \
-				   ../../Classes/LoadingScene.cpp \
-				   ../../Classes/MainScene.cpp \
-				   ../../Classes/SceneManager.cpp \
-				   ../../Classes/SlideCutScene.cpp \
-				   ../../Classes/TemplateScene.cpp \
-				   ../../Classes/TimeManager.cpp \
-				   ../../Classes/TollgateScene.cpp \
-				   ../../Classes/VisibleRect.cpp \
-				   ../../Classes/Zergling.cpp \
-				   ../../Classes/Farmer.cpp \
-				   ../../Classes/SettingsScene.cpp \
-				   ../../Classes/TollgateControlLayer.cpp \
-				   ../../Classes/PauseLayer.cpp \
-				   ../../Classes/Flower.cpp \
-				   ../../Classes/GameManager.cpp \
-				   ../../Classes/DataManager.cpp \
-				   ../../Classes/JumpingOnPoolScene.cpp \
-				   ../../Classes/BurrowAndAttack.cpp \
-				   ../../Classes/SmallZergling.cpp \
-				   ../../Classes/EatFlowersScene.cpp \
-				   ../../Classes/ClassifyUnits.cpp \
-				   ../../Classes/BOSS2ZerglingNinja.cpp \
-				   ../../Classes/BOSS1ZerglingKing.cpp \
-				   ../../Classes/Worker.cpp \
-				   ../../Classes/FeedSnacks.cpp \
-				   ../../Classes/farmerandflower.cpp \
-				   ../../Classes/CheckThethingScene.cpp \
-				   ../../Classes/Shake.cpp \
-				   ../../Classes/ScoreScene.cpp \
-				   ../../Classes/SoundManager.cpp \
-				   
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
+define walk
+$(wildcard $(1)) $(foreach e, $(wildcard $(1)/*), $(call walk, $(e)))
+endef
+
+ALLFILES = $(call walk, $(LOCAL_PATH)/../../Classes)
+FILE_LIST := hellocpp/main.cpp
+FILE_LIST += $(filter %.cpp, $(ALLFILES))
+
+LOCAL_SRC_FILES := $(FILE_LIST:$(LOCAL_PATH)/%=%)
+
+
 
 # _COCOS_HEADER_ANDROID_BEGIN
 # _COCOS_HEADER_ANDROID_END

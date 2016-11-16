@@ -150,8 +150,12 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BOSS1ZerglingKing.cpp" />
     <ClCompile Include="..\Classes\BOSS2ZerglingNinja.cpp" />
+    <ClCompile Include="..\Classes\Card.cpp" />
     <ClCompile Include="..\Classes\CardControlLayer.cpp" />
+    <ClCompile Include="..\Classes\CardInfoLayer.cpp" />
+    <ClCompile Include="..\Classes\CardManager.cpp" />
     <ClCompile Include="..\Classes\CheckThethingScene.cpp" />
+    <ClCompile Include="..\Classes\Chest.cpp" />
     <ClCompile Include="..\Classes\ClassifyUnits.cpp" />
     <ClCompile Include="..\Classes\DataManager.cpp" />
     <ClCompile Include="..\Classes\DoubleTapScene.cpp" />
@@ -190,8 +194,12 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BOSS1ZerglingKing.h" />
     <ClInclude Include="..\Classes\BOSS2ZerglingNinja.h" />
+    <ClInclude Include="..\Classes\Card.h" />
     <ClInclude Include="..\Classes\CardControlLayer.h" />
+    <ClInclude Include="..\Classes\CardInfoLayer.h" />
+    <ClInclude Include="..\Classes\CardManager.h" />
     <ClInclude Include="..\Classes\CheckThethingScene.h" />
+    <ClInclude Include="..\Classes\Chest.h" />
     <ClInclude Include="..\Classes\ChineseDisplay.h" />
     <ClInclude Include="..\Classes\ClassifyUnits.h" />
     <ClInclude Include="..\Classes\DataManager.h" />

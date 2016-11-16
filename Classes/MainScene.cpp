@@ -8,6 +8,7 @@
 #include "SoundManager.h"
 #include "CardControlLayer.h"
 #include "NoTouchLayer.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -26,7 +27,7 @@ bool MainScene::init()
 {
 	if (!Layer::init())
 		return false;
-	
+
 	m_energyText = nullptr;
 	m_jewelText = nullptr;
 	m_scoreText = nullptr;
@@ -42,12 +43,10 @@ bool MainScene::init()
 	addChild(rootNode);
 
 	//加载卡片合成层
-	//m_noTouchLayer->setVisible(false);
-	m_cardControlLayer = CardControlLayer::create();
+	/*m_cardControlLayer = CardControlLayer::create();
 	this->addChild(m_cardControlLayer, 11);
-	m_cardControlLayer->setVisible(false);
+	m_cardControlLayer->setVisible(false);*/
 	
-
 	// 添加狗的动画
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_zergling = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("zergling_big_1.png"));
@@ -68,17 +67,17 @@ bool MainScene::init()
 
 	DataManager::getInstance()->loadData();
 
-	m_energyText->setText("0");
-	m_jewelText->setText("0");
+	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
+	m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel()));
 	m_scoreText->setText(StringUtils::format("%d", DataManager::getInstance()->getBestScore()));
 	m_energyBar->setPercent(10.0f);
 
 	// 为按钮添加点击事件
 	m_settingsBtn->addTouchEventListener(this, toucheventselector(MainScene::onSettingsBtnClick));
 	m_cardBtn->addTouchEventListener(this, toucheventselector(MainScene::onCardBtnClick));
-//	m_addJewelBtn->addTouchEventListener(this, toucheventselector(MainScene::onAddJewelBtnClick));
-//	m_settingsBtn->addTouchEventListener(CC_CALLBACK_1(MainScene::onSettingsBtnClick, this));
-//	m_cardBtn->addTouchEventListener(CC_CALLBACK_1(MainScene::onCardBtnClick, this));
+	//	m_addJewelBtn->addTouchEventListener(this, toucheventselector(MainScene::onAddJewelBtnClick));
+	//	m_settingsBtn->addTouchEventListener(CC_CALLBACK_1(MainScene::onSettingsBtnClick, this));
+	//	m_cardBtn->addTouchEventListener(CC_CALLBACK_1(MainScene::onCardBtnClick, this));
 	// m_addJewelBtn->addTouchEventListener(CC_CALLBACK_1(MainScene::onAddJewelBtnClick, this));
 
 
@@ -89,7 +88,7 @@ bool MainScene::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	SoundManager::getInstance()->playMenuMusic();
-	
+
 	return true;
 }
 
@@ -101,7 +100,7 @@ bool MainScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event
 void MainScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
 	auto pos = touch->getLocation();
-	if(m_zergling->getBoundingBox().containsPoint(pos))
+	if (m_zergling->getBoundingBox().containsPoint(pos))
 	{
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateScene);
 	}
@@ -109,7 +108,7 @@ void MainScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event
 
 void MainScene::onSettingsBtnClick(Ref* pSender, TouchEventType type)
 {
-	if(type == TouchEventType::TOUCH_EVENT_ENDED)
+	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 		SceneManager::getInstance()->changeScene(SceneManager::SettingsScene);
 }
 
@@ -117,7 +116,9 @@ void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
-		m_cardControlLayer->showLayer();
+		//m_cardControlLayer->showLayer();
+		m_cardControlLayer = CardControlLayer::create();
+		this->addChild(m_cardControlLayer);
 	}
 	return;
 }

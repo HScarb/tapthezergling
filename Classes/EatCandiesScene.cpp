@@ -29,13 +29,6 @@ bool EatCandiesScene::init(int diff, int loop)
 	if (!Layer::init())
 		return false;
 
-	/*Sprite* sprite = Sprite::create("Res\zergling_big_1.png");
-	auto size = Director::getInstance()->getVisibleSize();
-	sprite->setPosition(size.height / 2, size.width / 2);
-	this->addChild(sprite);*/
-
-	//用矩阵中固定一个狗代替
-
 	auto winSize = Director::getInstance()->getWinSize();
 
 	auto UI = CSLoader::createNode("Tollgates/EatCandiesScene.csb");
@@ -113,29 +106,11 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 	m_diff = diff;
 	m_isRunning = false;
 
-	/*
-	Sprite* sprite = Sprite::create("Res/smallzer.png");
-	auto size = Director::getInstance()->getVisibleSize();
-	sprite->setPosition(size.height / 2, size.width / 2);
-	this->addChild(sprite);
-	*/
-
 	// 根据行、列，初始化一个空的二维容器
 	m_flowersesGrid.resize(m_col);
 	for (auto &vec : m_flowersesGrid)
 		vec.resize(m_row);
 
-	//generateNewThingGrid(m_diff);
-
-	/*
-	for (int x = 0; x < m_col; x++)
-	{
-		for (int y = 0; y < m_row; y++)
-		{
-			m_flowersesGrid[x][y] = createflower((Flower::UnitType)n_g[0][y][x], x, y);
-		}
-	}
-	*/
 
 	int q;
 	int w;
@@ -191,31 +166,6 @@ void EatCandiesGrid::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_
 }
 
 
-
-/*cocos2d::Animate* EatCandiesGrid::createAnimate()
-{
-	int iFrameNum = 4;
-	SpriteFrame* frame = NULL;
-	Vector<SpriteFrame*>frameVec;
-
-	for (int i = 1; i <= iFrameNum; i++)
-	{
-		frame = SpriteFrame::create(StringUtils::format("flower_1.%d.png", i), Rect(0, 0, 130, 130));
-		frameVec.pushBack((frame));
-	}
-
-	Animation* animation = Animation::createWithSpriteFrames(frameVec);
-	animation->setLoops(-1);
-	animation->setDelayPerUnit(0.1f);
-
-	Animate* action = Animate::create(animation);
-
-	return action;
-}
-*/
-
-
-
 //坐标获取，范围坐标与触屏坐标
 cocos2d::Vec2 EatCandiesGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 {
@@ -238,7 +188,7 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 
 	int x1 = (int)pos.x;
 	int y1 = (int)pos.y;
-	if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3) && m_flowersesGrid[x1][y1] /*&& ((x1 != 3) && (y1 != 1))*/)//中心的狗不能被消除
+	if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3) && m_flowersesGrid[x1][y1] )
 	{
 		// 如果倒计时还没有开始，则开始倒计时
 		if (!m_isRunning)
@@ -250,14 +200,8 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 		auto flower = m_flowersesGrid[x1][y1];
 		log("farmer pos x = %f, y = %f", flower->getPosition().x, flower->getPosition().y);
 
-		Blink* blink = Blink::create(3.0f, 3);
-
-		flower->runAction(blink);
-
 		// 清空矩阵中的花的指针
 		m_flowersesGrid[x1][y1] = nullptr;
-
-		//m_flowersesGrid[r][b] = createflower(n, r, b);
 
 		if (m_loop > 0 && getLivingFlowersNum() > 0)
 		{
@@ -293,8 +237,6 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 	
 		}
 
-		//flower->runAction(createAnimate());
-
 		flower->tapped();
 	}
 	return true;
@@ -311,15 +253,6 @@ int EatCandiesGrid::getLivingFlowersNum()
 				count++;
 		}
 	}
-
-	/*
-	if (m_flowersesGrid[3][1] != nullptr)
-	{
-		count--;
-	}
-	*/
-
-	//count--;
 
 	return count;
 }
