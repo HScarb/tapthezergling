@@ -22,6 +22,7 @@ public:
 	void reduceCardTime(float t);
 	void startCardTimeCountDown();
 	bool isCardTimeCountingDowm();
+	void pauseCardTimeCountingDown();
 
 private:
 	static TimeManager * m_timeManager;
@@ -31,7 +32,7 @@ private:
 	CC_SYNTHESIZE(float, m_time, Time);
 	CC_SYNTHESIZE(bool, m_isTollgateBegin, isTollgateBegin);		// 关卡是否已经开始(暂停要用到)
 
-	static TimeManager * m_cardtimeManager;
+private:
 	bool m_iscardTimeCountingDown;
 
 	CC_SYNTHESIZE(float, m_cardtime, CardTime);

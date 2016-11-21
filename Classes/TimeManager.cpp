@@ -82,6 +82,11 @@ bool TimeManager::isCardTimeCountingDowm()
 	return m_iscardTimeCountingDown;
 }
 
+void TimeManager::pauseCardTimeCountingDown()
+{
+	m_iscardTimeCountingDown = false;
+}
+
 void TimeManager::reduceCardTime(float t)
 {
 	m_cardtime -= t;
@@ -106,7 +111,7 @@ void TimeManager::update(float dt)
 		{
 			m_iscardTimeCountingDown = false;
 			m_cardtime = 0;
-			_eventDispatcher->dispatchCustomEvent("CardEnhanceSucceed");
+			_eventDispatcher->dispatchCustomEvent("CardCollectionSucceed");
 		}
 	}
 }
