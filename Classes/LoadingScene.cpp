@@ -103,17 +103,6 @@ bool LoadingScene::init()
 	TextureCache::getInstance()->addImageAsync(PATH_ZERG_BASE, addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(PATH_PROTOSS_BASE, addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(PATH_SPAWNINGPOOL, addTextureCallback);
-	/*//Cards
-	TextureCache::getInstance()->addImageAsync("Cards/Card_1.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_2.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_3.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_4.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_5.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_6.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_7.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_8.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_9.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_10.png", addTextureCallback);*/
 	for (int i = 1; i <= 10; i++)
 	{
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_%i.png", i), addTextureCallback);

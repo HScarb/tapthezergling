@@ -21,6 +21,7 @@ public:
 	void reduceCardTime(float t);
 	void startCardTimeCountDown();
 	bool isCardTimeCountingDowm();
+	void pauseCardTimeCountingDown();
 
 private:
 	static TimeManager * m_timeManager;

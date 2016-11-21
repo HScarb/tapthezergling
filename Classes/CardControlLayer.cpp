@@ -2,6 +2,7 @@
 #include"CardControlLayer.h"
 #include "cocostudio/CocoStudio.h"
 #include "CardManager.h"
+#include "TimeManager.h"
 const int CARD_SLOT_Y = 300;
 const int CARD_SLOT_X1 = 300;
 const int CARD_SLOT_X2 = 600;
@@ -28,11 +29,13 @@ bool CardControlLayer::init()
 	m_isEnhancerContaninsACard = false;
 	m_isCollectionContainsCard = false;
 	m_isSingleCard = true;
+	m_cardCollectionTime = nullptr;
 	auto ui = CSLoader::createNode("CardEnhancer.csb");
 	this->addChild(ui);
 	//从ui中加载按钮
 	m_closeBtn = (Button *)ui->getChildByName("Button_x");
 	m_collectBtn = (Button *)ui->getChildByName("Button_collect");
+	m_cardCollectionTime = (Text*)ui->getChildByName("time_Collection");
 	if (CardManager::getInstance()->getAllCards().size() == 0)
 	{
 		//创建卡片
@@ -63,10 +66,24 @@ bool CardControlLayer::init()
 	listener->onTouchEnded = CC_CALLBACK_2(CardControlLayer::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	listener->setSwallowTouches(true);
+
+	//增加卡片合成完成事件监听
+	auto cardCollectionListener = EventListenerCustom::create("CardCollectionSucceed", CC_CALLBACK_1(CardControlLayer::cardCollectionSucceedCallBack, this));
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(cardCollectionListener,this);
+
 	m_closeBtn->addTouchEventListener(this, toucheventselector(CardControlLayer::onCloseBtnClick));
 	m_collectBtn->addTouchEventListener(this, toucheventselector(CardControlLayer::onCollectBtnClick));
 	return true;
 
+}
+
+void CardControlLayer::update(float dt)
+{
+	if (TimeManager::getInstance()->isCardTimeCountingDowm())
+	{
+		TimeManager::getInstance()->update(dt);
+		m_cardCollectionTime->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getCardTime()));
+	}
 }
 
 void CardControlLayer::CreateACard(int info,int level,int posX)
@@ -104,9 +121,10 @@ void CardControlLayer::onCloseBtnClick(Ref* pSender, cocos2d::ui::TouchEventType
 }
 void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-		ClickedToStartCollectCards();
-		m_isCollectionContainsCard = true;
-
+	ClickedToStartCollectCards();
+	TimeManager::getInstance()->setCardTime(10);
+	this->scheduleUpdate();
+	m_isCollectionContainsCard = true;
 }
 
 Card* CardControlLayer::CreateACardByTypeAndLevel(Card::CardInfo info, int level,int posX)
@@ -190,7 +208,8 @@ bool CardControlLayer::IsSingleInVector(Card* card)
 
 void CardControlLayer::ClickedToStartCollectCards()
 {
-	CardCollectionSucceed();
+	log("cardtime %f", TimeManager::getInstance()->getCardTime());
+	TimeManager::getInstance()->startCardTimeCountDown();
 }
 
 void CardControlLayer::CardCollectionSucceed()
@@ -211,6 +230,15 @@ void CardControlLayer::CardCollectionSucceed()
 		card->removeFromParent();
 		CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card);
 	}
+}
+
+void CardControlLayer::cardCollectionSucceedCallBack(cocos2d::EventCustom * cardEvent)
+{
+	std::string * cardCollection = (std::string*)cardEvent->getUserData();
+	CCLOG("%s1111111111",cardCollection);
+	TimeManager::getInstance()->pauseCountDown();
+
+	CardCollectionSucceed();
 }
 
 bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)

@@ -61,7 +61,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_time" ActionTag="513317494" Tag="34" IconVisible="False" LeftMargin="453.5000" RightMargin="441.5000" TopMargin="294.0000" BottomMargin="214.0000" FontSize="22" LabelText="99:99" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="time_Collection" ActionTag="513317494" Tag="34" IconVisible="False" LeftMargin="453.5000" RightMargin="441.5000" TopMargin="294.0000" BottomMargin="214.0000" FontSize="22" LabelText="99:99" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="65.0000" Y="32.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="486.0000" Y="230.0000" />

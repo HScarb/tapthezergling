@@ -28,5 +28,20 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="CardEnhancer.csd" />
+          <FilePathData Path="CardInfoLayer.csd" />
+          <FilePathData Path="MainScene.csd" />
+          <FilePathData Path="PauseLayer.csd" />
+          <FilePathData Path="ScoreScene.csd" />
+          <FilePathData Path="SettingsScene.csd" />
+          <FilePathData Path="TestScene.csd" />
+          <FilePathData Path="TollgateScene.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="CardEnhancer.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

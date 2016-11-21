@@ -33,6 +33,10 @@ public:
 	//合成卡片完成
 	void CardCollectionSucceed();
 
+	//增加卡片合成成功后的回调函数
+	void cardCollectionSucceedCallBack(cocos2d::EventCustom * cardEvent);
+	virtual void update(float dt) override;
+
 	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
@@ -59,4 +63,5 @@ private:
 	bool m_isSingleCard;
 	//是否有卡片已经合成完毕
 	bool m_isCollectionContainsCard;
+	cocos2d::ui::Text * m_cardCollectionTime;
 };
