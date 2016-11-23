@@ -10,6 +10,49 @@ LOCAL_MODULE := cocos2dcpp_shared
 
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
+LOCAL_SRC_FILES := hellocpp/main.cpp \       
+			../../Classes/AppDelegate.cpp \    
+			../../Classes/HelloWorldScene.cpp\
+				   ../../Classes/AnimationUtil.cpp \
+				   ../../Classes/DoubleTapScene.cpp \
+				   ../../Classes/EatCandiesScene.cpp \
+				   ../../Classes/FilterSprite.cpp \
+				   ../../Classes/LoadingScene.cpp \
+				   ../../Classes/MainScene.cpp \
+				   ../../Classes/SceneManager.cpp \
+				   ../../Classes/SlideCutScene.cpp \
+				   ../../Classes/TemplateScene.cpp \
+				   ../../Classes/TimeManager.cpp \
+				   ../../Classes/TollgateScene.cpp \
+				   ../../Classes/VisibleRect.cpp \
+				   ../../Classes/Zergling.cpp \
+				   ../../Classes/Farmer.cpp \
+				   ../../Classes/SettingsScene.cpp \
+				   ../../Classes/TollgateControlLayer.cpp \
+				   ../../Classes/PauseLayer.cpp \
+				   ../../Classes/Flower.cpp \
+				   ../../Classes/GameManager.cpp \
+				   ../../Classes/DataManager.cpp \
+				   ../../Classes/JumpingOnPoolScene.cpp \
+				   ../../Classes/BurrowAndAttack.cpp \
+				   ../../Classes/SmallZergling.cpp \
+				   ../../Classes/EatFlowersScene.cpp \
+				   ../../Classes/ClassifyUnits.cpp \
+				   ../../Classes/BOSS2ZerglingNinja.cpp \
+				   ../../Classes/BOSS1ZerglingKing.cpp \
+				   ../../Classes/Worker.cpp \
+				   ../../Classes/FeedSnacks.cpp \
+				   ../../Classes/farmerandflower.cpp \
+				   ../../Classes/CheckThethingScene.cpp \
+				   ../../Classes/Shake.cpp \
+				   ../../Classes/ScoreScene.cpp \
+				   ../../Classes/SoundManager.cpp \
+				   ../../Classes/CardControlLayer.cpp \
+				   ../../Classes/Card.cpp \
+				   ../../Classes/CardManager.cpp \
+				   ../../Classes/CardInfoLayer.cpp \
+			       ../../Classes/NoTouchLayer.cpp \
+				   ../../Classes/Chest.cpp 
 
 define walk
 $(wildcard $(1)) $(foreach e, $(wildcard $(1)/*), $(call walk, $(e)))

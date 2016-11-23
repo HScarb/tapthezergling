@@ -61,14 +61,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="time_Collection" ActionTag="513317494" Tag="34" IconVisible="False" LeftMargin="453.5000" RightMargin="441.5000" TopMargin="294.0000" BottomMargin="214.0000" FontSize="22" LabelText="99:99" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="65.0000" Y="32.0000" />
+          <AbstractNodeData Name="time_Collection" ActionTag="513317494" Tag="34" IconVisible="False" LeftMargin="486.0000" RightMargin="474.0000" TopMargin="310.0000" BottomMargin="230.0000" FontSize="22" LabelText="" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="486.0000" Y="230.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5063" Y="0.4259" />
-            <PreSize X="0.0677" Y="0.0593" />
+            <PreSize X="0.0000" Y="0.0000" />
             <FontResource Type="Normal" Path="Res/fonts/Skranji-Bold.ttf" Plist="" />
             <OutlineColor A="255" R="0" G="128" B="0" />
             <ShadowColor A="255" R="0" G="128" B="0" />
@@ -93,7 +93,7 @@
             <PreSize X="0.0833" Y="0.1481" />
             <FileData Type="Normal" Path="Res/star crafts/starcrafts_Terrain_DarkGrass.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Image_1_1" ActionTag="-1900142839" Tag="15" IconVisible="False" LeftMargin="450.0000" RightMargin="430.0000" TopMargin="110.0000" BottomMargin="350.0000" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="imageCollection" ActionTag="-1900142839" Tag="15" IconVisible="False" LeftMargin="450.0000" RightMargin="430.0000" TopMargin="110.0000" BottomMargin="350.0000" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
             <Size X="80.0000" Y="80.0000" />
             <AnchorPoint />
             <Position X="450.0000" Y="350.0000" />

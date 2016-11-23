@@ -12,6 +12,7 @@ public:
 	virtual bool init() override;
 	CREATE_FUNC(CardControlLayer);
 
+	virtual void update(float dt) override;
 	//增加卡片
 	void CreateACard(int info,int level,int posX);
 	//删除卡片
@@ -28,14 +29,15 @@ public:
 	bool IsTheSameCardInEnhancer(Card * card);
 	//检测当前要移动的卡片在卡片存放容器中是否为单张
 	bool IsSingleInVector(Card * card);
-	//开始合成卡片
-	void ClickedToStartCollectCards();
 	//合成卡片完成
 	void CardCollectionSucceed();
 
 	//增加卡片合成成功后的回调函数
 	void cardCollectionSucceedCallBack(cocos2d::EventCustom * cardEvent);
-	virtual void update(float dt) override;
+	//获取时间戳
+	int getTimeStamp();
+	//获取当前时间
+	tm * getCurrentTime();
 
 	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
@@ -63,5 +65,11 @@ private:
 	bool m_isSingleCard;
 	//是否有卡片已经合成完毕
 	bool m_isCollectionContainsCard;
+	//是否有卡片正在合成
+	bool m_isCardsStartCollection;
 	cocos2d::ui::Text * m_cardCollectionTime;
+	cocos2d::ui::ImageView * m_sprite;
+	//获取当前时间和时间戳（秒）
+	int m_timeStamp;
+	tm * m_currentTime;
 };
