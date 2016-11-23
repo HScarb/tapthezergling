@@ -75,15 +75,6 @@ void CardManager::SortCardMsg()
 
 void CardManager::DeleteCardByObject(Card *card)
 { 
-	/*int pos = 0;
-	for (auto card : m_cardVector)
-	{
-		if (card->getCardinfo() == type && card->getCardLevel() == level)
-		{
-			break;
-		}
-		pos++;
-	}*/
 	m_cardVector.eraseObject(card);
 	SortCardMsg();
 }
