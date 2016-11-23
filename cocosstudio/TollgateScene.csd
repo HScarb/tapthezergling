@@ -36,13 +36,13 @@
             <PreSize X="0.5333" Y="0.2500" />
             <FileData Type="Normal" Path="Res/RESOURCE/Gem-board.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_goon" ActionTag="-1816586950" Tag="27" IconVisible="False" LeftMargin="524.2454" RightMargin="-76.2454" TopMargin="219.7601" BottomMargin="-191.7601" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="482" Scale9Height="490" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_goon" ActionTag="-1816586950" Tag="27" IconVisible="False" LeftMargin="640.0000" RightMargin="-192.0000" TopMargin="220.0000" BottomMargin="-192.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="482" Scale9Height="490" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="512.0000" Y="512.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="780.2454" Y="64.2399" />
+            <Position X="896.0000" Y="64.0000" />
             <Scale ScaleX="0.2300" ScaleY="0.2300" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8128" Y="0.1190" />
+            <PrePosition X="0.9333" Y="0.1185" />
             <PreSize X="0.5333" Y="0.9481" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />

@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 #include "GameManager.h"
 #include "SoundManager.h"
+#include "GlobalConst.h"
 using namespace std;
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -61,6 +62,7 @@ void TollgateControlLayer::update(float dt)
 	}
 }
 
+/* 过关函数 */
 void TollgateControlLayer::tollgateClear(cocos2d::EventCustom * event)
 {
 	string * tollgate = (string*)event->getUserData();
@@ -70,6 +72,11 @@ void TollgateControlLayer::tollgateClear(cocos2d::EventCustom * event)
 	TimeManager::getInstance()->setisTollgateBegin(false);		// 设置关卡没有开始
 	this->unscheduleUpdate();		// stop update for tollgate control layer
 	GameManager::getInstance()->setIsWaitToAddTime(true);
+	// 判断是否出现宝箱
+	if(GameManager::getInstance()->getTollgateNum() % CHEST_TOLLGATE == 0)
+	{
+		GameManager::getInstance()->setIsWaitToAddChest(true);
+	}
 	// 播放菜单背景音乐
 	SoundManager::getInstance()->forcePlayMenuMusic();
 	SceneManager::getInstance()->changeScene(SceneManager::SceneType::TollgateScene);

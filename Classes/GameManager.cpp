@@ -38,6 +38,8 @@ bool GameManager::init()
 	m_diff = 0;
 	m_loop = 1;
 	m_isGameOn = false;
+	m_isWaitToAddTime = false;
+	m_isWaitToAddChest = false;
 
 	return true;
 }

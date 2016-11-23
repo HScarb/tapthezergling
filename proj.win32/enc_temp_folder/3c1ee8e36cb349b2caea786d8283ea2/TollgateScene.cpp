@@ -315,6 +315,10 @@ void TollgateScene::onGoOnBtnClicked(Ref* pSender, cocos2d::ui::TouchEventType t
 		if (m_chest_sprite)
 		{
 			m_chest_sprite->stopAllActions();
+			m_energy_sprite->stopAllActions();
+			m_energy_sprite->removeFromParent();
+			m_diamond_sprite->stopAllActions();
+			m_diamond_sprite->removeFromParent();
 			m_chest_sprite->removeFromParent();
 		}
 		m_anotherChestText->setVisible(false);

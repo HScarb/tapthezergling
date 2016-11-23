@@ -39,7 +39,7 @@ private:
 	cocos2d::Label * m_label;
 
 	void onHomeBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
-	void onGoonBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onGoOnBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onCardBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 
 	void onTollgateLabelClicked(Ref * pSender);
@@ -70,7 +70,8 @@ private:
 	cocos2d::ui::LoadingBar * m_energyBar;
 	cocos2d::ui::LoadingBar * m_timeBar;
 	cocos2d::ui::Text * m_timeText;
-	cocos2d::ui::Text * m_chest_numText;
+	cocos2d::ui::Text * m_anotherChestText;
+	cocos2d::ui::Text * m_congratsText;
 	//新加的goon按钮
 	cocos2d::ui::Button * m_goonBtn;
 
