@@ -73,7 +73,7 @@ void TollgateControlLayer::tollgateClear(cocos2d::EventCustom * event)
 	this->unscheduleUpdate();		// stop update for tollgate control layer
 	GameManager::getInstance()->setIsWaitToAddTime(true);
 	// ÅÐ¶ÏÊÇ·ñ³öÏÖ±¦Ïä
-	if(GameManager::getInstance()->getTollgateNum() % CHEST_TOLLGATE == 0)
+	if(GameManager::getInstance()->getTollgateNum() % 10 == CHEST_TOLLGATE)
 	{
 		GameManager::getInstance()->setIsWaitToAddChest(true);
 	}

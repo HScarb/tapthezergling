@@ -18,6 +18,12 @@ using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 using namespace CocosDenshion;
 
+int m = 0;  //记录宝箱的开箱次数
+bool act = false;    //初始化宝箱调试
+bool but = false;	//按钮问题
+bool res = false;   //按钮的上升问题
+bool pre = false;   //控制奖励，防止提前被按
+
 cocos2d::Scene* TollgateScene::createScene()
 {
 	auto scene = Scene::create();
@@ -26,9 +32,79 @@ cocos2d::Scene* TollgateScene::createScene()
 	return scene;
 }
 
-int m = 0;  //记录宝箱的开箱次数
-bool act = false;    //初始化宝箱调试
-bool but = false;	//按钮问题
+void TollgateScene::runCard()
+{
+
+}
+
+void TollgateScene::runEnergy()
+{
+	auto action = Sequence::create(
+		MoveBy::create(1, ccp(-420, 220)),
+		CallFunc::create([this]{addEnergy();
+	}),
+		DelayTime::create(0.05f),
+		CallFunc::create([this]{
+		FadeOut * fadeout = FadeOut::create(0.01);
+		m_energy_sprite->runAction(fadeout);
+	}),
+		CallFunc::create([this]{
+		if (!res)
+		m_cardBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
+	}),
+		CallFunc::create([this]{
+		if (!res)
+		m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
+		res = true;
+	}),
+		CallFunc::create([this]{
+		setChest();
+	}),
+		CallFunc::create([this]{
+		int e = random(10, 12);
+		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
+		m_anotherChestText->setVisible(true);
+		act = false;
+	}),
+		nullptr
+		);
+	m_energy_sprite->runAction(action);
+}
+
+void TollgateScene::runDiamond()
+{
+	auto action = Sequence::create(
+		MoveBy::create(1, ccp(280, 220)),
+		CallFunc::create([this]{
+		addDiamond();
+	}),
+		DelayTime::create(0.05f),
+		CallFunc::create([this]{
+		FadeOut * fadeout = FadeOut::create(0.01);
+		m_diamond_sprite->runAction(fadeout);
+	}),
+		CallFunc::create([this]{
+		if (!res)
+		m_cardBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
+	}),
+		CallFunc::create([this]{
+		if (!res)
+		m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
+		res = true;
+	}),
+		CallFunc::create([this]{
+		setChest();
+	}),
+		CallFunc::create([this]{
+		int e = random(10, 12);
+		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
+		m_anotherChestText->setVisible(true);
+		act = false;
+	}),
+		nullptr
+		);
+	m_diamond_sprite->runAction(action);
+}
 
 bool TollgateScene::init()
 {
@@ -39,17 +115,25 @@ bool TollgateScene::init()
 	m_addJewelBtn = nullptr;
 	m_cardBtn = nullptr;
 	m_homeBtn = nullptr;
-	m_goonBtn = nullptr;
+	m_goOnBtn = nullptr;
 	m_energyBar = nullptr;
 	m_timeText = nullptr;
 	m_timeBar = nullptr;
-	m_chest_sprite = nullptr;
+//	m_chest_sprite = nullptr;
+	m_energy_sprite = nullptr;
+	m_diamond_sprite = nullptr;
+	m_flash = nullptr;
 	m_label = nullptr;
 	m_anotherChestText = nullptr;
 
+	if (!m_chest_sprite)
+	{
+		m_chest_sprite = nullptr;
+	}
 
 	//这个按钮是用来不重复生成关卡的
 	but = false;
+	act = false;
 
 	m_scrollView = nullptr;
 	m_t1 = nullptr;
@@ -61,11 +145,6 @@ bool TollgateScene::init()
 	// 加载UI
 	auto rootNode = CSLoader::createNode("TollgateScene.csb");
 	addChild(rootNode);
-
-	/*
-		开一个，减少相对应的宝石数量。
-	*/
-
 
 	/*//加载卡片合成层
 	m_cardControlLayer = CardControlLayer::create();
@@ -82,13 +161,13 @@ bool TollgateScene::init()
 	m_jewelText = (Text*)(rootNode->getChildByName("Text_jewel"));
 	m_homeBtn = (Button*)(rootNode->getChildByName("Button_home"));
 	m_cardBtn = (Button*)(rootNode->getChildByName("Button_cards"));
-	m_goonBtn = (Button*)(rootNode->getChildByName("Button_goon"));
+	m_goOnBtn = (Button*)(rootNode->getChildByName("Button_goon"));
 	// m_addJewelBtn = (Button*)(rootNode->getChildByName(""));
 	m_energyBar = (LoadingBar*)(rootNode->getChildByName("LoadingBar_energy"));
 	m_timeText = (Text*)rootNode->getChildByName("Text_time");
 	m_timeBar = (LoadingBar*)rootNode->getChildByName("LoadingBar_time");
 	
-	m_goonBtn->setVisible(false);
+	/*m_goonBtn->setVisible(false);*/
 
 	m_anotherChestText = (Text*)rootNode->getChildByName("Chest_numText");
 	//m_anotherChestText->setVisible(false);
@@ -133,6 +212,8 @@ bool TollgateScene::init()
 		{
 			//创建宝箱
 //			int tollgateNum = GameManager::getInstance()->getTollgateNum();
+			bool i = GameManager::getInstance()->getIsWaitToAddChest();
+			m_tollgateNumLabel->setString(StringUtils::format("%d", GameManager::getInstance()->getTollgateNum() + 1));
 			setChest();
 		}
 
@@ -149,7 +230,7 @@ bool TollgateScene::init()
 
 	// 关联触摸函数
 	m_homeBtn->addTouchEventListener(this, toucheventselector(TollgateScene::onHomeBtnClicked));
-	m_goonBtn->addTouchEventListener(this, toucheventselector(TollgateScene::onGoOnBtnClicked));
+	m_goOnBtn->addTouchEventListener(this, toucheventselector(TollgateScene::onGoOnBtnClicked));
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(TollgateScene::onTouchBegan, this);
@@ -308,8 +389,6 @@ cocos2d::Animate* TollgateScene::m_createAnimate()
 //这里设置继续按钮和关闭宝箱系统
 void TollgateScene::onGoOnBtnClicked(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	//这个按钮有两种想法：一种是显示关卡项目后自己点击进入关卡，另一种点击这个按钮之后直接进入下一关
-
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
 		if (m_chest_sprite)
@@ -318,6 +397,14 @@ void TollgateScene::onGoOnBtnClicked(Ref* pSender, cocos2d::ui::TouchEventType t
 			m_chest_sprite->removeFromParent();
 		}
 		m_anotherChestText->setVisible(false);
+		if (res)
+		{
+			m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
+			m_cardBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
+		}
+		res = false;
+		setNextTollgate();
+		GameManager::getInstance()->setIsWaitToAddChest(false);
 	}
 }
 
@@ -327,6 +414,7 @@ void TollgateScene::onHomeBtnClicked(Ref* pSender, TouchEventType type)
 	{
 		SceneManager::getInstance()->changeScene(SceneManager::SceneType::MainScene);
 	}	
+	GameManager::getInstance()->setIsWaitToAddChest(false);   //设置回主界面之后，再次进入时不显示宝箱
 }
 
 void TollgateScene::onCardBtnClicked(Ref* pSender, TouchEventType type)
@@ -440,7 +528,6 @@ void TollgateScene::onItem9Clicked(Ref* pSender, cocos2d::ui::TouchEventType typ
 	}
 }
 
-
 void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {	
 		auto pos = touch->getLocationInView();
@@ -453,19 +540,15 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 		m_flash->setVisible(false);
 		this->addChild(m_flash, 1);
 
-		RotateTo *rotateTo = RotateTo::create(2, 100);
-		ScaleBy *scaleBy = ScaleBy::create(1.8, 1.8);
+		DelayTime *dt = DelayTime::create(1.5f);
 		Hide *hideAction = Hide::create();
 		ScaleTo * scaleto2 = ScaleTo::create(0.3, 0.000001);
-		Sequence * seq1 = Sequence::create(DelayTime::create(2.3), scaleto2, NULL);
-		Sequence * seq2 = Sequence::create(DelayTime::create(2.3), hideAction, NULL);
 
-		if (m_chest_sprite != nullptr)
+		if (m_chest_sprite)  
 		{
-			if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (act != true))
+			if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (act != true)) 
 			{
-				//打开宝箱时触发文字（需要设置条件）
-				//这句话要不要考虑一下，暂时没找到更加柔和的线条提示方法（过于生硬）
+				//打开宝箱时触发鼓励文字
 				if (act != true)
 				{
 					Label *m_label = Label::create("  GREATE!  ", "fonts/AveriaSansLibre-Bold.ttf", 40);
@@ -473,19 +556,15 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					this->addChild(m_label, 1, 5);
 				}
 
-				m_cardBtn->setVisible(false);
-				m_goonBtn->setVisible(true);
-
 				if (act != true)
 				{
 					m_flash->setVisible(true);
-					m_flash->runAction(rotateTo);
-					m_flash->runAction(scaleBy);
+					m_flash->runAction(RotateTo::create(2, 100));
+					m_flash->runAction(ScaleBy::create(1.8, 1.8));
 					m_chest_sprite->runAction(m_createAnimate());
-					m_chest_sprite->runAction(seq1);
-					m_flash->runAction(seq2);
+					m_chest_sprite->runAction(Sequence::create(DelayTime::create(2.3), scaleto2, hideAction, dt, NULL));
+					m_flash->runAction(Sequence::create(DelayTime::create(2.3), hideAction, dt, NULL));
 				}
-
 				act = true;
 				int i = random(1, 2);
 				if (i == Energy)
@@ -494,81 +573,47 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					//创建能量
 					m_energy_sprite = Sprite::create("res/images/chest/Energy.png");
 					m_energy_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-					m_energy_sprite->setScale(0.48, 0.48);
-					addChild(m_energy_sprite, 1, 2);
-
-					auto delayTime = DelayTime::create(3.45f);
-
-					//能量提取
-					auto action = Sequence::create(
-						DelayTime::create(3.45f),
-						MoveBy::create(1, ccp(-420, 220)),
-						CallFunc::create([this]{addEnergy();}),
-						DelayTime::create(0.05f),
-						CallFunc::create([this]{
-							FadeOut * fadeout = FadeOut::create(0.01);
-							m_energy_sprite->runAction(fadeout);
-						}),
-						CallFunc::create([this]{setChest();}),					//测试无限开箱
-						CallFunc::create([this]{
-							int e = random(10, 12);
-							m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
-							m_anotherChestText->setVisible(true);
-							act = false;
-						}),
-						nullptr
-					);
-					m_energy_sprite->runAction(action);
+					m_energy_sprite->setScale(0.01, 0.01);
+					addChild(m_energy_sprite);
 				}
+
+				//能量提取
 				else if (i == Jewel)
 				{
 					m++;
 					//创建宝石
 					m_diamond_sprite = Sprite::create("res/images/chest/Gem.png");
 					m_diamond_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-					m_diamond_sprite->setScale(0.48, 0.48);
-					addChild(m_diamond_sprite, 1, 2);
-
-					//宝石提取
-					auto action = Sequence::create(
-						DelayTime::create(3.45f),
-						MoveBy::create(1, ccp(280, 220)),
-						CallFunc::create([this]{
-						addDiamond();
-					}),
-						DelayTime::create(0.05f),
-						CallFunc::create([this]{
-						FadeOut * fadeout = FadeOut::create(0.01);
-						m_diamond_sprite->runAction(fadeout);
-					}),
-						CallFunc::create([this]{
-						setChest();
-					}),					//测试无限开箱
-						CallFunc::create([this]{
-						int e = random(10, 12);
-						m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
-						m_anotherChestText->setVisible(true);
-						act = false;
-						/*
-						Touch* touch = NULL;
-						auto pos = touch->getLocationInView();
-						if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (GameManager::getInstance()->getJewel() >= (e * m)))
-						{
-						GameManager::getInstance()->setJewel(GameManager::getInstance()->getJewel() - (e * m));
-						m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel() - (e * m)));
-						}
-						*/
-					}),
-						nullptr
-						);
-					m_diamond_sprite->runAction(action);
+					m_diamond_sprite->setScale(0.01, 0.01);  //0.48是原设置的大小。想法：可以把sprite 变小，这样就按不到了
+					addChild(m_diamond_sprite);
 				}
-				else if (i == Card)
-				{
-					//随机创建卡片
-				}
-
 			}
+		}
+
+		if (m_diamond_sprite)
+		{
+			m_diamond_sprite -> runAction(Sequence::create(DelayTime::create(2.5f),
+				ScaleTo::create(0.5, 0.48),
+				NULL
+				));
+			if (m_diamond_sprite->getBoundingBox().containsPoint(pos))
+			{
+				runDiamond();
+			}
+		}
+		if (m_energy_sprite)
+		{
+			m_energy_sprite -> runAction(Sequence::create(DelayTime::create(2.5f),
+				ScaleTo::create(0.5, 0.48),
+				NULL
+				));
+			if (m_energy_sprite->getBoundingBox().containsPoint(pos))
+			{
+				runEnergy();
+			}
+		}
+		else if (m_card_sprite)
+		{
 
 		}
 }

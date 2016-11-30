@@ -22,6 +22,9 @@ public:
 	CREATE_FUNC(TollgateScene);
 
 private:
+	void runDiamond();      //进行宝石入库动画
+	void runEnergy();		//进行能量入库动画
+	void runCard();			//进行卡片入库动画
 	void addEnergy();		//增加能量值
 	void addDiamond();		//增加宝石值
 	void setChest();				//创建宝箱和动画
@@ -73,7 +76,7 @@ private:
 	cocos2d::ui::Text * m_anotherChestText;
 	cocos2d::ui::Text * m_congratsText;
 	//新加的goon按钮
-	cocos2d::ui::Button * m_goonBtn;
+	cocos2d::ui::Button * m_goOnBtn;
 
 	cocos2d::ui::ScrollView * m_scrollView;
 
