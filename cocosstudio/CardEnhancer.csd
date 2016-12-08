@@ -93,16 +93,6 @@
             <PreSize X="0.0833" Y="0.1481" />
             <FileData Type="Normal" Path="Res/star crafts/starcrafts_Terrain_DarkGrass.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="imageCollection" ActionTag="-1900142839" Tag="15" IconVisible="False" LeftMargin="450.0000" RightMargin="430.0000" TopMargin="110.0000" BottomMargin="350.0000" LeftEage="168" RightEage="168" TopEage="168" BottomEage="168" Scale9OriginX="168" Scale9OriginY="168" Scale9Width="176" Scale9Height="176" ctype="ImageViewObjectData">
-            <Size X="80.0000" Y="80.0000" />
-            <AnchorPoint />
-            <Position X="450.0000" Y="350.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4688" Y="0.6481" />
-            <PreSize X="0.0833" Y="0.1481" />
-            <FileData Type="Normal" Path="Res/star crafts/starcrafts_Terrain_DarkGrass.png" Plist="" />
-          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

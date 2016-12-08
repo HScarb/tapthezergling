@@ -103,11 +103,17 @@ bool LoadingScene::init()
 	TextureCache::getInstance()->addImageAsync(PATH_ZERG_BASE, addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(PATH_PROTOSS_BASE, addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(PATH_SPAWNINGPOOL, addTextureCallback);
-	for (int i = 1; i <= 10; i++)
-	{
-		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_%i.png", i), addTextureCallback);
-		log("Card_%i.png", i);
-	}
+	//Cards
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_BOSS1.jpg"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_BOSS2.jpg"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_BurrowAndAttack.jpg"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_CheckTheThing.jpg"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_ClassifyUnits.jpg"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_DoubleTap.jpg"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_EatFlowers.jpg"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_JumpingOnPool.jpg"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_FeadSnacks.jpg"), addTextureCallback);
+	TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_SlideCut.jpg"), addTextureCallback);
 
 	// 开启加载进度检测
 	schedule(schedule_selector(LoadingScene::onTextureLoading));

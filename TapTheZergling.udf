@@ -33,8 +33,9 @@
         <OpenedDocuments>
           <FilePathData Path="TollgateScene.csd" />
           <FilePathData Path="CardInfoLayer.csd" />
+          <FilePathData Path="CardEnhancer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="CardInfoLayer.csd" />
+        <ActiveDocument Path="CardEnhancer.csd" />
       </Value>
     </Item>
   </Properties>
