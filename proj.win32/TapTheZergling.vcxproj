@@ -165,6 +165,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\farmerandflower.cpp" />
     <ClCompile Include="..\Classes\FeedSnacks.cpp" />
     <ClCompile Include="..\Classes\FilterSprite.cpp" />
+    <ClCompile Include="..\Classes\fitthecircle.cpp" />
     <ClCompile Include="..\Classes\Flower.cpp" />
     <ClCompile Include="..\Classes\GameManager.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
@@ -210,6 +211,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\farmerandflower.h" />
     <ClInclude Include="..\Classes\FeedSnacks.h" />
     <ClInclude Include="..\Classes\FilterSprite.h" />
+    <ClInclude Include="..\Classes\fitthecircle.h" />
     <ClInclude Include="..\Classes\Flower.h" />
     <ClInclude Include="..\Classes\Global.h" />
     <ClInclude Include="..\Classes\GlobalConst.h" />

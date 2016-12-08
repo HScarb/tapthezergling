@@ -7,7 +7,7 @@
 
 const float INITIAL_TIME = 5.0f;
 const int TOTAL_TOLLGATE_TYPE = 8;
-const int CHEST_TOLLGATE = 10;			// 每几关出现关卡
+const int CHEST_TOLLGATE = 5;			// 每几关出现关卡
 const std::string TOLLGATE_NAME[9] = 
 {
 	"0: None",

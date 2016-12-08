@@ -11,7 +11,7 @@
 USING_NS_CC;
 
 using namespace std;
-using namespace cocos2d::ui;
+using namespace ui;
 using namespace cocostudio::timeline;
 using namespace CocosDenshion;
 
@@ -28,8 +28,6 @@ bool EatCandiesScene::init(int diff, int loop)
 {
 	if (!Layer::init())
 		return false;
-
-	auto winSize = Director::getInstance()->getWinSize();
 
 	auto UI = CSLoader::createNode("Tollgates/EatCandiesScene.csb");
 	addChild(UI);
@@ -48,10 +46,8 @@ bool EatCandiesScene::init(int diff, int loop)
 	m_grid->setPosition(0, 0);
 	this->addChild(m_grid);
 
-
 	return true;
 }
-
 
 cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
 {
@@ -66,17 +62,6 @@ cocos2d::Layer* EatCandiesScene::create(int diff, int loop)
 		CC_SAFE_DELETE(pRef);
 		return nullptr;
 	}
-}
-
-
-void EatCandiesScene::newLevel(int diff)
-{
-
-}
-
-void EatCandiesScene::update()
-{
-
 }
 
 //根据困难和轮数创建矩阵数量
@@ -111,11 +96,7 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 	for (auto &vec : m_flowersesGrid)
 		vec.resize(m_row);
 
-
-	int q;
-	int w;
-	int o;
-	
+	int q, w, o;
 	for (int n = 0; n <= 2; n++)
 	{
 		do
@@ -127,7 +108,6 @@ bool EatCandiesGrid::init(int diff, int loop, int row, int col)
 		m_flowersesGrid[q][w] = createflower(o, q, w);
 	}
 	
-
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(EatCandiesGrid::onTouchBegan, this);
 	listener->onTouchEnded = CC_CALLBACK_2(EatCandiesGrid::onTouchEnded, this);
@@ -153,8 +133,7 @@ Flower* EatCandiesGrid::createflower(int color, int x, int y)
 	setZerglingPixPos(flower, x, y);
 	flower->setScale(0.0);
 	addChild(flower);
-	auto big = ScaleTo::create(0.2, 1.0);
-	flower->runAction(big);
+	flower->runAction(ScaleTo::create(0.2, 1.0));
 
 	return flower;
 }
@@ -164,7 +143,6 @@ void EatCandiesGrid::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_
 {
 
 }
-
 
 //坐标获取，范围坐标与触屏坐标
 cocos2d::Vec2 EatCandiesGrid::convertToGridPos(cocos2d::Vec2 pixPos)
@@ -203,41 +181,35 @@ bool EatCandiesGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unuse
 		// 清空矩阵中的花的指针
 		m_flowersesGrid[x1][y1] = nullptr;
 
+		//移除花
+		flower->tapped();
+
 		if (m_loop > 0 && getLivingFlowersNum() > 0)
 		{
 			if (m_flowersesGrid[r][b] == nullptr)
 			{
 				m_flowersesGrid[r][b] = createflower(n+1, r, b);
 			}
-
 			else if (m_flowersesGrid[r][b] != nullptr)
 			{
 				m_flowersesGrid[r + 1][b] = createflower(n, r + 1, b);
 			}
-
 			else if (m_flowersesGrid[r + 1][b] != nullptr)
 			{
 				m_flowersesGrid[r][b+1] = createflower(n+1, r , b+1);
 			}
-
 			else  if(m_flowersesGrid[r][b+1] != nullptr)
 			{
 				m_flowersesGrid[r+1][b+1] = createflower(n, r+1, b+1);
 			}
-
 			m_loop--;
 		}
-
-				
 
 		if (getLivingFlowersNum() <= 0 && m_loop <= 0 )
 		{
 			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
 			CCLOG("EatFlowers clear");
-	
 		}
-
-		flower->tapped();
 	}
 	return true;
 }

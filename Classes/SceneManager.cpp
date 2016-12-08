@@ -17,6 +17,7 @@
 #include "BOSS2ZerglingNinja.h"
 #include "CheckThethingScene.h"
 #include"FeedSnacks.h"
+#include "fitthecircle.h"
 USING_NS_CC;
 
 SceneManager * SceneManager::m_sceneManager = nullptr;
@@ -125,6 +126,9 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 	case FeedSnacks:
 		pScene = FeedSnacks::createScene(diff, loop);
 		break;
+	case fitthecircle:
+		pScene = fitthecircleScene::createScene(diff, loop);
+		break;
 	default: break;
 	}
 	auto pDirector = Director::getInstance();
@@ -139,3 +143,4 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 		pDirector->replaceScene(replaceScene);
 	}
 }
+
