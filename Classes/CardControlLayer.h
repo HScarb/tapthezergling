@@ -13,14 +13,12 @@ public:
 	CREATE_FUNC(CardControlLayer);
 
 	virtual void update(float dt) override;
-	//增加卡片
-	void CreateACard(int info,int level,int posX);
 	//删除卡片
 	void DeleteACard(Card * card);
+	//从卡片合成器中删除卡片
+	void DeleteAcardFromEnhancer(Card * card);
 	//准备移动去合成
 	void MoveCardIntoEnhancer(Card *card);
-	//通过卡片信息，等级往容器中增加卡片
-	Card * CreateACardByTypeAndLevel(Card::CardInfo info, int level,int posX);
 	//显示卡片
 	void showCards();
 	//点击在卡片合成器中的未在合成时的卡片可以使卡片回到底部卡片存放处

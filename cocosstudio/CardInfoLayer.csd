@@ -32,26 +32,26 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="cardName" ActionTag="-191131709" Tag="43" IconVisible="False" LeftMargin="464.0000" RightMargin="464.0000" TopMargin="124.5000" BottomMargin="384.5000" FontSize="20" LabelText="123" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="cardName" ActionTag="-191131709" Tag="43" IconVisible="False" LeftMargin="464.0000" RightMargin="464.0000" TopMargin="144.5000" BottomMargin="364.5000" FontSize="20" LabelText="123" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="32.0000" Y="31.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="480.0000" Y="400.0000" />
+            <Position X="480.0000" Y="380.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.7407" />
+            <PrePosition X="0.5000" Y="0.7037" />
             <PreSize X="0.0333" Y="0.0574" />
             <FontResource Type="Normal" Path="Res/fonts/CarterOne.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="cardInfo" ActionTag="762551434" Tag="44" IconVisible="False" LeftMargin="430.0000" RightMargin="430.0000" TopMargin="180.0000" BottomMargin="340.0000" FontSize="20" LabelText="Text Label" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="100.0000" Y="20.0000" />
+          <AbstractNodeData Name="textInfo" ActionTag="762551434" Tag="44" IconVisible="False" LeftMargin="400.0000" RightMargin="400.0000" TopMargin="220.0000" BottomMargin="300.0000" FontSize="20" LabelText="Card Information" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="160.0000" Y="20.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="480.0000" Y="350.0000" />
+            <Position X="480.0000" Y="310.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.6481" />
-            <PreSize X="0.1042" Y="0.0370" />
+            <PrePosition X="0.5000" Y="0.5741" />
+            <PreSize X="0.1667" Y="0.0370" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -67,6 +67,52 @@
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
             <PressedFileData Type="Normal" Path="Res/RESOURCE/button_x_2.png" Plist="" />
             <NormalFileData Type="Normal" Path="Res/RESOURCE/button_x_1.png" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="cardLevel" ActionTag="767809235" Tag="37" IconVisible="False" LeftMargin="464.0000" RightMargin="464.0000" TopMargin="194.5000" BottomMargin="314.5000" FontSize="20" LabelText="123" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="32.0000" Y="31.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="480.0000" Y="330.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="0.6111" />
+            <PreSize X="0.0333" Y="0.0574" />
+            <FontResource Type="Normal" Path="Res/fonts/CarterOne.ttf" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="textLevel" ActionTag="1411468075" Tag="38" IconVisible="False" LeftMargin="435.0000" RightMargin="435.0000" TopMargin="170.0000" BottomMargin="350.0000" FontSize="20" LabelText="CardLevel" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="90.0000" Y="20.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="480.0000" Y="360.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="0.6667" />
+            <PreSize X="0.0938" Y="0.0370" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="textName" ActionTag="-329289337" Tag="39" IconVisible="False" LeftMargin="440.0000" RightMargin="440.0000" TopMargin="120.0000" BottomMargin="400.0000" FontSize="20" LabelText="CardName" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="80.0000" Y="20.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="480.0000" Y="410.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="0.7593" />
+            <PreSize X="0.0833" Y="0.0370" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="cardInfo" ActionTag="-818006586" Tag="40" IconVisible="False" LeftMargin="464.0000" RightMargin="464.0000" TopMargin="244.5000" BottomMargin="264.5000" FontSize="20" LabelText="123" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="32.0000" Y="31.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="480.0000" Y="280.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="0.5185" />
+            <PreSize X="0.0333" Y="0.0574" />
+            <FontResource Type="Normal" Path="Res/fonts/CarterOne.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

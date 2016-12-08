@@ -72,20 +72,25 @@ bool CardControlLayer::init()
 	if (CardManager::getInstance()->getAllCards().size() == 0)
 	{
 		//创建卡片
-		for (int i = 9; i >= 1; i--)
+		for (int i = 25; i >= 1; i--)
 		{
-			if (i > 10)
+			/*if (i > 10)
 			{
-				CreateACard(i - 10, 1, i - 1);
+				auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1,10)), 1, i - 1);
+				this->addChild(card);
 			}
 			else
-				CreateACard(1, 1, i - 1);
+			{
+				auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)1, 1, i - 1);
+				this->addChild(card);
+			}*/
+			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1, 10)), 1, i - 1);
+			this->addChild(card);
 		}
 	}
 	else
 		showCards();
-
-	CardManager::getInstance()->SortCardMsg();;
+	CardManager::getInstance()->SortCardMsg();
 
 	//获取屏幕分辨率
 	auto glView = Director::getInstance()->getOpenGLView();
@@ -113,6 +118,8 @@ int CardControlLayer::getTimeStamp()
 {
 	timeval tm;
 	gettimeofday(&tm, NULL);
+	log("stamp %ld", tm.tv_usec/1000+tm.tv_sec*1000);
+	log("stamo %ld", tm.tv_sec);
 	return tm.tv_sec;    // 单位：秒
 	//    return tm.tv_usec; // 单位：毫秒
 	
@@ -149,16 +156,16 @@ void CardControlLayer::update(float dt)
 	}
 }
 
-void CardControlLayer::CreateACard(int info, int level, int posX)
-{
-	CardManager::getInstance()->InsertACard(CreateACardByTypeAndLevel(
-		(Card::CardInfo)info, level, posX));
-}
-
 void CardControlLayer::DeleteACard(Card* card)
 {
 	card->removeFromParent();
 	CardManager::getInstance()->DeleteCardByObject(card);
+}
+
+void CardControlLayer::DeleteAcardFromEnhancer(Card* card)
+{
+	card->removeFromParent();
+	CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card);
 }
 
 void CardControlLayer::MoveCardIntoEnhancer(Card* card)
@@ -175,31 +182,26 @@ void CardControlLayer::MoveCardIntoEnhancer(Card* card)
 	CardManager::getInstance()->DeleteCardByObject(card);
 }
 
-Card* CardControlLayer::CreateACardByTypeAndLevel(Card::CardInfo info, int level, int posX)
-{
-	Card * card = nullptr;
-	if (info == 0)
-		return nullptr;
-	card = Card::createByInfo(info);
-	card->setCardLevel(level);//设置等级
-	if (posX != 450)
-		card->setPosition(posX * 80, 0);//设定新增卡片的坐标
-	else
-		card->setPosition(450, 350);//设定合成后的卡片的坐标
-	this->addChild(card);
-	return card;
-}
-
 void CardControlLayer::showCards()
 {
 	for (auto card : CardManager::getInstance()->getAllCards())
 	{
+		//auto tempCard = CardManager::getInstance()->CreateACardByTypeAndLevel(card);
 		this->addChild(card);
+		log("if %d", card->getCardinfo());
 	}
 	for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
+	{
+		//auto tempCard = CardManager::getInstance()->CreateACardByTypeAndLevel(card);
 		this->addChild(card);
+		log("if %d", card->getCardinfo());
+	}
 	for (auto card : CardManager::getInstance()->getCardAfterCollection())
+	{
+		//auto tempCard = CardManager::getInstance()->CreateACardByTypeAndLevel(card);
 		this->addChild(card);
+		log("if %d", card->getCardinfo());
+	}
 }
 
 void CardControlLayer::ClickCardBackToBottom(Card* card)
@@ -265,19 +267,18 @@ void CardControlLayer::CardCollectionSucceed()
 	}
 	if (tempCard != nullptr)
 	{
-		CardManager::getInstance()->InsertCardAfterCollection(CreateACardByTypeAndLevel((Card::CardInfo)tempCard->getCardinfo(), (tempCard->getCardLevel() + 1), 450));
+		auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)tempCard->getCardinfo(), (tempCard->getCardLevel() + 1), 450);
+		this->addChild(card);
 		for (auto card : CardManager::getInstance()->getCardAfterCollection());
 	}
 	for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
 	{
-		card->removeFromParent();
-		CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card);
+		DeleteAcardFromEnhancer(card);
 	}
 	m_sprite->setVisible(true);
 	DataManager::getInstance()->setEndingTimeStamp(0);
 	DataManager::getInstance()->setStartTimeStamp(0);
 	DataManager::getInstance()->setStartDate(nullptr);
-
 }
 
 void CardControlLayer::cardCollectionSucceedCallBack(cocos2d::EventCustom * cardEvent)
@@ -298,7 +299,7 @@ void CardControlLayer::onCloseBtnClick(Ref* pSender, cocos2d::ui::TouchEventType
 
 void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	if (!m_isCardsStartCollection)
+	if (!m_isCardsStartCollection&&CardManager::getInstance()->getCardsFromEnhancer().size()==2)
 	{
 		Card * cardTemp = nullptr;
 		for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
@@ -325,14 +326,17 @@ bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 	m_beginPos = touch->getLocation();
 	log("x=%f",m_beginPos.x);
 	//通过点击的方式从合成器中吧卡片移回下方容器
-	for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
+	if (m_isCardsStartCollection == false)
 	{
-		if (card->getBoundingBox().containsPoint(m_beginPos))
+		for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
 		{
-			if (CardManager::getInstance()->getCardsFromEnhancer().size() > 0)
-				ClickCardBackToBottom(card);
-			else
-				m_isEnhancerContaninsACard = false;
+			if (card->getBoundingBox().containsPoint(m_beginPos))
+			{
+				if (CardManager::getInstance()->getCardsFromEnhancer().size() > 0)
+					ClickCardBackToBottom(card);
+				else
+					m_isEnhancerContaninsACard = false;
+			}
 		}
 	}
 	//通过点击的方式吧合成的卡片移进下方容器
