@@ -29,7 +29,3 @@ bool Card::init(int info)
 	return true;
 	
 }
-
-void Card::tapped()
-{
-}

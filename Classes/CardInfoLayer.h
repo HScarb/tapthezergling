@@ -23,6 +23,7 @@ private:
 	//пео╒
 	cocos2d::ui::Text * m_cardName;
 	cocos2d::ui::Text * m_cardInfo;
+	cocos2d::ui::Text * m_cardLevel;
 	int m_info;
 	int m_level;
 };
