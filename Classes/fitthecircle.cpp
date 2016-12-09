@@ -23,6 +23,7 @@ int d = 0;
 int a = 0;
 int b = 0;
 int c = 0;
+int a1, a2, a3, a4;
 int ag1, ag2, ag3, ag4; //四个角度值
 
 Scene* fitthecircleScene::createScene(int diff, int loop)
@@ -56,10 +57,8 @@ bool fitthecircleScene::init(int diff, int loop)
 	auto UI = CSLoader::createNode("Tollgates/fitthecircle.csb");
 	addChild(UI);
 
-	a = 0;
-	b = 0;
-	c = 0;
-	d = 0;
+	a = 0;b = 0;c = 0;d = 0;
+	a1 = 0; a2 = 0; a3 = 0; a4 = 0;
 
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
@@ -84,7 +83,7 @@ int fitthecircleGrid::getCircle()
 	{
 		for (int y = 0; y < 6; y++)
 		{
-			if (m_spriteGrid[x][y] != nullptr)
+			if (m_spriteGrid[x][y] != nullptr )
 				count++;
 		}
 	}
@@ -169,15 +168,15 @@ void fitthecircleGrid::generateGrid(const int diff)
 cocos2d::Vec2 fitthecircleGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 {
 	float x, y;
-	x = (pixPos.x - 225) / 120;
-	y = (pixPos.y - 40) / 120;
+	x = (pixPos.x - L_MARGIN) / WIDTH;
+	y = (pixPos.y - B_MARGIN) / WIDTH;
 
 	return Vec2(x, y);
 }
 
 void fitthecircleGrid::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-
+	return;
 }
 
 bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
@@ -189,29 +188,26 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 	int y = (int)pos.y;
 	log("%d", x);
 	log("%d", y);
-	if ((0 <= x && x < 3) && (0 <= y && y < 6) && (m_spriteGrid[x][y]))
+
+	if ((0 <= x && x < 6) && (0 <= y && y < 6) && (m_spriteGrid[x][y]))
 	{
-		/*this->schedule(schedule_selector(cal), 1.0);*/
-		//四个sprite的矩阵位置是[1][1]和[3][1]和[1][3]和[3][3]
-		/*if (!m_isRunning)
+		if (!m_isRunning)
 		{
 			m_isRunning = true;
 			TimeManager::getInstance()->startCountDown();
-		}*/
+		}
 		//这个关系的计算式ag1->i,ag2->o,ag3->p,ag4->q，
-
-		if (a == i){ m_spriteGrid[2][2] = nullptr; }
-		else if ((x == 1 && y == 2) && (m_spriteGrid[2][2]) && (a != i))
+		if (a == i){ m_spriteGrid[2][2] = nullptr; a1 = 1; }
+		else if (((x == 1 && y == 2) || (x ==2 && y ==1 ) || (x==2 && y ==2)) && (m_spriteGrid[2][2]) && (a != i))
 		{
 			auto sp1 = m_spriteGrid[2][2];
 			sp1->runAction(RotateBy::create(0.1, 90));
 			a++;	
 		}
 		
-
-		////////////////////////////
-		if (b == o){ m_spriteGrid[4][2] = nullptr; }
-		else if ((1 == 1 && y == 5) && (m_spriteGrid[4][2]) && (b != o))
+	
+		 if ((b == o)){	m_spriteGrid[4][2] = nullptr; a2 = 1;}
+		 else if (((x == 4 && y == 2) || (x == 4 && y == 1)) && (b != o) && m_spriteGrid[4][2])
 		{
 			auto sp2 = m_spriteGrid[4][2];	
 			sp2->runAction(RotateBy::create(0.1, 90));
@@ -219,29 +215,29 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 		}
 	    
 		
-		if (c == p){ m_spriteGrid[2][0] = nullptr; }
-		else if ((x == 1 && y == 0) && (m_spriteGrid[2][0]) && (c != p))
+		if (c == p){ m_spriteGrid[2][0] = nullptr; a3 = 1; }
+		else if (((x == 1 && y == 0) || (x == 2 && y == 0)) && (m_spriteGrid[2][0]) && (c != p))
 		{
 			auto sp3 = m_spriteGrid[2][0];
 			sp3->runAction(RotateBy::create(0.1, 90));
 			c++;
 		}
 		
-		///////////////////////////
-		if (d == q){ m_spriteGrid[4][0] = nullptr; }
-		else if ((x == 3 && y == 5) && (m_spriteGrid[4][0]) && (d != q))
+		if (d == q){ m_spriteGrid[4][0] = nullptr; a4 = 1;}
+		else if (((x == 4 && y == 0) || (x == 3 && y == 0)) && (d != q) && m_spriteGrid[4][0])
 		{
 			auto sp4 = m_spriteGrid[4][0];
 			sp4->runAction(RotateBy::create(0.1, 90));
 			d++;	
 		}
-		
-		
-	}
-	if (getCircle() == 4)
-	{
-		_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"fitthecircle");
-		CCLOG("fitthecircle clear");
+
+
+		if (a1 == 1 && a3 == 1 && a2 == 1 && a4 == 1)
+		{
+			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"fitthecircle");
+			CCLOG("fitthecircle clear");
+		}
+		return true;
 	}
 	return true;
 }

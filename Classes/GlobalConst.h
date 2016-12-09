@@ -6,9 +6,9 @@
 #include <string>
 
 const float INITIAL_TIME = 5.0f;
-const int TOTAL_TOLLGATE_TYPE = 8;
+const int TOTAL_TOLLGATE_TYPE = 9;
 const int CHEST_TOLLGATE = 5;			// 每几关出现关卡
-const std::string TOLLGATE_NAME[9] = 
+const std::string TOLLGATE_NAME[10] = 
 {
 	"0: None",
 	"1: Double Tap Zergling",
@@ -18,7 +18,8 @@ const std::string TOLLGATE_NAME[9] =
 	"5: Jumping On Pools",
 	"6: Classify Units",
 	"7: Check The Units",
-	"8: Feed Snakes"
+	"8: Feed Snakes",
+	"9: Fitthecircle"
 };
 const std::string BOSS_TOLLGATE_NAME[3] =
 {
