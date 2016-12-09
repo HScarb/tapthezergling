@@ -198,7 +198,7 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 		}
 		//这个关系的计算式ag1->i,ag2->o,ag3->p,ag4->q，
 		if (a == i){ m_spriteGrid[2][2] = nullptr; a1 = 1; }
-		else if (((x == 1 && y == 2) || (x ==2 && y ==1 ) || (x==2 && y ==2)) && (m_spriteGrid[2][2]) && (a != i))
+		if (((x == 1 && y == 2) || (x ==2 && y ==1 ) || (x==2 && y ==2)) && (m_spriteGrid[2][2]) && (a != i))
 		{
 			auto sp1 = m_spriteGrid[2][2];
 			sp1->runAction(RotateBy::create(0.1, 90));
@@ -207,7 +207,7 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 		
 	
 		 if ((b == o)){	m_spriteGrid[4][2] = nullptr; a2 = 1;}
-		 else if (((x == 4 && y == 2) || (x == 4 && y == 1)) && (b != o) && m_spriteGrid[4][2])
+		 if (((x == 4 && y == 2) || (x == 4 && y == 1)) && (b != o) && m_spriteGrid[4][2])
 		{
 			auto sp2 = m_spriteGrid[4][2];	
 			sp2->runAction(RotateBy::create(0.1, 90));
@@ -216,7 +216,7 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 	    
 		
 		if (c == p){ m_spriteGrid[2][0] = nullptr; a3 = 1; }
-		else if (((x == 1 && y == 0) || (x == 2 && y == 0)) && (m_spriteGrid[2][0]) && (c != p))
+		if (((x == 1 && y == 0) || (x == 2 && y == 0)) && (m_spriteGrid[2][0]) && (c != p))
 		{
 			auto sp3 = m_spriteGrid[2][0];
 			sp3->runAction(RotateBy::create(0.1, 90));
@@ -224,7 +224,7 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 		}
 		
 		if (d == q){ m_spriteGrid[4][0] = nullptr; a4 = 1;}
-		else if (((x == 4 && y == 0) || (x == 3 && y == 0)) && (d != q) && m_spriteGrid[4][0])
+		if (((x == 4 && y == 0) || (x == 3 && y == 0)) && (d != q) && m_spriteGrid[4][0])
 		{
 			auto sp4 = m_spriteGrid[4][0];
 			sp4->runAction(RotateBy::create(0.1, 90));
