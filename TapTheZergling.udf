@@ -3,7 +3,7 @@
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="Resource" />
-        <IsLastPublish Value="True" />
+        <IsLastPublish Value="False" />
         <LastRunType Value="Windows" />
       </Value>
     </Item>
@@ -14,7 +14,7 @@
         <LuaEncryptSign Value="" />
         <Android_PackageName Value="org.cocos.tapthezergling" />
         <AndroidkeyStore Value="" />
-        <AndroidVersion Value="android-16" />
+        <AndroidVersion Value="android-20" />
         <iOS_Target Value="tapthezergling-mobile" />
         <iOS_BundleID Value="" />
         <Platform Value="Android" />

@@ -190,7 +190,7 @@ bool TollgateScene::init()
 	m_t11 = (Text*)(m_scrollView->getChildByName("Text_11"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-	m_scrollView->setVisible(false);
+	//m_scrollView->setVisible(false);
 
 	//关键地方
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));

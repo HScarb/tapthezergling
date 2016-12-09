@@ -203,8 +203,10 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 			auto sp1 = m_spriteGrid[2][2];
 			sp1->runAction(RotateBy::create(0.1, 90));
 			a++;	
+			if (a == i){
+				m_spriteGrid[2][2] = nullptr; a1 = 1;
+			}
 		}
-		
 	
 		 if ((b == o)){	m_spriteGrid[4][2] = nullptr; a2 = 1;}
 		 if (((x == 4 && y == 2) || (x == 4 && y == 1)) && (b != o) && m_spriteGrid[4][2])
@@ -212,8 +214,10 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 			auto sp2 = m_spriteGrid[4][2];	
 			sp2->runAction(RotateBy::create(0.1, 90));
 			b++;
+			if ((b == o)){
+				m_spriteGrid[4][2] = nullptr; a2 = 1;
+			}
 		}
-	    
 		
 		if (c == p){ m_spriteGrid[2][0] = nullptr; a3 = 1; }
 		if (((x == 1 && y == 0) || (x == 2 && y == 0)) && (m_spriteGrid[2][0]) && (c != p))
@@ -221,6 +225,9 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 			auto sp3 = m_spriteGrid[2][0];
 			sp3->runAction(RotateBy::create(0.1, 90));
 			c++;
+			if (c == p){
+				m_spriteGrid[2][0] = nullptr; a3 = 1;
+			}
 		}
 		
 		if (d == q){ m_spriteGrid[4][0] = nullptr; a4 = 1;}
@@ -229,8 +236,10 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 			auto sp4 = m_spriteGrid[4][0];
 			sp4->runAction(RotateBy::create(0.1, 90));
 			d++;	
+			if (d == q){
+				m_spriteGrid[4][0] = nullptr; a4 = 1;
+			}
 		}
-
 
 		if (a1 == 1 && a3 == 1 && a2 == 1 && a4 == 1)
 		{
