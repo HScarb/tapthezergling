@@ -29,7 +29,7 @@ const std::string BOSS_TOLLGATE_NAME[3] =
 
 const int ZORDER_TOLLGATECONTROLLAYER = 100;
 
-const std::string CARD_NAME[] =
+const std::string TOLL_NAME[] =
 {
 	"None",
 	"DoubleTap",
@@ -42,4 +42,18 @@ const std::string CARD_NAME[] =
 	"ZerglingNinja",
 	"CheckTheUnits",
 	"FeedSnakes"
+};
+const std::string CARD_NAME[] =
+{
+	"None",
+	"ZerglingCouple",
+	"Zealot Cutter",
+	"Reaver",
+	"Infestor",
+	"PiKaLing",
+	"Queen",
+	"Ultralisk",
+	"Thor",
+	"Overseer",
+	"ZerglingBrothers"
 };

@@ -58,6 +58,7 @@ bool CardInfoLayer::init(int info, int level)
 	//显示卡片名称、等级、作用
 	m_cardName->setText(CARD_NAME[m_info]);
 	m_cardLevel->setText(StringUtils::format("%d", m_level));
+	m_cardInfo->setText(TOLL_NAME[m_info] + "\n" + "Time" + "+" + StringUtils::format("%d", m_level * 200) + "ms");
 	return true;
 }
 

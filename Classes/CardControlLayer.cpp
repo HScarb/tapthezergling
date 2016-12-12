@@ -39,16 +39,16 @@ bool CardControlLayer::init()
 	m_closeBtn = (Button *)ui->getChildByName("Button_x");
 	m_collectBtn = (Button *)ui->getChildByName("Button_collect");
 	m_cardCollectionTime = (Text*)ui->getChildByName("time_Collection");
-	m_sprite = (ImageView*)ui->getChildByName("imageCollection");
+	//m_sprite = (ImageView*)ui->getChildByName("imageCollection");
 	if (CardManager::getInstance()->getCardAfterCollection().size() > 0)
 	{
 		m_isCollectionContainsCard = true;
-		m_sprite->setVisible(true);
+		//m_sprite->setVisible(true);
 	}	
 	else
 	{
 		m_isCollectionContainsCard = false;
-		m_sprite->setVisible(false);
+		//m_sprite->setVisible(false);
 	}
 	if (CardManager::getInstance()->getCardsFromEnhancer().size() > 0)
 		m_isEnhancerContaninsACard = true;
@@ -95,7 +95,7 @@ bool CardControlLayer::init()
 	//获取屏幕分辨率
 	auto glView = Director::getInstance()->getOpenGLView();
 	m_frameSize = glView->getFrameSize();
-	log("size=%f", m_frameSize.width);
+	//log("size=%f", m_frameSize.width);
 
 	//触控监听
 	auto listener = EventListenerTouchOneByOne::create();
@@ -213,7 +213,7 @@ void CardControlLayer::ClickCardBackToBottom(Card* card)
 	else//把中间位置合成后的卡片移进容器
 	{
 		CardManager::getInstance()->DeleteCardByObjectAfterCollection(card);
-		m_sprite->setVisible(false);
+		//m_sprite->setVisible(false);
 	}
 	if (CardManager::getInstance()->getCardAfterCollection().size() == 0)
 		m_isCollectionContainsCard = false;
@@ -275,7 +275,7 @@ void CardControlLayer::CardCollectionSucceed()
 	{
 		DeleteAcardFromEnhancer(card);
 	}
-	m_sprite->setVisible(true);
+	//m_sprite->setVisible(true);
 	DataManager::getInstance()->setEndingTimeStamp(0);
 	DataManager::getInstance()->setStartTimeStamp(0);
 	DataManager::getInstance()->setStartDate(nullptr);
@@ -375,11 +375,11 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 	if ((!m_isCollectionContainsCard) && (!m_isCardsStartCollection))//在卡片没有卡片在已经合成并且还在合成后预览位置时
 	{
 		//当前触点位置和点击初始位置的y轴距离绝对值大于40并且卡片合成器中卡片张数少于2，同时当前没有正在移动的卡片
-		if (abs(m_movedPos.y - m_beginPos.y) >= 40 && CardManager::getInstance()->getCardsFromEnhancer().size() < 2 && m_operatingCard == nullptr)
+		if (abs(m_movedPos.y - m_beginPos.y) >= 30 && CardManager::getInstance()->getCardsFromEnhancer().size() < 2 && m_operatingCard == nullptr)
 		{
 			for (auto card : CardManager::getInstance()->getAllCards())
 			{
-				if (card->getBoundingBox().containsPoint(m_beginPos))
+				if (/*card->getBoundingBox().containsPoint(m_beginPos)*/card->getBoundingBox().containsPoint(m_movedPos))
 				{
 					m_operatingCard = card;
 					m_operatingCard->setPosition(m_movedPos.x - 40, m_movedPos.y - 40);

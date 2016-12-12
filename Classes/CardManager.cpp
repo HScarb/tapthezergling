@@ -56,7 +56,7 @@ Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, int
 	card->setCardLevel(level);//设置等级
 	if (posX != 450)
 	{
-		card->setPosition(posX * 85, 0);//设定新增卡片的坐标
+		card->setPosition(posX * 80, 0);//设定新增卡片的坐标
 		InsertACard(card);
 	}
 	else
@@ -99,7 +99,7 @@ void CardManager::SortCardMsg()
 	int i = 0;
 	for (auto card : m_cardVector)
 	{
-		card->setPosition(i * 85, 0);
+		card->setPosition(i * 80, 0);
 		i++;
 	}
 }
@@ -126,7 +126,7 @@ bool SortCardsOpreator(const Card* card1, const Card* card2)
 {
 	if (card1->getCardinfo() == card2->getCardinfo())
 	{
-		return (card1->getCardLevel()) < (card2->getCardLevel());
+		return (card2->getCardLevel()) < (card1->getCardLevel());
 	}
 	else
 	{
