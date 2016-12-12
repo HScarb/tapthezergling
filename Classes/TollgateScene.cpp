@@ -65,6 +65,8 @@ void TollgateScene::runEnergy()
 		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
 		m_anotherChestText->setVisible(true);
 		act = false;
+		auto child = getChildByTag(2);                         //隐藏GERAT，GREAT的Tag是2
+		child->removeFromParent();
 	}),
 		nullptr
 		);
@@ -100,6 +102,8 @@ void TollgateScene::runDiamond()
 		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
 		m_anotherChestText->setVisible(true);
 		act = false;
+		auto child = getChildByTag(2);                         //隐藏GERAT，GREAT的Tag是2
+		child->removeFromParent();
 	}),
 		nullptr
 		);
@@ -183,9 +187,10 @@ bool TollgateScene::init()
 	m_t8 = (Text*)(m_scrollView->getChildByName("Text_8"));
 	m_t9 = (Text*)(m_scrollView->getChildByName("Text_9"));
 	m_t10 = (Text*)(m_scrollView->getChildByName("Text_10"));
+	m_t11 = (Text*)(m_scrollView->getChildByName("Text_11"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-	m_scrollView->setVisible(false);
+	//m_scrollView->setVisible(false);
 
 	//关键地方
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
@@ -247,6 +252,7 @@ bool TollgateScene::init()
 	m_t8->addTouchEventListener(this, toucheventselector(TollgateScene::onItem8Clicked));
 	m_t9->addTouchEventListener(this, toucheventselector(TollgateScene::onItem9Clicked));
 	m_t10->addTouchEventListener(this, toucheventselector(TollgateScene::onItem10Clicked));
+	m_t11->addTouchEventListener(this, toucheventselector(TollgateScene::onItem11Clicked));
 	m_cardBtn->addTouchEventListener(this, toucheventselector(TollgateScene::onCardBtnClicked));
 
 //	SimpleAudioEngine::getInstance()->playBackgroundMusic("Sounds/MainMenu.mp3", true);
@@ -553,7 +559,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 				{
 					Label *m_label = Label::create("  GREATE!  ", "fonts/AveriaSansLibre-Bold.ttf", 40);
 					m_label->setPosition(visibleSize.width / 2, (visibleSize.height / 2) + 135);
-					this->addChild(m_label, 1, 5);
+					this->addChild(m_label, 1, 2);
 				}
 
 				if (act != true)
@@ -629,5 +635,14 @@ void TollgateScene::onItem10Clicked(Ref* pSender, cocos2d::ui::TouchEventType ty
 	{
 		log("tollgate 10");
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::FeedSnacks, 0, 2);
+	}
+}
+
+void TollgateScene::onItem11Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
+{
+	if (type == TOUCH_EVENT_ENDED)
+	{
+		log("tollgate 11");
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::fitthecircle, 0, 2);
 	}
 }

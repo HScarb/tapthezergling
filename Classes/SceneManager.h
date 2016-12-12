@@ -28,7 +28,8 @@ public:
 		JumpingOnPoolScene,
 		ClassifyUnits,
 		CheckThethingScene,
-		FeedSnacks
+		FeedSnacks,
+		fitthecircle
 	}TollgateSceneType;
 	static SceneManager * getInstance();
 	virtual bool init();

@@ -64,6 +64,9 @@
     <Filter Include="Classes\Scenes\Tollgates\FeedSnacks">
       <UniqueIdentifier>{5bf8579b-ad60-4afb-8faf-eaf5f7536339}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\Shotttt">
+      <UniqueIdentifier>{f4abef43-b3f9-4d45-8d30-b14d9a0099ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -197,6 +200,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\CardInfoLayer.cpp">
       <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\fitthecircle.cpp">
+      <Filter>Classes\Scenes\Tollgates\Shotttt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CardInfoLayer.h">
       <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\fitthecircle.h">
+      <Filter>Classes\Scenes\Tollgates\Shotttt</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
