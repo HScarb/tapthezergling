@@ -64,7 +64,7 @@
     <Filter Include="Classes\Scenes\Tollgates\FeedSnacks">
       <UniqueIdentifier>{5bf8579b-ad60-4afb-8faf-eaf5f7536339}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Scenes\Tollgates\Shotttt">
+    <Filter Include="Classes\Scenes\Tollgates\Fitthecircle">
       <UniqueIdentifier>{f4abef43-b3f9-4d45-8d30-b14d9a0099ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -202,7 +202,10 @@
       <Filter>Classes\Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\fitthecircle.cpp">
-      <Filter>Classes\Scenes\Tollgates\Shotttt</Filter>
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Circle.cpp">
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -351,7 +354,10 @@
       <Filter>Classes\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\fitthecircle.h">
-      <Filter>Classes\Scenes\Tollgates\Shotttt</Filter>
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Circle.h">
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

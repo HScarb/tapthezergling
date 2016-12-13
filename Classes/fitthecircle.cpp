@@ -8,6 +8,7 @@
 #include "GlobalConst.h"
 #include "FilterSprite.h"
 #include "TollgateControlLayer.h"
+#include "Circle.h"
 
 USING_NS_CC;
 using namespace std;
@@ -182,78 +183,73 @@ void fitthecircleGrid::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unuse
 bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
 	auto pos = touch->getLocation();
-	pos = convertToGridPos(pos);
-
-	int x = (int)pos.x;
-	int y = (int)pos.y;
-	log("%d", x);
-	log("%d", y);
-
-	if ((0 <= x && x < 6) && (0 <= y && y < 6) && (m_spriteGrid[x][y]))
+	for (int x = 0; x < m_col; x++)
+	for (int y = 0; y < m_row; y++)
 	{
-		if (!m_isRunning)
+		//判断是否初始化就已对准
+		if (a == i){ m_spriteGrid[2][2] == nullptr; a1 = 1; }
+		if (b == o){ m_spriteGrid[4][2] == nullptr; a2 = 1; }
+		if (c == p){ m_spriteGrid[2][0] == nullptr; a3 = 1; }
+		if (d == q){ m_spriteGrid[4][0] == nullptr; a4 = 1; }
+		if (m_spriteGrid[x][y] != nullptr && m_spriteGrid[x][y]->getBoundingBox().containsPoint(pos)) //你点击的图标不是nullptr，而且图标被点击了
 		{
-			m_isRunning = true;
-			TimeManager::getInstance()->startCountDown();
-		}
-		//这个关系的计算式ag1->i,ag2->o,ag3->p,ag4->q，
-		if (a == i){ m_spriteGrid[2][2] = nullptr; a1 = 1; }
-		if (((x == 1 && y == 2) || (x ==2 && y ==1 ) || (x==2 && y ==2)) && (m_spriteGrid[2][2]) && (a != i))
-		{
-			auto sp1 = m_spriteGrid[2][2];
-			sp1->runAction(RotateBy::create(0.1, 90));
-			a++;	
-			if (a == i){
-				m_spriteGrid[2][2] = nullptr; a1 = 1;
+			int type = m_spriteGrid[x][y]->getColorType();    //获取得到的图标类型，一共有8种类型。5，6，7，8是旋转的图标
+			if (type == 5)
+			{
+				if (a == i){ m_spriteGrid[x][y] = nullptr; a1 = 1; }
+				if (a != i)
+				{
+					m_spriteGrid[x][y]->runAction(RotateBy::create(0.1, 90));
+					a++;
+					if (a == i){
+						m_spriteGrid[x][y] = nullptr; a1 = 1;
+					}
+				}
+			}
+			if (type == 6)
+			{
+				if (b == o){ m_spriteGrid[x][y] = nullptr; a2 = 1; }
+				if (b != o)
+				{
+					m_spriteGrid[x][y]->runAction(RotateBy::create(0.1, 90));
+					b++;
+					if (b == o){
+						m_spriteGrid[x][y] = nullptr; a2 = 1;
+					}
+				}
+			}
+			if (type == 7)
+			{
+				if (c == p){ m_spriteGrid[x][y] = nullptr; a3 = 1; }
+				if (c != p)
+				{
+					m_spriteGrid[x][y]->runAction(RotateBy::create(0.1, 90));
+					c++;
+					if (c == p){
+						m_spriteGrid[x][y] = nullptr; a3 = 1;
+					}
+				}
+			}
+			if (type == 8)
+			{
+				if (d == q){ m_spriteGrid[x][y] = nullptr; a4 = 1; }
+				if (d != q)
+				{
+					m_spriteGrid[x][y]->runAction(RotateBy::create(0.1, 90));
+					d++;
+					if (d == q){
+						m_spriteGrid[x][y] = nullptr; a4 = 1;
+					}
+				}
+			}
+			if (a1 == 1 && a3 == 1 && a2 == 1 && a4 == 1)
+			{
+				_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"fitthecircle");
+				CCLOG("fitthecircle clear");
 			}
 		}
-	
-		 if ((b == o)){	m_spriteGrid[4][2] = nullptr; a2 = 1;}
-		 if (((x == 4 && y == 2) || (x == 4 && y == 1)) && (b != o) && m_spriteGrid[4][2])
-		{
-			auto sp2 = m_spriteGrid[4][2];	
-			sp2->runAction(RotateBy::create(0.1, 90));
-			b++;
-			if ((b == o)){
-				m_spriteGrid[4][2] = nullptr; a2 = 1;
-			}
-		}
-		
-		if (c == p){ m_spriteGrid[2][0] = nullptr; a3 = 1; }
-		if (((x == 1 && y == 0) || (x == 2 && y == 0)) && (m_spriteGrid[2][0]) && (c != p))
-		{
-			auto sp3 = m_spriteGrid[2][0];
-			sp3->runAction(RotateBy::create(0.1, 90));
-			c++;
-			if (c == p){
-				m_spriteGrid[2][0] = nullptr; a3 = 1;
-			}
-		}
-		
-		if (d == q){ m_spriteGrid[4][0] = nullptr; a4 = 1;}
-		if (((x == 4 && y == 0) || (x == 3 && y == 0)) && (d != q) && m_spriteGrid[4][0])
-		{
-			auto sp4 = m_spriteGrid[4][0];
-			sp4->runAction(RotateBy::create(0.1, 90));
-			d++;	
-			if (d == q){
-				m_spriteGrid[4][0] = nullptr; a4 = 1;
-			}
-		}
-
-		if (a1 == 1 && a3 == 1 && a2 == 1 && a4 == 1)
-		{
-			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"fitthecircle");
-			CCLOG("fitthecircle clear");
-		}
-		return true;
 	}
 	return true;
-}
-
-void Circle::tapped()
-{
-	this->removeFromParent();
 }
 
 bool Circle::init(int color)
@@ -278,7 +274,7 @@ bool Circle::init(int color)
 		this->initWithFile(StringUtils::format("Res/flower/flower_4.%d.png", q));
 		break;
 	case 5:
-		this->initWithFile(StringUtils::format("Res/flower/flower_5.0.png"));
+		this->initWithFile(StringUtils::format("Res/flower/flower_9.0.png"));
 		this->runAction(ScaleTo::create(0, 1.5));
 		break;
 	case 6:
@@ -295,23 +291,6 @@ bool Circle::init(int color)
 		break;
 	default: break;
 	}
-	//this->setAnchorPoint(Vec2(0, 0));
 
 	return true;
-}
-
-Circle* Circle::createByColor(CircleType color)
-{
-	auto circle = new Circle();
-
-	if (circle && circle->init(color))
-	{
-		circle->autorelease();
-		return circle;
-	}
-	else
-	{
-		CC_SAFE_DELETE(circle);
-		return nullptr;
-	}
 }
