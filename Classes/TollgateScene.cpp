@@ -12,6 +12,8 @@
 #include "MainScene.h"
 #include "CardControlLayer.h"
 #include "DataManager.h"
+#include "CardManager.h"
+#include "Card.h";
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -159,7 +161,6 @@ bool TollgateScene::init()
 	m_tollgateNumLabel = Label::createWithTTF(StringUtils::format("%d", GameManager::getInstance()->getTollgateNum()), "fonts/AveriaSansLibre-Bold.ttf", 50);
 	m_tollgateNumLabel->setPosition(486, 70);
 	this->addChild(m_tollgateNumLabel);
-
 	// 载入其他
 	m_energyText = (Text*)(rootNode->getChildByName("Text_energy"));
 	m_jewelText = (Text*)(rootNode->getChildByName("Text_jewel"));
@@ -190,7 +191,7 @@ bool TollgateScene::init()
 	m_t11 = (Text*)(m_scrollView->getChildByName("Text_11"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-	//m_scrollView->setVisible(false);
+	m_scrollView->setVisible(false);
 
 	//关键地方
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
@@ -205,7 +206,7 @@ bool TollgateScene::init()
 		TimeManager::getInstance()->setTime(INITIAL_TIME);
 		GameManager::getInstance()->setIsGameOn(true);			// set game is on
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
-
+		//addSecondsByCard(GameManager::getInstance()->getTollgateNum());
 		setNextTollgate();		// 随机下一关
 	}
 	else
@@ -340,12 +341,14 @@ void TollgateScene::setNextTollgate()
 	}
 	CCLOG("Current Tollgate Num %d", GameManager::getInstance()->getTollgateNum());
 	showNextTollgate();
+	
 }
 
 void TollgateScene::showNextTollgate()
 {
 	int r = GameManager::getInstance()->getNextTollgate();
 	int num = GameManager::getInstance()->getTollgateNum();
+	addSecondsByCard(GameManager::getInstance()->getNextTollgate());
 	Label * label = nullptr;
 	// 显示关卡简介
 	if (num % 10 == 0)
@@ -370,6 +373,16 @@ void TollgateScene::showNextTollgate()
 	});
 	auto scale2 = ScaleTo::create(0.2, 1.0);
 	m_tollgateNumLabel->runAction(Sequence::create(scale1, changeText, scale2, nullptr));
+}
+
+void TollgateScene::addSecondsByCard(int info)
+{
+	for (auto card:CardManager::getInstance()->getAllCards())
+	if (info == card->getCardinfo())
+	{
+		TimeManager::getInstance()->addTime(card->getCardLevel()*0.02f);
+		break;
+	}
 }
 
 //创建开箱子的动画

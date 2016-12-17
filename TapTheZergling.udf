@@ -3,7 +3,7 @@
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="Resource" />
-        <IsLastPublish Value="False" />
+        <IsLastPublish Value="True" />
         <LastRunType Value="Windows" />
       </Value>
     </Item>
@@ -14,7 +14,7 @@
         <LuaEncryptSign Value="" />
         <Android_PackageName Value="org.cocos.tapthezergling" />
         <AndroidkeyStore Value="" />
-        <AndroidVersion Value="android-20" />
+        <AndroidVersion Value="android-16" />
         <iOS_Target Value="tapthezergling-mobile" />
         <iOS_BundleID Value="" />
         <Platform Value="Android" />
@@ -32,19 +32,13 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="TollgateScene.csd" />
-          <FilePathData Path="Tollgates/fitthecircle.csd" />
-          <FilePathData Path="Tollgates/EatCandiesScene.csd" />
-          <FilePathData Path="Tollgates/DoubleTapScene.csd" />
-          <FilePathData Path="Tollgates/CheckTheThing.csd" />
-          <FilePathData Path="Tollgates/BurrowAndAttack.csd" />
-          <FilePathData Path="Tollgates/BOSS2ZerglingNinja.csd" />
-          <FilePathData Path="Tollgates/BOSS1ZerglingKing.csd" />
-          <FilePathData Path="Tollgates/JumpingOnPoolScene.csd" />
-          <FilePathData Path="Tollgates/SlideCutScene.csd" />
-          <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
           <FilePathData Path="CardInfoLayer.csd" />
+          <FilePathData Path="CardEnhancer.csd" />
+          <FilePathData Path="MainScene.csd" />
+          <FilePathData Path="TestScene.csd" />
+          <FilePathData Path="SettingsScene.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="CardInfoLayer.csd" />
+        <ActiveDocument Path="TollgateScene.csd" />
       </Value>
     </Item>
   </Properties>
