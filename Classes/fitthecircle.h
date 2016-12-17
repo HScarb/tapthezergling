@@ -2,7 +2,7 @@
 #pragma once
 #include "cocos2d.h"
 #include "TollgateControlLayer.h"
-#include "FilterSprite.h"
+#include "Circle.h"
 const int ROW = 3;
 const int COL = 6;
 const int WIDTH = 120;
@@ -18,29 +18,6 @@ static const int j_g[1][3][6] =
 		{ 0, 0, 0, 0, 0, 0},
 		{ 0, 1, 5, 0, 6, 2}
 	},
-};
-
-class Circle : public FilterSprite
-{
-public:
-	enum CircleType
-	{
-		NONE = 0,
-		RED = 1,
-		ORANGE,
-		YELLOW,
-		GREEN,
-		g1,
-		g2,
-		g3,
-		g4
-	};
-
-	static Circle * createByColor(CircleType color = NONE);
-	bool init(int color);
-	void tapped();
-
-	CC_SYNTHESIZE(int, m_colorType, ColorType);
 };
 
 class fitthecircleScene : public cocos2d::Layer

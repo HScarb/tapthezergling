@@ -156,6 +156,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\CardManager.cpp" />
     <ClCompile Include="..\Classes\CheckThethingScene.cpp" />
     <ClCompile Include="..\Classes\Chest.cpp" />
+    <ClCompile Include="..\Classes\Circle.cpp" />
     <ClCompile Include="..\Classes\ClassifyUnits.cpp" />
     <ClCompile Include="..\Classes\DataManager.cpp" />
     <ClCompile Include="..\Classes\DoubleTapScene.cpp" />
@@ -202,6 +203,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\CheckThethingScene.h" />
     <ClInclude Include="..\Classes\Chest.h" />
     <ClInclude Include="..\Classes\ChineseDisplay.h" />
+    <ClInclude Include="..\Classes\Circle.h" />
     <ClInclude Include="..\Classes\ClassifyUnits.h" />
     <ClInclude Include="..\Classes\DataManager.h" />
     <ClInclude Include="..\Classes\DoubleTapScene.h" />
