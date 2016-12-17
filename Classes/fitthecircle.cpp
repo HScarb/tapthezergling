@@ -193,6 +193,13 @@ bool fitthecircleGrid::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 		if (d == q){ m_spriteGrid[4][0] == nullptr; a4 = 1; }
 		if (m_spriteGrid[x][y] != nullptr && m_spriteGrid[x][y]->getBoundingBox().containsPoint(pos)) //你点击的图标不是nullptr，而且图标被点击了
 		{
+
+			if (!m_isRunning)
+			{
+				m_isRunning = true;
+				TimeManager::getInstance()->startCountDown();
+			}
+
 			int type = m_spriteGrid[x][y]->getColorType();    //获取得到的图标类型，一共有8种类型。5，6，7，8是旋转的图标
 			if (type == 5)
 			{
