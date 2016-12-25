@@ -125,7 +125,7 @@ bool TollgateScene::init()
 	m_energyBar = nullptr;
 	m_timeText = nullptr;
 	m_timeBar = nullptr;
-//	m_chest_sprite = nullptr;
+	m_chest_sprite = nullptr;
 	m_energy_sprite = nullptr;
 	m_diamond_sprite = nullptr;
 	m_flash = nullptr;
@@ -317,7 +317,7 @@ void TollgateScene::addSeconds()
 	
 	this->addChild(swooth);
 	swooth->runAction(Sequence::create(delay0, big1, delay1, small1, callFunc1, big2, delay2, Spawn::createWithTwoActions(small2, moveBy), callFunc2, nullptr));
-	
+	addSecondsByCard(GameManager::getInstance()->getNextTollgate());
 }
 
 void TollgateScene::setNextTollgate()
@@ -348,7 +348,7 @@ void TollgateScene::showNextTollgate()
 {
 	int r = GameManager::getInstance()->getNextTollgate();
 	int num = GameManager::getInstance()->getTollgateNum();
-	addSecondsByCard(GameManager::getInstance()->getNextTollgate());
+	
 	Label * label = nullptr;
 	// 显示关卡简介
 	if (num % 10 == 0)
@@ -378,11 +378,12 @@ void TollgateScene::showNextTollgate()
 void TollgateScene::addSecondsByCard(int info)
 {
 	for (auto card:CardManager::getInstance()->getAllCards())
-	if (info == card->getCardinfo())
-	{
-		TimeManager::getInstance()->addTime(card->getCardLevel()*0.02f);
-		break;
-	}
+		if (info == card->getCardinfo())
+		{
+			TimeManager::getInstance()->addTime(card->getCardLevel()*0.02f);
+			m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
+			break;
+		}
 }
 
 //创建开箱子的动画

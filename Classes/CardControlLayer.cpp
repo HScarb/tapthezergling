@@ -372,47 +372,57 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 		}
 	}
 	// 把卡片移动到卡片管理器
-	if ((!m_isCollectionContainsCard) && (!m_isCardsStartCollection))//在卡片没有卡片在已经合成并且还在合成后预览位置时
+	else if ((m_isCollectionContainsCard == false) && (m_isCardsStartCollection == false))//在卡片没有卡片在已经合成并且还在合成后预览位置时
 	{
 		//当前触点位置和点击初始位置的y轴距离绝对值大于40并且卡片合成器中卡片张数少于2，同时当前没有正在移动的卡片
-		if (abs(m_movedPos.y - m_beginPos.y) >= 30 && CardManager::getInstance()->getCardsFromEnhancer().size() < 2 && m_operatingCard == nullptr)
+		if (abs(m_movedPos.y - m_beginPos.y) >= 30 )
 		{
-			for (auto card : CardManager::getInstance()->getAllCards())
+			Vec2 cardPos;
+			cardPos.x = m_movedPos.x;
+			cardPos.y = m_beginPos.y;
+			if (CardManager::getInstance()->getCardsFromEnhancer().size() < 2)
 			{
-				if (/*card->getBoundingBox().containsPoint(m_beginPos)*/card->getBoundingBox().containsPoint(m_movedPos))
+				if (m_operatingCard == nullptr)
 				{
-					m_operatingCard = card;
-					m_operatingCard->setPosition(m_movedPos.x - 40, m_movedPos.y - 40);
-					break;
-				}
-			}
-			if (m_operatingCard != nullptr)
-			{
-				for (auto card : CardManager::getInstance()->getAllCards())
-				{
-					if (CardManager::getInstance()->getCardsFromEnhancer().size() == 0)
+					for (auto card : CardManager::getInstance()->getAllCards())
 					{
-						m_isSingleCard = IsSingleInVector(m_operatingCard);
-					}
-					else if (CardManager::getInstance()->getCardsFromEnhancer().size() == 1)
-					{
-						if (IsTheSameCardInEnhancer(m_operatingCard))
-							m_isSingleCard = false;
-						else
+						if (/*card->getBoundingBox().containsPoint(m_beginPos)*/card->getBoundingBox().containsPoint(cardPos))
 						{
-							m_operatingCard = nullptr;
+							m_operatingCard = card;
+							m_operatingCard->setPosition(m_movedPos.x - 40, m_movedPos.y - 40);
 							break;
 						}
 					}
-					else
-						continue;
+					if (m_operatingCard != nullptr)
+					{
+						for (auto card : CardManager::getInstance()->getAllCards())
+						{
+							if (CardManager::getInstance()->getCardsFromEnhancer().size() == 0)
+							{
+								m_isSingleCard = IsSingleInVector(m_operatingCard);
+							}
+							else if (CardManager::getInstance()->getCardsFromEnhancer().size() == 1)
+							{
+								if (IsTheSameCardInEnhancer(m_operatingCard))
+									m_isSingleCard = false;
+								else
+								{
+									m_operatingCard = nullptr;
+									break;
+								}
+							}
+							else
+								continue;
+						}
+					}
+					if (m_isSingleCard)
+					{
+						m_operatingCard = nullptr;
+						CardManager::getInstance()->SortCardMsg();
+					}
 				}
 			}
-			if (m_isSingleCard)
-			{
-				m_operatingCard = nullptr;
-				CardManager::getInstance()->SortCardMsg();
-			}
+			
 		}
 		if (m_operatingCard != nullptr && m_isSingleCard == false)
 		{

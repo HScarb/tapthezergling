@@ -52,7 +52,7 @@ Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, int
 	Card * card = nullptr;
 	if (info == 0)
 		return nullptr;
-	card = Card::createByInfo(info);
+	card = Card::createByLevelAndInfo(level,info);
 	card->setCardLevel(level);//设置等级
 	if (posX != 450)
 	{
@@ -67,16 +67,16 @@ Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, int
 	return card;
 }
 
-Card* CardManager::CreateACardByTypeAndLevel(Card* card)
+/*Card* CardManager::CreateACardByTypeAndLevel(Card* card)
 {
 	Card * tempCard = nullptr;
 	if (card == nullptr)
 		return nullptr;
-	tempCard = Card::createByInfo((Card::CardInfo)card->getCardinfo());
+	tempCard = Card::createByLevelAndInfo((Card::CardInfo)card->getCardinfo());
 	tempCard->setCardLevel(card->getCardLevel());//设置等级
 	tempCard->setPosition(card->getPosition());
 	return tempCard;
-}
+}*/
 
 void CardManager::InsertACard(Card * card)
 {

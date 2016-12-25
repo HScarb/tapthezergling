@@ -19,8 +19,8 @@ public:
 		Zergling_King_Card,
 		Zergling_Ninja_Card
 	};//¿¨Æ¬Ãû³Æ
-	static Card * createByInfo(CardInfo info = NONE);
-	bool init(int info);
+	static Card * createByLevelAndInfo(int level,CardInfo info = NONE);
+	bool init(int info,int level);
 
 	void tapped();//¿¨Æ¬µã»÷²Ù×÷
 	CC_SYNTHESIZE(int, m_cardInfo, Cardinfo);
