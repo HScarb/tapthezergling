@@ -20,7 +20,6 @@ using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 using namespace CocosDenshion;
 
-int m = 0;  //记录宝箱的开箱次数
 bool act = false;    //初始化宝箱调试
 bool but = false;	//按钮问题
 bool res = false;   //按钮的上升问题
@@ -423,8 +422,17 @@ void TollgateScene::onGoOnBtnClicked(Ref* pSender, cocos2d::ui::TouchEventType t
 			m_cardBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
 		}
 		res = false;
-		setNextTollgate();
 		GameManager::getInstance()->setIsWaitToAddChest(false);
+
+		// 防止每次进入TollgateScene都加2秒时间
+		if (GameManager::getInstance()->getIsWaitToAddTime())
+		{
+			addSeconds();
+			CCLOG("added 2 seconds.");
+			GameManager::getInstance()->setIsWaitToAddTime(false);
+		}
+		else
+			showNextTollgate();
 	}
 }
 
@@ -566,6 +574,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 
 		if (m_chest_sprite)  
 		{
+			// 如果宝箱被点击
 			if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (act != true)) 
 			{
 				//打开宝箱时触发鼓励文字

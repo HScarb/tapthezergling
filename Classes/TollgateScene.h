@@ -33,7 +33,7 @@ private:
 	void showNextTollgate();		// 将已经生成的下一关显示出来
 	void addSecondsByCard(int info);		//如果卡片容器中有卡片与关卡相对应，就增加关卡时间
 
-	//宝箱和附属精灵及其动画
+	// 宝箱和附属精灵及其动画
 	cocos2d::Sprite * m_chest_sprite;
 	cocos2d::Sprite * m_card_sprite;
 	cocos2d::Sprite * m_energy_sprite;
@@ -96,4 +96,5 @@ private:
 	cocos2d::ui::Text * m_t11;
 private:
 	CardControlLayer * m_cardControlLayer;
+	int m;			// 宝箱的开箱次数
 };
