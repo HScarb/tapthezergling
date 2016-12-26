@@ -16,7 +16,7 @@ void RunScene::setRun()
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_zeriling_sprite = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("res/Res/ZerlingAnimation/r_1.png"));
-	m_zeriling_sprite->setScale(1.4);
+	m_zeriling_sprite->setScale(1.1);
 	m_zeriling_sprite->setPosition(100, visibleSize.height / 2 + 10);
 	this->addChild(m_zeriling_sprite);
 }

@@ -131,6 +131,9 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 	case fitthecircle:
 		pScene = fitthecircleScene::createScene(diff, loop);
 		break;
+	case Runrunrun:
+		pScene = RunScene::createScene(diff, loop);
+		break;
 	default: break;
 	}
 	auto pDirector = Director::getInstance();

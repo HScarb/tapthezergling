@@ -43,8 +43,9 @@
           <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
           <FilePathData Path="CardInfoLayer.csd" />
           <FilePathData Path="Tollgates/EatFlowersScene.csd" />
+          <FilePathData Path="Tollgates/RunScene.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="Tollgates/EatFlowersScene.csd" />
+        <ActiveDocument Path="Tollgates/RunScene.csd" />
       </Value>
     </Item>
   </Properties>

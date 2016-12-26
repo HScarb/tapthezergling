@@ -21,7 +21,7 @@ using namespace CocosDenshion;
 int m = 0;  //记录宝箱的开箱次数
 bool act = false;    //初始化宝箱调试
 bool but = false;	//按钮问题
-bool res = false;   //按钮的上升问题
+bool res = false;   //按钮的上升问题,false是卡片在上面，true是箭头在上面。
 bool pre = false;   //控制奖励，防止提前被按
 
 cocos2d::Scene* TollgateScene::createScene()
@@ -49,13 +49,13 @@ void TollgateScene::runEnergy()
 		m_energy_sprite->runAction(fadeout);
 	}),
 		CallFunc::create([this]{
-		if (!res)
+		if (!res)  //现在是false,卡片在上面
 		m_cardBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
 	}),
 		CallFunc::create([this]{
 		if (!res)
 		m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
-		res = true;
+		res = true;   //res为ture,则箭头在上面
 	}),
 		CallFunc::create([this]{
 		setChest();
@@ -92,7 +92,7 @@ void TollgateScene::runDiamond()
 		CallFunc::create([this]{
 		if (!res)
 		m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
-		res = true;
+		res = true;  //此时，箭头在上面
 	}),
 		CallFunc::create([this]{
 		setChest();
@@ -123,7 +123,7 @@ bool TollgateScene::init()
 	m_energyBar = nullptr;
 	m_timeText = nullptr;
 	m_timeBar = nullptr;
-//	m_chest_sprite = nullptr;
+	m_chest_sprite = nullptr;
 	m_energy_sprite = nullptr;
 	m_diamond_sprite = nullptr;
 	m_flash = nullptr;
@@ -188,9 +188,10 @@ bool TollgateScene::init()
 	m_t9 = (Text*)(m_scrollView->getChildByName("Text_9"));
 	m_t10 = (Text*)(m_scrollView->getChildByName("Text_10"));
 	m_t11 = (Text*)(m_scrollView->getChildByName("Text_11"));
+	m_t12 = (Text*)(m_scrollView->getChildByName("Text_12"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-	//m_scrollView->setVisible(false);
+	m_scrollView->setVisible(false);
 
 	//关键地方
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
@@ -253,7 +254,9 @@ bool TollgateScene::init()
 	m_t9->addTouchEventListener(this, toucheventselector(TollgateScene::onItem9Clicked));
 	m_t10->addTouchEventListener(this, toucheventselector(TollgateScene::onItem10Clicked));
 	m_t11->addTouchEventListener(this, toucheventselector(TollgateScene::onItem11Clicked));
+	m_t12->addTouchEventListener(this, toucheventselector(TollgateScene::onItem12Clicked));
 	m_cardBtn->addTouchEventListener(this, toucheventselector(TollgateScene::onCardBtnClicked));
+	
 
 //	SimpleAudioEngine::getInstance()->playBackgroundMusic("Sounds/MainMenu.mp3", true);
 	SoundManager::getInstance()->playMenuMusic();
@@ -403,12 +406,12 @@ void TollgateScene::onGoOnBtnClicked(Ref* pSender, cocos2d::ui::TouchEventType t
 			m_chest_sprite->removeFromParent();
 		}
 		m_anotherChestText->setVisible(false);
-		if (res)
+		if (res)  //如果res=true，则说明箭头在上面
 		{
 			m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
 			m_cardBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
 		}
-		res = false;
+		res = false;  //切换状态，卡片来到上面
 		setNextTollgate();
 		GameManager::getInstance()->setIsWaitToAddChest(false);
 	}
@@ -554,6 +557,12 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 		{
 			if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (act != true)) 
 			{
+				if (res)//如果当前是箭头在上面
+				{
+					m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
+					m_cardBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
+					res = false;
+				}
 				//打开宝箱时触发鼓励文字
 				if (act != true)
 				{
@@ -644,5 +653,14 @@ void TollgateScene::onItem11Clicked(Ref* pSender, cocos2d::ui::TouchEventType ty
 	{
 		log("tollgate 11");
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::fitthecircle, 0, 2);
+	}
+}
+
+void TollgateScene::onItem12Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
+{
+	if (type == TOUCH_EVENT_ENDED)
+	{
+		log("tollgate 12");
+		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::Runrunrun, 0, 2);
 	}
 }

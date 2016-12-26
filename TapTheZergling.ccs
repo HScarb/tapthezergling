@@ -53,6 +53,25 @@
             <Image Name="MainScene_final.png" />
             <Image Name="score_dialog.png" />
           </Folder>
+          <Folder Name="Runrunrun">
+            <Image Name="292.png" />
+            <Image Name="333.png" />
+            <Image Name="335.png" />
+            <Image Name="336.png" />
+            <Image Name="916.png" />
+            <Image Name="917.png" />
+            <Image Name="926.png" />
+            <Image Name="927.png" />
+            <Image Name="929.png" />
+            <Image Name="c.png" />
+            <Image Name="CJ (1086).png" />
+            <Image Name="CJ (189).png" />
+            <Image Name="CJ (192).png" />
+            <Image Name="CJ (848).png" />
+            <Image Name="CJ221.png" />
+            <Image Name="m_scene.jpg" />
+            <Image Name="r_1.png" />
+          </Folder>
           <Folder Name="star crafts">
             <Image Name="belshir_cliff0_diff.png" />
             <Image Name="SCs_Bush_00.png" />
@@ -298,6 +317,7 @@
           <Project Name="EatFlowersScene.csd" Type="Scene" />
           <Project Name="Fitthecircle.csd" Type="Scene" />
           <Project Name="JumpingOnPoolScene.csd" Type="Scene" />
+          <Project Name="RunScene.csd" Type="Scene" />
           <Project Name="SlideCutScene.csd" Type="Scene" />
           <Project Name="TollgateControlLayer.csd" Type="Layer" />
         </Folder>

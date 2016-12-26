@@ -58,6 +58,7 @@ private:
 	void onItem9Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem10Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem11Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onItem12Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 
 private:
 	virtual bool onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event);
@@ -93,6 +94,7 @@ private:
 	cocos2d::ui::Text * m_t9;
 	cocos2d::ui::Text * m_t10;
 	cocos2d::ui::Text * m_t11;
+	cocos2d::ui::Text * m_t12;
 private:
 	CardControlLayer * m_cardControlLayer;
 };
