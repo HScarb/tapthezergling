@@ -66,7 +66,7 @@ private:
 	//是否有卡片正在合成
 	bool m_isCardsStartCollection;
 	cocos2d::ui::Text * m_cardCollectionTime;
-	cocos2d::ui::ImageView * m_sprite;
+	//cocos2d::ui::ImageView * m_sprite;
 	//获取当前时间和时间戳（秒）
 	int m_timeStamp;
 	tm * m_currentTime;

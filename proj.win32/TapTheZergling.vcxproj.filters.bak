@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{4530f591-08dd-4129-bf02-6b6cd723bc24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes">
+      <UniqueIdentifier>{cc35d1d3-472a-4987-85b3-a933c242601c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Utils">
+      <UniqueIdentifier>{2d84547a-24e4-4d23-972f-e08e5f59d013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Manager">
+      <UniqueIdentifier>{6072f44e-f883-4509-9c8c-0bef297479ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates">
+      <UniqueIdentifier>{64b7089a-8ff0-487a-bbc0-5b5556d6787d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Entity">
+      <UniqueIdentifier>{c3dc609f-7d70-43e4-acfd-f3d65bb4f0e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Layer">
+      <UniqueIdentifier>{ef96f611-aa76-476b-99c6-e17dd2de12b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\SlideCut">
+      <UniqueIdentifier>{a5f1f2ec-e57b-468d-99d3-92efe05d486d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\DoubleTap">
+      <UniqueIdentifier>{9dfd1f53-61de-4648-8580-ebae28dccc2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\JumpingOnPool">
+      <UniqueIdentifier>{c4976620-4d8c-418b-b5f0-2191fc151ed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\BurrowAndAttack">
+      <UniqueIdentifier>{45e9c6ea-73df-4d80-91cc-f9581a41e569}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global">
+      <UniqueIdentifier>{69c315b5-1461-43b0-a093-304545c367e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\ClassifyUnits">
+      <UniqueIdentifier>{e4e6df00-9531-47c9-99bc-798577637622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\BOSS1ZerglingKing">
+      <UniqueIdentifier>{7abd44e7-0e2a-43e2-b539-425057ec37d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\BOSS2ZerglingNinja">
+      <UniqueIdentifier>{234c0a0e-03de-43b2-b757-9f65e71555b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\CheckThething">
+      <UniqueIdentifier>{7e0f20c1-99b4-4fcd-932f-a2dc4cf26164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\FeedSnacks">
+      <UniqueIdentifier>{5bf8579b-ad60-4afb-8faf-eaf5f7536339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\Fitthecircle">
+      <UniqueIdentifier>{f4abef43-b3f9-4d45-8d30-b14d9a0099ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\EatFlowers">
+      <UniqueIdentifier>{b8d09fb3-dd41-40b6-881c-aea985c02efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\Runrunrun">
+      <UniqueIdentifier>{3c0d7628-2c5e-4b77-954e-0987d7829265}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LoadingScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimationUtil.cpp">
+      <Filter>Classes\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SceneManager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TollgateScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TemplateScene.cpp">
+      <Filter>Classes\Scenes\Tollgates</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\VisibleRect.cpp">
+      <Filter>Classes\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FilterSprite.cpp">
+      <Filter>Classes\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TimeManager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SettingsScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Farmer.cpp">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SlideCutScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DoubleTapScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Zergling.cpp">
+      <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SlideCutScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Farmer.cpp">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Flower.cpp">
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PauseLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TollgateControlLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameManager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DataManager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BurrowAndAttack.cpp">
+      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\JumpingOnPoolScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SmallZergling.cpp">
+      <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ClassifyUnits.cpp">
+      <Filter>Classes\Scenes\Tollgates\ClassifyUnits</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BOSS1ZerglingKing.cpp">
+      <Filter>Classes\Scenes\Tollgates\BOSS1ZerglingKing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BOSS2ZerglingNinja.cpp">
+      <Filter>Classes\Scenes\Tollgates\BOSS2ZerglingNinja</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CheckThethingScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Worker.cpp">
+      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\farmerandflower.cpp">
+      <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FeedSnacks.cpp">
+      <Filter>Classes\Scenes\Tollgates\FeedSnacks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Shake.cpp">
+      <Filter>Classes\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ScoreScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SoundManager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Chest.cpp">
+      <Filter>Classes\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NoTouchLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CardControlLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Card.cpp">
+      <Filter>Classes\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CardManager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CardInfoLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\fitthecircle.cpp">
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Circle.cpp">
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="..\Classes\EatFlowersScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Meteorolite.cpp">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RunScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+=======
+    <ClCompile Include="..\Classes\CsvUtils.cpp">
+      <Filter>Classes\Utils</Filter>
+>>>>>>> 3d612d5dec142d83abac6bfba7daa60f7001f3f9
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LoadingScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimationUtil.h">
+      <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SceneManager.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TollgateScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TemplateScene.h">
+      <Filter>Classes\Scenes\Tollgates</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VisibleRect.h">
+      <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FilterSprite.h">
+      <Filter>Classes\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TimeManager.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SettingsScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Farmer.h">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SlideCutScene.h">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DoubleTapScene.h">
+      <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Zergling.h">
+      <Filter>Classes\Scenes\Tollgates\DoubleTap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SlideCutScene.h">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Farmer.h">
+      <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Flower.h">
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PauseLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TollgateControlLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DataManager.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameManager.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BurrowAndAttack.h">
+      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\JumpingOnPoolScene.h">
+      <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SmallZergling.h">
+      <Filter>Classes\Scenes\Tollgates\JumpingOnPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Global.h">
+      <Filter>Classes\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GlobalConst.h">
+      <Filter>Classes\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GlobalDefine.h">
+      <Filter>Classes\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ClassifyUnits.h">
+      <Filter>Classes\Scenes\Tollgates\ClassifyUnits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BOSS1ZerglingKing.h">
+      <Filter>Classes\Scenes\Tollgates\BOSS1ZerglingKing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BOSS2ZerglingNinja.h">
+      <Filter>Classes\Scenes\Tollgates\BOSS2ZerglingNinja</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CheckThethingScene.h">
+      <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Worker.h">
+      <Filter>Classes\Scenes\Tollgates\BurrowAndAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\farmerandflower.h">
+      <Filter>Classes\Scenes\Tollgates\CheckThething</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FeedSnacks.h">
+      <Filter>Classes\Scenes\Tollgates\FeedSnacks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shake.h">
+      <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ScoreScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ChineseDisplay.h">
+      <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SoundManager.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Chest.h">
+      <Filter>Classes\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NoTouchLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardControlLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Card.h">
+      <Filter>Classes\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardManager.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CardInfoLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\fitthecircle.h">
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Circle.h">
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="..\Classes\EatFlowersScene.h">
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Meteorolite.h">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RunScene.h">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+=======
+    <ClInclude Include="..\Classes\CsvUtils.h">
+      <Filter>Classes\Utils</Filter>
+>>>>>>> 3d612d5dec142d83abac6bfba7daa60f7001f3f9
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

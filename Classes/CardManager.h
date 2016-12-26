@@ -21,7 +21,7 @@ public:
 
 	//通过卡片信息，等级往容器中增加卡片
 	Card * CreateACardByTypeAndLevel(Card::CardInfo info, int level, int posX);
-	Card * CreateACardByTypeAndLevel(Card * card);
+	//Card * CreateACardByTypeAndLevel(Card * card);
 	void InsertACard(Card* card);
 	void InsertACardIntoEnhancer(Card * card);
 	void InsertCardAfterCollection(Card * card);

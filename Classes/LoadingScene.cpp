@@ -11,7 +11,7 @@ USING_NS_CC;
 using namespace CocosDenshion;
 using namespace CocosDenshion;
 
-const int TOTAL_TEXTURE_NUM = 204;	// 12 + small zerglings(137) + 3 workers + 15 RESOURCE + 4 bases + 10 smallUnitDeath + 7 other units + 10 Cards + 4 runner-dog= 192
+const int TOTAL_TEXTURE_NUM = 244;	// 12 + small zerglings(137) + 3 workers + 15 RESOURCE + 4 bases + 10 smallUnitDeath + 7 other units + 10 Cards + 4 runner-dog= 192
 
 Scene* LoadingScene::createScene() 
 {
@@ -106,10 +106,19 @@ bool LoadingScene::init()
 	TextureCache::getInstance()->addImageAsync(PATH_ZERG_BASE, addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(PATH_PROTOSS_BASE, addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(PATH_SPAWNINGPOOL, addTextureCallback);
-	for (int i = 1; i <= 10; i++)
+	//Cards
+	for (int i = 1; i <= 5; i++)
 	{
-		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_%i.png", i), addTextureCallback);
-		log("Card_%i.png", i);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_BOSS1_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_BOSS2_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_BurrowAndAttack_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_CheckTheThing_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_ClassifyUnits_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_DoubleTap_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_EatFlowers_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_JumpingOnPool_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_FeadSnacks_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_SlideCut_%d.jpg", i), addTextureCallback);
 	}
 
 	// 开启加载进度检测

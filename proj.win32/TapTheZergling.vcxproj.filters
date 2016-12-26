@@ -215,6 +215,8 @@
     </ClCompile>
     <ClCompile Include="..\Classes\RunScene.cpp">
       <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+    <ClCompile Include="..\Classes\CsvUtils.cpp">
+      <Filter>Classes\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -373,6 +375,8 @@
     </ClInclude>
     <ClInclude Include="..\Classes\RunScene.h">
       <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+    <ClInclude Include="..\Classes\CsvUtils.h">
+      <Filter>Classes\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

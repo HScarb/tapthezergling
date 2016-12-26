@@ -3,6 +3,7 @@
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="VS" />
+        <LastPublishType Value="Resource" />
         <IsLastPublish Value="True" />
         <LastRunType Value="Windows" />
       </Value>
@@ -14,7 +15,7 @@
         <LuaEncryptSign Value="" />
         <Android_PackageName Value="org.cocos.tapthezergling" />
         <AndroidkeyStore Value="" />
-        <AndroidVersion Value="android-20" />
+        <AndroidVersion Value="android-16" />
         <iOS_Target Value="tapthezergling-mobile" />
         <iOS_BundleID Value="" />
         <Platform Value="Android" />
@@ -44,6 +45,11 @@
           <FilePathData Path="CardInfoLayer.csd" />
           <FilePathData Path="Tollgates/EatFlowersScene.csd" />
           <FilePathData Path="Tollgates/RunScene.csd" />
+          <FilePathData Path="CardInfoLayer.csd" />
+          <FilePathData Path="CardEnhancer.csd" />
+          <FilePathData Path="MainScene.csd" />
+          <FilePathData Path="TestScene.csd" />
+          <FilePathData Path="SettingsScene.csd" />
         </OpenedDocuments>
         <ActiveDocument Path="Tollgates/RunScene.csd" />
       </Value>

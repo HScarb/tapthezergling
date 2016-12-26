@@ -31,6 +31,7 @@ private:
 	void addSeconds();				// 增加时间(动画效果)
 	void setNextTollgate();			// 随机下一关
 	void showNextTollgate();		// 将已经生成的下一关显示出来
+	void addSecondsByCard(int info);		//如果卡片容器中有卡片与关卡相对应，就增加关卡时间
 
 	//宝箱和附属精灵及其动画
 	cocos2d::Sprite * m_chest_sprite;
