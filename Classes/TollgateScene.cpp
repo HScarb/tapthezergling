@@ -36,7 +36,39 @@ cocos2d::Scene* TollgateScene::createScene()
 
 void TollgateScene::runCard()
 {
-
+	auto action = Sequence::create(
+		MoveBy::create(1, ccp(420,-220)),
+		CallFunc::create([this]{
+		//addCard();
+	}),
+		DelayTime::create(0.05f),
+	CallFunc::create([this]{
+		FadeOut * fadeout = FadeOut::create(0.01);
+		m_card_sprite->runAction(fadeout);
+	}),
+		CallFunc::create([this]{
+		if (!res)
+			m_cardBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
+	}),
+		CallFunc::create([this]{
+		if (!res)
+			m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
+		res = true;   //res为ture,则箭头在上面
+	}),
+		CallFunc::create([this]{
+		setChest();
+	}),
+		CallFunc::create([this]{
+		int e = random(10, 12);
+		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
+		m_anotherChestText->setVisible(true);
+		act = false;
+		auto child = getChildByTag(2);                         //隐藏GERAT，GREAT的Tag是2
+		child->removeFromParent();
+	}),
+		nullptr
+		);
+	m_card_sprite->runAction(action);
 }
 
 void TollgateScene::runEnergy()
@@ -128,6 +160,7 @@ bool TollgateScene::init()
 	m_chest_sprite = nullptr;
 	m_energy_sprite = nullptr;
 	m_diamond_sprite = nullptr;
+	m_card_sprite = nullptr;
 	m_flash = nullptr;
 	m_label = nullptr;
 	m_anotherChestText = nullptr;
@@ -279,6 +312,11 @@ void TollgateScene::addEnergy()
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 }
 
+void TollgateScene::addCard()
+{
+	
+}
+
 void TollgateScene::setChest()
 {
 	//创建宝箱及宝箱出场动作
@@ -427,6 +465,9 @@ void TollgateScene::onGoOnBtnClicked(Ref* pSender, cocos2d::ui::TouchEventType t
 		}
 		res = false;  //切换状态，卡片来到上面
 		setNextTollgate();
+		TimeManager::getInstance()->addTime(2.0f);				// add 2 seconds
+		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
+		m_timeBar->setPercent(100);
 		GameManager::getInstance()->setIsWaitToAddChest(false);
 	}
 }
@@ -595,7 +636,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					m_flash->runAction(Sequence::create(DelayTime::create(2.3), hideAction, dt, NULL));
 				}
 				act = true;
-				int i = random(1, 2);
+				int i = random(1, 3);
 				if (i == Energy)
 				{
 					m++;
@@ -615,6 +656,16 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					m_diamond_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
 					m_diamond_sprite->setScale(0.01, 0.01);  //0.48是原设置的大小。想法：可以把sprite 变小，这样就按不到了
 					addChild(m_diamond_sprite);
+				}
+
+				//卡片入袋
+				else if (i == Card)
+				{
+					m++;
+					//创建卡片
+					m_card_sprite = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1, 10)), 1,0);
+					m_card_sprite->setPosition(visibleSize.width / 2 - 40, visibleSize.height / 2 - 40);
+					this->addChild(m_card_sprite);
 				}
 			}
 		}
@@ -643,7 +694,14 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 		}
 		else if (m_card_sprite)
 		{
-
+			m_card_sprite->runAction(Sequence::create(DelayTime::create(2.5f),
+				ScaleTo::create(0.5, 0.48),
+				NULL
+				));
+			if (m_card_sprite->getBoundingBox().containsPoint(pos))
+			{
+				runCard();
+			}
 		}
 }
 

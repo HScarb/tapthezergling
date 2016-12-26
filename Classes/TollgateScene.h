@@ -27,6 +27,7 @@ private:
 	void runCard();			//进行卡片入库动画
 	void addEnergy();		//增加能量值
 	void addDiamond();		//增加宝石值
+	void addCard();			//添加卡片
 	void setChest();				//创建宝箱和动画
 	void addSeconds();				// 增加时间(动画效果)
 	void setNextTollgate();			// 随机下一关
