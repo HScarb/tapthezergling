@@ -160,7 +160,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\ClassifyUnits.cpp" />
     <ClCompile Include="..\Classes\DataManager.cpp" />
     <ClCompile Include="..\Classes\DoubleTapScene.cpp" />
-    <ClCompile Include="..\Classes\EatCandiesScene.cpp" />
+    <ClCompile Include="..\Classes\EatFlowersScene.cpp" />
     <ClCompile Include="..\Classes\Farmer.cpp" />
     <ClCompile Include="..\Classes\BurrowAndAttack.cpp" />
     <ClCompile Include="..\Classes\farmerandflower.cpp" />
@@ -207,7 +207,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\ClassifyUnits.h" />
     <ClInclude Include="..\Classes\DataManager.h" />
     <ClInclude Include="..\Classes\DoubleTapScene.h" />
-    <ClInclude Include="..\Classes\EatCandiesScene.h" />
+    <ClInclude Include="..\Classes\EatFlowersScene.h" />
     <ClInclude Include="..\Classes\Farmer.h" />
     <ClInclude Include="..\Classes\BurrowAndAttack.h" />
     <ClInclude Include="..\Classes\farmerandflower.h" />

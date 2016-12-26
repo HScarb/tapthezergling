@@ -126,9 +126,6 @@
     <ClCompile Include="..\Classes\Farmer.cpp">
       <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EatCandiesScene.cpp">
-      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Flower.cpp">
       <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
     </ClCompile>
@@ -207,6 +204,9 @@
     <ClCompile Include="..\Classes\Circle.cpp">
       <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EatFlowersScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -265,9 +265,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Farmer.h">
       <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EatCandiesScene.h">
-      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Flower.h">
       <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
@@ -358,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Circle.h">
       <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EatFlowersScene.h">
+      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,8 +2,8 @@
   <Properties>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
-        <LastPublishType Value="Resource" />
-        <IsLastPublish Value="False" />
+        <LastPublishType Value="VS" />
+        <IsLastPublish Value="True" />
         <LastRunType Value="Windows" />
       </Value>
     </Item>
@@ -32,8 +32,7 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="TollgateScene.csd" />
-          <FilePathData Path="Tollgates/fitthecircle.csd" />
-          <FilePathData Path="Tollgates/EatCandiesScene.csd" />
+          <FilePathData Path="Tollgates/Fitthecircle.csd" />
           <FilePathData Path="Tollgates/DoubleTapScene.csd" />
           <FilePathData Path="Tollgates/CheckTheThing.csd" />
           <FilePathData Path="Tollgates/BurrowAndAttack.csd" />
@@ -43,8 +42,9 @@
           <FilePathData Path="Tollgates/SlideCutScene.csd" />
           <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
           <FilePathData Path="CardInfoLayer.csd" />
+          <FilePathData Path="Tollgates/EatFlowersScene.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="Tollgates/CheckTheThing.csd" />
+        <ActiveDocument Path="Tollgates/EatFlowersScene.csd" />
       </Value>
     </Item>
   </Properties>
