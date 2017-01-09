@@ -1,5 +1,6 @@
 // DataManager.cpp
 #include "DataManager.h"
+#include "CsvUtil.h"
 USING_NS_CC;
 
 DataManager * DataManager::m_dataManager = nullptr;
@@ -31,7 +32,7 @@ bool DataManager::init()
 	m_bestScore = 0;
 	m_jewel = 0;
 	m_energy = 0;
-
+	m_sPath = "Cards.csv";
 	return true;
 }
 
@@ -56,4 +57,37 @@ void DataManager::loadData()
 	CCLOG("jewel = %d\n", m_jewel);
 	CCLOG("energy = %d\n", m_energy);
 	CCLOG("XML path: %s", UserDefault::getInstance()->getXMLFilePath());
+	
+	CsvUtil::getInstance()->flashCsv(m_sPath);
+	CsvUtil::getInstance()->loadFile(m_sPath);
+	Value fcn=CsvUtil::getInstance()->getValue(0,2,m_sPath);
+	log("firstMonsterName = %s", fcn.asString().c_str());
+}
+
+bool CsvData::init()
+{
+	return true;
+}
+
+void CsvData::addLineData(cocos2d::ValueVector lineData)
+{
+	m_allLineVec.push_back(cocos2d::Value(lineData));
+}
+
+cocos2d::ValueVector CsvData::getSingleLineData(int iLine)
+{
+	return m_allLineVec.at(iLine).asValueVector();
+}
+
+cocos2d::Size CsvData::getRowColNum()
+{
+	Size size = Size();
+
+	size.width = m_allLineVec.size();
+
+	if (size.width > 0) {
+		size.height = m_allLineVec.at(0).asValueVector().size();
+	}
+
+	return size;
 }

@@ -47,14 +47,14 @@ cocos2d::Vector<Card*> CardManager::getCardAfterCollection()
 	return m_cardAfterCollection;
 }
 
-Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, int posX)
+Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, float posY)
 {
 	Card * card = nullptr;
 	if (info == 0)
 		return nullptr;
 	card = Card::createByLevelAndInfo(level,info);
 	card->setCardLevel(level);//设置等级
-	if (posX != 450)
+	/*if (posY != 450)
 	{
 		card->setPosition(posX * 80, 0);//设定新增卡片的坐标
 		InsertACard(card);
@@ -63,7 +63,22 @@ Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, int
 	{
 		card->setPosition(450, 350);//设定合成后的卡片的坐标
 		InsertCardAfterCollection(card);
+	}*/
+	if (posY == 0)
+	{
+		card->setPosition(0, 0);//设定新增卡片的坐标
+		InsertACard(card);
 	}
+	else if (posY == 350)
+	{
+		card->setPosition(450, 350);//设定合成后的卡片的坐标
+		InsertCardAfterCollection(card);
+	}
+	/*if (posY == 300)
+	{
+		card->setPosition(450, 350);//设定合成后的卡片的坐标
+		InsertCardAfterCollection(card);
+	}*/
 	return card;
 }
 

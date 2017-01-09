@@ -84,7 +84,7 @@ bool CardControlLayer::init()
 				auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)1, 1, i - 1);
 				this->addChild(card);
 			}*/
-			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1, 10)), 1, i - 1);
+			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1, 10)), 1, 1);
 			this->addChild(card);
 		}
 	}

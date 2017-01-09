@@ -207,7 +207,10 @@
     <ClCompile Include="..\Classes\Circle.cpp">
       <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CsvUtils.cpp">
+    <ClCompile Include="..\Classes\StringUtil.cpp">
+      <Filter>Classes\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CsvUtil.cpp">
       <Filter>Classes\Utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -362,7 +365,10 @@
     <ClInclude Include="..\Classes\Circle.h">
       <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CsvUtils.h">
+    <ClInclude Include="..\Classes\StringUtil.h">
+      <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CsvUtil.h">
       <Filter>Classes\Utils</Filter>
     </ClInclude>
   </ItemGroup>
