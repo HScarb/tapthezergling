@@ -69,7 +69,7 @@ bool CardControlLayer::init()
 		}
 		TimeManager::getInstance()->startCardTimeCountDown();
 	}
-	if (CardManager::getInstance()->getAllCards().size() == 0)
+	/*if (CardManager::getInstance()->getAllCards().size() == 0)
 	{
 		//´´½¨¿¨Æ¬
 		for (int i = 25; i >= 1; i--)
@@ -83,12 +83,12 @@ bool CardControlLayer::init()
 			{
 				auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)1, 1, i - 1);
 				this->addChild(card);
-			}*/
+			}#1#
 			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1, 10)), 1, i - 1);
 			this->addChild(card);
 		}
 	}
-	else
+	else*/
 		showCards();
 	CardManager::getInstance()->SortCardMsg();
 

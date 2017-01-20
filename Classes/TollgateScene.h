@@ -20,7 +20,7 @@ public:
 	static cocos2d::Scene * createScene();
 	virtual bool init();
 	CREATE_FUNC(TollgateScene);
-
+	
 private:
 	void runDiamond();      //进行宝石入库动画
 	void runEnergy();		//进行能量入库动画
@@ -34,9 +34,9 @@ private:
 	void showNextTollgate();		// 将已经生成的下一关显示出来
 	void addSecondsByCard(int info);		//如果卡片容器中有卡片与关卡相对应，就增加关卡时间
 
-	//宝箱和附属精灵及其动画
-	cocos2d::Sprite * m_chest_sprite;
+	// 宝箱和附属精灵及其动画
 	cocos2d::Sprite * m_card_sprite;
+	cocos2d::Sprite * m_chest_sprite;
 	cocos2d::Sprite * m_energy_sprite;
 	cocos2d::Sprite * m_diamond_sprite;
 	cocos2d::Sprite * m_flash;
@@ -99,4 +99,5 @@ private:
 	cocos2d::ui::Text * m_t12;
 private:
 	CardControlLayer * m_cardControlLayer;
+	int m;			// 宝箱的开箱次数
 };

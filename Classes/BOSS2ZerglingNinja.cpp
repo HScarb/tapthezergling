@@ -5,6 +5,7 @@
 #include "TimeManager.h"
 #include "AnimationUtil.h"
 #include "Global.h"
+#include "GameManager.h"
 using namespace std;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;

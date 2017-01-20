@@ -20,7 +20,11 @@ using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 using namespace CocosDenshion;
 
-int m = 0;  //记录宝箱的开箱次数
+//Card * m_card_sprite;		 //卡片
+int money = 0;		//开箱要氪的金
+int m = 0;			//宝箱开启次数
+int n = 0;			//获得卡片次数
+int t = 0;			//获取卡片的种类
 bool act = false;    //初始化宝箱调试
 bool but = false;	//按钮问题
 bool res = false;   //按钮的上升问题,false是卡片在上面，true是箭头在上面。
@@ -39,7 +43,7 @@ void TollgateScene::runCard()
 	auto action = Sequence::create(
 		MoveBy::create(1, ccp(420,-220)),
 		CallFunc::create([this]{
-		//addCard();
+		addCard();
 	}),
 		DelayTime::create(0.05f),
 	CallFunc::create([this]{
@@ -53,13 +57,14 @@ void TollgateScene::runCard()
 		CallFunc::create([this]{
 		if (!res)
 			m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
-		res = true;   //res为ture,则箭头在上面
+			res = true;   //res为ture,则箭头在上面
 	}),
 		CallFunc::create([this]{
 		setChest();
 	}),
 		CallFunc::create([this]{
 		int e = random(10, 12);
+		money = e * m;
 		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
 		m_anotherChestText->setVisible(true);
 		act = false;
@@ -96,6 +101,7 @@ void TollgateScene::runEnergy()
 	}),
 		CallFunc::create([this]{
 		int e = random(10, 12);
+		money = e * m;
 		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
 		m_anotherChestText->setVisible(true);
 		act = false;
@@ -133,7 +139,8 @@ void TollgateScene::runDiamond()
 	}),
 		CallFunc::create([this]{
 		int e = random(10, 12);
-		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
+		money = e * m;
+		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));  //这个地方，m是全局变量，e不是
 		m_anotherChestText->setVisible(true);
 		act = false;
 		auto child = getChildByTag(2);                         //隐藏GERAT，GREAT的Tag是2
@@ -164,11 +171,16 @@ bool TollgateScene::init()
 	m_flash = nullptr;
 	m_label = nullptr;
 	m_anotherChestText = nullptr;
+	money = 0;
+	t = 0;
 
 	if (!m_chest_sprite)
 	{
 		m_chest_sprite = nullptr;
 	}
+
+	//初始宝箱开启设置为0次
+	m = 0;
 
 	//这个按钮是用来不重复生成关卡的
 	but = false;
@@ -314,6 +326,14 @@ void TollgateScene::addEnergy()
 
 void TollgateScene::addCard()
 {
+	/*
+	用到四个相关函数：
+	Card * CreateACardByTypeAndLevel(Card::CardInfo info, int level, int posX);
+	void InsertACard(Card* card);
+	void InsertACardtoEnhancer(Card* card);
+	void InsertACardAfterCollection(Card* card);
+	*/
+	 //怎么把m_card_sprite所指的card加入到容器中
 	
 }
 
@@ -469,6 +489,16 @@ void TollgateScene::onGoOnBtnClicked(Ref* pSender, cocos2d::ui::TouchEventType t
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
 		m_timeBar->setPercent(100);
 		GameManager::getInstance()->setIsWaitToAddChest(false);
+
+		// 防止每次进入TollgateScene都加2秒时间
+		/*if (GameManager::getInstance()->getIsWaitToAddTime())
+		{
+			addSeconds();
+			CCLOG("added 2 seconds.");
+			GameManager::getInstance()->setIsWaitToAddTime(false);
+		}
+		else
+			showNextTollgate();*/
 	}
 }
 
@@ -496,8 +526,10 @@ void TollgateScene::onTollgateLabelClicked(Ref* pSender)
 {
 	int nextTollgate = GameManager::getInstance()->getNextTollgate();
 	int num = GameManager::getInstance()->getTollgateNum();
-	if(num % 10 == 0)
+	if (num % 10 == 0 && GameManager::getInstance()->getEnergy() > 0)
 	{
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene((SceneManager::SceneType)(100 + num / 10));
 	}
 	else 
@@ -506,24 +538,33 @@ void TollgateScene::onTollgateLabelClicked(Ref* pSender)
 		CCLOG("Tollgate %d change scene...", nextTollgate);
 		int diff = GameManager::getInstance()->getDiff();
 		int loop = GameManager::getInstance()->getLoop();
-		SceneManager::getInstance()->changeScene((SceneManager::TollgateSceneType)nextTollgate, diff, loop);
+		if (GameManager::getInstance()->getEnergy() > 0)
+		{
+			GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+			m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
+			SceneManager::getInstance()->changeScene((SceneManager::TollgateSceneType)nextTollgate, diff, loop);
+		}
 	}
 }
 
 void TollgateScene::onItem1Clicked(Ref* pSender, TouchEventType type)
 {
-	if (type == TouchEventType::TOUCH_EVENT_ENDED) 
+	if (type == TouchEventType::TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 1");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::DoubleTapScene, 0, 3);
 	}
 }
 
 void TollgateScene::onItem2Clicked(Ref* pSender, TouchEventType type)
 {
-	if(type == TouchEventType::TOUCH_EVENT_ENDED)
+	if (type == TouchEventType::TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 2");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::SlideCutScene, 0, 2);
 
 	}
@@ -531,63 +572,77 @@ void TollgateScene::onItem2Clicked(Ref* pSender, TouchEventType type)
 
 void TollgateScene::onItem3Clicked(Ref* pSender, TouchEventType type)
 {
-	if (type == TouchEventType::TOUCH_EVENT_ENDED)
+	if (type == TouchEventType::TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 3");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::EatFlowersScene, 0, 1);
 	}
 }
 
 void TollgateScene::onItem4Clicked(Ref* pSender, TouchEventType type)
 {
-	if (type == TouchEventType::TOUCH_EVENT_ENDED)
+	if (type == TouchEventType::TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 4");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::BurrowAndAttackScene, 0, 2);
 	}
 }
 
 void TollgateScene::onItem5Clicked(Ref* pSender, TouchEventType type)
 {
-	if(type == TOUCH_EVENT_ENDED)
+	if (type == TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 5");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::JumpingOnPoolScene, 1, 2);
 	}
 }
 
 void TollgateScene::onItem6Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	if (type == TOUCH_EVENT_ENDED)
+	if (type == TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 6");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::ClassifyUnits, 1, 2);
 	}
 }
 
 void TollgateScene::onItem7Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	if(type == TOUCH_EVENT_ENDED)
+	if (type == TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 7");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::SceneType::BOSS1);
 	}
 }
 
 void TollgateScene::onItem8Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	if(type == TOUCH_EVENT_ENDED)
+	if (type == TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 8");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::SceneType::BOSS2);
 	}
 }
 
 void TollgateScene::onItem9Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	if (type == TOUCH_EVENT_ENDED)
+	if (type == TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 9");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::CheckThethingScene, 2, 2);
 	}
 }
@@ -607,11 +662,13 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 		DelayTime *dt = DelayTime::create(1.5f);
 		Hide *hideAction = Hide::create();
 		ScaleTo * scaleto2 = ScaleTo::create(0.3, 0.000001);
-
+		
 		if (m_chest_sprite)  
 		{
-			if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (act != true)) 
+			if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (act != true) && (GameManager::getInstance()->getJewel() >= money))
 			{
+				GameManager::getInstance()->setJewel(GameManager::getInstance()->getJewel() - money);
+				m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel()));
 				if (res)//如果当前是箭头在上面
 				{
 					m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
@@ -636,7 +693,8 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					m_flash->runAction(Sequence::create(DelayTime::create(2.3), hideAction, dt, NULL));
 				}
 				act = true;
-				int i = random(1, 3);
+				int i = random(1, 2);
+				//int i = 3;
 				if (i == Energy)
 				{
 					m++;
@@ -658,13 +716,15 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					addChild(m_diamond_sprite);
 				}
 
-				//卡片入袋
+				//卡片创建
 				else if (i == Card)
 				{
 					m++;
-					//创建卡片
-					m_card_sprite = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1, 10)), 1,0);
+					t = random(1, 10);
+					m_card_sprite = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(t), 1,n);
+					//按道理，这里的setPosition需要遍历CardVec，找到对应种类的卡片，排在最后
 					m_card_sprite->setPosition(visibleSize.width / 2 - 40, visibleSize.height / 2 - 40);
+					m_card_sprite->setScale(0.01, 0.01);
 					this->addChild(m_card_sprite);
 				}
 			}
@@ -695,12 +755,16 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 		else if (m_card_sprite)
 		{
 			m_card_sprite->runAction(Sequence::create(DelayTime::create(2.5f),
-				ScaleTo::create(0.5, 0.48),
-				NULL
-				));
+						ScaleTo::create(0.5, 1.2),
+						NULL
+						));
 			if (m_card_sprite->getBoundingBox().containsPoint(pos))
 			{
 				runCard();
+				//这个卡片加入很麻烦，每加入一张，都需要重新排序？？还是在原位置叠加，叠加的代码怎么写，怎么实现？
+				auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(t), 1, n);
+				//this->addChild(card);
+				n++;
 			}
 		}
 }
@@ -712,27 +776,33 @@ bool TollgateScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_e
 
 void TollgateScene::onItem10Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	if (type == TOUCH_EVENT_ENDED)
+	if (type == TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 10");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::FeedSnacks, 0, 2);
 	}
 }
 
 void TollgateScene::onItem11Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	if (type == TOUCH_EVENT_ENDED)
+	if (type == TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 11");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::fitthecircle, 0, 2);
 	}
 }
 
 void TollgateScene::onItem12Clicked(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	if (type == TOUCH_EVENT_ENDED)
+	if (type == TOUCH_EVENT_ENDED && GameManager::getInstance()->getEnergy() > 0)
 	{
 		log("tollgate 12");
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() - 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 		SceneManager::getInstance()->changeScene(SceneManager::TollgateSceneType::Runrunrun, 0, 2);
 	}
 }

@@ -7,6 +7,7 @@
 #include "Flower.h"
 #include "TollgateControlLayer.h"
 #include "Global.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 
