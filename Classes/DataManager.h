@@ -26,25 +26,8 @@ public:
 	CC_SYNTHESIZE(int, m_startCollectionTime, StartTimeStamp);
 	CC_SYNTHESIZE(int, m_endCollectionTime, EndingTimeStamp);
 	CC_SYNTHESIZE(tm*, m_startDate, StartDate);
-	CC_SYNTHESIZE(char*, m_sPath, csvPath);
+	//CC_SYNTHESIZE(char*, m_sPath, csvPath);
 private:
 	static DataManager * m_dataManager;
-	//const char* m_sPath;
-};
-
-class CsvData :public cocos2d::Ref
-{
-public:
-	CREATE_FUNC(CsvData);
-	virtual bool init();
-
-	void addLineData(cocos2d::ValueVector lineData);//添加一行数据
-
-	cocos2d::ValueVector getSingleLineData(int iLine);//获取某行数据
-
-	cocos2d::Size getRowColNum();//获取行列大小
-protected:
-private:
-
-	cocos2d::ValueVector m_allLineVec; //存放Csv文件所有行的数据，试试这样理解：ValueVector<Value<ValueVector>)
+	const char* m_sPath;
 };
