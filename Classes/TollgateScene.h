@@ -20,13 +20,14 @@ public:
 	static cocos2d::Scene * createScene();
 	virtual bool init();
 	CREATE_FUNC(TollgateScene);
-
+	
 private:
 	void runDiamond();      //进行宝石入库动画
 	void runEnergy();		//进行能量入库动画
 	void runCard();			//进行卡片入库动画
 	void addEnergy();		//增加能量值
 	void addDiamond();		//增加宝石值
+	void addCard();			//添加卡片
 	void setChest();				//创建宝箱和动画
 	void addSeconds();				// 增加时间(动画效果)
 	void setNextTollgate();			// 随机下一关
@@ -34,8 +35,8 @@ private:
 	void addSecondsByCard(int info);		//如果卡片容器中有卡片与关卡相对应，就增加关卡时间
 
 	// 宝箱和附属精灵及其动画
-	cocos2d::Sprite * m_chest_sprite;
 	cocos2d::Sprite * m_card_sprite;
+	cocos2d::Sprite * m_chest_sprite;
 	cocos2d::Sprite * m_energy_sprite;
 	cocos2d::Sprite * m_diamond_sprite;
 	cocos2d::Sprite * m_flash;
@@ -59,6 +60,7 @@ private:
 	void onItem9Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem10Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 	void onItem11Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
+	void onItem12Clicked(Ref * pSender, cocos2d::ui::TouchEventType type);
 
 private:
 	virtual bool onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event);
@@ -94,6 +96,7 @@ private:
 	cocos2d::ui::Text * m_t9;
 	cocos2d::ui::Text * m_t10;
 	cocos2d::ui::Text * m_t11;
+	cocos2d::ui::Text * m_t12;
 private:
 	CardControlLayer * m_cardControlLayer;
 	int m;			// 宝箱的开箱次数

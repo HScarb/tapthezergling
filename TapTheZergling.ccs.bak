@@ -1,0 +1,340 @@
+<Solution>
+  <PropertyGroup Name="TapTheZergling" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="Res">
+          <Folder Name="fonts">
+            <TTF Name="AveriaSansLibre-Bold.ttf" />
+            <TTF Name="AveriaSansLibre-BoldItalic.ttf" />
+            <TTF Name="AveriaSansLibre-Italic.ttf" />
+            <TTF Name="AveriaSansLibre-Light.ttf" />
+            <TTF Name="AveriaSansLibre-LightItalic.ttf" />
+            <TTF Name="AveriaSansLibre-Regular.ttf" />
+            <TTF Name="CarterOne.ttf" />
+            <TTF Name="Skranji-Bold.ttf" />
+            <TTF Name="Skranji-Regular.ttf" />
+          </Folder>
+          <Folder Name="RESOURCE">
+            <Image Name="add_two.png" />
+            <Image Name="button_accept_1.png" />
+            <Image Name="button_accept_2.png" />
+            <Image Name="button_base.png" />
+            <Image Name="button_cards_1.png" />
+            <Image Name="button_cards_2.png" />
+            <Image Name="button_play_1.png" />
+            <Image Name="button_play_2.png" />
+            <Image Name="button_reload.png" />
+            <Image Name="button_settings_1.png" />
+            <Image Name="button_settings_2.png" />
+            <Image Name="button_x_1.png" />
+            <Image Name="button_x_2.png" />
+            <Image Name="button-cards-1.png" />
+            <Image Name="button-cards-2.png" />
+            <Image Name="button-home-1.png" />
+            <Image Name="button-home-2.png" />
+            <Image Name="button-pause-1.png" />
+            <Image Name="button-pause-2.png" />
+            <Image Name="button-setting-1.png" />
+            <Image Name="button-setting-2.png" />
+            <Image Name="dialog_card_enhancer.png" />
+            <Image Name="Energy-bar.png" />
+            <Image Name="Energy-progress.png" />
+            <Image Name="frame_level.png" />
+            <Image Name="Gem-board.png" />
+            <Image Name="loading_bar.png" />
+            <Image Name="loading_progress.png" />
+            <Image Name="long_button_green_1.png" />
+            <Image Name="long_button_green_2.png" />
+            <Image Name="long_button_orange_1.png" />
+            <Image Name="long_button_orange_2.png" />
+            <Image Name="long_button_red_1.png" />
+            <Image Name="long_button_red_2.png" />
+            <Image Name="MainScene_final.png" />
+            <Image Name="score_dialog.png" />
+          </Folder>
+          <Folder Name="Runrunrun">
+            <Image Name="292.png" />
+            <Image Name="333.png" />
+            <Image Name="335.png" />
+            <Image Name="336.png" />
+            <Image Name="916.png" />
+            <Image Name="917.png" />
+            <Image Name="926.png" />
+            <Image Name="927.png" />
+            <Image Name="929.png" />
+            <Image Name="c.png" />
+            <Image Name="CJ (1086).png" />
+            <Image Name="CJ (189).png" />
+            <Image Name="CJ (192).png" />
+            <Image Name="CJ (848).png" />
+            <Image Name="CJ221.png" />
+            <Image Name="m_scene.jpg" />
+            <Image Name="r_1.png" />
+          </Folder>
+          <Folder Name="star crafts">
+            <Image Name="belshir_cliff0_diff.png" />
+            <Image Name="SCs_Bush_00.png" />
+            <Image Name="SCs_Bush_01.png" />
+            <Image Name="SCs_Bush_02.png" />
+            <Image Name="SCs_Bush_03.png" />
+            <Image Name="SCs_DancingFlowers_00.png" />
+            <Image Name="SCs_DancingFlowers_01.png" />
+            <Image Name="SCs_DancingFlowers_02.png" />
+            <Image Name="SCs_Doodad_GrassA.png" />
+            <Image Name="SCs_Doodad_GrassB.png" />
+            <Image Name="SCs_Doodad_GrassC.png" />
+            <Image Name="SCs_Doodad_GrassD.png" />
+            <Image Name="SCs_Doodad_GrassE.png" />
+            <Image Name="SCs_Doodad_GrassF.png" />
+            <Image Name="SCs_Doodad_pride_rock_brown.png" />
+            <Image Name="SCs_Doodad_rock_brown_large01.png" />
+            <Image Name="SCs_Doodad_rock_brown01.png" />
+            <Image Name="SCs_Doodad_rock_brown02.png" />
+            <Image Name="SCs_Doodad_Rock1.png" />
+            <Image Name="SCs_Doodad_Rock2.png" />
+            <Image Name="SCs_Doodad_Rock3.png" />
+            <Image Name="SCs_Doodad_rockpillar01.png" />
+            <Image Name="SCs_Doodad_rockpillar02.png" />
+            <Image Name="SCs_Doodad_rockpillar03.png" />
+            <Image Name="SCs_Doodad_SteppingStone1.png" />
+            <Image Name="SCs_Doodad_SteppingStone2.png" />
+            <Image Name="SCs_Doodad_SteppingStone3.png" />
+            <Image Name="SCs_Doodad_SteppingStone4.png" />
+            <Image Name="SCs_Doodad_SteppingStone5.png" />
+            <Image Name="SCs_Doodad_stump1.png" />
+            <Image Name="SCs_Doodad_stump2.png" />
+            <Image Name="SCs_Doodad_tree1.png" />
+            <Image Name="SCs_Doodad_tree2.png" />
+            <Image Name="SCs_Doodad_tree3.png" />
+            <Image Name="SCs_Doodad_tree4.png" />
+            <Image Name="SCs_Doodad_tree5.png" />
+            <Image Name="SCs_Doodad_treesmall1.png" />
+            <Image Name="SCs_Doodad_treetiny1.png" />
+            <Image Name="SCs_Doodads_GrassA.png" />
+            <Image Name="SCs_Doodads_GrassB.png" />
+            <Image Name="SCs_Doodads_GrassC.png" />
+            <Image Name="SCs_Doodads_GrassD.png" />
+            <Image Name="SCs_Doodads_GrassE.png" />
+            <Image Name="SCs_Doodads_GrassF.png" />
+            <Image Name="SCs_Doodads_SteppingStone6.png" />
+            <Image Name="SCs_GrassLightGreen_00.png" />
+            <Image Name="SCs_GrassLightGreen_01.png" />
+            <Image Name="SCs_GrassLightGreen_02.png" />
+            <Image Name="SCs_GrassLightGreen_03.png" />
+            <Image Name="SCs_GrassLightGreen_04.png" />
+            <Image Name="SCs_GrassLightGreen_05.png" />
+            <Image Name="starcrafts_Terrain_DarkGrass.png" />
+            <Image Name="starcrafts_Terrain_Dirt.png" />
+            <Image Name="starcrafts_Terrain_LightGrass.png" />
+            <Image Name="ui_loadingbar_bar_highlighted_protoss.png" />
+            <Image Name="ui_loadingbar_metalframe_protoss.png" />
+            <Image Name="zcreep.png" />
+          </Folder>
+          <Folder Name="Units">
+            <Image Name="blade.png" />
+            <Image Name="drone_small.PNG" />
+            <Image Name="marauder_small.png" />
+            <Image Name="marine_small.png" />
+            <Image Name="overlord_small.png" />
+            <Image Name="probe_small.PNG" />
+            <Image Name="roach_small.png" />
+            <Image Name="scv_small.PNG" />
+            <Image Name="stalker_small.png" />
+            <Image Name="zealot_small.png" />
+            <Image Name="zergling_small.png" />
+          </Folder>
+          <Folder Name="zergling">
+            <Image Name="SCs_Zergling_C3_01.png" />
+            <Image Name="SCs_Zergling_C3_02.png" />
+            <Image Name="SCs_Zergling_C3_03.png" />
+            <Image Name="SCs_Zergling_C3_04.png" />
+            <Image Name="SCs_Zergling_C3_05.png" />
+            <Image Name="SCs_Zergling_C3_06.png" />
+            <Image Name="SCs_Zergling_C3_07.png" />
+            <Image Name="SCs_Zergling_C3_08.png" />
+            <Image Name="SCs_Zergling_C3_09.png" />
+            <Image Name="SCs_Zergling_C3_10.png" />
+            <Image Name="SCs_Zergling_C3_100.png" />
+            <Image Name="SCs_Zergling_C3_101.png" />
+            <Image Name="SCs_Zergling_C3_102.png" />
+            <Image Name="SCs_Zergling_C3_103.png" />
+            <Image Name="SCs_Zergling_C3_104.png" />
+            <Image Name="SCs_Zergling_C3_105.png" />
+            <Image Name="SCs_Zergling_C3_106.png" />
+            <Image Name="SCs_Zergling_C3_107.png" />
+            <Image Name="SCs_Zergling_C3_108.png" />
+            <Image Name="SCs_Zergling_C3_109.png" />
+            <Image Name="SCs_Zergling_C3_11.png" />
+            <Image Name="SCs_Zergling_C3_110.png" />
+            <Image Name="SCs_Zergling_C3_111.png" />
+            <Image Name="SCs_Zergling_C3_112.png" />
+            <Image Name="SCs_Zergling_C3_113.png" />
+            <Image Name="SCs_Zergling_C3_114.png" />
+            <Image Name="SCs_Zergling_C3_115.png" />
+            <Image Name="SCs_Zergling_C3_116.png" />
+            <Image Name="SCs_Zergling_C3_117.png" />
+            <Image Name="SCs_Zergling_C3_118.png" />
+            <Image Name="SCs_Zergling_C3_119.png" />
+            <Image Name="SCs_Zergling_C3_12.png" />
+            <Image Name="SCs_Zergling_C3_120.png" />
+            <Image Name="SCs_Zergling_C3_121.png" />
+            <Image Name="SCs_Zergling_C3_122.png" />
+            <Image Name="SCs_Zergling_C3_123.png" />
+            <Image Name="SCs_Zergling_C3_124.png" />
+            <Image Name="SCs_Zergling_C3_125.png" />
+            <Image Name="SCs_Zergling_C3_126.png" />
+            <Image Name="SCs_Zergling_C3_127.png" />
+            <Image Name="SCs_Zergling_C3_128.png" />
+            <Image Name="SCs_Zergling_C3_129.png" />
+            <Image Name="SCs_Zergling_C3_13.png" />
+            <Image Name="SCs_Zergling_C3_130.png" />
+            <Image Name="SCs_Zergling_C3_131.png" />
+            <Image Name="SCs_Zergling_C3_132.png" />
+            <Image Name="SCs_Zergling_C3_133.png" />
+            <Image Name="SCs_Zergling_C3_134.png" />
+            <Image Name="SCs_Zergling_C3_135.png" />
+            <Image Name="SCs_Zergling_C3_136.png" />
+            <Image Name="SCs_Zergling_C3_137.png" />
+            <Image Name="SCs_Zergling_C3_138.png" />
+            <Image Name="SCs_Zergling_C3_139.png" />
+            <Image Name="SCs_Zergling_C3_14.png" />
+            <Image Name="SCs_Zergling_C3_140.png" />
+            <Image Name="SCs_Zergling_C3_141.png" />
+            <Image Name="SCs_Zergling_C3_142.png" />
+            <Image Name="SCs_Zergling_C3_143.png" />
+            <Image Name="SCs_Zergling_C3_144.png" />
+            <Image Name="SCs_Zergling_C3_15.png" />
+            <Image Name="SCs_Zergling_C3_16.png" />
+            <Image Name="SCs_Zergling_C3_17.png" />
+            <Image Name="SCs_Zergling_C3_18.png" />
+            <Image Name="SCs_Zergling_C3_19.png" />
+            <Image Name="SCs_Zergling_C3_20.png" />
+            <Image Name="SCs_Zergling_C3_21.png" />
+            <Image Name="SCs_Zergling_C3_22.png" />
+            <Image Name="SCs_Zergling_C3_23.png" />
+            <Image Name="SCs_Zergling_C3_24.png" />
+            <Image Name="SCs_Zergling_C3_25.png" />
+            <Image Name="SCs_Zergling_C3_26.png" />
+            <Image Name="SCs_Zergling_C3_27.png" />
+            <Image Name="SCs_Zergling_C3_28.png" />
+            <Image Name="SCs_Zergling_C3_29.png" />
+            <Image Name="SCs_Zergling_C3_30.png" />
+            <Image Name="SCs_Zergling_C3_31.png" />
+            <Image Name="SCs_Zergling_C3_32.png" />
+            <Image Name="SCs_Zergling_C3_33.png" />
+            <Image Name="SCs_Zergling_C3_34.png" />
+            <Image Name="SCs_Zergling_C3_35.png" />
+            <Image Name="SCs_Zergling_C3_36.png" />
+            <Image Name="SCs_Zergling_C3_37.png" />
+            <Image Name="SCs_Zergling_C3_38.png" />
+            <Image Name="SCs_Zergling_C3_39.png" />
+            <Image Name="SCs_Zergling_C3_40.png" />
+            <Image Name="SCs_Zergling_C3_41.png" />
+            <Image Name="SCs_Zergling_C3_42.png" />
+            <Image Name="SCs_Zergling_C3_43.png" />
+            <Image Name="SCs_Zergling_C3_44.png" />
+            <Image Name="SCs_Zergling_C3_45.png" />
+            <Image Name="SCs_Zergling_C3_46.png" />
+            <Image Name="SCs_Zergling_C3_47.png" />
+            <Image Name="SCs_Zergling_C3_48.png" />
+            <Image Name="SCs_Zergling_C3_49.png" />
+            <Image Name="SCs_Zergling_C3_50.png" />
+            <Image Name="SCs_Zergling_C3_51.png" />
+            <Image Name="SCs_Zergling_C3_52.png" />
+            <Image Name="SCs_Zergling_C3_53.png" />
+            <Image Name="SCs_Zergling_C3_54.png" />
+            <Image Name="SCs_Zergling_C3_55.png" />
+            <Image Name="SCs_Zergling_C3_56.png" />
+            <Image Name="SCs_Zergling_C3_57.png" />
+            <Image Name="SCs_Zergling_C3_58.png" />
+            <Image Name="SCs_Zergling_C3_59.png" />
+            <Image Name="SCs_Zergling_C3_60.png" />
+            <Image Name="SCs_Zergling_C3_61.png" />
+            <Image Name="SCs_Zergling_C3_62.png" />
+            <Image Name="SCs_Zergling_C3_63.png" />
+            <Image Name="SCs_Zergling_C3_64.png" />
+            <Image Name="SCs_Zergling_C3_65.png" />
+            <Image Name="SCs_Zergling_C3_66.png" />
+            <Image Name="SCs_Zergling_C3_67.png" />
+            <Image Name="SCs_Zergling_C3_68.png" />
+            <Image Name="SCs_Zergling_C3_69.png" />
+            <Image Name="SCs_Zergling_C3_70.png" />
+            <Image Name="SCs_Zergling_C3_71.png" />
+            <Image Name="SCs_Zergling_C3_72.png" />
+            <Image Name="SCs_Zergling_C3_73.png" />
+            <Image Name="SCs_Zergling_C3_74.png" />
+            <Image Name="SCs_Zergling_C3_75.png" />
+            <Image Name="SCs_Zergling_C3_76.png" />
+            <Image Name="SCs_Zergling_C3_77.png" />
+            <Image Name="SCs_Zergling_C3_78.png" />
+            <Image Name="SCs_Zergling_C3_79.png" />
+            <Image Name="SCs_Zergling_C3_80.png" />
+            <Image Name="SCs_Zergling_C3_81.png" />
+            <Image Name="SCs_Zergling_C3_82.png" />
+            <Image Name="SCs_Zergling_C3_83.png" />
+            <Image Name="SCs_Zergling_C3_84.png" />
+            <Image Name="SCs_Zergling_C3_85.png" />
+            <Image Name="SCs_Zergling_C3_86.png" />
+            <Image Name="SCs_Zergling_C3_87.png" />
+            <Image Name="SCs_Zergling_C3_88.png" />
+            <Image Name="SCs_Zergling_C3_89.png" />
+            <Image Name="SCs_Zergling_C3_90.png" />
+            <Image Name="SCs_Zergling_C3_91.png" />
+            <Image Name="SCs_Zergling_C3_92.png" />
+            <Image Name="SCs_Zergling_C3_93.png" />
+            <Image Name="SCs_Zergling_C3_94.png" />
+            <Image Name="SCs_Zergling_C3_95.png" />
+            <Image Name="SCs_Zergling_C3_96.png" />
+            <Image Name="SCs_Zergling_C3_97.png" />
+            <Image Name="SCs_Zergling_C3_98.png" />
+            <Image Name="SCs_Zergling_C3_99.png" />
+            <Image Name="SCSP_Zergling_01.png" />
+            <Image Name="SCSP_Zergling_02.png" />
+            <Image Name="SCSP_Zergling_03.png" />
+            <Image Name="SCSP_Zergling_04.png" />
+            <Image Name="zergling_big.png" />
+          </Folder>
+          <Image Name="zergling_big_1.png" />
+          <Image Name="zergling_big_2.png" />
+          <Image Name="zergling_big_3.png" />
+          <Image Name="zergling_big_4.png" />
+          <Image Name="zergling_small_0.png" />
+          <Image Name="zergling_small_1.png" />
+          <Image Name="zergling_small_2.png" />
+          <Image Name="zergling_small_3.png" />
+          <Image Name="zergling_small_4.png" />
+          <Image Name="zergling_small_5.png" />
+          <Image Name="zergling_small_6.png" />
+          <Image Name="zergling_small_7.png" />
+        </Folder>
+        <Folder Name="Tollgates">
+          <Project Name="BOSS1ZerglingKing.csd" Type="Scene" />
+          <Project Name="BOSS2ZerglingNinja.csd" Type="Scene" />
+          <Project Name="BurrowAndAttack.csd" Type="Scene" />
+          <Project Name="CheckTheThing.csd" Type="Scene" />
+          <Project Name="DoubleTapScene.csd" Type="Scene" />
+<<<<<<< HEAD
+          <Project Name="EatFlowersScene.csd" Type="Scene" />
+          <Project Name="Fitthecircle.csd" Type="Scene" />
+=======
+          <Project Name="EatCandiesScene.csd" Type="Scene" />
+>>>>>>> 3d612d5dec142d83abac6bfba7daa60f7001f3f9
+          <Project Name="JumpingOnPoolScene.csd" Type="Scene" />
+          <Project Name="RunScene.csd" Type="Scene" />
+          <Project Name="SlideCutScene.csd" Type="Scene" />
+          <Project Name="TollgateControlLayer.csd" Type="Layer" />
+        </Folder>
+        <TTF Name="AveriaSansLibre-Bold.ttf" />
+        <Project Name="CardEnhancer.csd" Type="Layer" />
+        <Project Name="CardInfoLayer.csd" Type="Layer" />
+        <Project Name="MainScene.csd" Type="Scene" />
+        <Project Name="PauseLayer.csd" Type="Layer" />
+        <Project Name="ScoreScene.csd" Type="Scene" />
+        <Project Name="SettingsScene.csd" Type="Scene" />
+        <Project Name="TestScene.csd" Type="Scene" />
+        <Project Name="TollgateScene.csd" Type="Scene" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

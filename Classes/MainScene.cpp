@@ -11,6 +11,9 @@
 #include "GameManager.h"
 
 USING_NS_CC;
+
+int new1 = 1;			//初始打开的情况下，给与30点能量值
+
 using namespace CocosDenshion;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -38,6 +41,13 @@ bool MainScene::init()
 
 	m_zergling = nullptr;
 
+	//30点能量
+	if (new1 == 1)
+	{
+		GameManager::getInstance()->setEnergy(30);
+		new1 = -1;
+	}
+	else {}
 	// 加载UI
 	auto rootNode = CSLoader::createNode("MainScene.csb");
 	addChild(rootNode);

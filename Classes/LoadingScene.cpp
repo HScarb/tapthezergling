@@ -11,7 +11,7 @@ USING_NS_CC;
 using namespace CocosDenshion;
 using namespace CocosDenshion;
 
-const int TOTAL_TEXTURE_NUM = 240;	// 12 + small zerglings(137) + 3 workers + 15 RESOURCE + 4 bases + 10 smallUnitDeath + 7 other units + 10 Cards= ...240
+const int TOTAL_TEXTURE_NUM = 244;	// 12 + small zerglings(137) + 3 workers + 15 RESOURCE + 4 bases + 10 smallUnitDeath + 7 other units + 10 Cards + 4 runner-dog= 192
 
 Scene* LoadingScene::createScene() 
 {
@@ -46,7 +46,10 @@ bool LoadingScene::init()
 	};
 
 	// “Ï≤Ωº”‘ÿÕº∆¨
-	
+	for (int i = 1; i <= 4; i++)
+	{
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("res/Res/ZerlingAnimation/r_%d.png", i), addTextureCallback);
+	}
 	for (int i = 1; i <= 2; i++)
 	{
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("res/images/chest/chest%d.png", i), addTextureCallback);

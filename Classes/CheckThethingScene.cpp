@@ -7,6 +7,7 @@
 #include "Global.h"
 #include "AnimationUtil.h"
 #define MAX_UNIT_TYPE 10
+#include "GameManager.h"
 USING_NS_CC;
 
 using namespace std;

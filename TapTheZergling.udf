@@ -32,7 +32,18 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="TollgateScene.csd" />
+          <FilePathData Path="Tollgates/Fitthecircle.csd" />
+          <FilePathData Path="Tollgates/DoubleTapScene.csd" />
+          <FilePathData Path="Tollgates/CheckTheThing.csd" />
+          <FilePathData Path="Tollgates/BurrowAndAttack.csd" />
+          <FilePathData Path="Tollgates/BOSS2ZerglingNinja.csd" />
+          <FilePathData Path="Tollgates/BOSS1ZerglingKing.csd" />
+          <FilePathData Path="Tollgates/JumpingOnPoolScene.csd" />
+          <FilePathData Path="Tollgates/SlideCutScene.csd" />
+          <FilePathData Path="Tollgates/TollgateControlLayer.csd" />
           <FilePathData Path="CardInfoLayer.csd" />
+          <FilePathData Path="Tollgates/EatFlowersScene.csd" />
+          <FilePathData Path="Tollgates/RunScene.csd" />
           <FilePathData Path="CardEnhancer.csd" />
           <FilePathData Path="MainScene.csd" />
           <FilePathData Path="TestScene.csd" />

@@ -37,9 +37,6 @@
     <Filter Include="Classes\Scenes\Tollgates\DoubleTap">
       <UniqueIdentifier>{9dfd1f53-61de-4648-8580-ebae28dccc2f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Scenes\Tollgates\EatCandies">
-      <UniqueIdentifier>{b8d09fb3-dd41-40b6-881c-aea985c02efb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Scenes\Tollgates\JumpingOnPool">
       <UniqueIdentifier>{c4976620-4d8c-418b-b5f0-2191fc151ed0}</UniqueIdentifier>
     </Filter>
@@ -66,6 +63,12 @@
     </Filter>
     <Filter Include="Classes\Scenes\Tollgates\Fitthecircle">
       <UniqueIdentifier>{f4abef43-b3f9-4d45-8d30-b14d9a0099ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\EatFlowers">
+      <UniqueIdentifier>{b8d09fb3-dd41-40b6-881c-aea985c02efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\Runrunrun">
+      <UniqueIdentifier>{3c0d7628-2c5e-4b77-954e-0987d7829265}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,11 +129,8 @@
     <ClCompile Include="..\Classes\Farmer.cpp">
       <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EatCandiesScene.cpp">
-      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Flower.cpp">
-      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\PauseLayer.cpp">
       <Filter>Classes\Layer</Filter>
@@ -207,6 +207,15 @@
     <ClCompile Include="..\Classes\Circle.cpp">
       <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EatFlowersScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Meteorolite.cpp">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RunScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+	   </ClCompile>
     <ClCompile Include="..\Classes\StringUtil.cpp">
       <Filter>Classes\Utils</Filter>
     </ClCompile>
@@ -275,11 +284,8 @@
     <ClInclude Include="..\Classes\Farmer.h">
       <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\EatCandiesScene.h">
-      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Flower.h">
-      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\PauseLayer.h">
       <Filter>Classes\Layer</Filter>
@@ -368,6 +374,15 @@
     <ClInclude Include="..\Classes\Circle.h">
       <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\EatFlowersScene.h">
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Meteorolite.h">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RunScene.h">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+	   </ClInclude>
     <ClInclude Include="..\Classes\StringUtil.h">
       <Filter>Classes\Utils</Filter>
     </ClInclude>

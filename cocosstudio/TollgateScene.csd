@@ -317,6 +317,18 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
+              <AbstractNodeData Name="Text_12" ActionTag="2127856354" Tag="55" IconVisible="False" LeftMargin="90.0033" RightMargin="101.9967" TopMargin="576.2682" BottomMargin="181.7318" TouchEnable="True" FontSize="34" LabelText="12 Runrunrun" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="208.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="194.0033" Y="202.7318" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4850" Y="0.2534" />
+                <PreSize X="0.5200" Y="0.0525" />
+                <FontResource Type="Normal" Path="AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint />
             <Position X="279.4240" Y="21.4472" />

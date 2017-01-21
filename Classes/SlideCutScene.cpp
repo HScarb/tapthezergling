@@ -5,6 +5,7 @@
 #include "TimeManager.h"
 #include "TollgateControlLayer.h"
 #include "Global.h"
+#include "GameManager.h"
 
 const int diff0 = 0;
 const int diff1 = 5;
