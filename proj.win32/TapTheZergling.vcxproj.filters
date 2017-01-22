@@ -222,6 +222,9 @@
     <ClCompile Include="..\Classes\CsvUtil.cpp">
       <Filter>Classes\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CsvManager.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -385,6 +388,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CsvUtil.h">
       <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CsvManager.h">
+      <Filter>Classes\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

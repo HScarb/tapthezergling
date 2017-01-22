@@ -123,5 +123,40 @@ const int CsvUtil::findValueInWithLine( const char* chValue, int iValueCol, cons
             break;
         }
     }
+
+<<<<<<< HEAD
+void CsvUtil::flashCsv(const char* csvFilePath)
+{
+	/*if (CardManager::getInstance()->getAllCards().size() == 0)
+	{
+		//´´½¨¿¨Æ¬
+		for (int i = 25; i >= 1; i--)
+		{
+			/*if (i > 10)
+			{
+			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1,10)), 1, i - 1);
+			this->addChild(card);
+			}
+			else
+			{
+			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)1, 1, i - 1);
+			this->addChild(card);
+			}#2#
+			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1, 10)), 1, 0);
+		}
+	}*/
+	CardManager::getInstance()->SortCardMsg();
+	/*char filename[] = "Cards.csv";
+	std::ofstream fout(filename);
+	fout << "Name,Level,Position" << std::endl;
+	
+	for (auto card : CardManager::getInstance()->getAllCards())
+	{
+		fout << StringUtils::format("%d", card->getCardinfo()) << "," << StringUtils::format("%d", card->getCardLevel()) << "," << StringUtils::format("%d", card->getPosition().y) << std::endl;
+	}*/
+	FileUtils::getInstance()->writeStringToFile("Name,Level,Position", m_sPath);
+}
+=======
     return iLine;
 }
+>>>>>>> 4e18f7ef114a051ec41ccf73a37fd1dc03b0341a
