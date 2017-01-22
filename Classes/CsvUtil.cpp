@@ -127,7 +127,7 @@ const int CsvUtil::findValueInWithLine(const char* chValue, int iValueCol, const
 
 void CsvUtil::flashCsv(const char* csvFilePath)
 {
-	if (CardManager::getInstance()->getAllCards().size() == 0)
+	/*if (CardManager::getInstance()->getAllCards().size() == 0)
 	{
 		//´´½¨¿¨Æ¬
 		for (int i = 25; i >= 1; i--)
@@ -141,10 +141,10 @@ void CsvUtil::flashCsv(const char* csvFilePath)
 			{
 			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)1, 1, i - 1);
 			this->addChild(card);
-			}*/
+			}#2#
 			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1, 10)), 1, 0);
 		}
-	}
+	}*/
 	CardManager::getInstance()->SortCardMsg();
 	/*char filename[] = "Cards.csv";
 	std::ofstream fout(filename);

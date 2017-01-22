@@ -27,6 +27,8 @@ public:
 	CC_SYNTHESIZE(int, m_endCollectionTime, EndingTimeStamp);
 	CC_SYNTHESIZE(tm*, m_startDate, StartDate);
 	CC_SYNTHESIZE(char*, m_sPath, csvPath);
+	CC_SYNTHESIZE(int, m_currenttime, Currenttime);
+	CC_SYNTHESIZE(int, m_lasttime, Lasttime);
 private:
 	static DataManager * m_dataManager;
 	//const char* m_sPath;

@@ -217,13 +217,10 @@
     <ClCompile Include="..\Classes\RunScene.cpp">
       <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
 	   </ClCompile>
-    <ClCompile Include="..\Classes\CsvUtils.cpp">
-=======
     <ClCompile Include="..\Classes\StringUtil.cpp">
       <Filter>Classes\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\CsvUtil.cpp">
->>>>>>> 65a05737d28351a3051867d428b8e909172abe96
       <Filter>Classes\Utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -375,7 +372,6 @@
     <ClInclude Include="..\Classes\Circle.h">
       <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="..\Classes\EatFlowersScene.h">
       <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
     </ClInclude>
@@ -385,13 +381,10 @@
     <ClInclude Include="..\Classes\RunScene.h">
       <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
 	   </ClInclude>
-    <ClInclude Include="..\Classes\CsvUtils.h">
-=======
     <ClInclude Include="..\Classes\StringUtil.h">
       <Filter>Classes\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\CsvUtil.h">
->>>>>>> 65a05737d28351a3051867d428b8e909172abe96
       <Filter>Classes\Utils</Filter>
     </ClInclude>
   </ItemGroup>

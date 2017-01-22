@@ -20,16 +20,6 @@ using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 using namespace CocosDenshion;
 
-//Card * m_card_sprite;		 //卡片
-int money = 0;		//开箱要氪的金
-int m = 0;			//宝箱开启次数
-int n = 0;			//获得卡片次数
-int t = 0;			//获取卡片的种类
-bool act = false;    //初始化宝箱调试
-bool but = false;	//按钮问题
-bool res = false;   //按钮的上升问题,false是卡片在上面，true是箭头在上面。
-bool pre = false;   //控制奖励，防止提前被按
-
 cocos2d::Scene* TollgateScene::createScene()
 {
 	auto scene = Scene::create();
@@ -51,23 +41,23 @@ void TollgateScene::runCard()
 		m_card_sprite->runAction(fadeout);
 	}),
 		CallFunc::create([this]{
-		if (!res)
+		if (!m_res)
 			m_cardBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
 	}),
 		CallFunc::create([this]{
-		if (!res)
+		if (!m_res)
 			m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
-			res = true;   //res为ture,则箭头在上面
+		m_res = true;   //res为ture,则箭头在上面
 	}),
 		CallFunc::create([this]{
 		setChest();
 	}),
 		CallFunc::create([this]{
 		int e = random(10, 12);
-		money = e * m;
+		m_money = e * m;
 		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
 		m_anotherChestText->setVisible(true);
-		act = false;
+		m_act = false;
 		auto child = getChildByTag(2);                         //隐藏GERAT，GREAT的Tag是2
 		child->removeFromParent();
 	}),
@@ -88,23 +78,23 @@ void TollgateScene::runEnergy()
 		m_energy_sprite->runAction(fadeout);
 	}),
 		CallFunc::create([this]{
-		if (!res)  //现在是false,卡片在上面
+		if (!m_res)  //现在是false,卡片在上面
 		m_cardBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
 	}),
 		CallFunc::create([this]{
-		if (!res)
+		if (!m_res)
 		m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
-		res = true;   //res为ture,则箭头在上面
+		m_res = true;   //res为ture,则箭头在上面
 	}),
 		CallFunc::create([this]{
 		setChest();
 	}),
 		CallFunc::create([this]{
 		int e = random(10, 12);
-		money = e * m;
+		m_money = e * m;
 		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));
 		m_anotherChestText->setVisible(true);
-		act = false;
+		m_act = false;
 		auto child = getChildByTag(2);                         //隐藏GERAT，GREAT的Tag是2
 		child->removeFromParent();
 	}),
@@ -126,23 +116,23 @@ void TollgateScene::runDiamond()
 		m_diamond_sprite->runAction(fadeout);
 	}),
 		CallFunc::create([this]{
-		if (!res)
+		if (!m_res)
 		m_cardBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
 	}),
 		CallFunc::create([this]{
-		if (!res)
+		if (!m_res)
 		m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
-		res = true;  //此时，箭头在上面
+		m_res = true;  //此时，箭头在上面
 	}),
 		CallFunc::create([this]{
 		setChest();
 	}),
 		CallFunc::create([this]{
 		int e = random(10, 12);
-		money = e * m;
+		m_money = e * m;
 		m_anotherChestText->setText(StringUtils::format("Need %d extro diamond", e * m));  //这个地方，m是全局变量，e不是
 		m_anotherChestText->setVisible(true);
-		act = false;
+		m_act = false;
 		auto child = getChildByTag(2);                         //隐藏GERAT，GREAT的Tag是2
 		child->removeFromParent();
 	}),
@@ -171,7 +161,8 @@ bool TollgateScene::init()
 	m_flash = nullptr;
 	m_label = nullptr;
 	m_anotherChestText = nullptr;
-	money = 0;
+	m_currentTime = 0;
+	m_money = 0;
 	t = 0;
 
 	if (!m_chest_sprite)
@@ -183,8 +174,8 @@ bool TollgateScene::init()
 	m = 0;
 
 	//这个按钮是用来不重复生成关卡的
-	but = false;
-	act = false;
+	m_but = false;
+	m_act = false;
 
 	m_scrollView = nullptr;
 	m_t1 = nullptr;
@@ -246,6 +237,35 @@ bool TollgateScene::init()
 	m_timeBar->setPercent(100.0f);
 	m_timeText->setText("00.00");
 	
+	/*m_currentTime = getCurrentTime();
+	while (GameManager::getInstance()->getEnergy() < 30)
+	{
+		DataManager::getInstance()->setLasttime(m_currentTime);
+		int s = m_currentTime->tm_min;			//这个值是实时变化的
+		if (s>0)
+		{
+			GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() + 1);
+			s--;
+		}
+		else if (s == 0)
+		{
+			break;
+		}
+	}*/
+	m_currentTime = getCurrentTime();
+	printf("second:%d\n", m_currentTime->tm_sec);
+	printf("second:%d\n", m_currentTime->tm_min);
+	printf("second:%d\n", m_currentTime->tm_hour);
+	printf("second:%d\n", m_currentTime->tm_mday);
+	printf("second:%d\n", m_currentTime->tm_mon);
+
+	if (GameManager::getInstance()->getEnergy() < 30)
+	{
+		this->schedule(schedule_selector(TollgateScene::resumeEnergy), 60.0f);
+		log("%d", GameManager::getInstance()->getEnergy());
+	}
+	
+
 	// 设置时间
 	if (GameManager::getInstance()->getIsGameOn() == false)		// 如果游戏还没有开始
 	{
@@ -436,6 +456,42 @@ void TollgateScene::showNextTollgate()
 	m_tollgateNumLabel->runAction(Sequence::create(scale1, changeText, scale2, nullptr));
 }
 
+void TollgateScene::resumeEnergy(float dt)
+{	
+	if (GameManager::getInstance()->getEnergy() < 30){
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() + 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
+	}
+}
+
+tm* TollgateScene::getCurrentTime()
+{
+	time_t t = time(NULL);
+	tm* lt = localtime(&t);
+
+	int year = lt->tm_year;
+	int month = lt->tm_mon;
+
+	int yday = lt->tm_yday;
+	int mday = lt->tm_mday;
+	int wday = lt->tm_wday;
+
+	int h = lt->tm_hour;
+	int m = lt->tm_min;
+	int s = lt->tm_sec;
+
+	return lt;
+}
+
+int TollgateScene::getTimeStamp()
+{
+	timeval tm;
+	gettimeofday(&tm, NULL);
+	log("stamp %ld",tm.tv_usec/1000 + tm.tv_sec*1000);
+	log("stamo %ld",tm.tv_sec);
+	return tm.tv_sec;
+}
+
 void TollgateScene::addSecondsByCard(int info)
 {
 	for (auto card:CardManager::getInstance()->getAllCards())
@@ -478,12 +534,12 @@ void TollgateScene::onGoOnBtnClicked(Ref* pSender, cocos2d::ui::TouchEventType t
 			m_chest_sprite->removeFromParent();
 		}
 		m_anotherChestText->setVisible(false);
-		if (res)  //如果res=true，则说明箭头在上面
+		if (m_res)  //如果res=true，则说明箭头在上面
 		{
 			m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
 			m_cardBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
 		}
-		res = false;  //切换状态，卡片来到上面
+		m_res = false;  //切换状态，卡片来到上面
 		setNextTollgate();
 		TimeManager::getInstance()->addTime(2.0f);				// add 2 seconds
 		m_timeText->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getTime()));		// 设置时间标签按照格式显示时间
@@ -665,25 +721,25 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 		
 		if (m_chest_sprite)  
 		{
-			if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (act != true) && (GameManager::getInstance()->getJewel() >= money))
+			if ((m_chest_sprite->getBoundingBox().containsPoint(pos)) && (m_act != true) && (GameManager::getInstance()->getJewel() >= m_money))
 			{
-				GameManager::getInstance()->setJewel(GameManager::getInstance()->getJewel() - money);
+				GameManager::getInstance()->setJewel(GameManager::getInstance()->getJewel() - m_money);
 				m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel()));
-				if (res)//如果当前是箭头在上面
+				if (m_res)//如果当前是箭头在上面
 				{
 					m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
 					m_cardBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
-					res = false;
+					m_res = false;
 				}
 				//打开宝箱时触发鼓励文字
-				if (act != true)
+				if (m_act != true)
 				{
 					Label *m_label = Label::create("  GREATE!  ", "fonts/AveriaSansLibre-Bold.ttf", 40);
 					m_label->setPosition(visibleSize.width / 2, (visibleSize.height / 2) + 135);
 					this->addChild(m_label, 1, 2);
 				}
 
-				if (act != true)
+				if (m_act != true)
 				{
 					m_flash->setVisible(true);
 					m_flash->runAction(RotateTo::create(2, 100));
@@ -692,9 +748,9 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					m_chest_sprite->runAction(Sequence::create(DelayTime::create(2.3), scaleto2, hideAction, dt, NULL));
 					m_flash->runAction(Sequence::create(DelayTime::create(2.3), hideAction, dt, NULL));
 				}
-				act = true;
-				int i = random(1, 2);
-				//int i = 3;
+				m_act = true;
+				//int i = random(1, 3);
+				int i = 2;
 				if (i == Energy)
 				{
 					m++;
@@ -761,8 +817,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 			if (m_card_sprite->getBoundingBox().containsPoint(pos))
 			{
 				runCard();
-				//这个卡片加入很麻烦，每加入一张，都需要重新排序？？还是在原位置叠加，叠加的代码怎么写，怎么实现？
-				auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(t), 1, n);
+				auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(t), 1, 0);
 				//this->addChild(card);
 				n++;
 			}

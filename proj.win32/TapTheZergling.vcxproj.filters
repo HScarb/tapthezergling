@@ -207,7 +207,6 @@
     <ClCompile Include="..\Classes\Circle.cpp">
       <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="..\Classes\EatFlowersScene.cpp">
       <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
     </ClCompile>

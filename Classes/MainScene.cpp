@@ -48,6 +48,14 @@ bool MainScene::init()
 		new1 = -1;
 	}
 	else {}
+	
+	//自然回复能量
+	if (GameManager::getInstance()->getEnergy() < 30)
+	{
+		this->schedule(schedule_selector(MainScene::resumeEnergy), 60.0f);
+		log("%d", GameManager::getInstance()->getEnergy());
+	}
+
 	// 加载UI
 	auto rootNode = CSLoader::createNode("MainScene.csb");
 	addChild(rootNode);
@@ -131,6 +139,14 @@ void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)
 		this->addChild(m_cardControlLayer);
 	}
 	return;
+}
+
+void MainScene::resumeEnergy(float dt)
+{
+	if (GameManager::getInstance()->getEnergy() < 30){
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() + 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
+	}
 }
 
 void MainScene::onAddJewelBtnClick(Ref* pSender, TouchEventType type)
