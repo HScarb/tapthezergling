@@ -750,7 +750,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 				}
 				m_act = true;
 				//int i = random(1, 3);
-				int i = 2;
+				int i = 3;
 				if (i == Energy)
 				{
 					m++;
