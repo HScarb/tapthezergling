@@ -24,7 +24,7 @@ bool CardControlLayer::init()
 	if (!Layer::init())
 		return false;
 	m_currentTime = getCurrentTime();
-	m_timeStamp=getTimeStamp();
+	m_timeStamp = getTimeStamp();
 	log("cardtime %d,et %d", DataManager::getInstance()->getStartTimeStamp(), DataManager::getInstance()->getEndingTimeStamp());
 	m_collectBtn = nullptr;
 	m_closeBtn = nullptr;
@@ -44,7 +44,7 @@ bool CardControlLayer::init()
 	{
 		m_isCollectionContainsCard = true;
 		//m_sprite->setVisible(true);
-	}	
+	}
 	else
 	{
 		m_isCollectionContainsCard = false;
@@ -74,7 +74,6 @@ bool CardControlLayer::init()
 		//创建卡片
 		for (int i = 25; i >= 1; i--)
 		{
-
 			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1, 10)), 1, 0);
 			this->addChild(card);
 		}
@@ -98,7 +97,7 @@ bool CardControlLayer::init()
 
 	//增加卡片合成完成事件监听
 	auto cardCollectionListener = EventListenerCustom::create("CardCollectionSucceed", CC_CALLBACK_1(CardControlLayer::cardCollectionSucceedCallBack, this));
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(cardCollectionListener,this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(cardCollectionListener, this);
 
 	m_closeBtn->addTouchEventListener(this, toucheventselector(CardControlLayer::onCloseBtnClick));
 	m_collectBtn->addTouchEventListener(this, toucheventselector(CardControlLayer::onCollectBtnClick));
@@ -109,11 +108,11 @@ int CardControlLayer::getTimeStamp()
 {
 	timeval tm;
 	gettimeofday(&tm, NULL);
-	log("stamp %ld", tm.tv_usec/1000+tm.tv_sec*1000);
+	log("stamp %ld", tm.tv_usec / 1000 + tm.tv_sec * 1000);
 	log("stamo %ld", tm.tv_sec);
 	return tm.tv_sec;    // 单位：秒
 	//    return tm.tv_usec; // 单位：毫秒
-	
+
 }
 
 tm* CardControlLayer::getCurrentTime()
@@ -290,7 +289,7 @@ void CardControlLayer::onCloseBtnClick(Ref* pSender, cocos2d::ui::TouchEventType
 
 void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
 {
-	if (!m_isCardsStartCollection&&CardManager::getInstance()->getCardsFromEnhancer().size()==2)
+	if (!m_isCardsStartCollection&&CardManager::getInstance()->getCardsFromEnhancer().size() == 2)
 	{
 		Card * cardTemp = nullptr;
 		for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
@@ -299,7 +298,7 @@ void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventTy
 			break;
 		}
 		m_isCardsStartCollection = true;
-		TimeManager::getInstance()->setCardTime((cardTemp->getCardLevel()*10));
+		TimeManager::getInstance()->setCardTime((cardTemp->getCardLevel() * 10));
 		log("cardtime %f", TimeManager::getInstance()->getCardTime());
 		TimeManager::getInstance()->startCardTimeCountDown();
 		DataManager::getInstance()->setStartTimeStamp(getTimeStamp());
@@ -307,15 +306,15 @@ void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventTy
 			DataManager::getInstance()->getEndingTimeStamp() + cardTemp->getCardLevel() * 10);
 		DataManager::getInstance()->setStartDate(getCurrentTime());
 	}
-	
-	
+
+
 }
 
 bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-	
+
 	m_beginPos = touch->getLocation();
-	log("x=%f",m_beginPos.x);
+	log("x=%f", m_beginPos.x);
 	//通过点击的方式从合成器中吧卡片移回下方容器
 	if (m_isCardsStartCollection == false)
 	{
@@ -366,7 +365,7 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 	else if ((m_isCollectionContainsCard == false) && (m_isCardsStartCollection == false))//在卡片没有卡片在已经合成并且还在合成后预览位置时
 	{
 		//当前触点位置和点击初始位置的y轴距离绝对值大于40并且卡片合成器中卡片张数少于2，同时当前没有正在移动的卡片
-		if (abs(m_movedPos.y - m_beginPos.y) >= 30 )
+		if (abs(m_movedPos.y - m_beginPos.y) >= 30)
 		{
 			Vec2 cardPos;
 			cardPos.x = m_movedPos.x;
@@ -413,7 +412,7 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 					}
 				}
 			}
-			
+
 		}
 		if (m_operatingCard != nullptr && m_isSingleCard == false)
 		{
@@ -454,10 +453,10 @@ void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unuse
 	if (m_operatingCard->getPosition().y >= (CARD_SLOT_Y - 50)
 		&& m_operatingCard->getPosition().y <= (CARD_SLOT_Y + 50)
 		&&
-			(m_operatingCard->getPosition().x >= (CARD_SLOT_X1 - 50)
-			&& m_operatingCard->getPosition().x <= (CARD_SLOT_X1 + 50)
-			|| m_operatingCard->getPosition().x >= (CARD_SLOT_X2 - 50)
-			&& m_operatingCard->getPosition().x <= (CARD_SLOT_X2 + 50)))
+		(m_operatingCard->getPosition().x >= (CARD_SLOT_X1 - 50)
+		&& m_operatingCard->getPosition().x <= (CARD_SLOT_X1 + 50)
+		|| m_operatingCard->getPosition().x >= (CARD_SLOT_X2 - 50)
+		&& m_operatingCard->getPosition().x <= (CARD_SLOT_X2 + 50)))
 	{
 		if (m_isEnhancerContaninsACard)
 		{

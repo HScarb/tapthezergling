@@ -145,6 +145,13 @@ bool TollgateScene::init()
 {
 	if (!Layer::init())
 		return false;
+	m = 0;
+	n = 0;
+	m_act = false;
+	m_but = false;
+	m_res = false;
+	m_pre = false;
+	m_money = 0;
 	m_energyText = nullptr;
 	m_jewelText = nullptr;
 	m_addJewelBtn = nullptr;
@@ -162,8 +169,6 @@ bool TollgateScene::init()
 	m_label = nullptr;
 	m_anotherChestText = nullptr;
 	m_currentTime = 0;
-	m_money = 0;
-	t = 0;
 
 	if (!m_chest_sprite)
 	{
@@ -354,6 +359,7 @@ void TollgateScene::addCard()
 	void InsertACardAfterCollection(Card* card);
 	*/
 	 //怎么把m_card_sprite所指的card加入到容器中
+	
 	
 }
 
@@ -749,7 +755,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					m_flash->runAction(Sequence::create(DelayTime::create(2.3), hideAction, dt, NULL));
 				}
 				m_act = true;
-				//int i = random(1, 3);
+				//int i = random(1, 2);
 				int i = 3;
 				if (i == Energy)
 				{
@@ -776,8 +782,9 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 				else if (i == Card)
 				{
 					m++;
-					t = random(1, 10);
-					m_card_sprite = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(t), 1,n);
+					GameManager::getInstance()->setcardType(random(1, 10));
+					//m_card_sprite = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(GameManager::getInstance()->getcardType()), 1,n);
+					m_card_sprite = Card::createByLevelAndInfo(1, Card::CardInfo(GameManager::getInstance()->getcardType()));
 					//按道理，这里的setPosition需要遍历CardVec，找到对应种类的卡片，排在最后
 					m_card_sprite->setPosition(visibleSize.width / 2 - 40, visibleSize.height / 2 - 40);
 					m_card_sprite->setScale(0.01, 0.01);
@@ -817,7 +824,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 			if (m_card_sprite->getBoundingBox().containsPoint(pos))
 			{
 				runCard();
-				auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(t), 1, 0);
+				auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(GameManager::getInstance()->getcardType()), 1, -1);
 				//this->addChild(card);
 				n++;
 			}

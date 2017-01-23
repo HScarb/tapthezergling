@@ -30,10 +30,11 @@ protected:
 	CC_SYNTHESIZE(int, m_energy, Energy);						// 当前的能量数量
 	CC_SYNTHESIZE(int, m_diff, Diff);							// 当前难度
 	CC_SYNTHESIZE(int, m_loop, Loop);							// 当前关循环次数
-	CC_SYNTHESIZE(int, m_speed, speed);                       //fitthecircle关的旋转速度
+	CC_SYNTHESIZE(int, m_speed, speed);                       // fitthecircle关的旋转速度
 	CC_SYNTHESIZE(bool, m_isGameOn, IsGameOn);					// 游戏是否已经开始
 	CC_SYNTHESIZE(bool, m_isWaitToAddTime, IsWaitToAddTime);	// 是否在等增加时间(关卡胜利之后增加2秒时间在此判断)
 	CC_SYNTHESIZE(bool, m_isWaitToAddChest, IsWaitToAddChest);	// 是否在等显示宝箱
+	CC_SYNTHESIZE(int, m_cardType, cardType);					// 宝箱获得的卡片
 
 private:
 	static GameManager * m_gameManager;

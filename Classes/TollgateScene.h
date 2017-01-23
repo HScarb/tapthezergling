@@ -20,6 +20,7 @@ public:
 	static cocos2d::Scene * createScene();
 	virtual bool init();
 	CREATE_FUNC(TollgateScene);
+
 	
 private:
 	void runDiamond();      //进行宝石入库动画
@@ -101,15 +102,14 @@ private:
 	cocos2d::ui::Text * m_t12;
 private:
 	CardControlLayer * m_cardControlLayer;
-	//Card * m_card_sprite;		 //卡片
+	//Card * m_card_sprite;	//卡片
 	int m_timeStamp;		//当前的时间和秒数
 	tm * m_currentTime;
-	int m_money = 0;		//开箱要氪的金
-	int m = 0;			//宝箱开启次数
-	int n = 0;			//获得卡片次数
-	int t = 0;			//获取卡片的种类
-	bool m_act = false;    //初始化宝箱调试
-	bool m_but = false;	//按钮问题
-	bool m_res = false;   //按钮的上升问题,false是卡片在上面，true是箭头在上面。
-	bool m_pre = false;   //控制奖励，防止提前被按
+	int m_money;			//开箱要氪的金
+	int m;					//宝箱开启次数
+	int n;					//获得卡片次数
+	bool m_act;				//初始化宝箱调试
+	bool m_but;				//按钮问题
+	bool m_res;				//按钮的上升问题,false是卡片在上面，true是箭头在上面。
+	bool m_pre;				//控制奖励，防止提前被按
 };
