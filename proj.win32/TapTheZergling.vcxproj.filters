@@ -70,6 +70,9 @@
     <Filter Include="Classes\Scenes\Tollgates\Runrunrun">
       <UniqueIdentifier>{3c0d7628-2c5e-4b77-954e-0987d7829265}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Utils\rapidjson">
+      <UniqueIdentifier>{81e38dfb-1d39-4891-a428-c39dc21e53cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -215,14 +218,14 @@
     </ClCompile>
     <ClCompile Include="..\Classes\RunScene.cpp">
       <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
-	   </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Classes\StringUtil.cpp">
       <Filter>Classes\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\CsvUtil.cpp">
       <Filter>Classes\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CsvManager.cpp">
+    <ClCompile Include="..\Classes\CsvData.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -382,15 +385,72 @@
     </ClInclude>
     <ClInclude Include="..\Classes\RunScene.h">
       <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
-	   </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Classes\StringUtil.h">
       <Filter>Classes\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\CsvUtil.h">
       <Filter>Classes\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CsvManager.h">
+    <ClInclude Include="..\Classes\CsvData.h">
       <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\allocators.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\document.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\encodedstream.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\encodings.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\filereadstream.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\filewritestream.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\fwd.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\istreamwrapper.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\memorybuffer.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\memorystream.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\ostreamwrapper.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\pointer.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\prettywriter.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\rapidjson.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\reader.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\schema.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\stream.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\stringbuffer.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\writer.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

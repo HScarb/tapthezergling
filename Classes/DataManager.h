@@ -11,6 +11,13 @@
 #pragma once
 #include "cocos2d.h"
 
+struct CardData
+{
+	int info;		// 卡片类型
+	int level;		// 卡片等级
+	int num;		// 该类型等级卡片的数量
+};
+
 class DataManager : public cocos2d::Node
 {
 public:
@@ -20,14 +27,18 @@ public:
 	void saveData();
 	void loadData();
 
+	void initCardData();
+
 	CC_SYNTHESIZE(int, m_bestScore, BestScore);
 	CC_SYNTHESIZE(int, m_jewel, Jewel);
 	CC_SYNTHESIZE(int, m_energy, Energy);
 	CC_SYNTHESIZE(int, m_startCollectionTime, StartTimeStamp);
 	CC_SYNTHESIZE(int, m_endCollectionTime, EndingTimeStamp);
 	CC_SYNTHESIZE(tm*, m_startDate, StartDate);
-	//CC_SYNTHESIZE(char*, m_sPath, csvPath);
+
+	CC_SYNTHESIZE(std::string, _cardDataPath, CardDataPath);		// 卡片数据存放路径
+	CC_SYNTHESIZE(std::vector<CardData>, m_cardData, CardData);			// 用vector存储卡片数据
 private:
 	static DataManager * m_dataManager;
-	const char* m_sPath;
+
 };

@@ -1,12 +1,12 @@
-#ifndef CsvManager_H
-#define CsvManager_H
+#ifndef __CSVDATA_H__
+#define __CSVDATA_H__
 
 #include "cocos2d.h"
 USING_NS_CC;
-class CsvManager : public Ref
+class CsvData : public Ref
 {
 public:
-	CREATE_FUNC(CsvManager);
+	CREATE_FUNC(CsvData);
 	virtual bool init();
 
 	void addLineData(ValueVector lineData);//添加一行数据

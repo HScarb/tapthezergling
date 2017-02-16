@@ -5,7 +5,7 @@
 class Card : public cocos2d::Sprite
 {
 public:
-	enum CardInfo
+	typedef enum
 	{
 		NONE = 0,
 		Double_Tap_Zergling_Card = 1,
@@ -18,11 +18,12 @@ public:
 		Feed_Snakes_Card,
 		Zergling_King_Card,
 		Zergling_Ninja_Card
-	};//¿¨Æ¬Ãû³Æ
+	} CardInfo;//¿¨Æ¬Ãû³Æ
 	static Card * createByLevelAndInfo(int level,CardInfo info = NONE);
 	bool init(int info,int level);
 
 	void tapped();//¿¨Æ¬µã»÷²Ù×÷
+
 	CC_SYNTHESIZE(int, m_cardInfo, Cardinfo);
 	CC_SYNTHESIZE(int, m_cardLevel, CardLevel);
 };

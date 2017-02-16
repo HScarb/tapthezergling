@@ -25,8 +25,8 @@ bool CsvUtil::init(){
 
 void CsvUtil::loadFile( const char* sPath ){
 
-    /* 存放一个csv文件的对象。 */
-    CsvManager* csvData = CsvManager::create();
+    /* CsvManager存放一个csv文件的对象。 */
+    auto csvData = CsvData::create();
 
     /* 读取数据，按行保存到列表中 */
     std::string str = FileUtils::getInstance()->getStringFromFile(sPath);

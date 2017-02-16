@@ -2,7 +2,7 @@
 #define CsvUtil_H
 
 #include "cocos2d.h"
-#include "CsvManager.h"
+#include "CsvData.h"
 
 using namespace cocos2d;
 
@@ -40,7 +40,7 @@ private:
     static CsvUtil* m_CsvUtil;
 
     /* ´æ·ÅmCsvStrList-filePathµÄ×Öµä */
-    Map<std::string, CsvManager*> mCsvMap;
+    Map<std::string, CsvData*> mCsvMap;
 };
 
 #endif

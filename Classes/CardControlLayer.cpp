@@ -69,7 +69,7 @@ bool CardControlLayer::init()
 		}
 		TimeManager::getInstance()->startCardTimeCountDown();
 	}
-	/*if (CardManager::getInstance()->getAllCards().size() == 0)
+	if (CardManager::getInstance()->getAllCards().size() == 0)
 	{
 		//创建卡片
 		for (int i = 25; i >= 1; i--)
@@ -86,11 +86,11 @@ bool CardControlLayer::init()
 			}*/
 			auto card = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(random(1, 10)), 1, 0);
 			this->addChild(card);
-			}
 		}
 	}
-	else*/
+	else
 		showCards();
+	
 	CardManager::getInstance()->SortCardMsg();
 
 	//获取屏幕分辨率
@@ -309,7 +309,7 @@ void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventTy
 			break;
 		}
 		m_isCardsStartCollection = true;
-		TimeManager::getInstance()->setCardTime((cardTemp->getCardLevel()*10));
+		TimeManager::getInstance()->setCardTime(cardTemp->getCardLevel()*10);
 		log("cardtime %f", TimeManager::getInstance()->getCardTime());
 		TimeManager::getInstance()->startCardTimeCountDown();
 		DataManager::getInstance()->setStartTimeStamp(getTimeStamp());
@@ -317,8 +317,6 @@ void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventTy
 			DataManager::getInstance()->getEndingTimeStamp() + cardTemp->getCardLevel() * 10);
 		DataManager::getInstance()->setStartDate(getCurrentTime());
 	}
-	
-	
 }
 
 bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
