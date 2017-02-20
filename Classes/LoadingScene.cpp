@@ -144,7 +144,6 @@ bool LoadingScene::init()
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/splat2.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/winmusic.mp3");
 
-
 	// 加载用户记录
 	DataManager::getInstance()->loadData();
 

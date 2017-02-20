@@ -20,6 +20,7 @@ public:
 	static cocos2d::Scene * createScene();
 	virtual bool init();
 	CREATE_FUNC(TollgateScene);
+
 	
 private:
 	void runDiamond();      //进行宝石入库动画
@@ -33,6 +34,9 @@ private:
 	void setNextTollgate();			// 随机下一关
 	void showNextTollgate();		// 将已经生成的下一关显示出来
 	void addSecondsByCard(int info);		//如果卡片容器中有卡片与关卡相对应，就增加关卡时间
+	int getTimeStamp();				//获取时间戳
+	tm* getCurrentTime();			//获取当前的时间，包括具体的年月日
+	void resumeEnergy(float dt);			//自然恢复能量值
 
 	// 宝箱和附属精灵及其动画
 	cocos2d::Sprite * m_card_sprite;
@@ -71,16 +75,15 @@ private:
 	// 标签和按钮和进度条
 	cocos2d::ui::Text * m_jewelText;
 	cocos2d::ui::Text * m_energyText;
-	cocos2d::ui::Button * m_homeBtn;
-	cocos2d::ui::Button * m_cardBtn;
-	cocos2d::ui::Button * m_addJewelBtn;
-	cocos2d::ui::LoadingBar * m_energyBar;
-	cocos2d::ui::LoadingBar * m_timeBar;
 	cocos2d::ui::Text * m_timeText;
 	cocos2d::ui::Text * m_anotherChestText;
 	cocos2d::ui::Text * m_congratsText;
-	//新加的goon按钮
+	cocos2d::ui::Button * m_homeBtn;
+	cocos2d::ui::Button * m_cardBtn;
+	cocos2d::ui::Button * m_addJewelBtn;
 	cocos2d::ui::Button * m_goOnBtn;
+	cocos2d::ui::LoadingBar * m_energyBar;
+	cocos2d::ui::LoadingBar * m_timeBar;
 
 	cocos2d::ui::ScrollView * m_scrollView;
 
@@ -99,5 +102,14 @@ private:
 	cocos2d::ui::Text * m_t12;
 private:
 	CardControlLayer * m_cardControlLayer;
-	int m;			// 宝箱的开箱次数
+	//Card * m_card_sprite;	//卡片
+	int m_timeStamp;		//当前的时间和秒数
+	tm * m_currentTime;
+	int m_money;			//开箱要氪的金
+	int m;					//宝箱开启次数
+	int n;					//获得卡片次数
+	bool m_act;				//初始化宝箱调试
+	bool m_but;				//按钮问题
+	bool m_res;				//按钮的上升问题,false是卡片在上面，true是箭头在上面。
+	bool m_pre;				//控制奖励，防止提前被按
 };

@@ -37,4 +37,7 @@ private:
 	//²ã
 	CardControlLayer * m_cardControlLayer;
 	NoTouchLayer * m_noTouchLayer;
+
+	//»Ø¸´ÄÜÁ¿
+	void resumeEnergy(float dt);
 };

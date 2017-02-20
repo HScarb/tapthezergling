@@ -1,13 +1,14 @@
 //CardManager.cpp
 #include "CardManager.h"
 #include "Card.h"
+#include "GameManager.h"
 USING_NS_CC;
 
 CardManager * CardManager::m_cardManager = nullptr;
 
 CardManager* CardManager::getInstance()
 {
-	
+
 	if (m_cardManager == nullptr)
 	{
 		m_cardManager = new CardManager();
@@ -52,17 +53,17 @@ Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, flo
 	Card * card = nullptr;
 	if (info == 0)
 		return nullptr;
-	card = Card::createByLevelAndInfo(level,info);
+	card = Card::createByLevelAndInfo(level, info);
 	card->setCardLevel(level);//设置等级
 	/*if (posY != 450)
 	{
-		card->setPosition(posX * 80, 0);//设定新增卡片的坐标
-		InsertACard(card);
+	card->setPosition(posX * 80, 0);//设定新增卡片的坐标
+	InsertACard(card);
 	}
 	else
 	{
-		card->setPosition(450, 350);//设定合成后的卡片的坐标
-		InsertCardAfterCollection(card);
+	card->setPosition(450, 350);//设定合成后的卡片的坐标
+	InsertCardAfterCollection(card);
 	}*/
 	if (posY == 0)
 	{
@@ -76,21 +77,25 @@ Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, flo
 	}
 	/*if (posY == 300)
 	{
-		card->setPosition(450, 350);//设定合成后的卡片的坐标
-		InsertCardAfterCollection(card);
+	card->setPosition(450, 350);//设定合成后的卡片的坐标
+	InsertCardAfterCollection(card);
 	}*/
+	else if (posY == -1)
+	{
+		InsertChestCard();
+	}
 	return card;
 }
 
 /*Card* CardManager::CreateACardByTypeAndLevel(Card* card)
 {
-	Card * tempCard = nullptr;
-	if (card == nullptr)
-		return nullptr;
-	tempCard = Card::createByLevelAndInfo((Card::CardInfo)card->getCardinfo());
-	tempCard->setCardLevel(card->getCardLevel());//设置等级
-	tempCard->setPosition(card->getPosition());
-	return tempCard;
+Card * tempCard = nullptr;
+if (card == nullptr)
+return nullptr;
+tempCard = Card::createByLevelAndInfo((Card::CardInfo)card->getCardinfo());
+tempCard->setCardLevel(card->getCardLevel());//设置等级
+tempCard->setPosition(card->getPosition());
+return tempCard;
 }*/
 
 void CardManager::InsertACard(Card * card)
@@ -108,9 +113,24 @@ void CardManager::InsertCardAfterCollection(Card* card)
 	m_cardAfterCollection.pushBack(card);
 }
 
+void CardManager::InsertChestCard()
+{
+	Card * card;
+	int type = GameManager::getInstance()->getcardType();
+	card = Card::createByLevelAndInfo(1, Card::CardInfo(type));
+	int i = 0;
+	//得到最后一张卡片的位置
+	for (auto card : m_cardVector)
+	{
+		i++;
+	}
+	card->setPosition((i++)*80, 0);//设定新增卡片的坐标
+	InsertACard(card);
+}
+
 void CardManager::SortCardMsg()
 {
-	std::sort(m_cardVector.begin(), m_cardVector.end(),SortCardsOpreator);
+	std::sort(m_cardVector.begin(), m_cardVector.end(), SortCardsOpreator);
 	int i = 0;
 	for (auto card : m_cardVector)
 	{
@@ -120,7 +140,7 @@ void CardManager::SortCardMsg()
 }
 
 void CardManager::DeleteCardByObject(Card *card)
-{ 
+{
 	m_cardVector.eraseObject(card);
 	SortCardMsg();
 }
@@ -149,3 +169,4 @@ bool SortCardsOpreator(const Card* card1, const Card* card2)
 	}
 
 }
+

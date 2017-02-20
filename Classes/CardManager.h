@@ -26,6 +26,7 @@ public:
 	void InsertACardIntoEnhancer(Card * card);
 	void InsertCardAfterCollection(Card * card);
 	void SortCardMsg();
+	void InsertChestCard();
 	//É¾³ý¿¨Æ¬
 	void DeleteCardByObject(Card * card);
 	void DeleteCardByObjectFromEnhancer(Card * card);
