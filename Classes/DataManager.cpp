@@ -36,6 +36,7 @@ bool DataManager::init()
 	m_bestScore = 0;
 	m_jewel = 0;
 	m_energy = 0;
+	m_lastLoginDate = 0;
 	_cardDataPath = FileUtils::getInstance()->getWritablePath() + "cardData.json";
 	return true;
 }
@@ -45,13 +46,33 @@ void DataManager::saveData()
 	UserDefault::getInstance()->setIntegerForKey("bestScore", m_bestScore);
 	UserDefault::getInstance()->setIntegerForKey("jewel", m_jewel);
 	UserDefault::getInstance()->setIntegerForKey("energy", m_energy);
+	UserDefault::getInstance()->setIntegerForKey("lastLoginDate", m_lastLoginDate);
 	UserDefault::getInstance()->flush();
 
-	// 存储card data
-	/*for(auto item : m_cardData)
+	// ----- 存储card data -----
+	Document document;	
+	document.SetObject();
+	Document::AllocatorType& allocator = document.GetAllocator();
+	rapidjson::Value info_array(rapidjson::kArrayType);
+		// 将m_cardData容器中的数据加入待写入的array
+	for(auto item : m_cardData)
 	{
-		
-	}*/
+		rapidjson::Value object(rapidjson::kObjectType);
+		object.SetObject();
+		object.AddMember("info", item->info, allocator);
+		object.AddMember("level", item->level, allocator);
+		object.AddMember("num", item->num, allocator);
+		info_array.PushBack(object, allocator);
+	}
+	document.AddMember("cardData", info_array, allocator);
+		// 美化json格式并写入文件
+	StringBuffer buffer;
+	PrettyWriter<StringBuffer> writer(buffer);
+	document.Accept(writer);
+	FILE * file = fopen(FileUtils::getInstance()->getSuitableFOpen(_cardDataPath).c_str(), "w");
+	fprintf(file, buffer.GetString());
+	fclose(file);
+
 	CCLOG("Data saved");
 }
 
@@ -62,25 +83,22 @@ void DataManager::loadData()
 		m_bestScore = loaded_bestScore;
 	m_jewel = UserDefault::getInstance()->getIntegerForKey("jewel", 0);
 	m_energy = UserDefault::getInstance()->getIntegerForKey("energy", 0);
+	m_lastLoginDate = UserDefault::getInstance()->getIntegerForKey("lastLoginDate", 0);
 	CCLOG("Data loaded.\n");
 	CCLOG("bestScore = %d\n", m_bestScore);
 	CCLOG("jewel = %d\n", m_jewel);
 	CCLOG("energy = %d\n", m_energy);
+	CCLOG("lastLoginDate = %d\n", m_lastLoginDate);
 	CCLOG("XML path: %s", UserDefault::getInstance()->getXMLFilePath());
-/*
-	//CsvUtil::getInstance()->flashCsv(m_sPath);
-	CsvUtil::getInstance()->loadFile(m_sPath);
-	Value fcn=CsvUtil::getInstance()->getValue(0,2,m_sPath);
-	log("firstMonsterName = %s", fcn.asString().c_str());
-*/
-	// 加载json数据文件
-	string cardData = FileUtils::getInstance()->getStringFromFile(_cardDataPath);
-	const int strlen = cardData.length();
+
+	// ----- 加载json数据文件 -----
+	string cardDataJson = FileUtils::getInstance()->getStringFromFile(_cardDataPath);
+	const int strlen = cardDataJson.length();
 	char * buffer = new char[strlen];
-	memcpy(buffer, cardData.c_str(), strlen);
+	memcpy(buffer, cardDataJson.c_str(), strlen);
 	CCLOG("Card Data Path: %s", _cardDataPath);
 	Document document;
-	if (document.ParseInsitu(buffer).HasParseError())				// 解析json文件，如果解析出错，则创建一个新的cardData文件
+	if (document.Parse(cardDataJson.c_str()).HasParseError())				// 解析json文件，如果解析出错，则创建一个新的cardData文件
 	{
 		CCLOG("Parse In-situ error, create a new card data file.");
 		initCardData();												// 创建一个新的空的cardData.json文件
@@ -89,13 +107,25 @@ void DataManager::loadData()
 	else
 	{
 		CCLOG("Parse In-situ test passed.");
-		const rapidjson::Value& a = document["cardData"];
+		const rapidjson::Value& dataArray = document["cardData"];
 
-		static const char* kTypeNames[] =
-			{ "Null", "False", "True", "Object", "Array", "String", "Number" };
-		for (rapidjson::Value::ConstMemberIterator itr = document["cardData"].MemberBegin(); itr != document["cardData"].MemberEnd(); ++itr)
+		if(dataArray.IsArray())
 		{
-			CCLOG("Type of member %s is %s\n", itr->name.GetString(), kTypeNames[itr->value.GetType()]);
+			for (int i = 0; i < dataArray.Size(); i++)
+			{
+				const rapidjson::Value& object = dataArray[i];
+
+				auto card = new CardData();
+				card->info = object["info"].GetInt();
+				card->level = object["level"].GetInt();
+				card->num = object["num"].GetInt();
+
+				m_cardData.push_back(card);
+			}
+		}
+		else
+		{
+			CCLOG("Parse json data error.");
 		}
 	}
 

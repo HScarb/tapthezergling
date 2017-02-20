@@ -32,12 +32,13 @@ public:
 	CC_SYNTHESIZE(int, m_bestScore, BestScore);
 	CC_SYNTHESIZE(int, m_jewel, Jewel);
 	CC_SYNTHESIZE(int, m_energy, Energy);
+	CC_SYNTHESIZE(int, m_lastLoginDate, LastLoginDate);
 	CC_SYNTHESIZE(int, m_startCollectionTime, StartTimeStamp);
 	CC_SYNTHESIZE(int, m_endCollectionTime, EndingTimeStamp);
 	CC_SYNTHESIZE(tm*, m_startDate, StartDate);
 
-	CC_SYNTHESIZE(std::string, _cardDataPath, CardDataPath);		// 卡片数据存放路径
-	CC_SYNTHESIZE(std::vector<CardData>, m_cardData, CardData);			// 用vector存储卡片数据
+	CC_SYNTHESIZE(std::string, _cardDataPath, CardDataPath);				// 卡片数据存放路径
+	CC_SYNTHESIZE(std::vector<CardData*>, m_cardData, CardData);			// 用vector存储卡片数据
 private:
 	static DataManager * m_dataManager;
 

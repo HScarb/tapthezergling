@@ -75,8 +75,6 @@ bool MainScene::init()
 	// m_addJewelBtn = (Button*)(rootNode->getChildByName(""));
 	m_energyBar = (LoadingBar*)(rootNode->getChildByName("LoadingBar_energy"));
 
-	DataManager::getInstance()->loadData();
-
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 	m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel()));
 	m_scoreText->setText(StringUtils::format("%d", DataManager::getInstance()->getBestScore()));
@@ -119,7 +117,10 @@ void MainScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event
 void MainScene::onSettingsBtnClick(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
+	{
 		SceneManager::getInstance()->changeScene(SceneManager::SettingsScene);
+		DataManager::getInstance()->saveData();
+	}
 }
 
 void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)
