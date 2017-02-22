@@ -2,7 +2,7 @@
 #include "Card.h"
 USING_NS_CC;
 
-Card* Card::createByLevelAndInfo(int level, CardInfo info)
+Card* Card::createByLevelAndInfo(int level, int info)
 {
 	auto card = new Card();
 	if (card&&card->init(info,level))

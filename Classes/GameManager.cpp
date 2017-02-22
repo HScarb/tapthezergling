@@ -41,6 +41,7 @@ bool GameManager::init()
 	m_isGameOn = false;
 	m_isWaitToAddTime = false;
 	m_isWaitToAddChest = false;
+	m_isCardManagerInitialized = false;
 
 	return true;
 }

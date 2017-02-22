@@ -228,6 +228,9 @@
     <ClCompile Include="..\Classes\CsvData.cpp">
       <Filter>Classes\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\FreeCardLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -451,6 +454,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\rapidjson\writer.h">
       <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FreeCardLayer.h">
+      <Filter>Classes\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

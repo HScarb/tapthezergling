@@ -2,6 +2,7 @@
 #pragma once
 #include "cocos2d.h"
 #include "ui\CocosGUI.h"
+#include "Card.h"
 #include "CardControlLayer.h"
 
 
@@ -10,10 +11,10 @@ class TollgateScene : public cocos2d::Layer
 public:
 	enum RewardType
 	{
-		None = 0,
-		Energy = 1,
-		Jewel,
-		Card
+		REWARD_NONE = 0,
+		REWARD_ENERGY = 1,
+		REWARD_JEWEL,
+		REWARD_CARD
 	};
 
 public:
@@ -39,12 +40,12 @@ private:
 	void resumeEnergy(float dt);			//自然恢复能量值
 
 	// 宝箱和附属精灵及其动画
-	cocos2d::Sprite * m_card_sprite;
+	Card* m_rewardCard;
 	cocos2d::Sprite * m_chest_sprite;
 	cocos2d::Sprite * m_energy_sprite;
 	cocos2d::Sprite * m_diamond_sprite;
 	cocos2d::Sprite * m_flash;
-	cocos2d::Animate * m_createAnimate();
+	cocos2d::Animate * createChestOpenAnimate();
 	cocos2d::Label * m_label;
 
 	void onHomeBtnClicked(Ref * pSender, cocos2d::ui::TouchEventType type);
@@ -102,12 +103,10 @@ private:
 	cocos2d::ui::Text * m_t12;
 private:
 	CardControlLayer * m_cardControlLayer;
-	//Card * m_card_sprite;	//卡片
 	int m_timeStamp;		//当前的时间和秒数
 	tm * m_currentTime;
 	int m_money;			//开箱要氪的金
-	int m;					//宝箱开启次数
-	int n;					//获得卡片次数
+	int m_chestOpenTimes;	//宝箱开启次数
 	bool m_act;				//初始化宝箱调试
 	bool m_but;				//按钮问题
 	bool m_res;				//按钮的上升问题,false是卡片在上面，true是箭头在上面。
