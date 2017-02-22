@@ -124,13 +124,13 @@ void CardManager::loadCardFromData()
 	}
 }
 
-void CardManager::SortCardMsg()
+void CardManager::SortCardMsg(int diff)
 {
 	std::sort(m_cardVector.begin(), m_cardVector.end(), SortCardsOpreator);
 	int i = 0;
 	for (auto card : m_cardVector)
 	{
-		card->setPosition(i * 80, 0);
+		card->setPosition(i * 80 + diff, 0);
 		i++;
 	}
 }
@@ -141,17 +141,17 @@ void CardManager::DeleteCardByObject(Card *card)
 	SortCardMsg();
 }
 
-void CardManager::DeleteCardByObjectFromEnhancer(Card* card)
+void CardManager::DeleteCardByObjectFromEnhancer(Card* card, float delta)
 {
 	m_cardInEnhancer.eraseObject(card);
-	SortCardMsg();
+	SortCardMsg(delta);
 }
 
-void CardManager::DeleteCardByObjectAfterCollection(Card* card)
+void CardManager::DeleteCardByObjectAfterCollection(Card* card,float delta)
 {
 //	free(m_cardEnhanced);
 	m_cardEnhanced = nullptr;
-	SortCardMsg();
+	SortCardMsg(delta);
 }
 
 bool SortCardsOpreator(const Card* card1, const Card* card2)

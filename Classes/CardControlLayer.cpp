@@ -34,6 +34,7 @@ bool CardControlLayer::init()
 	m_isCardsStartEnhance = false;
 	m_isSingleCard = true;
 	m_cardEnhanceTime = nullptr;
+	m_deltaX = 0;
 	auto ui = CSLoader::createNode("CardEnhancer.csb");
 	this->addChild(ui);
 	this->scheduleUpdate();
@@ -73,7 +74,7 @@ bool CardControlLayer::init()
 	if(!GameManager::getInstance()->getIsCardManagerInitialized())
 	{
 		CardManager::getInstance()->loadCardFromData();
-		CardManager::getInstance()->SortCardMsg();
+		CardManager::getInstance()->SortCardMsg(m_deltaX);
 		GameManager::getInstance()->setIsCardManagerInitialized(true);
 	}
 	
@@ -159,7 +160,7 @@ void CardControlLayer::DeleteACard(Card* card)
 void CardControlLayer::DeleteAcardFromEnhancer(Card* card)
 {
 	card->removeFromParent();
-	CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card);
+	CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card, m_deltaX);
 }
 
 void CardControlLayer::MoveCardIntoEnhancer(Card* card)
@@ -197,10 +198,10 @@ void CardControlLayer::ClickCardBackToBottom(Card* card)
 	CardManager::getInstance()->InsertACard(card);
 	//把卡片合成器中的卡片移动回下方的卡片容器
 	if (card->getPosition().y == 300)
-		CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card);
+		CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card,m_deltaX);
 	else//把中间位置合成后的卡片移进容器
 	{
-		CardManager::getInstance()->DeleteCardByObjectAfterCollection(card);
+		CardManager::getInstance()->DeleteCardByObjectAfterCollection(card, m_deltaX);
 		//m_sprite->setVisible(false);
 	}
 /*
@@ -314,7 +315,6 @@ void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventTy
 
 bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-
 	m_beginPos = touch->getLocation();
 	log("x=%f", m_beginPos.x);
 	// 通过点击的方式从合成器中吧卡片移回下方容器
@@ -365,8 +365,9 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 			for (auto card : CardManager::getInstance()->getAllCards())
 			{
 				auto pos = card->getPosition();
-				card->setPosition(pos.x + m_delta.x, 0);
+				card->setPosition(pos.x + m_delta.x, 0);				
 			}
+			m_deltaX += m_delta.x;
 		}
 	}
 	// 把卡片移动到卡片管理器
@@ -415,8 +416,9 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 					}
 					if (m_isSingleCard)
 					{
+
 						m_operatingCard = nullptr;
-						CardManager::getInstance()->SortCardMsg();
+						CardManager::getInstance()->SortCardMsg(m_deltaX);
 					}
 				}
 			}
@@ -477,7 +479,7 @@ void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unuse
 						&& m_operatingCard->getPosition().x <= (card->getPosition().x + 50))
 					{
 						m_operatingCard = nullptr;
-						CardManager::getInstance()->SortCardMsg();
+						CardManager::getInstance()->SortCardMsg(m_deltaX);
 						break;
 					}
 					else
@@ -490,7 +492,7 @@ void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unuse
 			else
 			{
 				m_operatingCard = nullptr;
-				CardManager::getInstance()->SortCardMsg();
+				CardManager::getInstance()->SortCardMsg(m_deltaX);
 			}
 		}
 		else
@@ -504,7 +506,7 @@ void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unuse
 	else
 	{
 		m_operatingCard = nullptr;
-		CardManager::getInstance()->SortCardMsg();
+		CardManager::getInstance()->SortCardMsg(m_deltaX);
 	}
 	m_isSingleCard = true;
 }

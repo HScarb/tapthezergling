@@ -73,4 +73,5 @@ private:
 	//获取当前时间和时间戳（秒）
 	int m_timeStamp;
 	tm * m_currentTime;
+	float m_deltaX;
 };
