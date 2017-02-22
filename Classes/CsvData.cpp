@@ -1,21 +1,21 @@
-#include "CsvManager.h"
+#include "CsvData.h"
 
-bool CsvManager::init()
+bool CsvData::init()
 {
 	return true;
 }
 
-void CsvManager::addLineData(ValueVector lineData)
+void CsvData::addLineData(ValueVector lineData)
 {
 	m_allLineVec.push_back(Value(lineData));
 }
 
-cocos2d::ValueVector CsvManager::getSingleLineData(int iLine)
+cocos2d::ValueVector CsvData::getSingleLineData(int iLine)
 {
 	return m_allLineVec.at(iLine).asValueVector();
 }
 
-Size CsvManager::getRowColNum()
+Size CsvData::getRowColNum()
 {
 	Size size = Size();
 

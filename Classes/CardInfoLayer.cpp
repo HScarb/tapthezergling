@@ -12,7 +12,7 @@ cocos2d::Scene* CardInfoLayer::createScene(int info, int level)
 {
 	auto scene = Scene::create();
 	auto layer = CardInfoLayer::create(info, level);
-	scene->addChild(scene);
+	scene->addChild(layer);
 	return scene;
 }
 
@@ -58,17 +58,19 @@ bool CardInfoLayer::init(int info, int level)
 	//显示卡片名称、等级、作用
 	m_cardName->setText(CARD_NAME[m_info]);
 	m_cardLevel->setText(StringUtils::format("%d", m_level));
-	m_cardInfo->setText(TOLL_NAME[m_info] + "\n" + "Time" + "+" + StringUtils::format("%d", m_level * 200) + "ms");
+	m_cardInfo->setText(TOLL_NAME[m_info] + "\n" + "Time " + " + " + StringUtils::format("%d", m_level * 200) + "ms");
 	return true;
+}
+
+void CardInfoLayer::onCloseBtnClick(Ref* pSender, TouchEventType type)
+{
+	if(type == TOUCH_EVENT_ENDED)
+	{
+		this->removeFromParent();
+	}
 }
 
 bool CardInfoLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-	log("111");
 	return true;
-}
-
-void CardInfoLayer::onCloseBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
-{
-	this->removeFromParent();
 }

@@ -66,7 +66,6 @@ bool LoadingScene::init()
 	for (int i = 1; i <= 137;i++)
 	{
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("zergling/SCs_Zergling_C3_%02d.png", i), addTextureCallback);
-//		CCLOG("SCs_Zergling_C3_%02d.png", i);
 	}
 	// Death animation 10
 	for (int i = 1; i <= 10;i++)
@@ -143,7 +142,6 @@ bool LoadingScene::init()
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/splat1.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/splat2.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/winmusic.mp3");
-
 
 	// 加载用户记录
 	DataManager::getInstance()->loadData();

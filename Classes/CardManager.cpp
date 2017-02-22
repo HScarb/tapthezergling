@@ -2,6 +2,7 @@
 #include "CardManager.h"
 #include "Card.h"
 #include "GameManager.h"
+#include "DataManager.h"
 USING_NS_CC;
 
 CardManager * CardManager::m_cardManager = nullptr;
@@ -30,6 +31,9 @@ bool CardManager::init()
 {
 	if (!Node::init())
 		return false;
+
+	m_cardEnhanced = nullptr;
+
 	return true;
 }
 
@@ -43,12 +47,7 @@ cocos2d::Vector<Card*> CardManager::getCardsFromEnhancer()
 	return m_cardInEnhancer;
 }
 
-cocos2d::Vector<Card*> CardManager::getCardAfterCollection()
-{
-	return m_cardAfterCollection;
-}
-
-Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, float posY)
+Card* CardManager::CreateACardByTypeAndLevel(int info, int level, float posY)
 {
 	Card * card = nullptr;
 	if (info == 0)
@@ -73,7 +72,7 @@ Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, flo
 	else if (posY == 350)
 	{
 		card->setPosition(450, 350);//设定合成后的卡片的坐标
-		InsertCardAfterCollection(card);
+		setCardEnhanced(card);
 	}
 	/*if (posY == 300)
 	{
@@ -87,17 +86,6 @@ Card* CardManager::CreateACardByTypeAndLevel(Card::CardInfo info, int level, flo
 	return card;
 }
 
-/*Card* CardManager::CreateACardByTypeAndLevel(Card* card)
-{
-Card * tempCard = nullptr;
-if (card == nullptr)
-return nullptr;
-tempCard = Card::createByLevelAndInfo((Card::CardInfo)card->getCardinfo());
-tempCard->setCardLevel(card->getCardLevel());//设置等级
-tempCard->setPosition(card->getPosition());
-return tempCard;
-}*/
-
 void CardManager::InsertACard(Card * card)
 {
 	m_cardVector.pushBack(card);
@@ -108,16 +96,11 @@ void CardManager::InsertACardIntoEnhancer(Card* card)
 	m_cardInEnhancer.pushBack(card);
 }
 
-void CardManager::InsertCardAfterCollection(Card* card)
-{
-	m_cardAfterCollection.pushBack(card);
-}
-
 void CardManager::InsertChestCard()
 {
 	Card * card;
-	int type = GameManager::getInstance()->getcardType();
-	card = Card::createByLevelAndInfo(1, Card::CardInfo(type));
+	int type = /*GameManager::getInstance()->getcardType();*/0;
+	card = Card::createByLevelAndInfo(1, type);
 	int i = 0;
 	//得到最后一张卡片的位置
 	for (auto card : m_cardVector)
@@ -126,6 +109,19 @@ void CardManager::InsertChestCard()
 	}
 	card->setPosition((i++)*80, 0);//设定新增卡片的坐标
 	InsertACard(card);
+}
+
+void CardManager::loadCardFromData()
+{
+	for (CardData* item : DataManager::getInstance()->getCardData())
+	{
+		// 每种卡片的数量
+		for (int i = 0; i < item->num; i++)
+		{
+			Card* card = Card::createByLevelAndInfo(item->level, item->info);
+			InsertACard(card);
+		}
+	}
 }
 
 void CardManager::SortCardMsg()
@@ -153,7 +149,8 @@ void CardManager::DeleteCardByObjectFromEnhancer(Card* card)
 
 void CardManager::DeleteCardByObjectAfterCollection(Card* card)
 {
-	m_cardAfterCollection.eraseObject(card);
+//	free(m_cardEnhanced);
+	m_cardEnhanced = nullptr;
 	SortCardMsg();
 }
 

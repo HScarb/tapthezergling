@@ -11,6 +11,9 @@
 #include "GameManager.h"
 #include "StringUtil.h"
 #include "CsvUtil.h"
+#include "TimeManager.h"
+#include "FreeCardLayer.h"
+#include "Global.h"
 
 USING_NS_CC;
 
@@ -111,8 +114,6 @@ bool MainScene::init()
 	// m_addJewelBtn = (Button*)(rootNode->getChildByName(""));
 	m_energyBar = (LoadingBar*)(rootNode->getChildByName("LoadingBar_energy"));
 
-	DataManager::getInstance()->loadData();
-
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 	m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel()));
 	m_scoreText->setText(StringUtils::format("%d", DataManager::getInstance()->getBestScore()));
@@ -135,7 +136,28 @@ bool MainScene::init()
 
 	SoundManager::getInstance()->playMenuMusic();
 
+	checkNewCard();
+
 	return true;
+}
+
+void MainScene::checkNewCard()
+{
+	int lastLoginDate = DataManager::getInstance()->getLastLoginDate();					// 保存在数据文件中的上一次登录日期
+	__int64 currentTime = TimeManager::getInstance()->getCurrentDateTime();
+	int currentDate = localtime(&currentTime)->tm_yday;									// 获取的当前日期
+	if(currentDate != lastLoginDate)													// 如果日期不同，给一张新卡
+	{
+		CardData* cardData = new CardData();
+		int info = random(1, TOTAL_TOLLGATE_TYPE + TOTAL_BOSS_TYPE);
+		auto cardInfoLayer = FreeCardLayer::create(info);
+		this->addChild(cardInfoLayer);
+
+		// 保存当前的日期为上次登录日期
+		DataManager::getInstance()->setLastLoginDate(currentDate);
+		DataManager::getInstance()->pushBackACard(info, 1);
+		DataManager::getInstance()->saveData();
+	}
 }
 
 bool MainScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
@@ -155,14 +177,16 @@ void MainScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event
 void MainScene::onSettingsBtnClick(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
+	{
 		SceneManager::getInstance()->changeScene(SceneManager::SettingsScene);
+		DataManager::getInstance()->saveData();
+	}
 }
 
 void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
-		//m_cardControlLayer->showLayer();
 		m_cardControlLayer = CardControlLayer::create();
 		this->addChild(m_cardControlLayer);
 	}

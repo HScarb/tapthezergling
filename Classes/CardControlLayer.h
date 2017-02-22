@@ -28,14 +28,17 @@ public:
 	//检测当前要移动的卡片在卡片存放容器中是否为单张
 	bool IsSingleInVector(Card * card);
 	//合成卡片完成
-	void CardCollectionSucceed();
+	void CardEnhanceSucceed();
 
 	//增加卡片合成成功后的回调函数
-	void cardCollectionSucceedCallBack(cocos2d::EventCustom * cardEvent);
+	void cardEnhanceSucceedCallBack(cocos2d::EventCustom * cardEvent);
 	//获取时间戳
 	int getTimeStamp();
 	//获取当前时间
 	tm * getCurrentTime();
+
+	// 收集合成好的卡片
+	void collectEnhancedCard(Card* card);
 
 	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
 	virtual void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *unused_event);
@@ -64,8 +67,8 @@ private:
 	//是否有卡片已经合成完毕
 	bool m_isCollectionContainsCard;
 	//是否有卡片正在合成
-	bool m_isCardsStartCollection;
-	cocos2d::ui::Text * m_cardCollectionTime;
+	bool m_isCardsStartEnhance;
+	cocos2d::ui::Text * m_cardEnhanceTime;
 	//cocos2d::ui::ImageView * m_sprite;
 	//获取当前时间和时间戳（秒）
 	int m_timeStamp;
