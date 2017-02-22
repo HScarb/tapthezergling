@@ -28,7 +28,7 @@ bool StringUtil::init()
     return true;
 }
 
-ValueVector StringUtil::split(const char* srcStr, const char* sSep)
+ValueVector StringUtil::split(const char* srcStr, const char* sSep) //将所有的字符串添加进列表
 {
     ValueVector stringList;
 
@@ -55,6 +55,9 @@ ValueVector StringUtil::split(const char* srcStr, const char* sSep)
         str = Value(str.asString().substr(endIndex + 1, size));
 
         endIndex = str.asString().find(sSep);
+		/*总的来说，需要分解的部分是以'，'为隔开的。
+		需要分解的案例是：auto strsList = StringUtil::getInsatance()->split("Muton,Xiaoruo,Cocos2d-x,Csv",",");
+		*/
     }
 
     /* 剩下的字符串也添加进列表 */

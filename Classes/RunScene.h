@@ -22,6 +22,7 @@ private:
 private: 
 	bool m_isRunning;
 	cocos2d::Sprite * m_zeriling_sprite;
+	cocos2d::Sprite * m_meteorolite;
 	cocos2d::ui::Button * m_pauseBtn;
 	cocos2d::ui::Text * m_timeText;
 	cocos2d::ui::LoadingBar* m_timeBar;

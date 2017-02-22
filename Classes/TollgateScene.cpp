@@ -233,7 +233,7 @@ bool TollgateScene::init()
 	m_t12 = (Text*)(m_scrollView->getChildByName("Text_12"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-	m_scrollView->setVisible(false);
+	//m_scrollView->setVisible(false);
 
 	//关键地方
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
@@ -351,15 +351,6 @@ void TollgateScene::addEnergy()
 
 void TollgateScene::addCard()
 {
-	/*
-	用到四个相关函数：
-	Card * CreateACardByTypeAndLevel(Card::CardInfo info, int level, int posX);
-	void InsertACard(Card* card);
-	void InsertACardtoEnhancer(Card* card);
-	void InsertACardAfterCollection(Card* card);
-	*/
-	 //怎么把m_card_sprite所指的card加入到容器中
-	
 	
 }
 
@@ -755,8 +746,8 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					m_flash->runAction(Sequence::create(DelayTime::create(2.3), hideAction, dt, NULL));
 				}
 				m_act = true;
-				//int i = random(1, 2);
-				int i = 3;
+				int i = random(1, 3);
+				//int i = 3;
 				if (i == Energy)
 				{
 					m++;

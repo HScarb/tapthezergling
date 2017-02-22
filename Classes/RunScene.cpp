@@ -66,6 +66,16 @@ bool RunScene::init(int diff, int loop)
 	setRun();
 	m_isRunning = false;
 
+	////////////////////////////////
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	m_meteorolite = nullptr;
+	m_meteorolite = Sprite::create("res/Res/Runrunrun/yunshi.png");
+	m_meteorolite->setScale(0.3, 0.3);
+	m_meteorolite->setPosition(visibleSize.width / 2,visibleSize.height - 50);
+	this->addChild(m_meteorolite);
+
+	///////////////////////////////
+
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchEnded = CC_CALLBACK_2(RunScene::onTouchEnded, this);
 	listener->onTouchBegan = CC_CALLBACK_2(RunScene::onTouchBegan, this);
@@ -109,6 +119,9 @@ bool RunScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 		m_isRunning = true;
 		TimeManager::getInstance()->startCountDown();
 	}
+	int x1 = (int)m_meteorolite->getPositionX();
+	int y1 = (int)m_meteorolite->getPositionY();
+
 	if (m_zeriling_sprite->getBoundingBox().containsPoint(pos))
 	{
 		MoveBy *moveby = MoveBy::create(0.2, ccp(80, 0));
@@ -117,7 +130,19 @@ bool RunScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 		flowword->showWord("Wow!!", m_zeriling_sprite->getPosition());
 		m_zeriling_sprite->runAction(Spawn::create(moveby, m_createAnimate(), NULL));
 		w++;
-			if (w == 10)
+
+		//设置获取陨石位置，如果与小狗的位置重叠，则减少时间（或者倒退一定距离）
+		int x2 = (int)m_zeriling_sprite->getPositionX();
+		int y2 = (int)m_zeriling_sprite->getPositionY();
+		
+		if (x1 = x2 && y1 == y2)
+		{
+
+		}
+
+
+
+			if (w == 10)//跳10次到达终点
 			{
 			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"Runrunrun");
 			CCLOG("Runrunrun clear");

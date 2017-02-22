@@ -9,6 +9,8 @@
 #include "CardControlLayer.h"
 #include "NoTouchLayer.h"
 #include "GameManager.h"
+#include "StringUtil.h"
+#include "CsvUtil.h"
 
 USING_NS_CC;
 
@@ -31,6 +33,32 @@ bool MainScene::init()
 	if (!Layer::init())
 		return false;
 
+	///////////////////////////////////////////////////////
+	/*以下是测试Csv部分*/
+	auto strsList = StringUtil::getInstance()->split("Muton,xiaoruo,cocos2d-x,Csv", ",");
+
+	for (auto value : strsList)
+	{
+		log("value = %s", value.asString().c_str());
+	}
+
+	const char * sPath = "Cards.csv";
+	CsvUtil::getInstance()->loadFile(sPath);
+
+	Value CardLevel = CsvUtil::getInstance()->getValue(2, 1, sPath);
+
+	Value CardPosition = CsvUtil::getInstance()->getValue(2, 2, sPath);
+
+	log("CardLevel = %s", CardLevel.asString().c_str());
+	log("CardPosition = %s", CardPosition.asString().c_str());
+
+	UserDefault::sharedUserDefault()->setStringForKey("CardName", "EatFlowers");
+
+	String * CardName = String::create(UserDefault::sharedUserDefault()->getStringForKey("CardName"));
+
+	log("CardName = %s", CardName->getCString());
+
+	//////////////////////////////////////////////////////
 	m_energyText = nullptr;
 	m_jewelText = nullptr;
 	m_scoreText = nullptr;
