@@ -26,8 +26,8 @@ bool CardControlLayer::init()
 	if (!Layer::init())
 		return false;
 	m_currentTime = getCurrentTime();
-	m_timeStamp = getTimeStamp();
-	log("cardtime %d,et %d", DataManager::getInstance()->getStartTimeStamp(), DataManager::getInstance()->getEndingTimeStamp());
+	//m_timeStamp = getTimeStamp();
+	//log("cardtime %d,et %d", DataManager::getInstance()->getStartTimeStamp(), DataManager::getInstance()->getEndingTimeStamp());
 	m_collectBtn = nullptr;
 	m_closeBtn = nullptr;
 	m_operatingCard = nullptr;
@@ -54,16 +54,16 @@ bool CardControlLayer::init()
 	else
 		m_isEnhancerContaninsACard = false;
 
-	if (DataManager::getInstance()->getStartTimeStamp() > 0 && DataManager::getInstance()->getEndingTimeStamp() > 0)
+	if (DataManager::getInstance()->getStartDate() > 0 && DataManager::getInstance()->getEndingDate() > 0)
 	{
-		if (m_timeStamp >= DataManager::getInstance()->getEndingTimeStamp())
+		if (m_currentTime >= DataManager::getInstance()->getEndingDate())
 		{
 			m_isCardsStartEnhance = false;
 			TimeManager::getInstance()->setCardTime(0);
 		}
 		else
 		{
-			TimeManager::getInstance()->setCardTime(DataManager::getInstance()->getEndingTimeStamp() - m_timeStamp);
+			TimeManager::getInstance()->setCardTime(DataManager::getInstance()->getEndingDate() - m_currentTime);
 			m_isCardsStartEnhance = true;
 		}
 		TimeManager::getInstance()->startCardTimeCountDown();
@@ -112,10 +112,10 @@ int CardControlLayer::getTimeStamp()
 
 }
 
-tm* CardControlLayer::getCurrentTime()
+time_t CardControlLayer::getCurrentTime()
 {
 	time_t t = time(NULL);
-	tm* lt = localtime(&t);
+	/*tm* lt = localtime(&t);
 
 	int year = lt->tm_year + 1900;  // 相对1900年的过去的年数
 	int month = lt->tm_mon + 1;     // 1月份：为0
@@ -131,7 +131,8 @@ tm* CardControlLayer::getCurrentTime()
 	log("%d %d\n", year, month);
 	log("%d %d %d\n", yday, mday, wday);
 	log("%d %d %d\n", hh, mm, ss);
-	return lt;
+	return lt;*/
+	return t;
 }
 
 void CardControlLayer::collectEnhancedCard(Card* card)
@@ -145,8 +146,14 @@ void CardControlLayer::update(float dt)
 {
 	if (TimeManager::getInstance()->isCardTimeCountingDowm())
 	{
+		m_cardEnhanceTime->setVisible(true);
 		TimeManager::getInstance()->update(dt);
-		m_cardEnhanceTime->setText(StringUtils::format("%05.2f", TimeManager::getInstance()->getCardTime()));
+		m_cardEnhanceTime->setText(StringUtils::format("%02d", (int)(TimeManager::getInstance()->getCardTime()) / 60) + ":" 
+			+ StringUtils::format("%02d", (int)(TimeManager::getInstance()->getCardTime()) % 60));
+	}
+	else
+	{
+		m_cardEnhanceTime->setVisible(false);
 	}
 }
 
@@ -266,9 +273,11 @@ void CardControlLayer::CardEnhanceSucceed()
 		DeleteAcardFromEnhancer(card);
 	}
 	//m_sprite->setVisible(true);
-	DataManager::getInstance()->setEndingTimeStamp(0);
-	DataManager::getInstance()->setStartTimeStamp(0);
-	DataManager::getInstance()->setStartDate(nullptr);
+	//DataManager::getInstance()->setEndingTimeStamp(0);
+	//DataManager::getInstance()->setStartTimeStamp(0);
+	DataManager::getInstance()->setStartDate(0);
+	DataManager::getInstance()->setEndingDate(0);
+	m_cardEnhanceTime->setVisible(false);
 }
 
 void CardControlLayer::cardEnhanceSucceedCallBack(cocos2d::EventCustom * cardEvent)
@@ -301,10 +310,13 @@ void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventTy
 		TimeManager::getInstance()->setCardTime(cardTemp->getCardLevel() * 10);
 		log("cardtime %f", TimeManager::getInstance()->getCardTime());
 		TimeManager::getInstance()->startCardTimeCountDown();
-		DataManager::getInstance()->setStartTimeStamp(getTimeStamp());
+		/*DataManager::getInstance()->setStartTimeStamp(getTimeStamp());
 		DataManager::getInstance()->setEndingTimeStamp(
-			DataManager::getInstance()->getEndingTimeStamp() + cardTemp->getCardLevel() * 10);
+			DataManager::getInstance()->getEndingTimeStamp() + cardTemp->getCardLevel() * 10);*/
 		DataManager::getInstance()->setStartDate(getCurrentTime());
+		DataManager::getInstance()->setEndingDate(
+			DataManager::getInstance()->getStartDate() + cardTemp->getCardLevel() * 1 * 60);
+
 	}
 	else if(!m_isCardsStartEnhance)
 	{
@@ -416,7 +428,7 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 					if (m_isSingleCard)
 					{
 						m_operatingCard = nullptr;
-						CardManager::getInstance()->SortCardMsg();
+						//CardManager::getInstance()->SortCardMsg();
 					}
 				}
 			}

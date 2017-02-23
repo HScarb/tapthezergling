@@ -35,7 +35,7 @@ public:
 	//获取时间戳
 	int getTimeStamp();
 	//获取当前时间
-	tm * getCurrentTime();
+	time_t getCurrentTime();
 
 	// 收集合成好的卡片
 	void collectEnhancedCard(Card* card);
@@ -72,5 +72,5 @@ private:
 	//cocos2d::ui::ImageView * m_sprite;
 	//获取当前时间和时间戳（秒）
 	int m_timeStamp;
-	tm * m_currentTime;
+	time_t m_currentTime;
 };
