@@ -135,10 +135,10 @@ void CardManager::SortCardMsg(int diff)
 	}
 }
 
-void CardManager::DeleteCardByObject(Card *card)
+void CardManager::DeleteCardByObject(Card *card,float delta)
 {
 	m_cardVector.eraseObject(card);
-	SortCardMsg();
+	SortCardMsg(delta);
 }
 
 void CardManager::DeleteCardByObjectFromEnhancer(Card* card, float delta)

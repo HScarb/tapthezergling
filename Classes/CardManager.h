@@ -28,7 +28,7 @@ public:
 	// 从DataManager数据中载入卡片
 	void loadCardFromData();
 	//删除卡片
-	void DeleteCardByObject(Card * card);
+	void DeleteCardByObject(Card * card,float delta = 0);
 	void DeleteCardByObjectFromEnhancer(Card * card, float delta = 0);
 	void DeleteCardByObjectAfterCollection(Card * card, float delta = 0);
 private:

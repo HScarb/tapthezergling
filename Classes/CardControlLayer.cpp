@@ -161,7 +161,7 @@ void CardControlLayer::update(float dt)
 void CardControlLayer::DeleteACard(Card* card)
 {
 	card->removeFromParent();
-	CardManager::getInstance()->DeleteCardByObject(card);
+	CardManager::getInstance()->DeleteCardByObject(card,m_deltaX);
 }
 
 void CardControlLayer::DeleteAcardFromEnhancer(Card* card)
@@ -172,6 +172,7 @@ void CardControlLayer::DeleteAcardFromEnhancer(Card* card)
 
 void CardControlLayer::MoveCardIntoEnhancer(Card* card)
 {
+	
 	if (card->getPosition().x >= (CARD_SLOT_X1 - 50)
 		&& card->getPosition().x <= (CARD_SLOT_X1 + 50))
 		card->setPosition(CARD_SLOT_X1, CARD_SLOT_Y);
@@ -181,7 +182,18 @@ void CardControlLayer::MoveCardIntoEnhancer(Card* card)
 	else
 		return;
 	CardManager::getInstance()->InsertACardIntoEnhancer(card);
-	CardManager::getInstance()->DeleteCardByObject(card);
+	CardManager::getInstance()->DeleteCardByObject(card,m_deltaX);
+	if (CardManager::getInstance()->getAllCards().size() <= m_frameSize.width / 80)
+		CardManager::getInstance()->SortCardMsg();
+	else if (CardManager::getInstance()->getAllCards().at(CardManager::getInstance()->getAllCards().size() - 1)->getPosition().x < m_frameSize.width - 60)
+	{
+		m_deltaX += 80;
+		CardManager::getInstance()->SortCardMsg(m_deltaX);
+	}
+	/*if (!m_isEnhancerContaninsACard)
+		CardManager::getInstance()->SortCardMsg(m_deltaX + 80);
+	else
+		CardManager::getInstance()->SortCardMsg(m_deltaX + 160);*/
 }
 
 void CardControlLayer::showCards()
@@ -232,6 +244,7 @@ bool CardControlLayer::IsTheSameCardInEnhancer(Card* card)
 
 bool CardControlLayer::IsSingleInVector(Card* card)
 {
+	/*bool temp1 = true;
 	bool temp = true;
 	for (auto tempCard : CardManager::getInstance()->getAllCards())
 	{
@@ -241,16 +254,37 @@ bool CardControlLayer::IsSingleInVector(Card* card)
 			if (tempCard->getPosition().x <= (card->getPosition().x + 40)
 				&& tempCard->getPosition().x >= (card->getPosition().x - 40))
 			{
-				temp = true;
+				temp1 = true;
 			}
 			else
 			{
-				temp = false;
+				temp1 = false;
 				break;
 			}
 		}
 	}
-	return temp;
+	return temp;*/
+	int num = 0;
+	for (auto tempCard : CardManager::getInstance()->getAllCards())
+	{
+		if (card->getCardLevel() == tempCard->getCardLevel()
+			&& card->getCardinfo() == tempCard->getCardinfo())
+			num += 1;
+		else
+			continue;
+	}
+	for (auto tempCard : CardManager::getInstance()->getCardsFromEnhancer())
+	{
+		if (card->getCardLevel() == tempCard->getCardLevel()
+			&& card->getCardinfo() == tempCard->getCardinfo())
+			num += 1;
+		else
+			continue;
+	}
+	if (num < 2)
+		return true;
+	else
+		return false;
 }
 
 void CardControlLayer::CardEnhanceSucceed()
@@ -308,7 +342,7 @@ void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventTy
 			break;
 		}
 		m_isCardsStartEnhance = true;
-		TimeManager::getInstance()->setCardTime(cardTemp->getCardLevel() * 10);
+		TimeManager::getInstance()->setCardTime(cardTemp->getCardLevel() * 60);
 		log("cardtime %f", TimeManager::getInstance()->getCardTime());
 		TimeManager::getInstance()->startCardTimeCountDown();
 		/*DataManager::getInstance()->setStartTimeStamp(getTimeStamp());
@@ -316,7 +350,7 @@ void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventTy
 			DataManager::getInstance()->getEndingTimeStamp() + cardTemp->getCardLevel() * 10);*/
 		DataManager::getInstance()->setStartDate(getCurrentTime());
 		DataManager::getInstance()->setEndingDate(
-			DataManager::getInstance()->getStartDate() + cardTemp->getCardLevel() * 1 * 60);
+			DataManager::getInstance()->getStartDate() + cardTemp->getCardLevel() * 60);
 
 	}
 	else if(!m_isCardsStartEnhance)
@@ -360,6 +394,13 @@ bool CardControlLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unuse
 			ClickCardBackToBottom(
 		}
 	}*/
+	for (auto card : CardManager::getInstance()->getAllCards())
+	{
+		if (card->getBoundingBox().containsPoint(m_beginPos))
+		{
+			m_isSingleCard = IsSingleInVector(card);
+		}
+	}
 	return true;
 }
 
@@ -368,18 +409,36 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 	Rect rect;
 	m_delta = touch->getDelta();
 	m_movedPos = touch->getLocation();
+	/*auto cardBegin = CardManager::getInstance()->getAllCards().at(0);
+	auto cardEnd = CardManager::getInstance()->getAllCards().at(CardManager::getInstance()->getAllCards().size()-1);*/
 	// 卡片滑动
 	// 当滑动x轴距离大于10时才开始滑动，当点击开始点和目前点y轴大于80时不能滑动
 	if (m_operatingCard == nullptr && abs(m_beginPos.x - m_movedPos.x) >= 10 && m_movedPos.y <= 80 && m_beginPos.y <= 80)
 	{
 		if (CardManager::getInstance()->getAllCards().size() >= m_frameSize.width / 80)
 		{
-			for (auto card : CardManager::getInstance()->getAllCards())
+			if (CardManager::getInstance()->getAllCards().at(0)->getPosition().x <= 20
+				&& CardManager::getInstance()->getAllCards().at(CardManager::getInstance()->getAllCards().size() - 1)->getPosition().x >= (m_frameSize.width - 100))
 			{
-				auto pos = card->getPosition();
-				card->setPosition(pos.x + m_delta.x, 0);				
+				for (auto card : CardManager::getInstance()->getAllCards())
+				{
+					auto pos = card->getPosition();
+					card->setPosition(pos.x + m_delta.x, 0);
+
+				}
+				log("%f----%f", m_delta.x, m_deltaX);
+				m_deltaX += m_delta.x;
 			}
-			m_deltaX += m_delta.x;
+			else if (CardManager::getInstance()->getAllCards().at(0)->getPosition().x > 20)
+			{
+				m_deltaX -= 10;
+				CardManager::getInstance()->SortCardMsg(m_deltaX);
+			}
+			else if (CardManager::getInstance()->getAllCards().at(CardManager::getInstance()->getAllCards().size() - 1)->getPosition().x < (m_frameSize.width - 100))
+			{
+				m_deltaX += 10;
+				CardManager::getInstance()->SortCardMsg(m_deltaX);
+			}
 		}
 	}
 	// 把卡片移动到卡片管理器
@@ -397,14 +456,24 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 				{
 					for (auto card : CardManager::getInstance()->getAllCards())
 					{
-						if (/*card->getBoundingBox().containsPoint(m_beginPos)*/card->getBoundingBox().containsPoint(cardPos))
+						if (/*card->getBoundingBox().containsPoint(m_beginPos)*/card->getBoundingBox().containsPoint(cardPos) && !m_isSingleCard)
 						{
 							m_operatingCard = card;
 							m_operatingCard->setPosition(m_movedPos.x - 40, m_movedPos.y - 40);
 							break;
+							/*if (m_isSingleCard)
+							{
+								m_operatingCard = nullptr;
+								continue;
+							}
+							else
+							{
+								m_operatingCard->setPosition(m_movedPos.x - 40, m_movedPos.y - 40);
+								break;
+							}*/
 						}
 					}
-					if (m_operatingCard != nullptr)
+					/*if (m_operatingCard != nullptr)
 					{
 						for (auto card : CardManager::getInstance()->getAllCards())
 						{
@@ -412,7 +481,7 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 							{
 								m_isSingleCard = IsSingleInVector(m_operatingCard);
 							}
-							else if (CardManager::getInstance()->getCardsFromEnhancer().size() == 1)
+							if (CardManager::getInstance()->getCardsFromEnhancer().size() == 1)
 							{
 								if (IsTheSameCardInEnhancer(m_operatingCard))
 									m_isSingleCard = false;
@@ -430,7 +499,7 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 					{
 						m_operatingCard = nullptr;
 						CardManager::getInstance()->SortCardMsg(m_deltaX);
-					}
+					}*/
 				}
 			}
 
@@ -503,7 +572,7 @@ void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unuse
 			else
 			{
 				m_operatingCard = nullptr;
-				CardManager::getInstance()->SortCardMsg(m_deltaX);
+				CardManager::getInstance()->SortCardMsg(m_deltaX+80);
 			}
 		}
 		else
@@ -519,5 +588,7 @@ void CardControlLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unuse
 		m_operatingCard = nullptr;
 		CardManager::getInstance()->SortCardMsg(m_deltaX);
 	}
+	/*if (CardManager::getInstance()->getAllCards().at(CardManager::getInstance()->getAllCards().size() - 1)->getPosition().x <= m_frameSize.width - 100)
+		CardManager::getInstance()->SortCardMsg(m_deltaX + 80);*/
 	m_isSingleCard = true;
 }
