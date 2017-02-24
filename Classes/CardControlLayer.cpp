@@ -217,7 +217,11 @@ void CardControlLayer::ClickCardBackToBottom(Card* card)
 	CardManager::getInstance()->InsertACard(card);
 	//把卡片合成器中的卡片移动回下方的卡片容器
 	if (card->getPosition().y == 300)
-		CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card,m_deltaX);
+	{
+		/*if (CardManager::getInstance()->getAllCards().at(CardManager::getInstance()->getAllCards().size() - 1)->getPosition().x < m_frameSize.width - 60)
+			m_deltaX -= 80;*/
+		CardManager::getInstance()->DeleteCardByObjectFromEnhancer(card, m_deltaX);
+	}
 	else//把中间位置合成后的卡片移进容器
 	{
 		CardManager::getInstance()->DeleteCardByObjectAfterCollection(card, m_deltaX);
@@ -429,16 +433,46 @@ void CardControlLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unuse
 				log("%f----%f", m_delta.x, m_deltaX);
 				m_deltaX += m_delta.x;
 			}
-			else if (CardManager::getInstance()->getAllCards().at(0)->getPosition().x > 20)
+			else if (CardManager::getInstance()->getAllCards().at(0)->getPosition().x > 20
+				&& CardManager::getInstance()->getAllCards().at(CardManager::getInstance()->getAllCards().size() - 1)->getPosition().x >= (m_frameSize.width - 100))
 			{
-				m_deltaX -= 10;
+				if (m_delta.x < 0)
+				{
+					for (auto card : CardManager::getInstance()->getAllCards())
+					{
+						auto pos = card->getPosition();
+						card->setPosition(pos.x + m_delta.x, 0);
+
+					}
+					log("%f----%f", m_delta.x, m_deltaX);
+					m_deltaX += m_delta.x;
+				}
+			}
+			else if (CardManager::getInstance()->getAllCards().at(0)->getPosition().x <= 20
+				&& CardManager::getInstance()->getAllCards().at(CardManager::getInstance()->getAllCards().size() - 1)->getPosition().x < (m_frameSize.width - 100))
+			{
+				if (m_delta.x > 0)
+				{
+					for (auto card : CardManager::getInstance()->getAllCards())
+					{
+						auto pos = card->getPosition();
+						card->setPosition(pos.x + m_delta.x, 0);
+
+					}
+					log("%f----%f", m_delta.x, m_deltaX);
+					m_deltaX += m_delta.x;
+				}
+			}
+			/*else if (CardManager::getInstance()->getAllCards().at(0)->getPosition().x > 20)
+			{
+				m_deltaX -= 5;
 				CardManager::getInstance()->SortCardMsg(m_deltaX);
 			}
 			else if (CardManager::getInstance()->getAllCards().at(CardManager::getInstance()->getAllCards().size() - 1)->getPosition().x < (m_frameSize.width - 100))
 			{
-				m_deltaX += 10;
+				m_deltaX += 5;
 				CardManager::getInstance()->SortCardMsg(m_deltaX);
-			}
+			}*/
 		}
 	}
 	// 把卡片移动到卡片管理器
