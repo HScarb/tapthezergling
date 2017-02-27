@@ -123,14 +123,14 @@ void TimeManager::update(float dt)
 	{
 		m_cardtime -= dt;
 		time_t currentT = time(NULL);
-		if (DataManager::getInstance()->getEndingDate() <= currentT)
+		if (DataManager::getInstance()->getCardEndTime() <= currentT)
 		{
 			m_iscardTimeCountingDown = false;
 			m_cardtime = 0;
 			_eventDispatcher->dispatchCustomEvent("CardEnhanceSucceed");
 		}
 		else
-			m_cardtime = DataManager::getInstance()->getEndingDate() - currentT;
+			m_cardtime = DataManager::getInstance()->getCardEndTime() - currentT;
 		if (m_cardtime <= 0.0)
 		{
 			m_iscardTimeCountingDown = false;

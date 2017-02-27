@@ -113,13 +113,40 @@ void CardManager::InsertChestCard()
 
 void CardManager::loadCardFromData()
 {
+	int enhanceCardType;
+	int enhanceCardLevel;
+	int enhanceCards = 0;
+	if(DataManager::getInstance()->getEnhanceCardType() > 0)
+	{
+		enhanceCardType = DataManager::getInstance()->getEnhanceCardType();
+		enhanceCardLevel = DataManager::getInstance()->getEnhanceCardLevel();
+		enhanceCards = 2;
+	}
 	for (CardData* item : DataManager::getInstance()->getCardData())
 	{
 		// 每种卡片的数量
-		for (int i = 0; i < item->num; i++)
+		// 是在Enhancer中的卡片
+		if (item->info == enhanceCardType && item->level == enhanceCardLevel)
 		{
-			Card* card = Card::createByLevelAndInfo(item->level, item->info);
-			InsertACard(card);
+			for (int i = 0; i < 2; i++)
+			{
+				Card* card = Card::createByLevelAndInfo(item->level, item->info);
+				card->setPosition(300 + 300 * i, 300);
+				InsertACardIntoEnhancer(card);
+			}
+			for (int i = 2; i < item->num; i++)
+			{
+				Card* card = Card::createByLevelAndInfo(item->level, item->info);
+				InsertACard(card);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < item->num; i++)
+			{
+				Card* card = Card::createByLevelAndInfo(item->level, item->info);
+				InsertACard(card);
+			}
 		}
 	}
 }

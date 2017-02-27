@@ -55,16 +55,18 @@ bool CardControlLayer::init()
 	else
 		m_isEnhancerContaninsACard = false;
 
-	if (DataManager::getInstance()->getStartDate() > 0 && DataManager::getInstance()->getEndingDate() > 0)
+	// 从DataManager中获取之前是否有卡片正在合成
+	if (DataManager::getInstance()->getCardEndTime() > 0 && DataManager::getInstance()->getEnhanceCardType() > 0)
 	{
-		if (m_currentTime >= DataManager::getInstance()->getEndingDate())
+		// 正在合成的卡片是否已经合成完毕
+		if (m_currentTime >= DataManager::getInstance()->getCardEndTime())
 		{
-			m_isCardsStartEnhance = false;
 			TimeManager::getInstance()->setCardTime(0);
+			m_isCardsStartEnhance = false;
 		}
 		else
 		{
-			TimeManager::getInstance()->setCardTime(DataManager::getInstance()->getEndingDate() - m_currentTime);
+			TimeManager::getInstance()->setCardTime(DataManager::getInstance()->getCardEndTime() - m_currentTime);
 			m_isCardsStartEnhance = true;
 		}
 		TimeManager::getInstance()->startCardTimeCountDown();
@@ -291,40 +293,32 @@ bool CardControlLayer::IsSingleInVector(Card* card)
 		return false;
 }
 
-void CardControlLayer::CardEnhanceSucceed()
+void CardControlLayer::cardEnhanceSucceedCallBack(cocos2d::EventCustom * cardEvent)
 {
+//	std::string * cardCollection = (std::string*)cardEvent->getUserData();
+//	CCLOG("card Collection: %s", cardCollection);
+	TimeManager::getInstance()->pauseCardTimeCountingDown();
+	
 	m_isCollectionContainsCard = true;
 	m_isCardsStartEnhance = false;
-	Card * tempCard = nullptr;
-	for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
+	int cardType = DataManager::getInstance()->getEnhanceCardType();
+	int cardLevel = DataManager::getInstance()->getEnhanceCardLevel();
+
+	if (DataManager::getInstance()->enhanceCards())
 	{
-		tempCard = card;
-		break;
-	}
-	if (tempCard != nullptr)
-	{
-		auto card = CardManager::getInstance()->CreateACardByTypeAndLevel(tempCard->getCardinfo(), (tempCard->getCardLevel() + 1), 350);
+		auto card = CardManager::getInstance()->CreateACardByTypeAndLevel(cardType, (cardLevel + 1), 350);
 		this->addChild(card);
-		//for (auto card : CardManager::getInstance()->getCardAfterCollection());
 	}
 	for (auto card : CardManager::getInstance()->getCardsFromEnhancer())
 	{
 		DeleteAcardFromEnhancer(card);
 	}
-	//m_sprite->setVisible(true);
-	//DataManager::getInstance()->setEndingTimeStamp(0);
-	//DataManager::getInstance()->setStartTimeStamp(0);
-	DataManager::getInstance()->setStartDate(0);
-	DataManager::getInstance()->setEndingDate(0);
-	m_cardEnhanceTime->setVisible(false);
-}
 
-void CardControlLayer::cardEnhanceSucceedCallBack(cocos2d::EventCustom * cardEvent)
-{
-	std::string * cardCollection = (std::string*)cardEvent->getUserData();
-	CCLOG("card Collection: %s", cardCollection);
-	TimeManager::getInstance()->pauseCardTimeCountingDown();
-	CardEnhanceSucceed();
+	DataManager::getInstance()->setCardEndTime(-1);
+	DataManager::getInstance()->setEnhanceCardType(-1);
+	DataManager::getInstance()->setEnhanceCardLevel(-1);
+
+	m_cardEnhanceTime->setVisible(false);
 }
 
 void CardControlLayer::onCloseBtnClick(Ref* pSender, cocos2d::ui::TouchEventType type)
@@ -349,13 +343,11 @@ void CardControlLayer::onCollectBtnClick(Ref* pSender, cocos2d::ui::TouchEventTy
 		TimeManager::getInstance()->setCardTime(cardTemp->getCardLevel() * 60);
 		log("cardtime %f", TimeManager::getInstance()->getCardTime());
 		TimeManager::getInstance()->startCardTimeCountDown();
-		/*DataManager::getInstance()->setStartTimeStamp(getTimeStamp());
-		DataManager::getInstance()->setEndingTimeStamp(
-			DataManager::getInstance()->getEndingTimeStamp() + cardTemp->getCardLevel() * 10);*/
-		DataManager::getInstance()->setStartDate(getCurrentTime());
-		DataManager::getInstance()->setEndingDate(
-			DataManager::getInstance()->getStartDate() + cardTemp->getCardLevel() * 60);
 
+		DataManager::getInstance()->setCardEndTime(getCurrentTime() + cardTemp->getCardLevel() * 60);
+		DataManager::getInstance()->setEnhanceCardType(CardManager::getInstance()->getCardsFromEnhancer().at(0)->getCardinfo());
+		DataManager::getInstance()->setEnhanceCardLevel(CardManager::getInstance()->getCardsFromEnhancer().at(0)->getCardLevel());
+		DataManager::getInstance()->saveData();
 	}
 	else if(!m_isCardsStartEnhance)
 	{

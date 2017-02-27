@@ -48,6 +48,10 @@ void DataManager::saveData()
 	UserDefault::getInstance()->setIntegerForKey("jewel", m_jewel);
 	UserDefault::getInstance()->setIntegerForKey("energy", m_energy);
 	UserDefault::getInstance()->setIntegerForKey("lastLoginDate", m_lastLoginDate);
+
+	UserDefault::getInstance()->setIntegerForKey("cardEndTime", m_cardEndTime);
+	UserDefault::getInstance()->setIntegerForKey("enhanceCardType", m_enhanceCardType);
+	UserDefault::getInstance()->setIntegerForKey("enhanceCardLevel", m_enhanceCardLevel);
 	UserDefault::getInstance()->flush();
 
 	saveCardData();
@@ -64,10 +68,15 @@ void DataManager::loadData()
 	m_jewel = UserDefault::getInstance()->getIntegerForKey("jewel", 0);
 	m_energy = UserDefault::getInstance()->getIntegerForKey("energy", 0);
 	m_lastLoginDate = UserDefault::getInstance()->getIntegerForKey("lastLoginDate", 0);
+	m_cardEndTime = UserDefault::getInstance()->getIntegerForKey("cardEndTime", -1);
+	m_enhanceCardType = UserDefault::getInstance()->getIntegerForKey("enhanceCardType", -1);
+	m_enhanceCardLevel = UserDefault::getInstance()->getIntegerForKey("enhanceCardLevel", -1);
+
 	CCLOG("Data loaded.\n");
 	CCLOG("bestScore = %d\n", m_bestScore);
 	CCLOG("jewel = %d\n", m_jewel);
 	CCLOG("energy = %d\n", m_energy);
+	CCLOG("cardEndTime = %d\n", m_cardEndTime);
 	CCLOG("lastLoginDate = %d\n", m_lastLoginDate);
 	CCLOG("XML path: %s", UserDefault::getInstance()->getXMLFilePath());
 
@@ -172,4 +181,51 @@ void DataManager::pushBackACard(int type, int level)
 	}
 	// 保存数据
 //	saveCardData();
+}
+
+bool DataManager::enhanceCards()
+{
+	if (m_cardData.size() <= 0)
+	{
+		return false;
+	}
+	int type = m_enhanceCardType;
+	int level = m_enhanceCardLevel;
+	if(type <= 0 || level <= 0)
+	{
+		return false;
+	}
+	// 删去两张低等级的卡
+	for (CardData* item : m_cardData)
+	{
+		if(item->info == type && item->level == level)
+		{
+			if (item->num >= 2)
+			{
+				item->num -= 2;
+				break;
+			}
+			else
+				return false;
+		}
+	}
+
+	// 增加一张高等级的卡
+	bool hasEnhancedLevel = false;
+	for (CardData* item : m_cardData)
+	{
+		if (item->info == type && item->level == level + 1)
+		{
+			item->num++;
+			hasEnhancedLevel = true;
+			break;
+		}
+	}
+	if (!hasEnhancedLevel)
+	{
+		CardData* cd = new CardData(type, level + 1, 1);
+		m_cardData.push_back(cd);
+	}
+	saveCardData();
+	return true;
 }

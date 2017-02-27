@@ -27,8 +27,6 @@ public:
 	bool IsTheSameCardInEnhancer(Card * card);
 	//检测当前要移动的卡片在卡片存放容器中是否为单张
 	bool IsSingleInVector(Card * card);
-	//合成卡片完成
-	void CardEnhanceSucceed();
 
 	//增加卡片合成成功后的回调函数
 	void cardEnhanceSucceedCallBack(cocos2d::EventCustom * cardEvent);
