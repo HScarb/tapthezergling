@@ -8,9 +8,9 @@
 
 const int hang = 3;
 const int lie = 3;
-const int width = 100;
-const int l_margin = 380;
-const int b_margin = 100;
+const int CTT_GRID_WIDTH = 100;
+const int X_MARGIN = 380;	//xÖáµÄ±ß¾à
+const int Y_MARGIN = 100;	//yÖáµÄ±ß¾à
 
 class CheckThethingGrid;
 

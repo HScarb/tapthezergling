@@ -19,7 +19,7 @@ Flower* Flower::createByColor(int color)
 
 bool Flower::init(int color)
 {
-	if (!FilterSprite::init())
+	if (!Sprite::init())
 		return false;
 
 	m_colorType = color;

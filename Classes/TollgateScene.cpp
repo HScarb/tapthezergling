@@ -20,15 +20,6 @@ using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 using namespace CocosDenshion;
 
-//int money = 0;		//开箱要氪的金
-//int m = 0;			//宝箱开启次数
-//int n = 0;			//获得卡片次数
-//int t = 0;			//获取卡片的种类
-//bool act = false;   //初始化宝箱调试
-//bool but = false;	//按钮问题
-//bool res = false;   //按钮的上升问题,false是卡片在上面，true是箭头在上面。
-//bool pre = false;   //控制奖励，防止提前被按
-
 cocos2d::Scene* TollgateScene::createScene()
 {
 	auto scene = Scene::create();
@@ -260,7 +251,7 @@ bool TollgateScene::init()
 	m_t12 = (Text*)(m_scrollView->getChildByName("Text_12"));
 	
 	/* !!!设置关卡目录不显示，当调试的时候可以设置为显示 */
-	//m_scrollView->setVisible(false);
+	m_scrollView->setVisible(false);
 
 	//关键地方
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
@@ -395,7 +386,7 @@ void TollgateScene::setChest()
 	m_chest_sprite->setScale(0.65, 0.65);
 	this->addChild(m_chest_sprite);
 
-	JumpTo * jumpto = JumpTo::create(1.0, ccp(visibleSize.width / 2, visibleSize.height / 2), 50, 2);
+	JumpTo * jumpto = JumpTo::create(1.0, Vec2(visibleSize.width / 2, visibleSize.height / 2), 50, 2);
 	m_chest_sprite->runAction(jumpto);
 }
 

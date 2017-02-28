@@ -66,15 +66,42 @@ bool RunScene::init(int diff, int loop)
 	setRun();
 	m_isRunning = false;
 
-	////////////////////////////////
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_meteorolite = nullptr;
 	m_meteorolite = Sprite::create("res/Res/Runrunrun/yunshi.png");
 	m_meteorolite->setScale(0.3, 0.3);
-	m_meteorolite->setPosition(visibleSize.width / 2,visibleSize.height - 50);
+	m_meteorolite->setPosition(visibleSize.width / 2 + 20,visibleSize.height - 50);
 	this->addChild(m_meteorolite);
 
-	///////////////////////////////
+	m_meteorolite2 = nullptr;
+	m_meteorolite2 = Sprite::create("res/Res/Runrunrun/yunshi2.png");
+	m_meteorolite2->setScale(0.3, 0.3);
+	m_meteorolite2->setPosition(visibleSize.width / 2 - 70,visibleSize.height - 50);
+	this->addChild(m_meteorolite2);
+
+	m_meteorolite3 = nullptr;
+	m_meteorolite3 = Sprite::create("res/Res/Runrunrun/yunshi3.png");
+	m_meteorolite3->setScale(0.3, 0.3);
+	m_meteorolite3->setPosition(visibleSize.width / 2 + 120, visibleSize.height - 50);
+	this->addChild(m_meteorolite3);
+
+	//RepeatForever创建重复动作
+	MoveBy *moveby1 = MoveBy::create(3, Vec2(0,-480));
+	MoveBy *moveby2 = MoveBy::create(5, Vec2(0,-480));
+	MoveBy *moveby3 = MoveBy::create(2, Vec2(0, -480));
+	auto action = RepeatForever::create(
+		Sequence::create(moveby1->clone(), moveby1->reverse(), nullptr)
+		);
+	auto action2 = RepeatForever::create(
+		Sequence::create(moveby2->clone(), moveby2->reverse(), nullptr)
+		);
+	auto action3 = RepeatForever::create(
+		Sequence::create(moveby3->clone(), moveby3->reverse(), nullptr)
+		);
+	m_meteorolite->runAction(action);
+	m_meteorolite2->runAction(action2);
+	m_meteorolite3->runAction(action3);
+
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchEnded = CC_CALLBACK_2(RunScene::onTouchEnded, this);
@@ -119,36 +146,33 @@ bool RunScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 		m_isRunning = true;
 		TimeManager::getInstance()->startCountDown();
 	}
-	int x1 = (int)m_meteorolite->getPositionX();
-	int y1 = (int)m_meteorolite->getPositionY();
+	auto x1 = m_meteorolite->getPositionX(); auto x3 = m_meteorolite2->getPositionX(); auto x4 = m_meteorolite3->getPositionX();
+	auto y1 = m_meteorolite->getPositionY(); auto y3 = m_meteorolite2->getPositionY(); auto y4 = m_meteorolite3->getPositionY();
+
+	//设置获取陨石位置，如果与小狗的位置重叠，则减少时间（或者倒退一定距离）
+	auto x2 = m_zeriling_sprite->getPositionX();
+	auto y2 = m_zeriling_sprite->getPositionY();
+
+	if ((abs(x1 - x2) <= 35 && abs(y1 - y2) <= 35) || (abs(x3 - x2) <= 35 && abs(y3 - y2) <= 35) || (abs(x4 - x2) <= 35 && abs(y4 - y2) <= 35))
+	{							
+		m_zeriling_sprite->runAction(MoveBy::create(0.2, Vec2(-240, 0)));
+		w = w - 3;
+	}
 
 	if (m_zeriling_sprite->getBoundingBox().containsPoint(pos))
 	{
-		MoveBy *moveby = MoveBy::create(0.2, ccp(80, 0));
+		MoveBy *moveby = MoveBy::create(0.4, ccp(80, 0));
 		FlowWord *flowword = FlowWord::create();
 		this->addChild(flowword);
 		flowword->showWord("Wow!!", m_zeriling_sprite->getPosition());
 		m_zeriling_sprite->runAction(Spawn::create(moveby, m_createAnimate(), NULL));
 		w++;
-
-		//设置获取陨石位置，如果与小狗的位置重叠，则减少时间（或者倒退一定距离）
-		int x2 = (int)m_zeriling_sprite->getPositionX();
-		int y2 = (int)m_zeriling_sprite->getPositionY();
-		
-		if (x1 = x2 && y1 == y2)
-		{
-
-		}
-
-
-
 			if (w == 10)//跳10次到达终点
 			{
 			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"Runrunrun");
 			CCLOG("Runrunrun clear");
 			}
 	}
-
 
 	return true;
 }

@@ -1,4 +1,4 @@
-//EacCandiesScnen.cpp
+//EacFlowersScnen.cpp
 #include "EatFlowersScene.h"
 #include "SimpleAudioEngine.h"
 #include "cocostudio/CocoStudio.h"
@@ -16,7 +16,6 @@ using namespace ui;
 using namespace cocostudio::timeline;
 using namespace CocosDenshion;
 
-
 Scene* EatFlowersScene::createScene(int diff, int loop)
 {
 	auto scene = Scene::create();
@@ -30,9 +29,14 @@ bool EatFlowersScene::init(int diff, int loop)
 	if (!Layer::init())
 		return false;
 
+	place = 0;
+	m_diff = diff;
+	m_loop = loop;
+	m_flower = nullptr;
+	m_isRunning = false;
+
 	auto UI = CSLoader::createNode("Tollgates/EatFlowersScene.csb");
 	addChild(UI);
-
 
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
@@ -43,9 +47,45 @@ bool EatFlowersScene::init(int diff, int loop)
 	m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
 	m_timeText = (Text*)(UI->getChildByName("Text_time"));
 
-	m_grid = EatFlowersGrid::create(diff, loop);
-	m_grid->setPosition(0, 0);
-	this->addChild(m_grid);
+	m_Vec2Vec.push_back(Vec2(200, 40)); 
+	m_Vec2Vec.push_back(Vec2(340, 40));
+	m_Vec2Vec.push_back(Vec2(480, 40));
+	m_Vec2Vec.push_back(Vec2(620, 40));
+	m_Vec2Vec.push_back(Vec2(760, 40));
+	m_Vec2Vec.push_back(Vec2(200, 190));
+	m_Vec2Vec.push_back(Vec2(340, 190));
+	m_Vec2Vec.push_back(Vec2(480, 190));
+	m_Vec2Vec.push_back(Vec2(620, 190));
+	m_Vec2Vec.push_back(Vec2(760, 190));
+	m_Vec2Vec.push_back(Vec2(200, 340));
+	m_Vec2Vec.push_back(Vec2(340, 340));
+	m_Vec2Vec.push_back(Vec2(480, 340));
+	m_Vec2Vec.push_back(Vec2(620, 340));
+	m_Vec2Vec.push_back(Vec2(760, 340));
+
+	for (int n = 0; n < 15; n++)
+	{
+		is_occupy[n] = 0;
+	}
+
+	for (int n = 0; n < 3; n++)
+	{
+		int i = random(1, 4);
+		do
+		{
+			place = random(0, 14);
+		} while (is_occupy[place] == 1);
+		is_occupy[place] = 1;
+		m_flower = Sprite::create(StringUtils::format("res/Res/flower/flower_%d.png", i));
+		m_flowerVec.pushBack(m_flower);
+		m_flower->setPosition(m_Vec2Vec.at(place));
+		this->addChild(m_flower);
+	}
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchEnded = CC_CALLBACK_2(EatFlowersScene::onTouchEnded, this);
+	listener->onTouchBegan = CC_CALLBACK_2(EatFlowersScene::onTouchBegan, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return true;
 }
@@ -65,180 +105,57 @@ cocos2d::Layer* EatFlowersScene::create(int diff, int loop)
 	}
 }
 
-//根据困难和轮数创建矩阵数量
-EatFlowersGrid* EatFlowersGrid::create(int diff, int loop, int row, int col)
-{
-	auto pRef = new EatFlowersGrid();
-	if (pRef && pRef->init(diff, loop, row, col))
-	{
-		pRef->autorelease();
-		return pRef;
-	}
-	else
-	{
-		CC_SAFE_DELETE(pRef);
-		return nullptr;
-	}
-}
-
-bool EatFlowersGrid::init(int diff, int loop, int row, int col)
-{
-	if (!Layer::init())
-		return false;
-
-	m_row = row;
-	m_col = col;
-	m_loop = loop;
-	m_diff = diff;
-	m_isRunning = false;
-
-	// 根据行、列，初始化一个空的二维容器
-	m_flowersesGrid.resize(m_col);
-	for (auto &vec : m_flowersesGrid)
-		vec.resize(m_row);
-
-	int q, w, o;
-	for (int n = 0; n <= 2; n++)
-	{
-		do
-		{
-			q = random(0, 5);
-			w = random(0, 2);
-			o = random(1, 3);
-		} while (m_flowersesGrid[q][w]);
-		m_flowersesGrid[q][w] = createflower(o, q, w);
-	}
-	
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = CC_CALLBACK_2(EatFlowersGrid::onTouchBegan, this);
-	listener->onTouchEnded = CC_CALLBACK_2(EatFlowersGrid::onTouchEnded, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
-	return true;
-
-}
-
-void EatFlowersGrid::setZerglingPixPos(Flower* zergling, int x, int y)
-{
-	zergling->setPosition(x * grid_WIDTH + left_MARGIN, y * grid_WIDTH + bottom_MARGIN);
-}
-
-Flower* EatFlowersGrid::createflower(int color, int x, int y)
-{
-	Flower * flower = nullptr;
-	if (color <= 0)
-		return nullptr;
-
-	flower = Flower::createByColor(color);
-
-	setZerglingPixPos(flower, x, y);
-	flower->setScale(0.0);
-	addChild(flower);
-	flower->runAction(ScaleTo::create(0.2, 1.0));
-
-	return flower;
-}
-
-
-void EatFlowersGrid::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+void EatFlowersScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
 
 }
 
-//坐标获取，范围坐标与触屏坐标
-cocos2d::Vec2 EatFlowersGrid::convertToGridPos(cocos2d::Vec2 pixPos)
+bool EatFlowersScene::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
-	float x, y;
-	x = (pixPos.x - left_MARGIN) / grid_WIDTH;
-	y = (pixPos.y - bottom_MARGIN) / grid_WIDTH;
-	return Vec2(x, y);
-}
-
-bool EatFlowersGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
-{
-	int n = 0;
-	int r = 0;
-	int b = 0;
-	r = random(0, 5);
-	b = random(0, 2);
-	n = random(1, 3);
 	auto pos = touch->getLocation();
-	pos = convertToGridPos(pos);
-
 	int x1 = (int)pos.x;
 	int y1 = (int)pos.y;
-	if ((0 <= x1 && x1 < 6) && (0 <= y1 && y1 < 3) && m_flowersesGrid[x1][y1] )
+	
+	if (!m_isRunning)
 	{
-		// 如果倒计时还没有开始，则开始倒计时
-		if (!m_isRunning)
+		m_isRunning = true;
+		TimeManager::getInstance()->startCountDown();
+	}
+
+	for (auto item : m_flowerVec)
+	{
+		int p = 0;
+		if (item->getBoundingBox().containsPoint(pos))
 		{
-			m_isRunning = true;
-			TimeManager::getInstance()->startCountDown();
+			int k = p;
+			item->removeFromParent();
+			m_flowerVec.eraseObject(item);
+			is_occupy[k] = 0;   //重置是否占用坐标位置
 		}
-		// * add animation
-		auto flower = m_flowersesGrid[x1][y1];
-		log("farmer pos x = %f, y = %f", flower->getPosition().x, flower->getPosition().y);
-
-		// 清空矩阵中的花的指针
-		m_flowersesGrid[x1][y1] = nullptr;
-
-		//移除花
-		flower->tapped();
-
-		if (m_loop > 0 && getLivingFlowersNum() > 0)
-		{
-			if (m_flowersesGrid[r][b] == nullptr)
-			{
-				m_flowersesGrid[r][b] = createflower(n+1, r, b);
-			}
-			else if (m_flowersesGrid[r][b] != nullptr)
-			{
-				m_flowersesGrid[r + 1][b] = createflower(n, r + 1, b);
-			}
-			else if (m_flowersesGrid[r + 1][b] != nullptr)
-			{
-				m_flowersesGrid[r][b+1] = createflower(n+1, r , b+1);
-			}
-			else  if(m_flowersesGrid[r][b+1] != nullptr)
-			{
-				m_flowersesGrid[r+1][b+1] = createflower(n, r+1, b+1);
-			}
-			m_loop--;
-		}
-
-		if (getLivingFlowersNum() <= 0 && m_loop <= 0 )
+		p++;
+	}
+	int m = m_loop;
+	if (m_flowerVec.size() <= 0 && m_loop <= 0)			//初始的设置为m_loop = 0
 		{
 			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
 			CCLOG("EatFlowers clear");
 		}
-	}
+	else if (m_flowerVec.size() > 0 && m_loop > 0)
+		{
+			int i = random(1, 4);
+			do
+			{
+				place = random(0, 14);
+			} while (is_occupy[place] == 1);
+			is_occupy[place] = 1;
+			m_flower = Sprite::create(StringUtils::format("res/Res/flower/flower_%d.png", i));
+			m_flowerVec.pushBack(m_flower);
+			m_flower->setPosition(m_Vec2Vec.at(place));
+			m_flower->setScale(0.0);
+			m_flower->runAction(ScaleTo::create(0.25, 1.0));
+			this->addChild(m_flower);
+
+			m_loop--;
+		}
 	return true;
-}
-
-int EatFlowersGrid::getLivingFlowersNum()
-{
-	int count = 0;
-	for (int x = 0; x < m_col; x++)
-	{
-		for (int y = 0; y < m_row; y++)
-		{
-			if (m_flowersesGrid[x][y] != nullptr )
-				count++;
-		}
-	}
-
-	return count;
-}
-
-void EatFlowersGrid::generateNewZerglingGrid(const int diff)
-{
-	m_loop--;
-	int r = random(1, 4);
-	for (int x = 0; x < m_col; x++)
-	{
-		for (int y = 0; y < m_row; y++)
-		{
-			m_flowersesGrid[x][y] = createflower(r, x, y);
-		}
-	}
 }

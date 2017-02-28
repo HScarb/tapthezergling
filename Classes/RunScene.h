@@ -23,6 +23,8 @@ private:
 	bool m_isRunning;
 	cocos2d::Sprite * m_zeriling_sprite;
 	cocos2d::Sprite * m_meteorolite;
+	cocos2d::Sprite * m_meteorolite2;
+	cocos2d::Sprite * m_meteorolite3;
 	cocos2d::ui::Button * m_pauseBtn;
 	cocos2d::ui::Text * m_timeText;
 	cocos2d::ui::LoadingBar* m_timeBar;
@@ -30,7 +32,7 @@ private:
 	cocos2d::Animate * m_createAnimate();
 };
 
-/*飙血动画效果*/
+/*WOW！动画效果*/
 class FlowWord : public CCNode 
 {
 public:
