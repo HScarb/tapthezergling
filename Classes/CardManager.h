@@ -23,15 +23,14 @@ public:
 	//Card * CreateACardByTypeAndLevel(Card * card);
 	void InsertACard(Card* card);
 	void InsertACardIntoEnhancer(Card * card);
-	void SortCardMsg();
+	void SortCardMsg(int diff = 0);
 	void InsertChestCard();
 	// 从DataManager数据中载入卡片
 	void loadCardFromData();
 	//删除卡片
-	void DeleteCardByObject(Card * card);
-	void DeleteCardByObjectFromEnhancer(Card * card);
-	void DeleteCardByObjectAfterCollection(Card * card);
-
+	void DeleteCardByObject(Card * card,float delta = 0);
+	void DeleteCardByObjectFromEnhancer(Card * card, float delta = 0);
+	void DeleteCardByObjectAfterCollection(Card * card, float delta = 0);
 private:
 	static CardManager * m_cardManager;
 

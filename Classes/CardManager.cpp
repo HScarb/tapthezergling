@@ -113,45 +113,72 @@ void CardManager::InsertChestCard()
 
 void CardManager::loadCardFromData()
 {
+	int enhanceCardType;
+	int enhanceCardLevel;
+	int enhanceCards = 0;
+	if(DataManager::getInstance()->getEnhanceCardType() > 0)
+	{
+		enhanceCardType = DataManager::getInstance()->getEnhanceCardType();
+		enhanceCardLevel = DataManager::getInstance()->getEnhanceCardLevel();
+		enhanceCards = 2;
+	}
 	for (CardData* item : DataManager::getInstance()->getCardData())
 	{
 		// 每种卡片的数量
-		for (int i = 0; i < item->num; i++)
+		// 是在Enhancer中的卡片
+		if (item->info == enhanceCardType && item->level == enhanceCardLevel)
 		{
-			Card* card = Card::createByLevelAndInfo(item->level, item->info);
-			InsertACard(card);
+			for (int i = 0; i < 2; i++)
+			{
+				Card* card = Card::createByLevelAndInfo(item->level, item->info);
+				card->setPosition(300 + 300 * i, 300);
+				InsertACardIntoEnhancer(card);
+			}
+			for (int i = 2; i < item->num; i++)
+			{
+				Card* card = Card::createByLevelAndInfo(item->level, item->info);
+				InsertACard(card);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < item->num; i++)
+			{
+				Card* card = Card::createByLevelAndInfo(item->level, item->info);
+				InsertACard(card);
+			}
 		}
 	}
 }
 
-void CardManager::SortCardMsg()
+void CardManager::SortCardMsg(int diff)
 {
 	std::sort(m_cardVector.begin(), m_cardVector.end(), SortCardsOpreator);
 	int i = 0;
 	for (auto card : m_cardVector)
 	{
-		card->setPosition(i * 80, 0);
+		card->setPosition(i * 80 + diff, 0);
 		i++;
 	}
 }
 
-void CardManager::DeleteCardByObject(Card *card)
+void CardManager::DeleteCardByObject(Card *card,float delta)
 {
 	m_cardVector.eraseObject(card);
-	SortCardMsg();
+	SortCardMsg(delta);
 }
 
-void CardManager::DeleteCardByObjectFromEnhancer(Card* card)
+void CardManager::DeleteCardByObjectFromEnhancer(Card* card, float delta)
 {
 	m_cardInEnhancer.eraseObject(card);
-	SortCardMsg();
+	SortCardMsg(delta);
 }
 
-void CardManager::DeleteCardByObjectAfterCollection(Card* card)
+void CardManager::DeleteCardByObjectAfterCollection(Card* card,float delta)
 {
 //	free(m_cardEnhanced);
 	m_cardEnhanced = nullptr;
-	SortCardMsg();
+	SortCardMsg(delta);
 }
 
 bool SortCardsOpreator(const Card* card1, const Card* card2)

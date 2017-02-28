@@ -27,15 +27,13 @@ public:
 	bool IsTheSameCardInEnhancer(Card * card);
 	//检测当前要移动的卡片在卡片存放容器中是否为单张
 	bool IsSingleInVector(Card * card);
-	//合成卡片完成
-	void CardEnhanceSucceed();
 
 	//增加卡片合成成功后的回调函数
 	void cardEnhanceSucceedCallBack(cocos2d::EventCustom * cardEvent);
 	//获取时间戳
 	int getTimeStamp();
 	//获取当前时间
-	tm * getCurrentTime();
+	time_t getCurrentTime();
 
 	// 收集合成好的卡片
 	void collectEnhancedCard(Card* card);
@@ -72,5 +70,6 @@ private:
 	//cocos2d::ui::ImageView * m_sprite;
 	//获取当前时间和时间戳（秒）
 	int m_timeStamp;
-	tm * m_currentTime;
+	time_t m_currentTime;
+	float m_deltaX;
 };

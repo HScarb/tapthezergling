@@ -1,5 +1,6 @@
 // TimeManager.cpp
 #include "TimeManager.h"
+#include "DataManager.h"
 USING_NS_CC;
 
 TimeManager * TimeManager::m_timeManager = nullptr;
@@ -121,6 +122,15 @@ void TimeManager::update(float dt)
 	if (m_iscardTimeCountingDown)
 	{
 		m_cardtime -= dt;
+		time_t currentT = time(NULL);
+		if (DataManager::getInstance()->getCardEndTime() <= currentT)
+		{
+			m_iscardTimeCountingDown = false;
+			m_cardtime = 0;
+			_eventDispatcher->dispatchCustomEvent("CardEnhanceSucceed");
+		}
+		else
+			m_cardtime = DataManager::getInstance()->getCardEndTime() - currentT;
 		if (m_cardtime <= 0.0)
 		{
 			m_iscardTimeCountingDown = false;
