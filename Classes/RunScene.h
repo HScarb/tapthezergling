@@ -2,8 +2,6 @@
 #include "ui\CocosGUI.h"
 #include "TollgateControlLayer.h"
 
-USING_NS_CC;
-
 class RunScene : public cocos2d::Layer
 {
 public:
@@ -29,20 +27,20 @@ private:
 	cocos2d::ui::Text * m_timeText;
 	cocos2d::ui::LoadingBar* m_timeBar;
 
-	cocos2d::Animate * m_createAnimate();
+	cocos2d::Animate * createAnimate();
 };
 
 /*WOW£¡¶¯»­Ð§¹û*/
-class FlowWord : public CCNode 
+class FlowWord : public cocos2d::Node 
 {
 public:
 	static FlowWord* create();
 	bool init();
 
 public:
-	void showWord(const char* text, CCPoint pos);
+	void showWord(const char* text, cocos2d::Vec2 pos);
 private:
-	CCLabelTTF* m_textLab;
+	cocos2d::LabelTTF* m_textLab;
 
 	void flowEnd();
 };
