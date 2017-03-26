@@ -36,13 +36,13 @@
             <PreSize X="0.5333" Y="0.2500" />
             <FileData Type="Normal" Path="Res/RESOURCE/Gem-board.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_goon" ActionTag="-1816586950" Tag="27" IconVisible="False" LeftMargin="524.2454" RightMargin="-76.2454" TopMargin="219.7601" BottomMargin="-191.7601" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="482" Scale9Height="490" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_goon" ActionTag="-1816586950" Tag="27" IconVisible="False" LeftMargin="640.0000" RightMargin="-192.0000" TopMargin="344.0000" BottomMargin="-316.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="482" Scale9Height="490" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="512.0000" Y="512.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="780.2454" Y="64.2399" />
+            <Position X="896.0000" Y="-60.0000" />
             <Scale ScaleX="0.2300" ScaleY="0.2300" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8128" Y="0.1190" />
+            <PrePosition X="0.9333" Y="-0.1111" />
             <PreSize X="0.5333" Y="0.9481" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
@@ -302,6 +302,30 @@
                 <PrePosition X="0.5000" Y="0.3750" />
                 <PreSize X="0.5675" Y="0.0525" />
                 <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_11" ActionTag="-825682459" Tag="36" IconVisible="False" LeftMargin="90.2006" RightMargin="106.7994" TopMargin="531.4622" BottomMargin="226.5378" TouchEnable="True" FontSize="34" LabelText="11 Fithecircle" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="203.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="191.7006" Y="247.5378" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4793" Y="0.3094" />
+                <PreSize X="0.5075" Y="0.0525" />
+                <FontResource Type="Normal" Path="Res/fonts/AveriaSansLibre-Bold.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_12" ActionTag="2127856354" Tag="55" IconVisible="False" LeftMargin="90.0033" RightMargin="101.9967" TopMargin="576.2682" BottomMargin="181.7318" TouchEnable="True" FontSize="34" LabelText="12 Runrunrun" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="208.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="194.0033" Y="202.7318" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.4850" Y="0.2534" />
+                <PreSize X="0.5200" Y="0.0525" />
+                <FontResource Type="Normal" Path="AveriaSansLibre-Bold.ttf" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>

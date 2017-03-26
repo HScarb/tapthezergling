@@ -6,8 +6,10 @@
 #include <string>
 
 const float INITIAL_TIME = 5.0f;
-const int TOTAL_TOLLGATE_TYPE = 8;
-const std::string TOLLGATE_NAME[9] = 
+const int TOTAL_TOLLGATE_TYPE = 10;
+const int TOTAL_BOSS_TYPE = 2;
+const int CHEST_TOLLGATE = 10;			// 每几关出现宝箱
+const std::string TOLLGATE_NAME[11] = 
 {
 	"0: None",
 	"1: Double Tap Zergling",
@@ -17,7 +19,9 @@ const std::string TOLLGATE_NAME[9] =
 	"5: Jumping On Pools",
 	"6: Classify Units",
 	"7: Check The Units",
-	"8: Feed Snakes"
+	"8: Feed Snakes",
+	"9: Fit The Circle",
+	"10: Run Run Run"
 };
 const std::string BOSS_TOLLGATE_NAME[3] =
 {
@@ -28,17 +32,32 @@ const std::string BOSS_TOLLGATE_NAME[3] =
 
 const int ZORDER_TOLLGATECONTROLLAYER = 100;
 
+const std::string TOLL_NAME[] =
+{
+	"None",
+	"DoubleTap",
+	"SlideCut",
+	"EatFlowers",
+	"BurrowAndAttack",
+	"JumpingOnPools",
+	"ClassifyUnits",
+	"ZerglingKing",
+	"ZerglingNinja",
+	"CheckTheUnits",
+	"FeedSnakes",
+	"RunRunRun"
+};
 const std::string CARD_NAME[] =
 {
 	"None",
-	"Double Tap Zergling Card",
-	"Slide Cut Card",
-	"Eat Flowers Card",
-	"Burrow And Attack Card",
-	"Jumping On Pools Card",
-	"Classify Units Card",
-	"Check The Units Card",
-	"Feed Snakes Card"
-	"Zergling King Card",
-	"Zergling Ninja Card"
+	"ZerglingCouple",
+	"Zealot Cutter",
+	"Reaver",
+	"Infestor",
+	"PiKaLing",
+	"Queen",
+	"Ultralisk",
+	"Thor",
+	"Overseer",
+	"ZerglingBrothers"
 };

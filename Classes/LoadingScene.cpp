@@ -11,7 +11,7 @@ USING_NS_CC;
 using namespace CocosDenshion;
 using namespace CocosDenshion;
 
-const int TOTAL_TEXTURE_NUM = 200;	// 12 + small zerglings(137) + 3 workers + 15 RESOURCE + 4 bases + 10 smallUnitDeath + 7 other units + 10 Cards= 188
+const int TOTAL_TEXTURE_NUM = 248;	// 12 + small zerglings(137) + 3 workers + 15 RESOURCE + 4 bases + 10 smallUnitDeath + 7 other units + 10 Cards + 4 runner-dog + 4 flowers= 196
 
 Scene* LoadingScene::createScene() 
 {
@@ -46,7 +46,14 @@ bool LoadingScene::init()
 	};
 
 	// 异步加载图片
-	
+	for (int i = 1; i <= 4; i++)
+	{
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("res/Res/flower_%d.png", i),addTextureCallback);
+	}
+	for (int i = 1; i <= 4; i++)
+	{
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("res/Res/ZerlingAnimation/r_%d.png", i), addTextureCallback);
+	}
 	for (int i = 1; i <= 2; i++)
 	{
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("res/images/chest/chest%d.png", i), addTextureCallback);
@@ -63,7 +70,6 @@ bool LoadingScene::init()
 	for (int i = 1; i <= 137;i++)
 	{
 		TextureCache::getInstance()->addImageAsync(StringUtils::format("zergling/SCs_Zergling_C3_%02d.png", i), addTextureCallback);
-//		CCLOG("SCs_Zergling_C3_%02d.png", i);
 	}
 	// Death animation 10
 	for (int i = 1; i <= 10;i++)
@@ -103,21 +109,19 @@ bool LoadingScene::init()
 	TextureCache::getInstance()->addImageAsync(PATH_ZERG_BASE, addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(PATH_PROTOSS_BASE, addTextureCallback);
 	TextureCache::getInstance()->addImageAsync(PATH_SPAWNINGPOOL, addTextureCallback);
-	/*//Cards
-	TextureCache::getInstance()->addImageAsync("Cards/Card_1.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_2.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_3.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_4.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_5.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_6.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_7.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_8.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_9.png", addTextureCallback);
-	TextureCache::getInstance()->addImageAsync("Cards/Card_10.png", addTextureCallback);*/
-	for (int i = 1; i <= 10; i++)
+	//Cards
+	for (int i = 1; i <= 5; i++)
 	{
-		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_%i.png", i), addTextureCallback);
-		log("Card_%i.png", i);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_BOSS1_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_BOSS2_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_BurrowAndAttack_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_CheckTheThing_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_ClassifyUnits_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_DoubleTap_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_EatFlowers_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_JumpingOnPool_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_FeadSnacks_%d.jpg", i), addTextureCallback);
+		TextureCache::getInstance()->addImageAsync(StringUtils::format("Cards/Card_SlideCut_%d.jpg", i), addTextureCallback);
 	}
 
 	// 开启加载进度检测
@@ -142,7 +146,6 @@ bool LoadingScene::init()
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/splat1.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/splat2.mp3");
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Sounds/winmusic.mp3");
-
 
 	// 加载用户记录
 	DataManager::getInstance()->loadData();

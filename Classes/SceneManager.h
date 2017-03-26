@@ -23,12 +23,14 @@ public:
 		None,
 		DoubleTapScene,
 		SlideCutScene,
-		EatCandiesScene,
+		EatFlowersScene,
 		BurrowAndAttackScene,
 		JumpingOnPoolScene,
 		ClassifyUnits,
 		CheckThethingScene,
-		FeedSnacks
+		FeedSnacks,
+		fitthecircle,
+		Runrunrun
 	}TollgateSceneType;
 	static SceneManager * getInstance();
 	virtual bool init();

@@ -6,6 +6,7 @@
 #include"TollgateControlLayer.h"
 #include"math.h"
 #include "Global.h"
+#include "GameManager.h"
 
 const int diff0 = 1;
 const int diff1 = 2;
@@ -213,7 +214,7 @@ void BurrowAndAttackGrid::onTouchEnded(Touch* touch, Event* unused_event)
 				}
 				else if (getLivingWorkerNum() <= 0 && m_loop <= 0)
 				{
-					_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"BurrowAndAttack");
+					_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"BurrowAndAttack");					
 					CCLOG("BurrowAndAttack clear");
 				}
 			}

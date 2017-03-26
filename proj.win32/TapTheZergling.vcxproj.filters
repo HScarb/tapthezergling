@@ -37,9 +37,6 @@
     <Filter Include="Classes\Scenes\Tollgates\DoubleTap">
       <UniqueIdentifier>{9dfd1f53-61de-4648-8580-ebae28dccc2f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Scenes\Tollgates\EatCandies">
-      <UniqueIdentifier>{b8d09fb3-dd41-40b6-881c-aea985c02efb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Scenes\Tollgates\JumpingOnPool">
       <UniqueIdentifier>{c4976620-4d8c-418b-b5f0-2191fc151ed0}</UniqueIdentifier>
     </Filter>
@@ -58,11 +55,23 @@
     <Filter Include="Classes\Scenes\Tollgates\BOSS2ZerglingNinja">
       <UniqueIdentifier>{234c0a0e-03de-43b2-b757-9f65e71555b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Scenes\Tollgates\CheckThething">
-      <UniqueIdentifier>{7e0f20c1-99b4-4fcd-932f-a2dc4cf26164}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Scenes\Tollgates\FeedSnacks">
       <UniqueIdentifier>{5bf8579b-ad60-4afb-8faf-eaf5f7536339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\Fitthecircle">
+      <UniqueIdentifier>{f4abef43-b3f9-4d45-8d30-b14d9a0099ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\EatFlowers">
+      <UniqueIdentifier>{b8d09fb3-dd41-40b6-881c-aea985c02efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\Runrunrun">
+      <UniqueIdentifier>{3c0d7628-2c5e-4b77-954e-0987d7829265}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Utils\rapidjson">
+      <UniqueIdentifier>{81e38dfb-1d39-4891-a428-c39dc21e53cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scenes\Tollgates\CheckThething">
+      <UniqueIdentifier>{7e0f20c1-99b4-4fcd-932f-a2dc4cf26164}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,11 +132,8 @@
     <ClCompile Include="..\Classes\Farmer.cpp">
       <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EatCandiesScene.cpp">
-      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Flower.cpp">
-      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\PauseLayer.cpp">
       <Filter>Classes\Layer</Filter>
@@ -196,7 +202,34 @@
       <Filter>Classes\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\CardInfoLayer.cpp">
-      <Filter>Classes\Entity</Filter>
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\fitthecircle.cpp">
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Circle.cpp">
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EatFlowersScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Meteorolite.cpp">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RunScene.cpp">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StringUtil.cpp">
+      <Filter>Classes\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CsvUtil.cpp">
+      <Filter>Classes\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CsvData.cpp">
+      <Filter>Classes\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FreeCardLayer.cpp">
+      <Filter>Classes\Layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,11 +290,8 @@
     <ClInclude Include="..\Classes\Farmer.h">
       <Filter>Classes\Scenes\Tollgates\SlideCut</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\EatCandiesScene.h">
-      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Flower.h">
-      <Filter>Classes\Scenes\Tollgates\EatCandies</Filter>
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\PauseLayer.h">
       <Filter>Classes\Layer</Filter>
@@ -342,7 +372,91 @@
       <Filter>Classes\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\CardInfoLayer.h">
-      <Filter>Classes\Entity</Filter>
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\fitthecircle.h">
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Circle.h">
+      <Filter>Classes\Scenes\Tollgates\Fitthecircle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EatFlowersScene.h">
+      <Filter>Classes\Scenes\Tollgates\EatFlowers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Meteorolite.h">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RunScene.h">
+      <Filter>Classes\Scenes\Tollgates\Runrunrun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StringUtil.h">
+      <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CsvUtil.h">
+      <Filter>Classes\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CsvData.h">
+      <Filter>Classes\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\allocators.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\document.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\encodedstream.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\encodings.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\filereadstream.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\filewritestream.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\fwd.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\istreamwrapper.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\memorybuffer.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\memorystream.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\ostreamwrapper.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\pointer.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\prettywriter.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\rapidjson.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\reader.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\schema.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\stream.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\stringbuffer.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rapidjson\writer.h">
+      <Filter>Classes\Utils\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FreeCardLayer.h">
+      <Filter>Classes\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

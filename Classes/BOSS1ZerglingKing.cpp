@@ -1,5 +1,6 @@
 // BOSS1ZerglingKing.cpp
 #include "BOSS1ZerglingKing.h"
+#include "GameManager.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"

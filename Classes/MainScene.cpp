@@ -9,8 +9,16 @@
 #include "CardControlLayer.h"
 #include "NoTouchLayer.h"
 #include "GameManager.h"
+#include "StringUtil.h"
+#include "CsvUtil.h"
+#include "TimeManager.h"
+#include "FreeCardLayer.h"
+#include "Global.h"
 
 USING_NS_CC;
+
+int new1 = 1;			//初始打开的情况下，给与30点能量值
+
 using namespace CocosDenshion;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
@@ -28,6 +36,32 @@ bool MainScene::init()
 	if (!Layer::init())
 		return false;
 
+	///////////////////////////////////////////////////////
+	/*以下是测试Csv部分*/
+	auto strsList = StringUtil::getInstance()->split("Muton,xiaoruo,cocos2d-x,Csv", ",");
+
+	for (auto value : strsList)
+	{
+		log("value = %s", value.asString().c_str());
+	}
+
+	const char * sPath = "Cards.csv";
+	CsvUtil::getInstance()->loadFile(sPath);
+
+	Value CardLevel = CsvUtil::getInstance()->getValue(2, 1, sPath);
+
+	Value CardPosition = CsvUtil::getInstance()->getValue(2, 2, sPath);
+
+	log("CardLevel = %s", CardLevel.asString().c_str());
+	log("CardPosition = %s", CardPosition.asString().c_str());
+
+	UserDefault::sharedUserDefault()->setStringForKey("CardName", "EatFlowers");
+
+	String * CardName = String::create(UserDefault::sharedUserDefault()->getStringForKey("CardName"));
+
+	log("CardName = %s", CardName->getCString());
+
+	//////////////////////////////////////////////////////
 	m_energyText = nullptr;
 	m_jewelText = nullptr;
 	m_scoreText = nullptr;
@@ -37,6 +71,21 @@ bool MainScene::init()
 	m_energyBar = nullptr;
 
 	m_zergling = nullptr;
+
+	//30点能量
+	if (new1 == 1)
+	{
+		GameManager::getInstance()->setEnergy(30);
+		new1 = -1;
+	}
+	else {}
+	
+	//自然回复能量
+	if (GameManager::getInstance()->getEnergy() < 30)
+	{
+		this->schedule(schedule_selector(MainScene::resumeEnergy), 60.0f);
+		log("%d", GameManager::getInstance()->getEnergy());
+	}
 
 	// 加载UI
 	auto rootNode = CSLoader::createNode("MainScene.csb");
@@ -65,8 +114,6 @@ bool MainScene::init()
 	// m_addJewelBtn = (Button*)(rootNode->getChildByName(""));
 	m_energyBar = (LoadingBar*)(rootNode->getChildByName("LoadingBar_energy"));
 
-	DataManager::getInstance()->loadData();
-
 	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 	m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel()));
 	m_scoreText->setText(StringUtils::format("%d", DataManager::getInstance()->getBestScore()));
@@ -89,7 +136,28 @@ bool MainScene::init()
 
 	SoundManager::getInstance()->playMenuMusic();
 
+	checkNewCard();
+
 	return true;
+}
+
+void MainScene::checkNewCard()
+{
+	int lastLoginDate = DataManager::getInstance()->getLastLoginDate();					// 保存在数据文件中的上一次登录日期
+	__int64 currentTime = TimeManager::getInstance()->getCurrentDateTime();
+	int currentDate = localtime(&currentTime)->tm_yday;									// 获取的当前日期
+	if(currentDate != lastLoginDate)													// 如果日期不同，给一张新卡
+	{
+		CardData* cardData = new CardData();
+		int info = random(1, TOTAL_TOLLGATE_TYPE + TOTAL_BOSS_TYPE);
+		auto cardInfoLayer = FreeCardLayer::create(info);
+		this->addChild(cardInfoLayer);
+
+		// 保存当前的日期为上次登录日期
+		DataManager::getInstance()->setLastLoginDate(currentDate);
+		DataManager::getInstance()->pushBackACard(info, 1);
+		DataManager::getInstance()->saveData();
+	}
 }
 
 bool MainScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
@@ -109,18 +177,28 @@ void MainScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event
 void MainScene::onSettingsBtnClick(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
+	{
 		SceneManager::getInstance()->changeScene(SceneManager::SettingsScene);
+		DataManager::getInstance()->saveData();
+	}
 }
 
 void MainScene::onCardBtnClick(Ref* pSender, TouchEventType type)
 {
 	if (type == TouchEventType::TOUCH_EVENT_ENDED)
 	{
-		//m_cardControlLayer->showLayer();
 		m_cardControlLayer = CardControlLayer::create();
 		this->addChild(m_cardControlLayer);
 	}
 	return;
+}
+
+void MainScene::resumeEnergy(float dt)
+{
+	if (GameManager::getInstance()->getEnergy() < 30){
+		GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() + 1);
+		m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
+	}
 }
 
 void MainScene::onAddJewelBtnClick(Ref* pSender, TouchEventType type)

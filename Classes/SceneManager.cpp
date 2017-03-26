@@ -9,7 +9,7 @@
 
 #include "DoubleTapScene.h"
 #include "SlideCutScene.h"
-#include "EatCandiesScene.h"
+#include "EatFlowersScene.h"
 #include "BurrowAndAttack.h"
 #include "JumpingOnPoolScene.h"
 #include "ClassifyUnits.h"
@@ -17,6 +17,9 @@
 #include "BOSS2ZerglingNinja.h"
 #include "CheckThethingScene.h"
 #include"FeedSnacks.h"
+#include "fitthecircle.h"
+#include "RunScene.h"
+
 USING_NS_CC;
 
 SceneManager * SceneManager::m_sceneManager = nullptr;
@@ -107,8 +110,8 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 	case SlideCutScene: 
 		pScene = SlideCutScene::createScene(diff, loop);
 		break;
-	case EatCandiesScene:
-		pScene = EatCandiesScene::createScene(diff,loop);
+	case EatFlowersScene:
+		pScene = EatFlowersScene::createScene(diff, loop);
 		break;
 	case BurrowAndAttackScene:
 		pScene = BurrowAndAttackScene::createScene(diff, loop);
@@ -125,6 +128,12 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 	case FeedSnacks:
 		pScene = FeedSnacks::createScene(diff, loop);
 		break;
+	case fitthecircle:
+		pScene = fitthecircleScene::createScene(diff, loop);
+		break;
+	case Runrunrun:
+		pScene = RunScene::createScene(diff, loop);
+		break;
 	default: break;
 	}
 	auto pDirector = Director::getInstance();
@@ -139,3 +148,4 @@ void SceneManager::changeScene(TollgateSceneType sceneType, int diff, int loop)
 		pDirector->replaceScene(replaceScene);
 	}
 }
+

@@ -13,6 +13,8 @@ public:
 	CREATE_FUNC(MainScene);
 
 private:
+	void checkNewCard();						// 检测是否给一张新卡(每天只能给一张)
+
 	virtual bool onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event);
 	virtual void onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * unused_event);
 
@@ -37,4 +39,7 @@ private:
 	//层
 	CardControlLayer * m_cardControlLayer;
 	NoTouchLayer * m_noTouchLayer;
+
+	//回复能量
+	void resumeEnergy(float dt);
 };

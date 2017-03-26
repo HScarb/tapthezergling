@@ -17,21 +17,27 @@ public:
 	//返回卡片存放容器
 	cocos2d::Vector<Card*> getAllCards();
 	cocos2d::Vector<Card*> getCardsFromEnhancer();
-	cocos2d::Vector<Card*> getCardAfterEnhancer();
 
+	//通过卡片信息，等级往容器中增加卡片
+	Card * CreateACardByTypeAndLevel(int info, int level, float posY);
+	//Card * CreateACardByTypeAndLevel(Card * card);
 	void InsertACard(Card* card);
 	void InsertACardIntoEnhancer(Card * card);
-	void InsertACardToAEnhancer(Card * card);
-	void SortCardMsg();
+	void SortCardMsg(int diff = 0);
+	void InsertChestCard();
+	// 从DataManager数据中载入卡片
+	void loadCardFromData();
 	//删除卡片
-	void DeleteCardByObject(Card * card);
-	void DeleteCardByObjectFromEnhancer(Card * card);
-
+	void DeleteCardByObject(Card * card,float delta = 0);
+	void DeleteCardByObjectFromEnhancer(Card * card, float delta = 0);
+	void DeleteCardByObjectAfterCollection(Card * card, float delta = 0);
 private:
 	static CardManager * m_cardManager;
+
 	cocos2d::Vector<Card*> m_cardVector;
 	cocos2d::Vector<Card*> m_cardInEnhancer;
-	cocos2d::Vector<Card*> m_cardAfterEnhancer;
+
+	CC_SYNTHESIZE(Card*, m_cardEnhanced, CardEnhanced);
 };
 
 inline bool SortCardsOpreator(const Card* card1, const Card* card2);

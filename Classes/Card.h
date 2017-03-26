@@ -5,7 +5,7 @@
 class Card : public cocos2d::Sprite
 {
 public:
-	enum CardInfo
+	typedef enum
 	{
 		NONE = 0,
 		Double_Tap_Zergling_Card = 1,
@@ -16,13 +16,15 @@ public:
 		Classify_Units_Card,
 		Check_The_Units_Card,
 		Feed_Snakes_Card,
+		//Fit_The_Circle_Card,
 		Zergling_King_Card,
 		Zergling_Ninja_Card
-	};//¿¨Æ¬Ãû³Æ
-	static Card * createByInfo(CardInfo info = NONE);
-	bool init(int info);
+	} CardInfo;//¿¨Æ¬Ãû³Æ
+	static Card * createByLevelAndInfo(int level,int info = 0);
+	bool init(int info,int level);
 
 	void tapped();//¿¨Æ¬µã»÷²Ù×÷
+
 	CC_SYNTHESIZE(int, m_cardInfo, Cardinfo);
 	CC_SYNTHESIZE(int, m_cardLevel, CardLevel);
 };

@@ -4,6 +4,7 @@
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
 #include "Global.h"
+#include "GameManager.h"
 USING_NS_CC;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;

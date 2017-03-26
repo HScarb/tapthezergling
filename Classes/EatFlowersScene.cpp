@@ -1,55 +1,21 @@
 //EacFlowersScnen.cpp
 #include "EatFlowersScene.h"
+#include "SimpleAudioEngine.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
 #include "Flower.h"
 #include "TollgateControlLayer.h"
+#include "AnimationUtil.h"
+#include "Global.h"
+#include "GameManager.h"
 
 USING_NS_CC;
 
-using namespace cocos2d;
 using namespace std;
-using namespace cocos2d::ui;
+using namespace ui;
 using namespace cocostudio::timeline;
-
-
-// multi touches test
-static const Color3B* s_TouchColors[3] = {
-	&Color3B::YELLOW,
-	&Color3B::BLUE,
-	&Color3B::RED,
-};
-
-class TouchPoint : public Node
-{
-public:
-	TouchPoint(const Vec2 &touchPoint, const Color3B &touchColor)
-	{
-		m_point = touchPoint;
-		DrawNode* drawNode = DrawNode::create();
-		auto s = Director::getInstance()->getWinSize();
-		Color4F color(touchColor.r / 255.0f, touchColor.g / 255.0f, touchColor.b / 255.0f, 1.0f);
-		drawNode->drawLine(Vec2(0, touchPoint.y), Vec2(s.width, touchPoint.y), color);
-		drawNode->drawLine(Vec2(touchPoint.x, 0), Vec2(touchPoint.x, s.height), color);
-		drawNode->drawDot(touchPoint, 3, color);
-		addChild(drawNode);
-	}
-
-	static TouchPoint* touchPointWithParent(Node* pParent, const Vec2 &touchPoint, const Color3B &touchColor)
-	{
-		auto pRet = new (std::nothrow) TouchPoint(touchPoint, touchColor);
-		pRet->setContentSize(pParent->getContentSize());
-		pRet->setAnchorPoint(Vec2(0.0f, 0.0f));
-		pRet->autorelease();
-		return pRet;
-	}
-	CC_SYNTHESIZE(Vec2, m_point, Pt);
-};
-
-static Map<int, TouchPoint*> s_map;
-
-
+using namespace CocosDenshion;
 
 Scene* EatFlowersScene::createScene(int diff, int loop)
 {
@@ -64,31 +30,68 @@ bool EatFlowersScene::init(int diff, int loop)
 	if (!Layer::init())
 		return false;
 
-
-	auto winSize = Director::getInstance()->getWinSize();
+	place = 0;
+	m_diff = diff;
+	m_loop = loop;
+	m_flower = nullptr;
+	m_isRunning = false;
 
 	auto UI = CSLoader::createNode("Tollgates/EatFlowersScene.csb");
 	addChild(UI);
 
-
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
 	m_controlLayer->scheduleUpdate();
-	addChild(m_controlLayer);
+	addChild(m_controlLayer, ZORDER_TOLLGATECONTROLLAYER);
 
-	//m_pauseBtn = (Button*)(UI->getChildByName("Button_pause"));
-	//m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
-	//m_timeText = (Text*)(UI->getChildByName("Text_time"));
+	m_pauseBtn = (Button*)(UI->getChildByName("Button_pause"));
+	m_timeBar = (LoadingBar*)(UI->getChildByName("LoadingBar_time"));
+	m_timeText = (Text*)(UI->getChildByName("Text_time"));
 
-	m_grid = EatFlowersGrid::create(diff, loop);
-	m_grid->setPosition(0, 0);
-	this->addChild(m_grid);
+	m_Vec2Vec.push_back(Vec2(200, 40)); 
+	m_Vec2Vec.push_back(Vec2(340, 40));
+	m_Vec2Vec.push_back(Vec2(480, 40));
+	m_Vec2Vec.push_back(Vec2(620, 40));
+	m_Vec2Vec.push_back(Vec2(760, 40));
+	m_Vec2Vec.push_back(Vec2(200, 190));
+	m_Vec2Vec.push_back(Vec2(340, 190));
+	m_Vec2Vec.push_back(Vec2(480, 190));
+	m_Vec2Vec.push_back(Vec2(620, 190));
+	m_Vec2Vec.push_back(Vec2(760, 190));
+	m_Vec2Vec.push_back(Vec2(200, 340));
+	m_Vec2Vec.push_back(Vec2(340, 340));
+	m_Vec2Vec.push_back(Vec2(480, 340));
+	m_Vec2Vec.push_back(Vec2(620, 340));
+	m_Vec2Vec.push_back(Vec2(760, 340));
+
+	for (int n = 0; n < 15; n++)
+	{
+		is_occupy[n] = 0;
+	}
+
+	for (int n = 0; n < 3; n++)
+	{
+		int i = random(1, 4);
+		do
+		{
+			place = random(0, 14);
+		} while (is_occupy[place] == 1);
+		is_occupy[place] = 1;
+		m_flower = Sprite::create(StringUtils::format("res/Res/flower/flower_%d.png", i));
+		m_flowerVec.pushBack(m_flower);
+		m_flower->setPosition(m_Vec2Vec.at(place));
+		this->addChild(m_flower);
+	}
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchEnded = CC_CALLBACK_2(EatFlowersScene::onTouchEnded, this);
+	listener->onTouchBegan = CC_CALLBACK_2(EatFlowersScene::onTouchBegan, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return true;
 }
 
-//下面的Layer* create代码差不多，固定
-Layer* EatFlowersScene::create(int diff, int loop)
+cocos2d::Layer* EatFlowersScene::create(int diff, int loop)
 {
 	auto pRef = new EatFlowersScene();
 	if (pRef && pRef->init(diff, loop))
@@ -103,194 +106,59 @@ Layer* EatFlowersScene::create(int diff, int loop)
 	}
 }
 
-
-//接下去两个虚函数
-void EatFlowersScene::newLevel(int diff)
+void EatFlowersScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
 
 }
 
-void EatFlowersScene::update()
+bool EatFlowersScene::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
-
-}
-
-//根据困难和轮数创建矩阵数量
-EatFlowersGrid* EatFlowersGrid::create(int diff, int loop, int row, int col)
-{
-	auto pRef = new EatFlowersGrid();
-	if (pRef && pRef->init(diff, loop, row, col))
-	{
-		pRef->autorelease();
-		return pRef;
-	}
-	else
-	{
-		CC_SAFE_DELETE(pRef);
-		return nullptr;
-	}
-}
-
-bool EatFlowersGrid::init(int diff, int loop, int row, int col)
-{
-	if (!Layer::init())
-		return false;
-	/*
-	int r = 0;
-	int b = 0;
-	r = random(0, 2);
-	b = random(2, 5);
-	*/
-
-	m_row = row;
-	m_col = col;
-	m_loop = loop;
-	m_diff = diff;
-	m_isRunning = false;
-	m_touchesLabel = Label::create("0000", "Arial", 30);
-	m_touchesLabel->setPosition(100, 500);
-	this->addChild(m_touchesLabel);
-
-	// 根据行、列，初始化一个空的二维容器
-	m_flowersesGrid.resize(m_col);
-	for (auto &vec : m_flowersesGrid)
-		vec.resize(m_row);
-
+	auto pos = touch->getLocation();
+	int x1 = (int)pos.x;
+	int y1 = (int)pos.y;
 	
-	for (int x = 0; x < m_col; x++)
-	{
-		for (int y = 0; y < m_row; y++)
-		{
-			m_flowersesGrid[x][y] = createflower((Flower::FlowerColor)n_g[0][y][x], x, y);
-		}
-	}
-
-
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = CC_CALLBACK_2(EatFlowersGrid::onTouchBegan, this);
-	listener->onTouchEnded = CC_CALLBACK_2(EatFlowersGrid::onTouchEnded, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
-	return true;
-
-}
-
-void EatFlowersGrid::setZerglingPixPos(Flower* zergling, int x, int y)
-{
-	zergling->setPosition(x * grid_WIDTH + left_MARGIN, y * grid_WIDTH + bottom_MARGIN);
-}
-
-Flower* EatFlowersGrid::createflower(Flower::FlowerColor color, int x, int y)
-{
-	Flower * flower = nullptr;
-	if (color <= 0)
-		return nullptr;
-	flower = Flower::createByColor(color);
-
-	setZerglingPixPos(flower, x, y);
-	addChild(flower);
-
-	return flower;
-}
-
-
-void EatFlowersGrid::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
-{
-
-}
-
-//坐标获取，范围坐标与触屏坐标
-cocos2d::Vec2 EatFlowersGrid::convertToGridPos(cocos2d::Vec2 pixPos)
-{
-	float x, y;
-	x = (pixPos.x - left_MARGIN) / grid_WIDTH;
-	y = (pixPos.y - bottom_MARGIN) / grid_WIDTH;
-	return Vec2(x, y);
-}
-
-bool EatFlowersGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
-{
 	if (!m_isRunning)
 	{
 		m_isRunning = true;
 		TimeManager::getInstance()->startCountDown();
 	}
 
-	int r = 0;
-	int b = 0;
-	r = random(0, 2);
-	b = random(0, 5);
-
-	auto pos = touch->getLocation();
-	pos = convertToGridPos(pos);
-
-	int x1 = (int)pos.x;
-	int y1 = (int)pos.y;
-	if ((0 <= x1 && x1 < 3) && (0 <= y1 && y1 < 6) && m_flowersesGrid[x1][y1] && (x1!= 3 && y1 != 1) )//中心的狗不能被消除
+	for (auto item : m_flowerVec)
 	{
-		// 如果倒计时还没有开始，则开始倒计时
-		if (!m_isRunning)
+		int p = 0;
+		if (item->getBoundingBox().containsPoint(pos))
 		{
-			m_isRunning = true;
-			TimeManager::getInstance()->startCountDown();
+			int k = p;
+			item->removeFromParent();
+			PLAY_BURST_ANIMATION(item->getPosition(), 0.8f);
+			m_flowerVec.eraseObject(item);
+			is_occupy[k] = 0;   //重置是否占用坐标位置
 		}
-		
-		auto flower = m_flowersesGrid[x1][y1];
-		log("farmer pos x = %f, y = %f", flower->getPosition().x, flower->getPosition().y);
-
-		// 清空矩阵中的花的指针
-		m_flowersesGrid[x1][y1] = nullptr;
-
-		//m_loop--;
-
-		//m_flowersesGrid[r][b] = createflower(Flower::BLUE, r, b);//按一个消失，会出来一个。就是说会出来三个
-
-		
-		/*
-		if (m_loop > 0 && getLivingFlowersNum() > 0)
+		p++;
+	}
+	int m = m_loop;
+	if (m_flowerVec.size() <= 0 && m_loop <= 0) //初始的设置为m_loop = 0
+	{
+		_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
+		CCLOG("EatFlowers clear");
+	}
+	else if (m_flowerVec.size() > 0 && m_loop > 0)
+	{
+		int i = random(1, 4);
+		do
 		{
-			m_flowersesGrid[r][b] = createflower(Flower::BLUE, r, b);
+			place = random(0, 14);
 		}
-		
-		if (getLivingFlowersNum() <= 0 && m_loop <= 0)
-		{
-			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
-			CCLOG("EatFlowers clear");
-		}
-		*/
+		while (is_occupy[place] == 1);
+		is_occupy[place] = 1;
+		m_flower = Sprite::create(StringUtils::format("res/Res/flower/flower_%d.png", i));
+		m_flowerVec.pushBack(m_flower);
+		m_flower->setPosition(m_Vec2Vec.at(place));
+		m_flower->setScale(0.0);
+		m_flower->runAction(ScaleTo::create(0.25, 1.0));
+		this->addChild(m_flower);
 
-		flower->tapped();
-
+		m_loop--;
 	}
 	return true;
 }
-
-int EatFlowersGrid::getLivingFlowersNum()
-{
-	int count = 0;
-	for (int x = 0; x < m_col; x++)
-	{
-		for (int y = 0; y < m_row; y++)
-		{
-			if (m_flowersesGrid[x][y] != nullptr)
-				count++;
-		}
-	}
-	return count;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-

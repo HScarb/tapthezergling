@@ -7,6 +7,7 @@
 #include "Global.h"
 #include "AnimationUtil.h"
 #define MAX_UNIT_TYPE 10
+#include "GameManager.h"
 USING_NS_CC;
 
 using namespace std;
@@ -129,7 +130,7 @@ bool CheckThethingGrid::init(int diff, int loop, int row, int col)
 
 void CheckThethingGrid::setZerglingPixPos(farmerandflower* zergling, int x, int y)
 {
-	zergling->setPosition(x * width + l_margin, y * width + b_margin);
+	zergling->setPosition(x * CTT_GRID_WIDTH + X_MARGIN, y * CTT_GRID_WIDTH + Y_MARGIN);
 }
 
 farmerandflower* CheckThethingGrid::createUnit(int type, int x, int y)
@@ -153,8 +154,8 @@ farmerandflower* CheckThethingGrid::createUnit(int type, int x, int y)
 cocos2d::Vec2 CheckThethingGrid::convertToGridPos(cocos2d::Vec2 pixPos)
 {
 	float x, y;
-	x = (pixPos.x - l_margin) / width;
-	y = (pixPos.y - b_margin) / width;
+	x = (pixPos.x - X_MARGIN) / CTT_GRID_WIDTH;
+	y = (pixPos.y - Y_MARGIN) / CTT_GRID_WIDTH;
 	return Vec2(x, y);
 }
 
@@ -181,7 +182,7 @@ bool CheckThethingGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * un
 						PLAY_BURST_ANIMATION(m_sampleGrid[k]->getPosition(), 0.8f);
 						m_sampleGrid[k]->removeFromParent();
 						m_sampleGrid[k] = nullptr;
-						PLAY_BURST_ANIMATION(m_thingGrid[x][y]->getPosition(), 0.8);
+						PLAY_BURST_ANIMATION(m_thingGrid[x][y]->getPosition(), 0.8f);
 						m_thingGrid[x][y]->removeFromParent();
 						m_thingGrid[x][y] = nullptr;
 						

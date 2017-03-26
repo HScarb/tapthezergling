@@ -1,6 +1,7 @@
 // GameManager.cpp
 #include "GameManager.h"
 #include "TimeManager.h"
+#include "GlobalConst.h"
 USING_NS_CC;
 
 GameManager * GameManager::m_gameManager = nullptr;
@@ -38,6 +39,9 @@ bool GameManager::init()
 	m_diff = 0;
 	m_loop = 1;
 	m_isGameOn = false;
+	m_isWaitToAddTime = false;
+	m_isWaitToAddChest = false;
+	m_isCardManagerInitialized = false;
 
 	return true;
 }
@@ -48,7 +52,9 @@ void GameManager::setNextTollgate(int i)
 	m_score = m_score + (int)TimeManager::getInstance()->getTime() + m_loop * 5 + m_tollgateNum * 2;
 	
 	m_nextTollgate = i;
+	
 	m_tollgateNum++;
+
 	if (m_tollgateNum < 10)
 	{
 		m_diff = 0;

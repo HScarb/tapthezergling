@@ -2,9 +2,10 @@
 #define __FLOWER_H__
 #pragma once
 #include "cocos2d.h"
+#include "TollgateControlLayer.h"
 #include "FilterSprite.h"
 
-class Flower :public FilterSprite
+class Flower :public cocos2d::Sprite
 {
 public:
 	typedef enum
