@@ -356,15 +356,15 @@ bool TollgateScene::init()
 void TollgateScene::addDiamond()
 {
 	int i = random(1, 9);
+	GameManager::getInstance()->setJewel(GameManager::getInstance()->getJewel() + i);
 	m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel()));
-	GameManager::getInstance()->setJewel(GameManager::getInstance()->getJewel() + i);		
 }																							
 																							
 void TollgateScene::addEnergy()
 {
 	int i = random(1, 9);
-	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 	GameManager::getInstance()->setEnergy(GameManager::getInstance()->getEnergy() + i);
+	m_energyText->setText(StringUtils::format("%d", GameManager::getInstance()->getEnergy()));
 }
 
 void TollgateScene::addCard()
@@ -745,70 +745,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 			GameManager::getInstance()->setJewel(GameManager::getInstance()->getJewel() - m_money);
 			m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel()));
 			if (m_res)			// 如果当前是箭头在上面
-			{/*
-<<<<<<< HEAD
-				GameManager::getInstance()->setJewel(GameManager::getInstance()->getJewel() - m_money);
-				m_jewelText->setText(StringUtils::format("%d", GameManager::getInstance()->getJewel()));
-				if (m_res)//如果当前是箭头在上面
-				{
-					m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
-					m_cardBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
-					m_res = false;
-				}
-				//打开宝箱时触发鼓励文字
-				if (m_act != true)
-				{
-					Label *m_label = Label::create("  GREATE!  ", "fonts/AveriaSansLibre-Bold.ttf", 40);
-					m_label->setPosition(visibleSize.width / 2, (visibleSize.height / 2) + 135);
-					this->addChild(m_label, 1, 2);
-				}
-
-				if (m_act != true)
-				{
-					m_flash->setVisible(true);
-					m_flash->runAction(RotateTo::create(2, 100));
-					m_flash->runAction(ScaleBy::create(1.8, 1.8));
-					m_chest_sprite->runAction(createAnimate());
-					m_chest_sprite->runAction(Sequence::create(DelayTime::create(2.3), scaleto2, hideAction, dt, NULL));
-					m_flash->runAction(Sequence::create(DelayTime::create(2.3), hideAction, dt, NULL));
-				}
-				m_act = true;
-				int i = random(1, 3);
-				//int i = 3;
-				if (i == Energy)
-				{
-					m++;
-					//创建能量
-					m_energy_sprite = Sprite::create("res/images/chest/Energy.png");
-					m_energy_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-					m_energy_sprite->setScale(0.01, 0.01);
-					addChild(m_energy_sprite);
-				}
-
-				//能量提取
-				else if (i == Jewel)
-				{
-					m++;
-					//创建宝石
-					m_diamond_sprite = Sprite::create("res/images/chest/Gem.png");
-					m_diamond_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-					m_diamond_sprite->setScale(0.01, 0.01);  //0.48是原设置的大小。想法：可以把sprite 变小，这样就按不到了
-					addChild(m_diamond_sprite);
-				}
-
-				//卡片创建
-				else if (i == Card)
-				{
-					m++;
-					GameManager::getInstance()->setcardType(random(1, 10));
-					//m_card_sprite = CardManager::getInstance()->CreateACardByTypeAndLevel((Card::CardInfo)(GameManager::getInstance()->getcardType()), 1,n);
-					m_card_sprite = Card::createByLevelAndInfo(1, Card::CardInfo(GameManager::getInstance()->getcardType()));
-					//按道理，这里的setPosition需要遍历CardVec，找到对应种类的卡片，排在最后
-					m_card_sprite->setPosition(visibleSize.width / 2 - 40, visibleSize.height / 2 - 40);
-					m_card_sprite->setScale(0.01, 0.01);
-					this->addChild(m_card_sprite);
-				}
-=======*/
+			{
 				m_goOnBtn->runAction(MoveBy::create(0.5, Point(0, -120)));
 				m_cardBtn->runAction(MoveBy::create(0.5, Point(0, 120)));
 				m_res = false;
@@ -819,7 +756,6 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 				Label* m_label = Label::create("  GREATE!  ", "fonts/AveriaSansLibre-Bold.ttf", 40);
 				m_label->setPosition(visibleSize.width / 2, (visibleSize.height / 2) + 135);
 				this->addChild(m_label, 1, 2);
-//>>>>>>> 1b9834acc10b619a4b8d9f8477c599dcbcaa3cb5
 			}
 
 			if (m_act != true)
@@ -832,8 +768,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 				m_flash->runAction(Sequence::create(DelayTime::create(2.3), hideAction, dt, NULL));
 			}
 			m_act = true;
-			//int i = random(1, 2);
-			int rewardType = 3;
+			int rewardType = random(1, 3);
 			if (rewardType == REWARD_ENERGY)
 			{
 				m_chestOpenTimes++;
@@ -851,7 +786,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 				//创建宝石
 				m_diamond_sprite = Sprite::create("res/images/chest/Gem.png");
 				m_diamond_sprite->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-				m_diamond_sprite->setScale(0, 0); //0.48是原设置的大小。想法：可以把sprite 变小，这样就按不到了
+				m_diamond_sprite->setScale(0, 0); 
 				addChild(m_diamond_sprite);
 			}
 

@@ -51,7 +51,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/Card.cpp \
 				   ../../Classes/CardManager.cpp \
 				   ../../Classes/CardInfoLayer.cpp \
-			       	   ../../Classes/NoTouchLayer.cpp \
+			       ../../Classes/NoTouchLayer.cpp \
 				   ../../Classes/Chest.cpp \
 				   ../../Classes/CsvUtil.cpp \
 				   ../../Classes/StringUtil.cpp \
@@ -59,7 +59,10 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/CsvManager.cpp \
 				   ../../Classes/fitthecircle.cpp \
 				   ../../Classes/Meteorolite.cpp \
-				   ../../Classes/RunScene.cpp 				  
+				   ../../Classes/RunScene.cpp \				   
+				   ../../Classes/CsvData.cpp \				   
+				   ../../Classes/FreeCardLayer.cpp \				   
+				   ../../Classes/JsonData.cpp \				   
 
 define walk
 $(wildcard $(1)) $(foreach e, $(wildcard $(1)/*), $(call walk, $(e)))

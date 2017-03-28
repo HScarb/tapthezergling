@@ -34,14 +34,14 @@
           <AbstractNodeData Name="Button_collect" ActionTag="-738788882" Tag="25" IconVisible="False" LeftMargin="-118.5000" RightMargin="-130.5000" TopMargin="191.0000" BottomMargin="-29.0000" TouchEnable="True" FontSize="100" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="1179" Scale9Height="356" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="1209.0000" Y="378.0000" />
             <Children>
-              <AbstractNodeData Name="Text_collect" ActionTag="1249600138" Tag="26" IconVisible="False" LeftMargin="442.6047" RightMargin="421.3953" TopMargin="110.3507" BottomMargin="113.6493" FontSize="100" LabelText="Collect" ShadowOffsetX="4.0000" ShadowOffsetY="-4.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="345.0000" Y="154.0000" />
+              <AbstractNodeData Name="Text_collect" ActionTag="1249600138" Tag="26" IconVisible="False" LeftMargin="403.1047" RightMargin="381.8953" TopMargin="110.3507" BottomMargin="113.6493" FontSize="100" LabelText="Enhance" ShadowOffsetX="4.0000" ShadowOffsetY="-4.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="424.0000" Y="154.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="615.1047" Y="190.6493" />
                 <Scale ScaleX="1.8000" ScaleY="1.8000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5088" Y="0.5044" />
-                <PreSize X="0.2854" Y="0.4074" />
+                <PreSize X="0.3507" Y="0.4074" />
                 <FontResource Type="Normal" Path="Res/fonts/CarterOne.ttf" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="91" G="156" B="0" />
