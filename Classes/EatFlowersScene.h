@@ -7,6 +7,8 @@
 #include "Flower.h"
 #include "TollgateControlLayer.h"
 
+USING_NS_CC;
+
 class EatFlowersScene : public cocos2d::Layer
 {
 public:
@@ -14,8 +16,7 @@ public:
 	virtual bool init(int diff, int loop);	
 	static cocos2d::Layer * create(int diff, int loop);
 
-	virtual bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *unused_event);
-	virtual void onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *unused_event);
+	virtual bool onTouchBegan(Touch *touch, Event *unused_event);
 
 private:
 	int m_loop, m_diff;

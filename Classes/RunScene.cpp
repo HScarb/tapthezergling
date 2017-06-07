@@ -12,8 +12,40 @@ using namespace cocostudio::timeline;
 
 int w = 0;   //test
 
+void RunScene::getPosition(float dt)
+{
+	//注：(x0,x0)是小狗的位置，其余是陨石的位置
+	Position_x0 = m_zeriling_sprite->getPositionX(); Position_x1 = m_meteorolite->getPositionX(); Position_x2 = m_meteorolite2->getPositionX(); Position_x3 = m_meteorolite3->getPositionX();
+	Position_y0 = m_zeriling_sprite->getPositionY(); Position_y1 = m_meteorolite->getPositionY(); Position_y2 = m_meteorolite2->getPositionY(); Position_y3 = m_meteorolite3->getPositionY();
+}
+
+void RunScene::onEnter()
+{
+	Layer::onEnter();
+
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	//创建一个物理世界, 大小和屏幕的尺寸相同, 使用默认材质, debug框的宽度为3个像素
+	auto body = PhysicsBody::createEdgeBox(visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
+	//创建一个碰撞图形
+	auto edgeShape = Node::create();
+	//将图形和刚刚创建的世界绑定
+	edgeShape->setPhysicsBody(body);
+	//设置图形的位置在屏幕正中间
+	edgeShape->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+	//添加进图层
+	addChild(edgeShape);
+}
+
 void RunScene::setRun()
 {
+	//物理世界部分
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	//bodyDef.position.Set(320, 300);
+	b2Body *zeriling = world->CreateBody(&bodyDef);
+	zeriling->SetUserData(m_zeriling_sprite);
+	zeriling->SetActive(true);
+
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	m_zeriling_sprite = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("res/Res/ZerlingAnimation/r_1.png"));
 	m_zeriling_sprite->setScale(1.1);
@@ -38,10 +70,16 @@ cocos2d::Layer* RunScene::create(int diff, int loop)
 
 cocos2d::Scene* RunScene::createScene(int diff, int loop)
 {
-	auto scene = Scene::create();
+	Scene *scene = Scene::createWithPhysics();
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	auto layer = RunScene::create(diff, loop);
 	scene->addChild(layer);
 	return scene;
+
+	/*auto scene = Scene::create();
+	auto layer = RunScene::create(diff, loop);
+	scene->addChild(layer);
+	return scene;*/
 }
 
 bool RunScene::init(int diff, int loop)
@@ -51,6 +89,11 @@ bool RunScene::init(int diff, int loop)
 
 	auto UI = CSLoader::createNode("Tollgates/RunScene.csb");
 	addChild(UI);
+
+	b2Vec2 gravity;
+	gravity.Set(0.0f, -2.0f);
+	world = new b2World(gravity);
+	world->SetContinuousPhysics(true);
 
 	m_controlLayer = TollgateControlLayer::create();
 	m_controlLayer->initTimeBar();
@@ -85,7 +128,25 @@ bool RunScene::init(int diff, int loop)
 	m_meteorolite3->setPosition(visibleSize.width / 2 + 120, visibleSize.height - 50);
 	this->addChild(m_meteorolite3);
 
-	//RepeatForever创建重复动作
+	//物理世界部分
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	//bodyDef.position.Set(320, 300);
+	b2Body *stone1 = world->CreateBody(&bodyDef);
+	b2Body *stone2 = world->CreateBody(&bodyDef);
+	b2Body *stone3 = world->CreateBody(&bodyDef);
+	stone1->SetUserData(m_meteorolite);
+	stone1->SetActive(true);
+	stone2->SetUserData(m_meteorolite2);
+	stone2->SetActive(true);
+	stone3->SetUserData(m_meteorolite3);
+	stone3->SetActive(true);
+
+	Position_x0 = m_zeriling_sprite->getPositionX(); 
+	Position_x1 = m_meteorolite->getPositionX(); Position_x2 = m_meteorolite2->getPositionX(); Position_x3 = m_meteorolite3->getPositionX();
+	Position_y0 = m_zeriling_sprite->getPositionY(); 
+	Position_y1 = m_meteorolite->getPositionY(); Position_y2 = m_meteorolite2->getPositionY(); Position_y3 = m_meteorolite3->getPositionY();
+
 	MoveBy *moveby1 = MoveBy::create(3, Vec2(0,-480));
 	MoveBy *moveby2 = MoveBy::create(5, Vec2(0,-480));
 	MoveBy *moveby3 = MoveBy::create(2, Vec2(0, -480));
@@ -107,6 +168,13 @@ bool RunScene::init(int diff, int loop)
 	listener->onTouchEnded = CC_CALLBACK_2(RunScene::onTouchEnded, this);
 	listener->onTouchBegan = CC_CALLBACK_2(RunScene::onTouchBegan, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = [](PhysicsContact &contact)
+	{
+		return true;
+	};
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener,this);
 
 	return true;
 }
@@ -141,19 +209,15 @@ bool RunScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 	int x = (int)pos.x;
 	int y = (int)pos.y;
 	log("%d,%d", x, y);
-	if (!m_isRunning)
+	/*if (!m_isRunning)
 	{
 		m_isRunning = true;
 		TimeManager::getInstance()->startCountDown();
-	}
-	auto x1 = m_meteorolite->getPositionX(); auto x3 = m_meteorolite2->getPositionX(); auto x4 = m_meteorolite3->getPositionX();
-	auto y1 = m_meteorolite->getPositionY(); auto y3 = m_meteorolite2->getPositionY(); auto y4 = m_meteorolite3->getPositionY();
+	}*/
+	
+	schedule(schedule_selector(RunScene::getPosition, 0.2f));
 
-	//设置获取陨石位置，如果与小狗的位置重叠，则减少时间（或者倒退一定距离）
-	auto x2 = m_zeriling_sprite->getPositionX();
-	auto y2 = m_zeriling_sprite->getPositionY();
-
-	if ((abs(x1 - x2) <= 35 && abs(y1 - y2) <= 35) || (abs(x3 - x2) <= 35 && abs(y3 - y2) <= 35) || (abs(x4 - x2) <= 35 && abs(y4 - y2) <= 35))
+	if ((abs(Position_x1 - Position_x0) <= 40 && abs(Position_y1 - Position_y0) <= 40) || (abs(Position_x2 - Position_x0) <= 42 && abs(Position_y2 - Position_y0) <= 42) || (abs(Position_x3 - Position_x0) <= 40 && abs(Position_y3 - Position_y0) <= 40))
 	{							
 		m_zeriling_sprite->runAction(MoveBy::create(0.2, Vec2(-240, 0)));
 		w = w - 3;
@@ -179,10 +243,11 @@ bool RunScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 
 
 /*
-FlowWord *flowword = FlowWord::create();  
+	使用方法:
+	FlowWord *flowword = FlowWord::create();  
     this->addChild(flowword);  
     flowword->showWord("-15",GetSprite()->getPosition());  
-	使用方法*/
+*/
 FlowWord* FlowWord::create()
 {
 	FlowWord* flowWord = new FlowWord();

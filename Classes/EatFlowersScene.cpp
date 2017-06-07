@@ -105,11 +105,6 @@ cocos2d::Layer* EatFlowersScene::create(int diff, int loop)
 	}
 }
 
-void EatFlowersScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
-{
-
-}
-
 bool EatFlowersScene::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unused_event)
 {
 	auto pos = touch->getLocation();

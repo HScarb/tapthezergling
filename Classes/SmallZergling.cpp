@@ -10,9 +10,9 @@ bool SmallZergling::init()
 	if (!Sprite::initWithFile("zergling/SCs_Zergling_C3_04.png"))
 		return false;
 
-	auto idleAnimation = AnimationUtil::createWithFrameNameAndNumRange("zergling/SCs_Zergling_C3_", 44, 48, 1.0 / 12.0, -1);
+	auto idleAnimation = AnimationUtil::createWithFrameNameAndNumRange("res/zergling/SCs_Zergling_C3_", 44, 48, 1.0 / 12.0, -1,true);
 	this->setIdleAction(RepeatForever::create(Animate::create(idleAnimation)));
-	auto runAnimation = AnimationUtil::createWithFrameNameAndNumRange("zergling/SCs_Zergling_C3_", 33, 36, 1.0 / 12.0, 1);
+	auto runAnimation = AnimationUtil::createWithFrameNameAndNumRange("res/zergling/SCs_Zergling_C3_", 33, 36, 1.0 / 12.0, 1, true);
 	this->setRunAction(Animate::create(runAnimation));
 
 	return true;

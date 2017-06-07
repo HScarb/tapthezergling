@@ -69,7 +69,6 @@ void SceneManager::changeScene(SceneType sceneType)
 	case SceneManager::ScoreScene:
 		pScene = ScoreScene::createScene();
 		break;
-		break;
 	case SceneManager::BOSS1:
 		pScene = BOSS1ZerglingKing::createScene();
 		break;
