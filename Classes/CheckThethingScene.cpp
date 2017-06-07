@@ -182,7 +182,7 @@ bool CheckThethingGrid::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * un
 						PLAY_BURST_ANIMATION(m_sampleGrid[k]->getPosition(), 0.8f);
 						m_sampleGrid[k]->removeFromParent();
 						m_sampleGrid[k] = nullptr;
-						PLAY_BURST_ANIMATION(m_thingGrid[x][y]->getPosition(), 0.8);
+						PLAY_BURST_ANIMATION(m_thingGrid[x][y]->getPosition(), 0.8f);
 						m_thingGrid[x][y]->removeFromParent();
 						m_thingGrid[x][y] = nullptr;
 						

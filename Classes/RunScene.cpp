@@ -10,7 +10,8 @@ using namespace std;
 using namespace cocos2d::ui;
 using namespace cocostudio::timeline;
 
-int w = 0;   //test
+int STEP = 0;   //test
+const int MAX_STEP = 10;
 
 void RunScene::getPosition(float dt)
 {
@@ -105,7 +106,7 @@ bool RunScene::init(int diff, int loop)
 	m_timeText = (Text*)(UI->getChildByName("Text_time"));
 
 	//初始化奔跑的小狗
-	w = 0;
+	STEP = 0;
 	setRun();
 	m_isRunning = false;
 
@@ -179,7 +180,7 @@ bool RunScene::init(int diff, int loop)
 	return true;
 }
 
-cocos2d::Animate* RunScene::m_createAnimate()
+cocos2d::Animate* RunScene::createAnimate()
 {
 	int iFrameNum = 4;
 	SpriteFrame * frame = NULL;
@@ -220,7 +221,7 @@ bool RunScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 	if ((abs(Position_x1 - Position_x0) <= 40 && abs(Position_y1 - Position_y0) <= 40) || (abs(Position_x2 - Position_x0) <= 42 && abs(Position_y2 - Position_y0) <= 42) || (abs(Position_x3 - Position_x0) <= 40 && abs(Position_y3 - Position_y0) <= 40))
 	{							
 		m_zeriling_sprite->runAction(MoveBy::create(0.2, Vec2(-240, 0)));
-		w = w - 3;
+		STEP = STEP - 3;
 	}
 
 	if (m_zeriling_sprite->getBoundingBox().containsPoint(pos))
@@ -228,14 +229,14 @@ bool RunScene::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 		MoveBy *moveby = MoveBy::create(0.4, ccp(80, 0));
 		FlowWord *flowword = FlowWord::create();
 		this->addChild(flowword);
-		flowword->showWord("Wow!!", m_zeriling_sprite->getPosition());
-		m_zeriling_sprite->runAction(Spawn::create(moveby, m_createAnimate(), NULL));
-		w++;
-			if (w == 10)//跳10次到达终点
-			{
+		flowword->showWord("Woo!", m_zeriling_sprite->getPosition());
+		m_zeriling_sprite->runAction(Spawn::create(moveby, createAnimate(), NULL));
+		STEP++;
+		if (STEP == MAX_STEP)//跳10次到达终点
+		{
 			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"Runrunrun");
 			CCLOG("Runrunrun clear");
-			}
+		}
 	}
 
 	return true;
@@ -273,19 +274,19 @@ bool FlowWord::init()
 	return true;
 }
 
-void FlowWord::showWord(const char* text, CCPoint pos) 
+void FlowWord::showWord(const char* text, Vec2 pos) 
 {
 	m_textLab->setString(text);
 	m_textLab->setPosition(pos);
 	m_textLab->setVisible(true);
 
 	/* 组合两个动作，放大后缩小 */
-	CCActionInterval* scaleLarge = CCScaleTo::create(0.3f, 2.5f, 2.5f);
-	CCActionInterval* scaleSmall = CCScaleTo::create(0.5f, 0.5f, 0.5f);
+	ActionInterval* scaleLarge = ScaleTo::create(0.3f, 2.5f, 2.5f);
+	ActionInterval* scaleSmall = ScaleTo::create(0.5f, 0.5f, 0.5f);
 
-	CCCallFunc* callFunc = CCCallFunc::create(this, callfunc_selector(FlowWord::flowEnd));
+	CallFunc* callFunc = CallFunc::create(this, callfunc_selector(FlowWord::flowEnd));
 
-	CCActionInterval* actions = CCSequence::create(scaleLarge, scaleSmall, callFunc, NULL);
+	ActionInterval* actions = Sequence::create(scaleLarge, scaleSmall, callFunc, NULL);
 
 	m_textLab->runAction(actions);
 }

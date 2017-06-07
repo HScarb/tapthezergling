@@ -113,8 +113,8 @@ void CardManager::InsertChestCard()
 
 void CardManager::loadCardFromData()
 {
-	int enhanceCardType;
-	int enhanceCardLevel;
+	int enhanceCardType = -1;
+	int enhanceCardLevel = -1;
 	int enhanceCards = 0;
 	if(DataManager::getInstance()->getEnhanceCardType() > 0)
 	{

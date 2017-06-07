@@ -8,7 +8,7 @@
 const float INITIAL_TIME = 5.0f;
 const int TOTAL_TOLLGATE_TYPE = 10;
 const int TOTAL_BOSS_TYPE = 2;
-const int CHEST_TOLLGATE = 10;			// 每几关出现关卡
+const int CHEST_TOLLGATE = 10;			// 每几关出现宝箱
 const std::string TOLLGATE_NAME[11] = 
 {
 	"0: None",

@@ -250,26 +250,6 @@ bool CardControlLayer::IsTheSameCardInEnhancer(Card* card)
 
 bool CardControlLayer::IsSingleInVector(Card* card)
 {
-	/*bool temp1 = true;
-	bool temp = true;
-	for (auto tempCard : CardManager::getInstance()->getAllCards())
-	{
-		if (card->getCardLevel() == tempCard->getCardLevel()
-			&& card->getCardinfo() == tempCard->getCardinfo())
-		{
-			if (tempCard->getPosition().x <= (card->getPosition().x + 40)
-				&& tempCard->getPosition().x >= (card->getPosition().x - 40))
-			{
-				temp1 = true;
-			}
-			else
-			{
-				temp1 = false;
-				break;
-			}
-		}
-	}
-	return temp;*/
 	int num = 0;
 	for (auto tempCard : CardManager::getInstance()->getAllCards())
 	{

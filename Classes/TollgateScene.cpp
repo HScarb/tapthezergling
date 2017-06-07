@@ -768,7 +768,7 @@ void TollgateScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 					m_flash->setVisible(true);
 					m_flash->runAction(RotateTo::create(2, 100));
 					m_flash->runAction(ScaleBy::create(1.8, 1.8));
-					m_chest_sprite->runAction(m_createAnimate());
+					m_chest_sprite->runAction(createAnimate());
 					m_chest_sprite->runAction(Sequence::create(DelayTime::create(2.3), scaleto2, hideAction, dt, NULL));
 					m_flash->runAction(Sequence::create(DelayTime::create(2.3), hideAction, dt, NULL));
 				}

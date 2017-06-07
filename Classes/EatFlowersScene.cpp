@@ -6,6 +6,7 @@
 #include "TimeManager.h"
 #include "Flower.h"
 #include "TollgateControlLayer.h"
+#include "AnimationUtil.h"
 #include "Global.h"
 #include "GameManager.h"
 
@@ -124,33 +125,35 @@ bool EatFlowersScene::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * unus
 		{
 			int k = p;
 			item->removeFromParent();
+			PLAY_BURST_ANIMATION(item->getPosition(), 0.8f);
 			m_flowerVec.eraseObject(item);
 			is_occupy[k] = 0;   //重置是否占用坐标位置
 		}
 		p++;
 	}
 	int m = m_loop;
-	if (m_flowerVec.size() <= 0 && m_loop <= 0)			//初始的设置为m_loop = 0
-		{
-			_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
-			CCLOG("EatFlowers clear");
-		}
+	if (m_flowerVec.size() <= 0 && m_loop <= 0) //初始的设置为m_loop = 0
+	{
+		_eventDispatcher->dispatchCustomEvent("tollgate_clear", (void*)"EatFlowers");
+		CCLOG("EatFlowers clear");
+	}
 	else if (m_flowerVec.size() > 0 && m_loop > 0)
+	{
+		int i = random(1, 4);
+		do
 		{
-			int i = random(1, 4);
-			do
-			{
-				place = random(0, 14);
-			} while (is_occupy[place] == 1);
-			is_occupy[place] = 1;
-			m_flower = Sprite::create(StringUtils::format("res/Res/flower/flower_%d.png", i));
-			m_flowerVec.pushBack(m_flower);
-			m_flower->setPosition(m_Vec2Vec.at(place));
-			m_flower->setScale(0.0);
-			m_flower->runAction(ScaleTo::create(0.25, 1.0));
-			this->addChild(m_flower);
-
-			m_loop--;
+			place = random(0, 14);
 		}
+		while (is_occupy[place] == 1);
+		is_occupy[place] = 1;
+		m_flower = Sprite::create(StringUtils::format("res/Res/flower/flower_%d.png", i));
+		m_flowerVec.pushBack(m_flower);
+		m_flower->setPosition(m_Vec2Vec.at(place));
+		m_flower->setScale(0.0);
+		m_flower->runAction(ScaleTo::create(0.25, 1.0));
+		this->addChild(m_flower);
+
+		m_loop--;
+	}
 	return true;
 }

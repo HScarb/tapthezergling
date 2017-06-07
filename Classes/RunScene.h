@@ -6,13 +6,6 @@
 #include "TollgateControlLayer.h"
 #include "Box2D\Box2D.h"
 
-USING_NS_CC;
-
-#define RED_BIT_MASK		0x4
-#define GREEN_BIT_MASK     0x2
-#define BLUE_BIT_MASK	    0x1
-#define EDGE_BIT_MASK    0x8
-
 class RunScene : public cocos2d::Layer
 {
 public:
@@ -50,20 +43,20 @@ private:
 	cocos2d::ui::Text * m_timeText;
 	cocos2d::ui::LoadingBar* m_timeBar;
 
-	cocos2d::Animate * m_createAnimate();
+	cocos2d::Animate * createAnimate();
 };
 
 /*WOW£¡¶¯»­Ð§¹û*/
-class FlowWord : public CCNode 
+class FlowWord : public cocos2d::Node 
 {
 public:
 	static FlowWord* create();
 	bool init();
 
 public:
-	void showWord(const char* text, CCPoint pos);
+	void showWord(const char* text, cocos2d::Vec2 pos);
 private:
-	CCLabelTTF* m_textLab;
+	cocos2d::LabelTTF* m_textLab;
 
 	void flowEnd();
 };

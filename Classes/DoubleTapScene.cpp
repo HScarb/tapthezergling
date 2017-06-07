@@ -4,6 +4,7 @@
 #include "ui/CocosGUI.h"
 #include "TimeManager.h"
 #include "TollgateControlLayer.h"
+#include "AnimationUtil.h"
 #include "Global.h"
 #include "GameManager.h"
 
@@ -206,7 +207,7 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 			if (m_zerglingGrid[x1][y1]->getColorType()
 				== m_zerglingGrid[x2][y2]->getColorType())
 			{
-				log("crush!");
+				// log("crush!");
 				// 如果倒计时还没有开始，则开始倒计时
 				if (!m_isRunning)
 				{
@@ -214,6 +215,9 @@ void DoubleTapGrid::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, 
 					TimeManager::getInstance()->startCountDown();
 				}
 				// * add animation
+				PLAY_BURST_ANIMATION(m_zerglingGrid[x1][y1]->getPosition(), 1.0f);
+				PLAY_BURST_ANIMATION(m_zerglingGrid[x2][y2]->getPosition(), 1.0f);
+
 				auto zergling1 = m_zerglingGrid[x1][y1];
 				auto zergling2 = m_zerglingGrid[x2][y2];
 				// 清空矩阵中的狗的指针
